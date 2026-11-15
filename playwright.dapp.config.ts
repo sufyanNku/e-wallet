@@ -1,0 +1,3 @@
+import {defineConfig} from '@playwright/test';
+process.env.PLAYWRIGHT_NO_COPY_PROMPT='1';
+export default defineConfig({testDir:'tests/browser-dapp',testMatch:'evm.spec.ts',workers:1,reporter:[['list'],['json',{outputFile:'artifacts/phase-04/dapp-results.json'}]],use:{baseURL:'http://127.0.0.1:8787',headless:true,launchOptions:{executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE??'/opt/google/chrome/chrome',args:['--no-sandbox']},screenshot:'off',trace:'off',video:'off'},webServer:[{command:'pnpm serve:web',url:'http://127.0.0.1:8787/api/v1/health',reuseExistingServer:true},{command:'pnpm dev:dapp',url:'http://127.0.0.1:5174',reuseExistingServer:true}]});

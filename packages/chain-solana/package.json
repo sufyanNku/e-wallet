@@ -1,0 +1,18 @@
+{
+  "name": "@ewallet/chain-solana",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "@ewallet/domain": "workspace:*",
+    "@ewallet/config": "workspace:*",
+    "@solana/kit": "8.6.0",
+    "@solana-program/system": "0.16.0",
+    "@solana-program/token": "0.18.0",
+    "@solana-program/token-2022": "0.20.1",
+    "@solana-program/compute-budget": "0.20.0",
+    "zod": "4.6.7",
+    "@metaplex-foundation/mpl-token-metadata-kit": "0.0.3"
+  }
+}

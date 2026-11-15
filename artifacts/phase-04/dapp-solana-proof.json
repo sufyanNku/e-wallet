@@ -1,0 +1,10 @@
+{
+  "observedAt": "2026-11-13T21:46:40.892Z",
+  "actualPopup": true,
+  "walletStandard": true,
+  "signMessage": true,
+  "signedExactTransaction": true,
+  "signature": "3MZqYD28fPrudwLanFobtmGdgdf59DHqSxwY1GqYtQzjg9Aq1DYtSxCVnnDopJSbeX286kutgbsMMntCpntcBCmh",
+  "recipientDeltaLamports": "10000",
+  "isolatedLedger": true
+}

@@ -1,0 +1,344 @@
+{
+  "source": "node",
+  "checks": [
+    {
+      "networkId": "eip155:31337",
+      "name": "Current ledger epoch",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "dUSDC deployed bytecode",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "dDAI deployed bytecode",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "EWLT deployed bytecode",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "Impostor deployed bytecode",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "DemoNFT721 deployed bytecode",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "DemoNFT1155 deployed bytecode",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "DemoFaucet deployed bytecode",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "SavingsVault deployed bytecode",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "SharedWallet deployed bytecode",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "DemoSwapPool deployed bytecode",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "DemoBridgeLock deployed bytecode",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "dUSDC supply reconciles with real mint/burn logs",
+      "passed": true,
+      "expected": "1021100000000",
+      "actual": "1021100000000"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "dUSDC decimals",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "alice dUSDC event/balance reconciliation",
+      "passed": true,
+      "expected": "9900000000",
+      "actual": "9900000000"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "bob dUSDC event/balance reconciliation",
+      "passed": true,
+      "expected": "4875000000",
+      "actual": "4875000000"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "carol dUSDC event/balance reconciliation",
+      "passed": true,
+      "expected": "5025000000",
+      "actual": "5025000000"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "dana dUSDC event/balance reconciliation",
+      "passed": true,
+      "expected": "0",
+      "actual": "0"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "dDAI supply reconciles with real mint/burn logs",
+      "passed": true,
+      "expected": "1020000000000000000000000",
+      "actual": "1020000000000000000000000"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "dDAI decimals",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "alice dDAI event/balance reconciliation",
+      "passed": true,
+      "expected": "10099690060900928177460",
+      "actual": "10099690060900928177460"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "bob dDAI event/balance reconciliation",
+      "passed": true,
+      "expected": "5000000000000000000000",
+      "actual": "5000000000000000000000"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "carol dDAI event/balance reconciliation",
+      "passed": true,
+      "expected": "5000000000000000000000",
+      "actual": "5000000000000000000000"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "dana dDAI event/balance reconciliation",
+      "passed": true,
+      "expected": "0",
+      "actual": "0"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "EWLT supply reconciles with real mint/burn logs",
+      "passed": true,
+      "expected": "4500000000000000000000",
+      "actual": "4500000000000000000000"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "EWLT decimals",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "alice EWLT event/balance reconciliation",
+      "passed": true,
+      "expected": "2499999999999999999999",
+      "actual": "2499999999999999999999"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "bob EWLT event/balance reconciliation",
+      "passed": true,
+      "expected": "1000000000000000000000",
+      "actual": "1000000000000000000000"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "carol EWLT event/balance reconciliation",
+      "passed": true,
+      "expected": "1000000000000000000001",
+      "actual": "1000000000000000000001"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "dana EWLT event/balance reconciliation",
+      "passed": true,
+      "expected": "0",
+      "actual": "0"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "USDC supply reconciles with real mint/burn logs",
+      "passed": true,
+      "expected": "7000000",
+      "actual": "7000000"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "USDC decimals",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "alice USDC event/balance reconciliation",
+      "passed": true,
+      "expected": "7000000",
+      "actual": "7000000"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "bob USDC event/balance reconciliation",
+      "passed": true,
+      "expected": "0",
+      "actual": "0"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "carol USDC event/balance reconciliation",
+      "passed": true,
+      "expected": "0",
+      "actual": "0"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "dana USDC event/balance reconciliation",
+      "passed": true,
+      "expected": "0",
+      "actual": "0"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "Vault withdrawn / withdrawable / one-hour principal fixture (maturity follows chain time)",
+      "actual": "one-hour position locked",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "Shared threshold exactly two",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "Independent shared owners",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "One approval pending and two-owner executed examples",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "Pool reserves equal actual token holdings after real swap",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "Transferred ERC-721 ownership",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "Transferred ERC-1155 quantity",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "alice native balance includes actual transaction fees",
+      "passed": true,
+      "expected": "99898167009867965091",
+      "actual": "99898167009867965091"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "bob native balance includes actual transaction fees",
+      "passed": true,
+      "expected": "100099908052029316254",
+      "actual": "100099908052029316254"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "carol native balance includes actual transaction fees",
+      "passed": true,
+      "expected": "100000000000000000000",
+      "actual": "100000000000000000000"
+    },
+    {
+      "networkId": "eip155:31337",
+      "name": "dana native balance includes actual transaction fees",
+      "passed": true,
+      "expected": "0",
+      "actual": "0"
+    },
+    {
+      "networkId": "eip155:31338",
+      "name": "Current ledger epoch",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31338",
+      "name": "bdUSDC deployed bytecode",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31338",
+      "name": "DemoBridgeMint deployed bytecode",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31338",
+      "name": "bdUSDC supply reconciles with real mint/burn logs",
+      "passed": true,
+      "expected": "25000000",
+      "actual": "25000000"
+    },
+    {
+      "networkId": "eip155:31338",
+      "name": "bdUSDC decimals",
+      "passed": true
+    },
+    {
+      "networkId": "eip155:31338",
+      "name": "alice bdUSDC event/balance reconciliation",
+      "passed": true,
+      "expected": "25000000",
+      "actual": "25000000"
+    },
+    {
+      "networkId": "eip155:31338",
+      "name": "bob bdUSDC event/balance reconciliation",
+      "passed": true,
+      "expected": "0",
+      "actual": "0"
+    },
+    {
+      "networkId": "eip155:31338",
+      "name": "carol bdUSDC event/balance reconciliation",
+      "passed": true,
+      "expected": "0",
+      "actual": "0"
+    },
+    {
+      "networkId": "eip155:31338",
+      "name": "dana bdUSDC event/balance reconciliation",
+      "passed": true,
+      "expected": "0",
+      "actual": "0"
+    }
+  ]
+}

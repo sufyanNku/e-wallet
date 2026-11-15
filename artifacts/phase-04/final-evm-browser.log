@@ -1,0 +1,18 @@
+[WebServer] (node:914084) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:914098) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:914114) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:914137) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser-chains/evm.spec.ts:61:1 › real browser approves and broadcasts an EVM native payment, token payment and NFT transfer through its Worker (14.1s)
+  ✓  2 tests/browser-chains/evm.spec.ts:226:1 › real contract UI executes an AMM swap, a vault withdrawal and a faucet claim (20.5s)
+  ✓  3 tests/browser-chains/evm.spec.ts:307:1 › a second independent owner approves and executes a two-of-three shared proposal (11.9s)
+  ✓  4 tests/browser-chains/evm.spec.ts:344:1 › native maximum preserves a complete reviewed fee reserve (5.3s)
+  ✓  5 tests/browser-chains/evm.spec.ts:391:1 › bridge UI locks source tokens and the local relayer mints exactly one canonical destination (25.6s)
+
+  5 passed (1.4m)

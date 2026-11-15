@@ -1,0 +1,19 @@
+{
+  "observedAt": "2026-11-13T21:44:54.623Z",
+  "actualBrowserSourceLock": true,
+  "realDestinationMint": true,
+  "message": {
+    "id": "0x2adc3f4465632201aff3eeb74fc3361a22f4f1016aaeb131a6add9021542b24f",
+    "nonce": "1",
+    "sender": "0x37566338ADFbf56aa41FE8FC38aA92dB1e12aD59",
+    "recipient": "0x37566338ADFbf56aa41FE8FC38aA92dB1e12aD59",
+    "amount": "1000000",
+    "sourceHash": "0xf57c50ef22b02578091a2e5b94b3466945e5421272e1e2a4e4fbdcbaf672e03a",
+    "sourceBlockHash": "0x62fc246fe396796ba38f0130da7bede4a54c2dd0c8b0c88795950690b77fe07a",
+    "destinationHash": "0x5e6280d2234294b9caa8d0d2596476a7798b6f0ad1763d728d53cb3f15bc112e",
+    "state": "minted",
+    "firstObservedAt": "2026-11-13T21:44:48.856Z"
+  },
+  "repeatRelayDeduplicated": true,
+  "cleanup": "Both EVM snapshots restored; relayer journal restored"
+}

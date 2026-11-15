@@ -1,0 +1,5 @@
+
+> e-wallet@0.1.0 build:metadata /home/sufyan/Desktop/Dev/E-wallet
+> tsx scripts/build-metadata.ts
+
+Pinned Metaplex program hash verified and staged.

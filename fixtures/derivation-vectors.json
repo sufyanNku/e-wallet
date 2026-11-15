@@ -1,0 +1,27 @@
+{
+  "source": "Independent Python bip-utils 2.9.3; published BIP39 zero-entropy test mnemonic. Test-only; never imported into frontend.",
+  "mnemonic": "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
+  "passphrase": "",
+  "accounts": [
+    {
+      "family": "evm",
+      "path": "m/44'/60'/0'/0/0",
+      "address": "0x9858EfFD232B4033E47d90003D41EC34EcaEda94"
+    },
+    {
+      "family": "solana",
+      "path": "m/44'/501'/0'/0'",
+      "address": "HAgk14JpMQLgt6rVgv7cBQFJWFto5Dqxi472uT3DKpqk"
+    },
+    {
+      "family": "bitcoin",
+      "path": "m/84'/1'/0'/0/0",
+      "address": "bcrt1q6rz28mcfaxtmd6v789l9rrlrusdprr9pz3cppk"
+    },
+    {
+      "family": "bitcoin",
+      "path": "m/86'/1'/0'/0/0",
+      "address": "bcrt1p8wpt9v4frpf3tkn0srd97pksgsxc5hs52lafxwru9kgeephvs7rqjeprhg"
+    }
+  ]
+}

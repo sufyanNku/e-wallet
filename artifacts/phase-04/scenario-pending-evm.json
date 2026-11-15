@@ -1,0 +1,13 @@
+{
+  "name": "pending-evm",
+  "observedAt": "2026-11-13T22:03:40.142Z",
+  "networkId": "eip155:31337",
+  "isolatedBySnapshot": true,
+  "pendingHash": "0xe170ffd082811bcf8cfafcc042835501c6952a92981b3d3e59895a99743a3897",
+  "pendingReceiptAbsent": true,
+  "receipt": {
+    "hash": "0xe170ffd082811bcf8cfafcc042835501c6952a92981b3d3e59895a99743a3897",
+    "status": 1,
+    "blockHash": "0x18e9b89906347620096d79717ac35d97b9486fc9308d4cbce0b1b621514ac51d"
+  }
+}

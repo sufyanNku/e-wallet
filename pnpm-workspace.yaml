@@ -1,0 +1,9 @@
+packages:
+  - apps/*
+  - packages/*
+  - services/*
+  - contracts
+useNodeVersion: 24.22.3
+onlyBuiltDependencies:
+  - better-sqlite3
+  - esbuild

@@ -1,0 +1,20 @@
+{
+  "name": "@ewallet/reference-dapp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "@ewallet/provider": "workspace:*",
+    "@ewallet/domain": "workspace:*",
+    "@ewallet/config": "workspace:*",
+    "@ewallet/chain-bitcoin": "workspace:*",
+    "@ewallet/ui": "workspace:*",
+    "@solana/kit": "8.6.0",
+    "@solana-program/system": "0.16.0",
+    "ethers": "6.17.0",
+    "lucide-react": "1.72.0"
+  }
+}

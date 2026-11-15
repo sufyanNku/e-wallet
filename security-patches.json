@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "patches": [
+    {
+      "package": "zod",
+      "version": "3.25.76",
+      "path": "patches/zod@3.25.76.patch",
+      "sha256": "b0391ec835c83a0ef8630467aec0dcb48d21186b51767f945f99bf0883b8a277",
+      "cve": "CVE-2023-54404",
+      "ghsa": "GHSA-mrhx-c7xc-m3w5",
+      "upstream": "https://github.com/colinhacks/zod/commit/a0ebf970f2d752e5f58527cd2942ff48be4f46bd",
+      "reason": "Hardhat 3.22 and its plugins require Zod 3. Backport early rejection of oversized constrained arrays/exact lengths/sets in TS, ESM and CJS without a breaking validator migration. Zod 3 has no sized Map API. Application code uses 4.6.7.",
+      "verification": [
+        "tests/security/zod-toolchain.test.ts",
+        "pnpm contracts:test"
+      ],
+      "auditHandling": "pnpm audit:verified verifies the patch checksum and live parser behavior before excluding this exact version-only finding. All other advisories fail normally."
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+name: ewallet-browser-test
+services:
+  solana:
+    image: ewallet-native:4.4.1-32.1
+    entrypoint: ["node", "/opt/ewallet/start-solana.mjs"]
+    command: ["--ledger", "/data/ledger", "--rpc-port", "8899", "--quiet", "--limit-blockstore-size", "2000000", "--bpf-program", "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s", "/opt/ewallet/programs/token_metadata.so"]
+    ports: ["127.0.0.1:18899:8899"]
+    shm_size: 512mb
+    security_opt: ["seccomp=./solana-seccomp.json"]
+    labels: {org.ewallet.project: ewallet-browser-test}

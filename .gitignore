@@ -1,0 +1,13 @@
+node_modules/
+.local/
+**/dist/
+.env
+.env.*
+!.env.example
+playwright-report/
+test-results/
+coverage/
+
+contracts/artifacts/
+contracts/cache/
+contracts/types/

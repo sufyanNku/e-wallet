@@ -1,0 +1,12 @@
+{
+  "observedAt": "2026-11-13T22:16:46.980Z",
+  "source": "real-local-node",
+  "family": "evm",
+  "path": "m/44'/60'/0'/0/3",
+  "address": "0xD315F3Cf720a4Cb05306E94ae742534bFdcBE4fA",
+  "fundingHash": "0x3d712c01fb3cd14ed0e52875878e65bee9f7980bcc2dd99b13f20c83619a7349",
+  "restoredFromPhrase": true,
+  "usedAccountRecovered": true,
+  "scanCount": 20,
+  "snapshotRestored": true
+}

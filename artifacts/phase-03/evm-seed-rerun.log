@@ -1,0 +1,6 @@
+
+> e-wallet@0.1.0 deploy:local /home/sufyan/Desktop/Dev/E-wallet
+> tsx scripts/seed-evm.ts
+
+eip155:31337: deployments and 69 real transaction stages reconciled.
+eip155:31338: deployments and 5 real transaction stages reconciled.

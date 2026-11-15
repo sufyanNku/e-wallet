@@ -1,0 +1,126 @@
+
+> e-wallet@0.1.0 test:browser-solana /home/sufyan/Desktop/Dev/E-wallet
+> tsx scripts/test-solana-browser.ts
+
+
+> e-wallet@0.1.0 build:wallet /home/sufyan/Desktop/Dev/E-wallet
+> vite build --config apps/wallet/vite.config.ts --mode wallet-local
+
+vite v8.3.8 building client environment for wallet-local...
+transforming...
+[33m[INEFFECTIVE_DYNAMIC_IMPORT] [0mpackages/chain-bitcoin/src/index.ts is dynamically imported by packages/chain-bitcoin/src/adapter.ts but also statically imported by packages/chain-bitcoin/src/adapter.ts, packages/chain-bitcoin/src/external.ts, packages/wallet-core/src/bitcoin-signer.ts, packages/wallet-core/src/core.ts, dynamic import will not move module into another chunk.
+
+✓ 2346 modules transformed.
+rendering chunks...
+computing gzip size...
+apps/wallet/dist/assets/src-B52C-euK.js                   0.04 kB
+apps/wallet/dist/wallet-config.json                       0.07 kB │ gzip:     0.07 kB
+apps/wallet/dist/assets/rolldown-runtime-4tVxZq34.js      0.23 kB
+apps/wallet/dist/index.html                               0.58 kB │ gzip:     0.34 kB
+apps/wallet/dist/assets/src-C_y0Qv_i.js                 292.17 kB
+apps/wallet/dist/assets/secp256k1-CBqUmpIR.wasm       1,242.47 kB │ gzip: 1,160.98 kB
+apps/wallet/dist/assets/signing.worker-CxidcC-g.js    1,884.07 kB
+apps/wallet/dist/assets/index-C9EqMQvC.css               24.17 kB │ gzip:     6.29 kB
+apps/wallet/dist/assets/index-BGL4_T-n.js               742.05 kB │ gzip:   235.56 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[33m[INEFFECTIVE_DYNAMIC_IMPORT] [0mapps/wallet/src/real-gateway.ts is dynamically imported by apps/wallet/src/main.tsx but also statically imported by apps/wallet/src/connect-page.tsx, dynamic import will not move module into another chunk.
+
+✓ built in 1.73s
+ Network ewallet-browser-test_default Creating 
+ Network ewallet-browser-test_default Created 
+ Container ewallet-browser-test-solana-1 Creating 
+ Container ewallet-browser-test-solana-1 Created 
+ Container ewallet-browser-test-solana-1 Starting 
+ Container ewallet-browser-test-solana-1 Started 
+Solana stage reconciled: opening:SOL:alice
+Solana stage reconciled: opening:SOL:bob
+Solana stage reconciled: opening:SOL:carol
+Solana stage reconciled: mint:dUSDC
+Solana stage reconciled: mint:sEWLT
+Solana stage reconciled: mint:token2022
+Solana stage reconciled: mint:unsupported
+Solana stage reconciled: mint:frozen
+Solana stage reconciled: mint:nft1
+Solana stage reconciled: mint:nft2
+Solana stage reconciled: opening:dUSDC:alice
+Solana stage reconciled: opening:dUSDC:bob
+Solana stage reconciled: opening:dUSDC:carol
+Solana stage reconciled: opening:sEWLT:alice
+Solana stage reconciled: opening:token2022:alice
+Solana stage reconciled: opening:unsupported:alice
+Solana stage reconciled: opening:frozen:alice
+Solana stage reconciled: opening:nft1:alice
+Solana stage reconciled: opening:nft2:bob
+Solana stage reconciled: metadata:dUSDC
+Solana stage reconciled: revoke-mint:dUSDC
+Solana stage reconciled: metadata:sEWLT
+Solana stage reconciled: revoke-mint:sEWLT
+Solana stage reconciled: metadata:frozen
+Solana stage reconciled: revoke-mint:frozen
+Solana stage reconciled: metadata:nft1
+Solana stage reconciled: edition:nft1
+Solana stage reconciled: metadata:nft2
+Solana stage reconciled: edition:nft2
+Solana stage reconciled: delegate:alice
+Solana stage reconciled: freeze:alice
+Solana stage reconciled: SEED-11-sEWLT
+Solana stage reconciled: SEED-11-SOL
+Solana stage reconciled: SEED-11-dUSDC
+Solana stage reconciled: SEED-11-fresh-ATA
+Solana stage reconciled: SEED-12-NFT
+Solana: 37 real stages reconciled; metadata and supply assertions passed.
+solana: actual chain activity indexed and repeated-batch deduplication verified.
+[WebServer] (node:934379) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:934392) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:934408) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:934460) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser-solana/solana.spec.ts:78:1 › browser Worker signs SOL, SPL with missing ATA, Token-2022 and a standard Metaplex NFT, then revokes a real delegate (10.1s)
+
+  1 passed (14.1s)
+[WebServer] (node:935138) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:935219) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:935235) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:935294) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:935318) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:935334) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+[WebServer]   - import "./reference-api" without a file extension (apps/reference-dapp/vite.config.ts:1:28). Add the file extension
+[WebServer]   - import "../../services/backend/src/node-rpc" without a file extension (apps/reference-dapp/reference-api.ts:4:26). Add the file extension
+[WebServer]   - import "../../services/backend/src/bitcoin-rpc" without a file extension (apps/reference-dapp/reference-api.ts:5:42). Add the file extension
+[WebServer]   - import "./rpc" without a file extension (services/backend/src/node-rpc.ts:2:42). Add the file extension
+[WebServer]   - import "./rpc" without a file extension (services/backend/src/bitcoin-rpc.ts:2:29). Add the file extension
+[WebServer]   - import "./bitcoin-rpc" without a file extension (services/backend/src/node-rpc.ts:3:28). Add the file extension
+[WebServer]   - import "./rpc-concurrency" without a file extension (services/backend/src/rpc.ts:1:29). Add the file extension
+[WebServer] Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+Running 1 test using 1 worker
+
+(node:935362) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser-dapp/solana.spec.ts:27:1 › Wallet Standard connects through a real popup, signs exact bytes and sends a decoded Solana transfer (13.7s)
+
+  1 passed (19.9s)
+ Container ewallet-browser-test-solana-1 Stopping 
+ Container ewallet-browser-test-solana-1 Stopped 
+ Container ewallet-browser-test-solana-1 Removing 
+ Container ewallet-browser-test-solana-1 Removed 
+ Network ewallet-browser-test_default Removing 
+ Network ewallet-browser-test_default Removed 

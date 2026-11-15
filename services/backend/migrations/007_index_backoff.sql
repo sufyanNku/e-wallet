@@ -1,0 +1,1 @@
+ALTER TABLE sync_cursors ADD COLUMN failure_count INTEGER NOT NULL DEFAULT 0;

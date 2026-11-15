@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "mode": "testnet",
+  "observedAt": "2026-11-13T22:10:15.165Z",
+  "identities": "Random testnet-only keys kept outside version control",
+  "bitcoin": {
+    "networkId": "bitcoin:regtest",
+    "state": "not_run",
+    "reason": "Bitcoin remains an independently evaluated local regtest chain."
+  },
+  "results": [
+    {
+      "networkId": "eip155:11155111",
+      "state": "blocked_funding",
+      "address": "0xfCa64E76497c583F81b87832303fAEF487939B8a",
+      "recipient": "0x6dA2F9A9BdB3Cef41E238A71b34905fDB92C7105",
+      "balance": "0",
+      "observedIdentity": "11155111",
+      "faucet": "https://faucets.chain.link/sepolia",
+      "observedAt": "2026-11-13T22:10:05.420Z",
+      "reason": "Random testnet identity lacks the small gas allocation needed for the complete fixture. Use a legitimate free faucet; human checks are not bypassed."
+    },
+    {
+      "networkId": "eip155:84532",
+      "state": "blocked_funding",
+      "address": "0xaB4027A189ae62c5eCC4280e9e76E5dfFb3A89E7",
+      "recipient": "0xA946E6cE32D532485909D80278E567656bD80419",
+      "balance": "0",
+      "observedIdentity": "84532",
+      "faucet": "https://docs.base.org/base-chain/tools/network-faucets",
+      "observedAt": "2026-11-13T22:10:06.235Z",
+      "reason": "Random testnet identity lacks the small gas allocation needed for the complete fixture. Use a legitimate free faucet; human checks are not bypassed."
+    },
+    {
+      "networkId": "eip155:80002",
+      "state": "blocked_funding",
+      "address": "0xE82027981c45673fde7b55e3e3F303B52F7794D9",
+      "recipient": "0x56e62C96Ede14C3b695D8f6Bdc164895909417cb",
+      "balance": "0",
+      "observedIdentity": "80002",
+      "faucet": "https://faucet.polygon.technology",
+      "observedAt": "2026-11-13T22:10:07.079Z",
+      "reason": "Random testnet identity lacks the small gas allocation needed for the complete fixture. Use a legitimate free faucet; human checks are not bypassed."
+    },
+    {
+      "networkId": "eip155:97",
+      "state": "blocked_funding",
+      "address": "0x6260E9321A4392d7b8363297e215d6Df0a3bd9fa",
+      "recipient": "0x6f72859806a1df912Aaaff69E0bFAF4213FbEfBD",
+      "balance": "0",
+      "observedIdentity": "97",
+      "faucet": "https://testnet.bnbchain.org/faucet-smart",
+      "observedAt": "2026-11-13T22:10:08.792Z",
+      "reason": "Random testnet identity lacks the small gas allocation needed for the complete fixture. Use a legitimate free faucet; human checks are not bypassed."
+    },
+    {
+      "networkId": "eip155:998",
+      "state": "blocked_funding",
+      "address": "0x07bcEDBAEE37e70929d80d69a78cB2B0D07670b9",
+      "recipient": "0xFEE4F5e81B33BD1D9D7ba6f890B3990E2A65F596",
+      "balance": "0",
+      "observedIdentity": "998",
+      "faucet": "https://app.hyperliquid-testnet.xyz/drip",
+      "observedAt": "2026-11-13T22:10:09.988Z",
+      "reason": "Random testnet identity lacks the small gas allocation needed for the complete fixture. Use a legitimate free faucet; human checks are not bypassed."
+    },
+    {
+      "networkId": "eip155:46630",
+      "state": "blocked_funding",
+      "address": "0xb44C089Dd54Fa10c0ACff3342eE8F778Ba533a13",
+      "recipient": "0x11Bae7E62547837512b5FE5F7Dd47805b405E008",
+      "balance": "0",
+      "observedIdentity": "46630",
+      "faucet": "https://faucet.testnet.chain.robinhood.com",
+      "observedAt": "2026-11-13T22:10:11.116Z",
+      "reason": "Random testnet identity lacks the small gas allocation needed for the complete fixture. Use a legitimate free faucet; human checks are not bypassed."
+    },
+    {
+      "networkId": "eip155:5042002",
+      "state": "blocked_funding",
+      "address": "0x930769664BB1F58369b61040af888f216Cfd16a9",
+      "recipient": "0x852C03AF727faf09614E7dc2Fd3cCE3480275F87",
+      "balance": "0",
+      "observedIdentity": "5042002",
+      "faucet": "https://faucet.circle.com",
+      "observedAt": "2026-11-13T22:10:12.934Z",
+      "reason": "Random testnet identity lacks the small gas allocation needed for the complete fixture. Use a legitimate free faucet; human checks are not bypassed."
+    },
+    {
+      "networkId": "solana:devnet",
+      "state": "blocked_funding",
+      "address": "HD5X9K4N3XVN8HrqjNCb73koLeNfw4GnUWko2DC8cQaC",
+      "recipient": "6PLpv2CJiz2TaHjdy1djjvZtBoUJb5zEQrjkgBnGWRym",
+      "balance": "0",
+      "observedIdentity": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+      "faucet": "https://faucet.solana.com",
+      "observedAt": "2026-11-13T22:10:13.934Z",
+      "reason": "Random testnet identity lacks the small gas allocation needed for the complete fixture. Use a legitimate free faucet; human checks are not bypassed."
+    }
+  ]
+}

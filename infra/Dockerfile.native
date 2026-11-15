@@ -1,0 +1,13 @@
+FROM node:24.22.3-bookworm-slim@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54
+WORKDIR /opt/ewallet
+COPY native ./bin
+COPY programs ./programs
+COPY sha256.json ./sha256.json
+COPY start-solana.mjs ./start-solana.mjs
+RUN node --input-type=module -e "import fs from 'node:fs';import{createHash}from'node:crypto';for(const[n,h]of Object.entries(JSON.parse(fs.readFileSync('sha256.json','utf8')))){if(createHash('sha256').update(fs.readFileSync('bin/'+n)).digest('hex')!==h)throw Error('Native checksum mismatch')}" \
+    && node --input-type=module -e "import fs from 'node:fs';import{createHash}from'node:crypto';const m=JSON.parse(fs.readFileSync('programs/build.json'));if(createHash('sha256').update(fs.readFileSync('programs/token_metadata.so')).digest('hex')!==m.programSha256)throw Error('Metadata checksum mismatch')" \
+    && /opt/ewallet/bin/solana-test-validator --version \
+    && /opt/ewallet/bin/bitcoind --version \
+    && mkdir /data && chown node:node /data
+ENV PATH="/opt/ewallet/bin:${PATH}"
+USER node

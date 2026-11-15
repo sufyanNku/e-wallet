@@ -1,0 +1,13 @@
+{
+  "source": "node",
+  "persistent": true,
+  "networkId": "eip155:31337",
+  "fingerprint": "43ed22d20f51ad1ef6671592c77e45bc58c0c29d8a390b06a24b635485ee2fe7",
+  "transactions": 51,
+  "transfers": 53,
+  "scopedLinks": 32,
+  "balanceSnapshots": 40,
+  "idempotent": true,
+  "coverage": "Registered contract events and outer native transactions",
+  "isolated": false
+}

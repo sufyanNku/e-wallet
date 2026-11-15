@@ -1,0 +1,79 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "lib": [
+      "ES2023",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "types": [
+      "node",
+      "vite/client"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@ewallet/domain": [
+        "packages/domain/src/index.ts"
+      ],
+      "@ewallet/config": [
+        "packages/config/src/index.ts"
+      ],
+      "@ewallet/ui": [
+        "packages/ui/src/index.ts"
+      ],
+      "@ewallet/wallet-core": [
+        "packages/wallet-core/src/index.ts"
+      ],
+      "@ewallet/provider": [
+        "packages/provider/src/index.ts"
+      ],
+      "@ewallet/chain-evm": [
+        "packages/chain-evm/src/index.ts"
+      ],
+      "@ewallet/chain-solana": [
+        "packages/chain-solana/src/index.ts"
+      ],
+      "@ewallet/chain-bitcoin": [
+        "packages/chain-bitcoin/src/index.ts"
+      ],
+      "@ewallet/domain/protocol": [
+        "packages/domain/src/worker-protocol.ts"
+      ],
+      "@ewallet/domain/deployments": [
+        "packages/domain/src/deployments.ts"
+      ],
+      "@ewallet/config/abis": [
+        "packages/config/src/abis.generated.ts"
+      ],
+      "@ewallet/config/rpc": [
+        "packages/config/src/rpc.ts"
+      ]
+    }
+  },
+  "include": [
+    "apps",
+    "packages",
+    "services",
+    "scripts",
+    "tests",
+    "vitest.config.ts",
+    "playwright.config.ts"
+  ],
+  "exclude": [
+    "**/dist",
+    "node_modules",
+    ".local"
+  ]
+}

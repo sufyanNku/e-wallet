@@ -1,0 +1,12 @@
+
+> e-wallet@0.1.0 lint /home/sufyan/Desktop/Dev/E-wallet
+> eslint . && node scripts/check-boundaries.mjs
+
+
+/home/sufyan/Desktop/Dev/E-wallet/scripts/check-indexers.ts
+  8:5   error  The value assigned to 'address' is not used in subsequent statements  no-useless-assignment
+  8:16  error  The value assigned to 'network' is not used in subsequent statements  no-useless-assignment
+
+✖ 2 problems (2 errors, 0 warnings)
+
+ ELIFECYCLE  Command failed with exit code 1.

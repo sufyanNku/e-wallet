@@ -1,0 +1,11 @@
+
+> e-wallet@0.1.0 seed:bitcoin /home/sufyan/Desktop/Dev/E-wallet
+> tsx scripts/seed-bitcoin.ts
+
+Bitcoin funding submitted: alice-wpkh-0
+Bitcoin funding submitted: alice-wpkh-1
+Bitcoin funding submitted: alice-tr-0
+Bitcoin funding submitted: alice-tr-1
+Bitcoin funding submitted: bob-wpkh
+Bitcoin funding submitted: carol-wpkh
+Bitcoin: public descriptors, six funding transactions, script-type allocations and watch-only policy verified.

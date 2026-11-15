@@ -1,0 +1,10 @@
+{
+  "observedAt": "2026-11-14T14:02:40.837Z",
+  "wallet": 5173,
+  "backendAndApprovals": 8787,
+  "referenceDapp": 5174,
+  "ready": true,
+  "localMode": true,
+  "openerPoliciesVerified": true,
+  "scope": "Only spawned development processes; existing nodes retained"
+}

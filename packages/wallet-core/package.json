@@ -1,0 +1,26 @@
+{
+  "name": "@ewallet/wallet-core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "@ewallet/domain": "workspace:*",
+    "@ewallet/config": "workspace:*",
+    "zod": "4.6.7",
+    "idb": "8.0.4",
+    "@scure/bip39": "2.4.0",
+    "@scure/bip32": "2.4.0",
+    "micro-key-producer": "0.10.2",
+    "@scure/base": "2.4.0",
+    "ethers": "6.17.0",
+    "bitcoinjs-lib": "7.0.5",
+    "bip32": "5.0.1",
+    "ecpair": "3.0.2",
+    "tiny-secp256k1": "2.2.5",
+    "@ewallet/chain-evm": "workspace:*",
+    "@ewallet/chain-solana": "workspace:*",
+    "@solana/kit": "8.6.0",
+    "@ewallet/chain-bitcoin": "workspace:*"
+  }
+}

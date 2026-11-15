@@ -1,0 +1,30 @@
+[WebServer] (node:930654) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:930668) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:930684) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:930718) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:930766) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:930782) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+[WebServer]   - import "./reference-api" without a file extension (apps/reference-dapp/vite.config.ts:1:28). Add the file extension
+[WebServer]   - import "../../services/backend/src/node-rpc" without a file extension (apps/reference-dapp/reference-api.ts:4:26). Add the file extension
+[WebServer]   - import "../../services/backend/src/bitcoin-rpc" without a file extension (apps/reference-dapp/reference-api.ts:5:42). Add the file extension
+[WebServer]   - import "./rpc" without a file extension (services/backend/src/node-rpc.ts:2:42). Add the file extension
+[WebServer]   - import "./rpc" without a file extension (services/backend/src/bitcoin-rpc.ts:2:29). Add the file extension
+[WebServer]   - import "./bitcoin-rpc" without a file extension (services/backend/src/node-rpc.ts:3:28). Add the file extension
+[WebServer]   - import "./rpc-concurrency" without a file extension (services/backend/src/rpc.ts:1:29). Add the file extension
+[WebServer] Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+Running 2 tests using 1 worker
+
+(node:930980) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser-dapp/evm.spec.ts:34:1 › built cross-origin popup connects, signs messages, sends a payment and revokes its live session (14.8s)
+  ✓  2 tests/browser-dapp/evm.spec.ts:206:1 › reference diagnostics refuse wrong channel, target origin and payload reuse before signing (9.5s)
+
+  2 passed (31.7s)

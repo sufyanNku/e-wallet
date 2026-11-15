@@ -1,0 +1,12 @@
+{
+  "secretNetworkLeaks": 0,
+  "secretConsoleLeaks": 0,
+  "plaintextSecretStorage": 0,
+  "crossTabLock": "passed",
+  "separateTabUnlock": "passed",
+  "encryptedBackupRestore": "passed",
+  "passwordChangeRestart": "passed",
+  "screenshots": "disabled",
+  "trace": "disabled",
+  "video": "disabled"
+}

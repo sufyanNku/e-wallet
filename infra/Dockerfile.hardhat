@@ -1,0 +1,12 @@
+FROM node:24.22.3-bookworm-slim@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54
+WORKDIR /app
+RUN corepack enable && corepack prepare pnpm@10.34.9 --activate
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml .npmrc ./
+COPY contracts/package.json ./contracts/package.json
+COPY patches ./patches
+RUN pnpm --filter @ewallet/contracts install --frozen-lockfile --ignore-scripts
+COPY --chown=node:node contracts/hardhat.config.ts ./contracts/hardhat.config.ts
+RUN chown -R node:node /app
+USER node
+WORKDIR /app/contracts
+ENTRYPOINT ["pnpm", "exec", "hardhat", "node"]

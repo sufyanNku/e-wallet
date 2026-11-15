@@ -1,0 +1,99 @@
+
+> e-wallet@0.1.0 test:browser-bitcoin /home/sufyan/Desktop/Dev/E-wallet
+> tsx scripts/test-bitcoin-browser.ts
+
+
+> e-wallet@0.1.0 build:wallet /home/sufyan/Desktop/Dev/E-wallet
+> vite build --config apps/wallet/vite.config.ts --mode wallet-local
+
+vite v8.3.8 building client environment for wallet-local...
+transforming...
+[33m[INEFFECTIVE_DYNAMIC_IMPORT] [0mpackages/chain-bitcoin/src/index.ts is dynamically imported by packages/chain-bitcoin/src/adapter.ts but also statically imported by packages/chain-bitcoin/src/adapter.ts, packages/chain-bitcoin/src/external.ts, packages/wallet-core/src/bitcoin-signer.ts, packages/wallet-core/src/core.ts, dynamic import will not move module into another chunk.
+
+✓ 2346 modules transformed.
+rendering chunks...
+computing gzip size...
+apps/wallet/dist/assets/src-B52C-euK.js                   0.04 kB
+apps/wallet/dist/wallet-config.json                       0.07 kB │ gzip:     0.07 kB
+apps/wallet/dist/assets/rolldown-runtime-4tVxZq34.js      0.23 kB
+apps/wallet/dist/index.html                               0.58 kB │ gzip:     0.34 kB
+apps/wallet/dist/assets/src-C_y0Qv_i.js                 292.17 kB
+apps/wallet/dist/assets/secp256k1-CBqUmpIR.wasm       1,242.47 kB │ gzip: 1,160.98 kB
+apps/wallet/dist/assets/signing.worker-CxidcC-g.js    1,884.07 kB
+apps/wallet/dist/assets/index-C9EqMQvC.css               24.17 kB │ gzip:     6.29 kB
+apps/wallet/dist/assets/index-BGL4_T-n.js               742.05 kB │ gzip:   235.56 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[33m[INEFFECTIVE_DYNAMIC_IMPORT] [0mapps/wallet/src/real-gateway.ts is dynamically imported by apps/wallet/src/main.tsx but also statically imported by apps/wallet/src/connect-page.tsx, dynamic import will not move module into another chunk.
+
+✓ built in 1.81s
+ Network ewallet-bitcoin-browser-test_default Creating 
+ Network ewallet-bitcoin-browser-test_default Created 
+ Container ewallet-bitcoin-browser-test-bitcoin-1 Creating 
+ Container ewallet-bitcoin-browser-test-bitcoin-1 Created 
+ Container ewallet-bitcoin-browser-test-bitcoin-1 Starting 
+ Container ewallet-bitcoin-browser-test-bitcoin-1 Started 
+
+> e-wallet@0.1.0 seed:bitcoin /home/sufyan/Desktop/Dev/E-wallet
+> tsx scripts/seed-bitcoin.ts
+
+Bitcoin funding submitted: alice-wpkh-0
+Bitcoin funding submitted: alice-wpkh-1
+Bitcoin funding submitted: alice-tr-0
+Bitcoin funding submitted: alice-tr-1
+Bitcoin funding submitted: bob-wpkh
+Bitcoin funding submitted: carol-wpkh
+Bitcoin: public descriptors, six funding transactions, script-type allocations and watch-only policy verified.
+[WebServer] (node:937084) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:937103) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:937119) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:937253) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser-bitcoin/bitcoin.spec.ts:61:1 › browser Worker sends P2WPKH and key-path P2TR PSBTs, recognizes internal change and confirms after CLI mining (24.2s)
+
+  1 passed (28.6s)
+[WebServer] (node:938177) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:938190) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:938206) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:938229) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:938242) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:938258) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+[WebServer]   - import "./reference-api" without a file extension (apps/reference-dapp/vite.config.ts:1:28). Add the file extension
+[WebServer]   - import "../../services/backend/src/node-rpc" without a file extension (apps/reference-dapp/reference-api.ts:4:26). Add the file extension
+[WebServer]   - import "../../services/backend/src/bitcoin-rpc" without a file extension (apps/reference-dapp/reference-api.ts:5:42). Add the file extension
+[WebServer]   - import "./rpc" without a file extension (services/backend/src/bitcoin-rpc.ts:2:29). Add the file extension
+[WebServer]   - import "./rpc" without a file extension (services/backend/src/node-rpc.ts:2:42). Add the file extension
+[WebServer]   - import "./bitcoin-rpc" without a file extension (services/backend/src/node-rpc.ts:3:28). Add the file extension
+[WebServer]   - import "./rpc-concurrency" without a file extension (services/backend/src/rpc.ts:1:29). Add the file extension
+[WebServer] Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+Running 1 test using 1 worker
+
+(node:938305) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser-dapp/bitcoin.spec.ts:19:1 › Bitcoin project API connects with descriptor consent, reviews a PSBT and broadcasts only its exact prior authorization (15.2s)
+
+  1 passed (20.7s)
+ Container ewallet-bitcoin-browser-test-bitcoin-1 Stopping 
+ Container ewallet-bitcoin-browser-test-bitcoin-1 Stopped 
+ Container ewallet-bitcoin-browser-test-bitcoin-1 Removing 
+ Container ewallet-bitcoin-browser-test-bitcoin-1 Removed 
+ Network ewallet-bitcoin-browser-test_default Removing 
+ Network ewallet-bitcoin-browser-test_default Removed 

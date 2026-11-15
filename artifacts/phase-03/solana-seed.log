@@ -1,0 +1,38 @@
+
+> e-wallet@0.1.0 seed:solana /home/sufyan/Desktop/Dev/E-wallet
+> tsx scripts/seed-solana.ts
+
+Solana stage reconciled: opening:SOL:alice
+Solana stage reconciled: opening:SOL:bob
+Solana stage reconciled: opening:SOL:carol
+Solana stage reconciled: mint:dUSDC
+Solana stage reconciled: mint:sEWLT
+Solana stage reconciled: mint:token2022
+Solana stage reconciled: mint:unsupported
+Solana stage reconciled: mint:frozen
+Solana stage reconciled: mint:nft1
+Solana stage reconciled: mint:nft2
+Solana stage reconciled: opening:dUSDC:alice
+Solana stage reconciled: opening:dUSDC:bob
+Solana stage reconciled: opening:dUSDC:carol
+Solana stage reconciled: opening:sEWLT:alice
+Solana stage reconciled: opening:token2022:alice
+Solana stage reconciled: opening:unsupported:alice
+Solana stage reconciled: opening:frozen:alice
+Solana stage reconciled: opening:nft1:alice
+Solana stage reconciled: opening:nft2:bob
+Solana stage reconciled: metadata:dUSDC
+Solana stage reconciled: revoke-mint:dUSDC
+Solana stage reconciled: metadata:sEWLT
+Solana stage reconciled: revoke-mint:sEWLT
+Solana stage reconciled: metadata:frozen
+Solana stage reconciled: revoke-mint:frozen
+Solana stage reconciled: metadata:nft1
+Solana stage reconciled: edition:nft1
+Solana stage reconciled: metadata:nft2
+Solana stage reconciled: edition:nft2
+Solana stage reconciled: delegate:alice
+Solana stage reconciled: freeze:alice
+Solana stage reconciled: SEED-11-sEWLT
+Solana stage reconciled: SEED-12-NFT
+Solana: 34 real stages reconciled; metadata and supply assertions passed.

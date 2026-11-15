@@ -1,0 +1,2853 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-11-14T14:03:07.051710Z",
+  "phases": [
+    {
+      "phase": "01",
+      "state": "passed",
+      "gate": "G1",
+      "tasks": [
+        {
+          "taskId": "F01",
+          "state": "passed",
+          "changedPaths": [
+            "package.json",
+            "pnpm-lock.yaml",
+            "pnpm-workspace.yaml",
+            "tsconfig.json",
+            "eslint.config.js",
+            "scripts/check-boundaries.mjs"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:55:40.190Z",
+              "completedAt": "2026-11-13T21:55:49.179Z",
+              "evidencePath": "artifacts/phase-01/typecheck.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:55:53.769Z",
+              "completedAt": "2026-11-13T21:56:10.671Z",
+              "evidencePath": "artifacts/phase-01/test:unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:56:33.686Z",
+              "completedAt": "2026-11-13T21:56:36.195Z",
+              "evidencePath": "artifacts/phase-01/audit:verified.log"
+            },
+            {
+              "command": "pnpm build:web",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:50.041Z",
+              "completedAt": "2026-11-13T21:58:52.849Z",
+              "evidencePath": "artifacts/phase-01/build:web.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:52.849Z",
+              "completedAt": "2026-11-13T21:58:57.141Z",
+              "evidencePath": "artifacts/phase-01/lint.log"
+            },
+            {
+              "command": "pnpm test:ui",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:57.141Z",
+              "completedAt": "2026-11-13T21:59:14.750Z",
+              "evidencePath": "artifacts/phase-01/test:ui.log"
+            },
+            {
+              "command": "Node-22 terminal: pnpm node --version; pnpm install --frozen-lockfile --offline; pnpm seed:local; node --import tsx scripts/check-dev.ts",
+              "state": "passed",
+              "exitCode": 0,
+              "observedAt": "2026-11-14T14:03:07.051710Z",
+              "evidencePath": "artifacts/phase-04/node-runtime-proof.json"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-01/verification.json",
+            "artifacts/phase-01/browser-results.json",
+            "artifacts/phase-01/accessibility.json",
+            "artifacts/phase-04/node-runtime-proof.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "F02",
+          "state": "passed",
+          "changedPaths": [
+            "packages/domain/src/index.ts",
+            "packages/config/src/index.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:55:40.190Z",
+              "completedAt": "2026-11-13T21:55:49.179Z",
+              "evidencePath": "artifacts/phase-01/typecheck.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:55:53.769Z",
+              "completedAt": "2026-11-13T21:56:10.671Z",
+              "evidencePath": "artifacts/phase-01/test:unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:56:33.686Z",
+              "completedAt": "2026-11-13T21:56:36.195Z",
+              "evidencePath": "artifacts/phase-01/audit:verified.log"
+            },
+            {
+              "command": "pnpm build:web",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:50.041Z",
+              "completedAt": "2026-11-13T21:58:52.849Z",
+              "evidencePath": "artifacts/phase-01/build:web.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:52.849Z",
+              "completedAt": "2026-11-13T21:58:57.141Z",
+              "evidencePath": "artifacts/phase-01/lint.log"
+            },
+            {
+              "command": "pnpm test:ui",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:57.141Z",
+              "completedAt": "2026-11-13T21:59:14.750Z",
+              "evidencePath": "artifacts/phase-01/test:ui.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-01/verification.json",
+            "artifacts/phase-01/browser-results.json",
+            "artifacts/phase-01/accessibility.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "F03",
+          "state": "passed",
+          "changedPaths": [
+            "packages/ui/src/components.tsx",
+            "apps/wallet/src/styles.css"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:55:40.190Z",
+              "completedAt": "2026-11-13T21:55:49.179Z",
+              "evidencePath": "artifacts/phase-01/typecheck.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:55:53.769Z",
+              "completedAt": "2026-11-13T21:56:10.671Z",
+              "evidencePath": "artifacts/phase-01/test:unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:56:33.686Z",
+              "completedAt": "2026-11-13T21:56:36.195Z",
+              "evidencePath": "artifacts/phase-01/audit:verified.log"
+            },
+            {
+              "command": "pnpm build:web",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:50.041Z",
+              "completedAt": "2026-11-13T21:58:52.849Z",
+              "evidencePath": "artifacts/phase-01/build:web.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:52.849Z",
+              "completedAt": "2026-11-13T21:58:57.141Z",
+              "evidencePath": "artifacts/phase-01/lint.log"
+            },
+            {
+              "command": "pnpm test:ui",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:57.141Z",
+              "completedAt": "2026-11-13T21:59:14.750Z",
+              "evidencePath": "artifacts/phase-01/test:ui.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-01/verification.json",
+            "artifacts/phase-01/browser-results.json",
+            "artifacts/phase-01/accessibility.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "F04",
+          "state": "passed",
+          "changedPaths": [
+            "apps/wallet/src/onboarding.tsx",
+            "apps/wallet/src/mock-gateway.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:55:40.190Z",
+              "completedAt": "2026-11-13T21:55:49.179Z",
+              "evidencePath": "artifacts/phase-01/typecheck.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:55:53.769Z",
+              "completedAt": "2026-11-13T21:56:10.671Z",
+              "evidencePath": "artifacts/phase-01/test:unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:56:33.686Z",
+              "completedAt": "2026-11-13T21:56:36.195Z",
+              "evidencePath": "artifacts/phase-01/audit:verified.log"
+            },
+            {
+              "command": "pnpm build:web",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:50.041Z",
+              "completedAt": "2026-11-13T21:58:52.849Z",
+              "evidencePath": "artifacts/phase-01/build:web.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:52.849Z",
+              "completedAt": "2026-11-13T21:58:57.141Z",
+              "evidencePath": "artifacts/phase-01/lint.log"
+            },
+            {
+              "command": "pnpm test:ui",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:57.141Z",
+              "completedAt": "2026-11-13T21:59:14.750Z",
+              "evidencePath": "artifacts/phase-01/test:ui.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-01/verification.json",
+            "artifacts/phase-01/browser-results.json",
+            "artifacts/phase-01/accessibility.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "F05",
+          "state": "passed",
+          "changedPaths": [
+            "apps/wallet/src/payments.tsx",
+            "apps/wallet/src/portfolio.tsx"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:55:40.190Z",
+              "completedAt": "2026-11-13T21:55:49.179Z",
+              "evidencePath": "artifacts/phase-01/typecheck.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:55:53.769Z",
+              "completedAt": "2026-11-13T21:56:10.671Z",
+              "evidencePath": "artifacts/phase-01/test:unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:56:33.686Z",
+              "completedAt": "2026-11-13T21:56:36.195Z",
+              "evidencePath": "artifacts/phase-01/audit:verified.log"
+            },
+            {
+              "command": "pnpm build:web",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:50.041Z",
+              "completedAt": "2026-11-13T21:58:52.849Z",
+              "evidencePath": "artifacts/phase-01/build:web.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:52.849Z",
+              "completedAt": "2026-11-13T21:58:57.141Z",
+              "evidencePath": "artifacts/phase-01/lint.log"
+            },
+            {
+              "command": "pnpm test:ui",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:57.141Z",
+              "completedAt": "2026-11-13T21:59:14.750Z",
+              "evidencePath": "artifacts/phase-01/test:ui.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-01/verification.json",
+            "artifacts/phase-01/browser-results.json",
+            "artifacts/phase-01/accessibility.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "F06",
+          "state": "passed",
+          "changedPaths": [
+            "apps/wallet/src/services.tsx",
+            "apps/wallet/src/context.tsx"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:55:40.190Z",
+              "completedAt": "2026-11-13T21:55:49.179Z",
+              "evidencePath": "artifacts/phase-01/typecheck.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:55:53.769Z",
+              "completedAt": "2026-11-13T21:56:10.671Z",
+              "evidencePath": "artifacts/phase-01/test:unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:56:33.686Z",
+              "completedAt": "2026-11-13T21:56:36.195Z",
+              "evidencePath": "artifacts/phase-01/audit:verified.log"
+            },
+            {
+              "command": "pnpm build:web",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:50.041Z",
+              "completedAt": "2026-11-13T21:58:52.849Z",
+              "evidencePath": "artifacts/phase-01/build:web.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:52.849Z",
+              "completedAt": "2026-11-13T21:58:57.141Z",
+              "evidencePath": "artifacts/phase-01/lint.log"
+            },
+            {
+              "command": "pnpm test:ui",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:57.141Z",
+              "completedAt": "2026-11-13T21:59:14.750Z",
+              "evidencePath": "artifacts/phase-01/test:ui.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-01/verification.json",
+            "artifacts/phase-01/browser-results.json",
+            "artifacts/phase-01/accessibility.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "F07",
+          "state": "passed",
+          "changedPaths": [
+            "apps/wallet/src/settings.tsx"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:55:40.190Z",
+              "completedAt": "2026-11-13T21:55:49.179Z",
+              "evidencePath": "artifacts/phase-01/typecheck.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:55:53.769Z",
+              "completedAt": "2026-11-13T21:56:10.671Z",
+              "evidencePath": "artifacts/phase-01/test:unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:56:33.686Z",
+              "completedAt": "2026-11-13T21:56:36.195Z",
+              "evidencePath": "artifacts/phase-01/audit:verified.log"
+            },
+            {
+              "command": "pnpm build:web",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:50.041Z",
+              "completedAt": "2026-11-13T21:58:52.849Z",
+              "evidencePath": "artifacts/phase-01/build:web.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:52.849Z",
+              "completedAt": "2026-11-13T21:58:57.141Z",
+              "evidencePath": "artifacts/phase-01/lint.log"
+            },
+            {
+              "command": "pnpm test:ui",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:57.141Z",
+              "completedAt": "2026-11-13T21:59:14.750Z",
+              "evidencePath": "artifacts/phase-01/test:ui.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-01/verification.json",
+            "artifacts/phase-01/browser-results.json",
+            "artifacts/phase-01/accessibility.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "F08",
+          "state": "passed",
+          "changedPaths": [
+            "apps/wallet/src/App.tsx",
+            "services/backend/src/server.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:55:40.190Z",
+              "completedAt": "2026-11-13T21:55:49.179Z",
+              "evidencePath": "artifacts/phase-01/typecheck.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:55:53.769Z",
+              "completedAt": "2026-11-13T21:56:10.671Z",
+              "evidencePath": "artifacts/phase-01/test:unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:56:33.686Z",
+              "completedAt": "2026-11-13T21:56:36.195Z",
+              "evidencePath": "artifacts/phase-01/audit:verified.log"
+            },
+            {
+              "command": "pnpm build:web",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:50.041Z",
+              "completedAt": "2026-11-13T21:58:52.849Z",
+              "evidencePath": "artifacts/phase-01/build:web.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:52.849Z",
+              "completedAt": "2026-11-13T21:58:57.141Z",
+              "evidencePath": "artifacts/phase-01/lint.log"
+            },
+            {
+              "command": "pnpm test:ui",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:57.141Z",
+              "completedAt": "2026-11-13T21:59:14.750Z",
+              "evidencePath": "artifacts/phase-01/test:ui.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-01/verification.json",
+            "artifacts/phase-01/browser-results.json",
+            "artifacts/phase-01/accessibility.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "F09",
+          "state": "passed",
+          "changedPaths": [
+            "tests",
+            "artifacts/phase-01"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:55:40.190Z",
+              "completedAt": "2026-11-13T21:55:49.179Z",
+              "evidencePath": "artifacts/phase-01/typecheck.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:55:53.769Z",
+              "completedAt": "2026-11-13T21:56:10.671Z",
+              "evidencePath": "artifacts/phase-01/test:unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:56:33.686Z",
+              "completedAt": "2026-11-13T21:56:36.195Z",
+              "evidencePath": "artifacts/phase-01/audit:verified.log"
+            },
+            {
+              "command": "pnpm build:web",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:50.041Z",
+              "completedAt": "2026-11-13T21:58:52.849Z",
+              "evidencePath": "artifacts/phase-01/build:web.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:52.849Z",
+              "completedAt": "2026-11-13T21:58:57.141Z",
+              "evidencePath": "artifacts/phase-01/lint.log"
+            },
+            {
+              "command": "pnpm test:ui",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T21:58:57.141Z",
+              "completedAt": "2026-11-13T21:59:14.750Z",
+              "evidencePath": "artifacts/phase-01/test:ui.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-01/verification.json",
+            "artifacts/phase-01/browser-results.json",
+            "artifacts/phase-01/accessibility.json"
+          ],
+          "remainingBlockers": []
+        }
+      ],
+      "checks": [
+        {
+          "command": "pnpm typecheck",
+          "state": "passed",
+          "exitCode": 0,
+          "startedAt": "2026-11-13T21:55:40.190Z",
+          "completedAt": "2026-11-13T21:55:49.179Z",
+          "evidencePath": "artifacts/phase-01/typecheck.log"
+        },
+        {
+          "command": "pnpm test:unit",
+          "state": "passed",
+          "exitCode": 0,
+          "startedAt": "2026-11-13T21:55:53.769Z",
+          "completedAt": "2026-11-13T21:56:10.671Z",
+          "evidencePath": "artifacts/phase-01/test:unit.log"
+        },
+        {
+          "command": "pnpm audit:verified",
+          "state": "passed",
+          "exitCode": 0,
+          "startedAt": "2026-11-13T21:56:33.686Z",
+          "completedAt": "2026-11-13T21:56:36.195Z",
+          "evidencePath": "artifacts/phase-01/audit:verified.log"
+        },
+        {
+          "command": "pnpm build:web",
+          "state": "passed",
+          "exitCode": 0,
+          "startedAt": "2026-11-13T21:58:50.041Z",
+          "completedAt": "2026-11-13T21:58:52.849Z",
+          "evidencePath": "artifacts/phase-01/build:web.log"
+        },
+        {
+          "command": "pnpm lint",
+          "state": "passed",
+          "exitCode": 0,
+          "startedAt": "2026-11-13T21:58:52.849Z",
+          "completedAt": "2026-11-13T21:58:57.141Z",
+          "evidencePath": "artifacts/phase-01/lint.log"
+        },
+        {
+          "command": "pnpm test:ui",
+          "state": "passed",
+          "exitCode": 0,
+          "startedAt": "2026-11-13T21:58:57.141Z",
+          "completedAt": "2026-11-13T21:59:14.750Z",
+          "evidencePath": "artifacts/phase-01/test:ui.log"
+        }
+      ],
+      "remainingBlockers": [],
+      "evidencePaths": [
+        "artifacts/phase-01/1440-activity.png",
+        "artifacts/phase-01/1440-apps.png",
+        "artifacts/phase-01/1440-asset.png",
+        "artifacts/phase-01/1440-bridge.png",
+        "artifacts/phase-01/1440-collectibles.png",
+        "artifacts/phase-01/1440-connect.png",
+        "artifacts/phase-01/1440-contacts.png",
+        "artifacts/phase-01/1440-create.png",
+        "artifacts/phase-01/1440-evaluation.png",
+        "artifacts/phase-01/1440-faucet.png",
+        "artifacts/phase-01/1440-home.png",
+        "artifacts/phase-01/1440-import.png",
+        "artifacts/phase-01/1440-receive.png",
+        "artifacts/phase-01/1440-send.png",
+        "artifacts/phase-01/1440-services.png",
+        "artifacts/phase-01/1440-settings.png",
+        "artifacts/phase-01/1440-shared.png",
+        "artifacts/phase-01/1440-swap.png",
+        "artifacts/phase-01/1440-tokens.png",
+        "artifacts/phase-01/1440-unlock.png",
+        "artifacts/phase-01/1440-vault.png",
+        "artifacts/phase-01/1440-welcome.png",
+        "artifacts/phase-01/320-activity.png",
+        "artifacts/phase-01/320-apps.png",
+        "artifacts/phase-01/320-asset.png",
+        "artifacts/phase-01/320-bridge.png",
+        "artifacts/phase-01/320-collectibles.png",
+        "artifacts/phase-01/320-connect.png",
+        "artifacts/phase-01/320-contacts.png",
+        "artifacts/phase-01/320-create.png",
+        "artifacts/phase-01/320-evaluation.png",
+        "artifacts/phase-01/320-faucet.png",
+        "artifacts/phase-01/320-home.png",
+        "artifacts/phase-01/320-import.png",
+        "artifacts/phase-01/320-receive.png",
+        "artifacts/phase-01/320-send.png",
+        "artifacts/phase-01/320-services.png",
+        "artifacts/phase-01/320-settings.png",
+        "artifacts/phase-01/320-shared.png",
+        "artifacts/phase-01/320-swap.png",
+        "artifacts/phase-01/320-tokens.png",
+        "artifacts/phase-01/320-unlock.png",
+        "artifacts/phase-01/320-vault.png",
+        "artifacts/phase-01/320-welcome.png",
+        "artifacts/phase-01/360-activity.png",
+        "artifacts/phase-01/360-apps.png",
+        "artifacts/phase-01/360-asset.png",
+        "artifacts/phase-01/360-bridge.png",
+        "artifacts/phase-01/360-collectibles.png",
+        "artifacts/phase-01/360-connect.png",
+        "artifacts/phase-01/360-contacts.png",
+        "artifacts/phase-01/360-create.png",
+        "artifacts/phase-01/360-evaluation.png",
+        "artifacts/phase-01/360-faucet.png",
+        "artifacts/phase-01/360-home.png",
+        "artifacts/phase-01/360-import.png",
+        "artifacts/phase-01/360-receive.png",
+        "artifacts/phase-01/360-send.png",
+        "artifacts/phase-01/360-services.png",
+        "artifacts/phase-01/360-settings.png",
+        "artifacts/phase-01/360-shared.png",
+        "artifacts/phase-01/360-swap.png",
+        "artifacts/phase-01/360-tokens.png",
+        "artifacts/phase-01/360-unlock.png",
+        "artifacts/phase-01/360-vault.png",
+        "artifacts/phase-01/360-welcome.png",
+        "artifacts/phase-01/768-activity.png",
+        "artifacts/phase-01/768-apps.png",
+        "artifacts/phase-01/768-asset.png",
+        "artifacts/phase-01/768-bridge.png",
+        "artifacts/phase-01/768-collectibles.png",
+        "artifacts/phase-01/768-connect.png",
+        "artifacts/phase-01/768-contacts.png",
+        "artifacts/phase-01/768-create.png",
+        "artifacts/phase-01/768-evaluation.png",
+        "artifacts/phase-01/768-faucet.png",
+        "artifacts/phase-01/768-home.png",
+        "artifacts/phase-01/768-import.png",
+        "artifacts/phase-01/768-receive.png",
+        "artifacts/phase-01/768-send.png",
+        "artifacts/phase-01/768-services.png",
+        "artifacts/phase-01/768-settings.png",
+        "artifacts/phase-01/768-shared.png",
+        "artifacts/phase-01/768-swap.png",
+        "artifacts/phase-01/768-tokens.png",
+        "artifacts/phase-01/768-unlock.png",
+        "artifacts/phase-01/768-vault.png",
+        "artifacts/phase-01/768-welcome.png",
+        "artifacts/phase-01/accessibility.json",
+        "artifacts/phase-01/approval-460x720.png",
+        "artifacts/phase-01/audit.log",
+        "artifacts/phase-01/audit:verified.log",
+        "artifacts/phase-01/browser-results.json",
+        "artifacts/phase-01/build:web.log",
+        "artifacts/phase-01/dependency-review.json",
+        "artifacts/phase-01/lint.log",
+        "artifacts/phase-01/sample-qr.png",
+        "artifacts/phase-01/serialized-example.json",
+        "artifacts/phase-01/test:ui.log",
+        "artifacts/phase-01/test:unit.log",
+        "artifacts/phase-01/typecheck.log",
+        "artifacts/phase-01/verification.json"
+      ],
+      "gateResult": "passed"
+    },
+    {
+      "phase": "02",
+      "state": "passed",
+      "gate": "G2",
+      "tasks": [
+        {
+          "taskId": "C01",
+          "state": "passed",
+          "changedPaths": [
+            "packages/domain/src/worker-protocol.ts",
+            "apps/wallet/src/worker-client.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm test:browser-core",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:41:10.418Z",
+              "completedAt": "2026-11-13T21:41:27.495Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-core-browser.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-02/verification.json",
+            "artifacts/phase-02/browser-results.json",
+            "artifacts/phase-02/browser-security.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "C02",
+          "state": "passed",
+          "changedPaths": [
+            "packages/wallet-core/src/vault.ts",
+            "packages/wallet-core/src/storage.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm test:browser-core",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:41:10.418Z",
+              "completedAt": "2026-11-13T21:41:27.495Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-core-browser.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-02/verification.json",
+            "artifacts/phase-02/browser-results.json",
+            "artifacts/phase-02/browser-security.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "C03",
+          "state": "passed",
+          "changedPaths": [
+            "packages/wallet-core/src/derivation.ts",
+            "fixtures/derivation-vectors.json"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm test:browser-core",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:41:10.418Z",
+              "completedAt": "2026-11-13T21:41:27.495Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-core-browser.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-02/verification.json",
+            "artifacts/phase-02/browser-results.json",
+            "artifacts/phase-02/browser-security.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "C04",
+          "state": "passed",
+          "changedPaths": [
+            "apps/wallet/src/real-onboarding.tsx"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm test:browser-core",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:41:10.418Z",
+              "completedAt": "2026-11-13T21:41:27.495Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-core-browser.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-02/verification.json",
+            "artifacts/phase-02/browser-results.json",
+            "artifacts/phase-02/browser-security.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "C05",
+          "state": "passed",
+          "changedPaths": [
+            "packages/wallet-core/src/core.ts",
+            "apps/wallet/src/real-settings.tsx",
+            "packages/chain-evm/src/index.ts",
+            "packages/chain-solana/src/index.ts",
+            "packages/chain-bitcoin/src/index.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm test:browser-core",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:41:10.418Z",
+              "completedAt": "2026-11-13T21:41:27.495Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-core-browser.log"
+            },
+            {
+              "command": "pnpm exec playwright test --config playwright.chains.config.ts",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:43:32.142Z",
+              "completedAt": "2026-11-13T21:44:54.873Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-evm-browser.log"
+            },
+            {
+              "command": "pnpm exec playwright test --config playwright.chains.config.ts --grep discovery",
+              "state": "passed",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-02/discovery-browser-proof.json"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-02/verification.json",
+            "artifacts/phase-02/browser-results.json",
+            "artifacts/phase-02/browser-security.json",
+            "artifacts/phase-02/discovery-browser-proof.json",
+            "artifacts/phase-03/bitcoin-browser-proof.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "C06",
+          "state": "passed",
+          "changedPaths": [
+            "packages/wallet-core/src/core.ts",
+            "apps/wallet/src/real-gateway.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm test:browser-core",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:41:10.418Z",
+              "completedAt": "2026-11-13T21:41:27.495Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-core-browser.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-02/verification.json",
+            "artifacts/phase-02/browser-results.json",
+            "artifacts/phase-02/browser-security.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "C07",
+          "state": "passed",
+          "changedPaths": [
+            "packages/wallet-core/src/approvals.ts",
+            "packages/wallet-core/src/journal.ts",
+            "packages/wallet-core/src/reservations.ts",
+            "packages/wallet-core/src/indexed-history.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm test:browser-core",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:41:10.418Z",
+              "completedAt": "2026-11-13T21:41:27.495Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-core-browser.log"
+            },
+            {
+              "command": "pnpm exec playwright test --config playwright.chains.config.ts",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:43:32.142Z",
+              "completedAt": "2026-11-13T21:44:54.873Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-evm-browser.log"
+            },
+            {
+              "command": "pnpm test:browser-solana",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:45:27.770Z",
+              "completedAt": "2026-11-13T21:46:41.478Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-solana-browser.log"
+            },
+            {
+              "command": "pnpm test:browser-bitcoin",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:46:41.479Z",
+              "completedAt": "2026-11-13T21:47:46.253Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-bitcoin-browser.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-02/verification.json",
+            "artifacts/phase-02/browser-results.json",
+            "artifacts/phase-02/browser-security.json",
+            "artifacts/phase-04/scenario-verification.json",
+            "artifacts/phase-04/final-verification.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "C08",
+          "state": "passed",
+          "changedPaths": [
+            "services/backend/src/sessions.ts",
+            "services/backend/src/server.ts",
+            "packages/domain/src/redaction.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm test:browser-core",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:41:10.418Z",
+              "completedAt": "2026-11-13T21:41:27.495Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-core-browser.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-02/verification.json",
+            "artifacts/phase-02/browser-results.json",
+            "artifacts/phase-02/browser-security.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "C09",
+          "state": "passed",
+          "changedPaths": [
+            "apps/wallet/src/main.tsx",
+            "apps/wallet/src/signing.worker.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm test:browser-core",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:41:10.418Z",
+              "completedAt": "2026-11-13T21:41:27.495Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-core-browser.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-02/verification.json",
+            "artifacts/phase-02/browser-results.json",
+            "artifacts/phase-02/browser-security.json"
+          ],
+          "remainingBlockers": []
+        }
+      ],
+      "checks": [
+        {
+          "command": "pnpm typecheck",
+          "state": "passed",
+          "startedAt": "2026-11-13T22:13:10.939Z",
+          "completedAt": "2026-11-13T22:13:20.558Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-typecheck.log"
+        },
+        {
+          "command": "pnpm lint",
+          "state": "passed",
+          "startedAt": "2026-11-13T22:13:20.562Z",
+          "completedAt": "2026-11-13T22:13:25.195Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-lint.log"
+        },
+        {
+          "command": "pnpm test:unit",
+          "state": "passed",
+          "startedAt": "2026-11-13T22:13:25.196Z",
+          "completedAt": "2026-11-13T22:13:42.423Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-unit.log"
+        },
+        {
+          "command": "pnpm audit:verified",
+          "state": "passed",
+          "startedAt": "2026-11-13T22:12:57.326Z",
+          "completedAt": "2026-11-13T22:13:00.429Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-audit.log"
+        },
+        {
+          "command": "pnpm test:browser-core",
+          "state": "passed",
+          "startedAt": "2026-11-13T21:41:10.418Z",
+          "completedAt": "2026-11-13T21:41:27.495Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-core-browser.log"
+        },
+        {
+          "command": "pnpm exec playwright test --config playwright.chains.config.ts --grep discovery",
+          "state": "passed",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-02/discovery-browser-proof.json"
+        }
+      ],
+      "remainingBlockers": [],
+      "evidencePaths": [
+        "artifacts/phase-04/final-verification.json",
+        "artifacts/phase-02/browser-security.json",
+        "artifacts/phase-02/discovery-browser-proof.json",
+        "artifacts/unit-results.json"
+      ],
+      "gateResult": "passed"
+    },
+    {
+      "phase": "03",
+      "state": "passed",
+      "gate": "G3",
+      "tasks": [
+        {
+          "taskId": "B01",
+          "state": "passed",
+          "changedPaths": [
+            "infra/compose.yaml",
+            "packages/config/src/index.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm networks:check",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:47:56.610Z",
+              "completedAt": "2026-11-13T21:47:59.476Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-network-health.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-03/network-health.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "B02",
+          "state": "passed",
+          "changedPaths": [
+            "packages/chain-evm/src/index.ts",
+            "packages/wallet-core/src/evm-signer.ts",
+            "packages/wallet-core/src/reservations.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm exec playwright test --config playwright.chains.config.ts",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:43:32.142Z",
+              "completedAt": "2026-11-13T21:44:54.873Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-evm-browser.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-03/evm-browser-proof.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "B03",
+          "state": "passed",
+          "changedPaths": [
+            "packages/chain-evm/src/index.ts",
+            "apps/wallet/src/real-apps.tsx"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm exec playwright test --config playwright.chains.config.ts",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:43:32.142Z",
+              "completedAt": "2026-11-13T21:44:54.873Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-evm-browser.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-03/evm-browser-proof.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "B04",
+          "state": "passed",
+          "changedPaths": [
+            "contracts/contracts",
+            "contracts/test",
+            "scripts/seed-evm.ts",
+            "packages/config/src/abis.generated.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm contracts:test",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:41:04.779Z",
+              "completedAt": "2026-11-13T21:41:07.992Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-contracts.log"
+            },
+            {
+              "command": "pnpm seed:assert",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:47:53.114Z",
+              "completedAt": "2026-11-13T21:47:56.609Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-seed-assert.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/deployments/eip155-31337.json",
+            "artifacts/phase-03/evm-assertions.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "B05",
+          "state": "passed",
+          "changedPaths": [
+            "apps/wallet/src/real-services.tsx",
+            "packages/wallet-core/src/core.ts",
+            "services/backend/src/bridge-observer.ts",
+            "scripts/relayer.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm exec playwright test --config playwright.chains.config.ts",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:43:32.142Z",
+              "completedAt": "2026-11-13T21:44:54.873Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-evm-browser.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-03/services-browser-proof.json",
+            "artifacts/phase-03/browser-results.json",
+            "artifacts/phase-04/bridge-browser-proof.json",
+            "artifacts/phase-04/final-evm-browser.log"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "B06",
+          "state": "passed",
+          "changedPaths": [
+            "packages/chain-solana/src/index.ts",
+            "packages/wallet-core/src/solana-signer.ts",
+            "scripts/seed-solana.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm test:browser-solana",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:45:27.770Z",
+              "completedAt": "2026-11-13T21:46:41.478Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-solana-browser.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-03/solana-browser-proof.json",
+            "artifacts/phase-03/solana-browser-results.json",
+            "artifacts/seed/solana-manifest.json",
+            "artifacts/phase-04/final-solana-browser.log"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "B07",
+          "state": "passed",
+          "changedPaths": [
+            "packages/chain-bitcoin/package.json",
+            "packages/chain-bitcoin/src/index.ts",
+            "packages/wallet-core/src/bitcoin-signer.ts",
+            "services/backend/src/bitcoin-watch.ts",
+            "services/backend/src/bitcoin-rpc.ts",
+            "scripts/seed-bitcoin.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm test:browser-bitcoin",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:46:41.479Z",
+              "completedAt": "2026-11-13T21:47:46.253Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-bitcoin-browser.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-03/bitcoin-browser-proof.json",
+            "artifacts/phase-03/bitcoin-psbt-proof.json",
+            "artifacts/phase-04/final-bitcoin-browser.log"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "B08",
+          "state": "passed",
+          "changedPaths": [
+            "scripts/networks-check.ts",
+            "packages/config/src/index.ts",
+            "packages/chain-evm/src/base-fees.ts",
+            "scripts/check-base-fees.ts",
+            "scripts/seed-testnets.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm networks:check",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:47:56.610Z",
+              "completedAt": "2026-11-13T21:47:59.476Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-network-health.log"
+            },
+            {
+              "command": "pnpm seed:testnets",
+              "state": "passed",
+              "exitCode": 0,
+              "evidencePath": "artifacts/seed/testnet-manifest.json",
+              "result": "Runner and report completed; all eight public transaction profiles are blocked_funding, not passed",
+              "observedAt": "2026-11-13T22:10:15.165Z"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-03/network-health.json",
+            "artifacts/phase-03/base-fee-proof.json",
+            "artifacts/seed/testnet-manifest.json"
+          ],
+          "remainingBlockers": [
+            "Public transaction execution on seven EVM profiles and Solana Devnet awaits legitimate free gas. RPC identities passed; each public execution row remains blocked_funding. Reproduce with pnpm seed:testnets."
+          ],
+          "publicTransactionState": "blocked_funding"
+        },
+        {
+          "taskId": "B09",
+          "state": "passed",
+          "changedPaths": [
+            "apps/wallet/src/real-gateway.ts",
+            "apps/wallet/src/real-services.tsx",
+            "services/backend/src/read-api.ts",
+            "packages/wallet-core/src/indexed-history.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm exec playwright test --config playwright.chains.config.ts",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:43:32.142Z",
+              "completedAt": "2026-11-13T21:44:54.873Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-evm-browser.log"
+            },
+            {
+              "command": "pnpm test:browser-solana",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:45:27.770Z",
+              "completedAt": "2026-11-13T21:46:41.478Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-solana-browser.log"
+            },
+            {
+              "command": "pnpm test:browser-bitcoin",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:46:41.479Z",
+              "completedAt": "2026-11-13T21:47:46.253Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-bitcoin-browser.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-03/browser-results.json",
+            "artifacts/phase-03/solana-browser-results.json",
+            "artifacts/phase-04/public-api-proof.json",
+            "artifacts/phase-03/bitcoin-browser-proof.json"
+          ],
+          "remainingBlockers": []
+        }
+      ],
+      "checks": [
+        {
+          "command": "pnpm typecheck",
+          "state": "passed",
+          "startedAt": "2026-11-13T22:13:10.939Z",
+          "completedAt": "2026-11-13T22:13:20.558Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-typecheck.log"
+        },
+        {
+          "command": "pnpm lint",
+          "state": "passed",
+          "startedAt": "2026-11-13T22:13:20.562Z",
+          "completedAt": "2026-11-13T22:13:25.195Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-lint.log"
+        },
+        {
+          "command": "pnpm test:unit",
+          "state": "passed",
+          "startedAt": "2026-11-13T22:13:25.196Z",
+          "completedAt": "2026-11-13T22:13:42.423Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-unit.log"
+        },
+        {
+          "command": "pnpm audit:verified",
+          "state": "passed",
+          "startedAt": "2026-11-13T22:12:57.326Z",
+          "completedAt": "2026-11-13T22:13:00.429Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-audit.log"
+        },
+        {
+          "command": "pnpm contracts:test",
+          "state": "passed",
+          "startedAt": "2026-11-13T21:41:04.779Z",
+          "completedAt": "2026-11-13T21:41:07.992Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-contracts.log"
+        },
+        {
+          "command": "pnpm exec playwright test --config playwright.chains.config.ts",
+          "state": "passed",
+          "startedAt": "2026-11-13T21:43:32.142Z",
+          "completedAt": "2026-11-13T21:44:54.873Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-evm-browser.log"
+        },
+        {
+          "command": "pnpm test:browser-solana",
+          "state": "passed",
+          "startedAt": "2026-11-13T21:45:27.770Z",
+          "completedAt": "2026-11-13T21:46:41.478Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-solana-browser.log"
+        },
+        {
+          "command": "pnpm test:browser-bitcoin",
+          "state": "passed",
+          "startedAt": "2026-11-13T21:46:41.479Z",
+          "completedAt": "2026-11-13T21:47:46.253Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-bitcoin-browser.log"
+        },
+        {
+          "command": "pnpm seed:assert",
+          "state": "passed",
+          "startedAt": "2026-11-13T21:47:53.114Z",
+          "completedAt": "2026-11-13T21:47:56.609Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-seed-assert.log"
+        },
+        {
+          "command": "pnpm networks:check",
+          "state": "passed",
+          "startedAt": "2026-11-13T21:47:56.610Z",
+          "completedAt": "2026-11-13T21:47:59.476Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-network-health.log"
+        },
+        {
+          "command": "pnpm exec tsx scripts/check-seed-idempotence.ts",
+          "state": "passed",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-03/seed-idempotence.json"
+        }
+      ],
+      "remainingBlockers": [
+        "Public transaction execution on seven EVM profiles and Solana Devnet awaits legitimate free gas. RPC identities passed; each public execution row remains blocked_funding. Reproduce with pnpm seed:testnets."
+      ],
+      "gateResult": "passed",
+      "evidencePaths": [
+        "artifacts/phase-04/final-verification.json",
+        "artifacts/phase-03/network-health.json",
+        "artifacts/phase-03/base-fee-proof.json",
+        "artifacts/phase-03/seed-idempotence.json",
+        "artifacts/seed/testnet-manifest.json"
+      ],
+      "publicTestnetVerification": "blocked_funding"
+    },
+    {
+      "phase": "04",
+      "state": "passed",
+      "gate": "G4",
+      "tasks": [
+        {
+          "taskId": "D01",
+          "state": "passed",
+          "changedPaths": [
+            "infra/compose.yaml",
+            "infra/Dockerfile.hardhat",
+            "toolchain-lock.json",
+            "scripts/infra.ts",
+            "scripts/preflight.ts",
+            "scripts/dev.ts",
+            "scripts/reset-local.ts",
+            "pnpm-workspace.yaml"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm exec tsx scripts/check-dev.ts",
+              "state": "passed",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/dev-supervisor-proof.json"
+            },
+            {
+              "command": "Node-22 terminal: pnpm node --version; pnpm install --frozen-lockfile --offline; pnpm seed:local; node --import tsx scripts/check-dev.ts",
+              "state": "passed",
+              "exitCode": 0,
+              "observedAt": "2026-11-14T14:03:07.051710Z",
+              "evidencePath": "artifacts/phase-04/node-runtime-proof.json"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-04/preflight.json",
+            "artifacts/phase-04/dev-supervisor-proof.json",
+            "artifacts/phase-04/node-security-proof.json",
+            "artifacts/phase-04/node-runtime-proof.json"
+          ],
+          "remainingBlockers": [],
+          "verificationLimits": [
+            "Destructive reset was not executed against the retained main ledgers; exact-label/path/confirmation guards were reviewed. Fresh disposable chain setups and supervisor startup were executed."
+          ]
+        },
+        {
+          "taskId": "D02",
+          "state": "passed",
+          "changedPaths": [
+            "scripts/seed-evm.ts",
+            "scripts/seed-solana.ts",
+            "scripts/seed-bitcoin.ts",
+            "scripts/assert-seed.ts",
+            "packages/domain/src/local-manifest.ts",
+            "packages/domain/src/solana-manifest.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm seed:assert",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:47:53.114Z",
+              "completedAt": "2026-11-13T21:47:56.609Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-seed-assert.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/seed/local-manifest.json",
+            "artifacts/phase-04/seed-assertions.json",
+            "artifacts/phase-03/evm-assertions.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "D03",
+          "state": "passed",
+          "changedPaths": [
+            "scripts/seed-local.ts",
+            "scripts/check-seed-idempotence.ts",
+            "scripts/scenario.ts",
+            "scripts/verify-scenarios.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm exec tsx scripts/check-seed-idempotence.ts",
+              "state": "passed",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-03/seed-idempotence.json"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-03/seed-idempotence.json",
+            "artifacts/phase-04/scenario-verification.json",
+            "artifacts/seed/local-manifest.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "D04",
+          "state": "passed",
+          "changedPaths": [
+            "services/backend/src/migrations.ts",
+            "services/backend/src/public-indexer.ts",
+            "services/backend/src/index-storage.ts",
+            "services/backend/src/index-solana.ts",
+            "services/backend/src/index-bitcoin.ts",
+            "services/backend/src/cached-watch.ts",
+            "services/backend/src/read-api.ts",
+            "services/backend/src/watch-api.ts",
+            "scripts/check-indexers.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm test:integration",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:47:46.253Z",
+              "completedAt": "2026-11-13T21:47:53.114Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-integration.log"
+            },
+            {
+              "command": "pnpm exec tsx scripts/check-indexers.ts evm --persist",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T22:14:00.011Z",
+              "completedAt": "2026-11-13T22:14:12.162Z",
+              "evidencePath": "artifacts/phase-04/index-evm.json"
+            },
+            {
+              "command": "pnpm exec tsx scripts/check-indexers.ts solana --persist",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T22:14:12.162Z",
+              "completedAt": "2026-11-13T22:14:14.128Z",
+              "evidencePath": "artifacts/phase-04/index-solana.json"
+            },
+            {
+              "command": "pnpm exec tsx scripts/check-indexers.ts bitcoin --persist",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T22:14:14.128Z",
+              "completedAt": "2026-11-13T22:14:17.366Z",
+              "evidencePath": "artifacts/phase-04/index-bitcoin.json"
+            },
+            {
+              "command": "pnpm exec tsx scripts/check-indexers.ts bitcoin --purpose=86 --persist",
+              "state": "passed",
+              "exitCode": 0,
+              "startedAt": "2026-11-13T22:14:17.366Z",
+              "completedAt": "2026-11-13T22:14:21.721Z",
+              "evidencePath": "artifacts/phase-04/index-bitcoin.json"
+            },
+            {
+              "command": "pnpm exec tsx scripts/check-public-api.ts --persistent",
+              "state": "passed",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/public-api-proof.json"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-04/index-verification.json",
+            "artifacts/phase-04/index-reorg-proof.json",
+            "artifacts/phase-04/public-api-proof.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "D05",
+          "state": "passed",
+          "changedPaths": [
+            "services/backend/src/metadata.ts",
+            "services/backend/src/safe-fetch.ts",
+            "scripts/build-metadata.ts",
+            "apps/wallet/src/portfolio.tsx"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm test:integration",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:47:46.253Z",
+              "completedAt": "2026-11-13T21:47:53.114Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-integration.log"
+            },
+            {
+              "command": "pnpm exec tsx scripts/check-public-api.ts --persistent",
+              "state": "passed",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/public-api-proof.json"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-04/public-api-proof.json",
+            "artifacts/unit-results.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "D06",
+          "state": "passed",
+          "changedPaths": [
+            "packages/provider/src/index.ts",
+            "packages/provider/README.md",
+            "apps/wallet/src/connector-host.ts",
+            "apps/wallet/src/connect-page.tsx",
+            "packages/wallet-core/src/dapp.ts",
+            "packages/wallet-core/src/message-signer.ts",
+            "apps/reference-dapp/src/main.tsx"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm exec playwright test --config playwright.dapp.config.ts",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:44:54.874Z",
+              "completedAt": "2026-11-13T21:45:27.769Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-evm-dapp.log"
+            },
+            {
+              "command": "pnpm test:browser-solana",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:45:27.770Z",
+              "completedAt": "2026-11-13T21:46:41.478Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-solana-browser.log"
+            },
+            {
+              "command": "pnpm test:browser-bitcoin",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:46:41.479Z",
+              "completedAt": "2026-11-13T21:47:46.253Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-bitcoin-browser.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-04/dapp-evm-proof.json",
+            "artifacts/phase-04/dapp-solana-proof.json",
+            "artifacts/phase-04/dapp-bitcoin-proof.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "D07",
+          "state": "passed",
+          "changedPaths": [
+            "packages/wallet-core/src/dapp.ts",
+            "packages/wallet-core/src/core.ts",
+            "apps/wallet/src/real-apps.tsx",
+            "services/backend/src/index-storage.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm exec playwright test --config playwright.chains.config.ts",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:43:32.142Z",
+              "completedAt": "2026-11-13T21:44:54.873Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-evm-browser.log"
+            },
+            {
+              "command": "pnpm test:browser-solana",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:45:27.770Z",
+              "completedAt": "2026-11-13T21:46:41.478Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-solana-browser.log"
+            },
+            {
+              "command": "pnpm test:integration",
+              "state": "passed",
+              "startedAt": "2026-11-13T21:47:46.253Z",
+              "completedAt": "2026-11-13T21:47:53.114Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-integration.log"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/phase-03/evm-browser-proof.json",
+            "artifacts/phase-03/solana-browser-proof.json",
+            "artifacts/phase-04/public-api-proof.json"
+          ],
+          "remainingBlockers": []
+        },
+        {
+          "taskId": "D08",
+          "state": "passed",
+          "changedPaths": [
+            "scripts/seed-testnets.ts",
+            "scripts/testnet-evm.ts",
+            "scripts/testnet-solana.ts"
+          ],
+          "checks": [
+            {
+              "command": "pnpm typecheck",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:10.939Z",
+              "completedAt": "2026-11-13T22:13:20.558Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-typecheck.log"
+            },
+            {
+              "command": "pnpm lint",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:20.562Z",
+              "completedAt": "2026-11-13T22:13:25.195Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-lint.log"
+            },
+            {
+              "command": "pnpm test:unit",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:13:25.196Z",
+              "completedAt": "2026-11-13T22:13:42.423Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-unit.log"
+            },
+            {
+              "command": "pnpm audit:verified",
+              "state": "passed",
+              "startedAt": "2026-11-13T22:12:57.326Z",
+              "completedAt": "2026-11-13T22:13:00.429Z",
+              "exitCode": 0,
+              "evidencePath": "artifacts/phase-04/final-audit.log"
+            },
+            {
+              "command": "pnpm seed:testnets",
+              "state": "passed",
+              "exitCode": 0,
+              "evidencePath": "artifacts/seed/testnet-manifest.json",
+              "result": "Runner and report completed; all eight public transaction profiles are blocked_funding, not passed",
+              "observedAt": "2026-11-13T22:10:15.165Z"
+            }
+          ],
+          "evidencePaths": [
+            "artifacts/seed/testnet-manifest.json",
+            "artifacts/phase-03/network-health.json"
+          ],
+          "remainingBlockers": [
+            "Eight public profiles have verified RPC identity but no test gas. Funding addresses, faucet references and actual blocked_funding observations are preserved in artifacts/seed/testnet-manifest.json. Retry with pnpm seed:testnets."
+          ],
+          "verificationScope": "Runner/report implemented and executed. Funded public transaction paths remain unverified; none are claimed passed.",
+          "publicTransactionState": "blocked_funding"
+        }
+      ],
+      "checks": [
+        {
+          "command": "pnpm typecheck",
+          "state": "passed",
+          "startedAt": "2026-11-13T22:13:10.939Z",
+          "completedAt": "2026-11-13T22:13:20.558Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-typecheck.log"
+        },
+        {
+          "command": "pnpm lint",
+          "state": "passed",
+          "startedAt": "2026-11-13T22:13:20.562Z",
+          "completedAt": "2026-11-13T22:13:25.195Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-lint.log"
+        },
+        {
+          "command": "pnpm test:unit",
+          "state": "passed",
+          "startedAt": "2026-11-13T22:13:25.196Z",
+          "completedAt": "2026-11-13T22:13:42.423Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-unit.log"
+        },
+        {
+          "command": "pnpm audit:verified",
+          "state": "passed",
+          "startedAt": "2026-11-13T22:12:57.326Z",
+          "completedAt": "2026-11-13T22:13:00.429Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-audit.log"
+        },
+        {
+          "command": "pnpm test:integration",
+          "state": "passed",
+          "startedAt": "2026-11-13T21:47:46.253Z",
+          "completedAt": "2026-11-13T21:47:53.114Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-integration.log"
+        },
+        {
+          "command": "pnpm exec playwright test --config playwright.dapp.config.ts",
+          "state": "passed",
+          "startedAt": "2026-11-13T21:44:54.874Z",
+          "completedAt": "2026-11-13T21:45:27.769Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-evm-dapp.log"
+        },
+        {
+          "command": "pnpm test:browser-solana",
+          "state": "passed",
+          "startedAt": "2026-11-13T21:45:27.770Z",
+          "completedAt": "2026-11-13T21:46:41.478Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-solana-browser.log"
+        },
+        {
+          "command": "pnpm test:browser-bitcoin",
+          "state": "passed",
+          "startedAt": "2026-11-13T21:46:41.479Z",
+          "completedAt": "2026-11-13T21:47:46.253Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-bitcoin-browser.log"
+        },
+        {
+          "command": "pnpm seed:assert",
+          "state": "passed",
+          "startedAt": "2026-11-13T21:47:53.114Z",
+          "completedAt": "2026-11-13T21:47:56.609Z",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/final-seed-assert.log"
+        },
+        {
+          "command": "pnpm exec tsx scripts/check-indexers.ts evm --persist",
+          "state": "passed",
+          "exitCode": 0,
+          "startedAt": "2026-11-13T22:14:00.011Z",
+          "completedAt": "2026-11-13T22:14:12.162Z",
+          "evidencePath": "artifacts/phase-04/index-evm.json"
+        },
+        {
+          "command": "pnpm exec tsx scripts/check-indexers.ts solana --persist",
+          "state": "passed",
+          "exitCode": 0,
+          "startedAt": "2026-11-13T22:14:12.162Z",
+          "completedAt": "2026-11-13T22:14:14.128Z",
+          "evidencePath": "artifacts/phase-04/index-solana.json"
+        },
+        {
+          "command": "pnpm exec tsx scripts/check-indexers.ts bitcoin --persist",
+          "state": "passed",
+          "exitCode": 0,
+          "startedAt": "2026-11-13T22:14:14.128Z",
+          "completedAt": "2026-11-13T22:14:17.366Z",
+          "evidencePath": "artifacts/phase-04/index-bitcoin.json"
+        },
+        {
+          "command": "pnpm exec tsx scripts/check-indexers.ts bitcoin --purpose=86 --persist",
+          "state": "passed",
+          "exitCode": 0,
+          "startedAt": "2026-11-13T22:14:17.366Z",
+          "completedAt": "2026-11-13T22:14:21.721Z",
+          "evidencePath": "artifacts/phase-04/index-bitcoin.json"
+        },
+        {
+          "command": "pnpm exec tsx scripts/check-seed-idempotence.ts",
+          "state": "passed",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-03/seed-idempotence.json"
+        },
+        {
+          "command": "pnpm exec tsx scripts/check-public-api.ts --persistent",
+          "state": "passed",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/public-api-proof.json"
+        },
+        {
+          "command": "pnpm exec tsx scripts/check-dev.ts",
+          "state": "passed",
+          "exitCode": 0,
+          "evidencePath": "artifacts/phase-04/dev-supervisor-proof.json"
+        },
+        {
+          "command": "pnpm seed:testnets",
+          "state": "passed",
+          "exitCode": 0,
+          "evidencePath": "artifacts/seed/testnet-manifest.json",
+          "result": "Runner and report completed; all eight public transaction profiles are blocked_funding, not passed",
+          "observedAt": "2026-11-13T22:10:15.165Z"
+        }
+      ],
+      "remainingBlockers": [
+        "Eight public profiles have verified RPC identity but no test gas. Funding addresses, faucet references and actual blocked_funding observations are preserved in artifacts/seed/testnet-manifest.json. Retry with pnpm seed:testnets."
+      ],
+      "gateResult": "passed",
+      "evidencePaths": [
+        "artifacts/phase-04/final-verification.json",
+        "artifacts/phase-04/index-verification.json",
+        "artifacts/phase-04/public-api-proof.json",
+        "artifacts/phase-04/scenario-verification.json",
+        "artifacts/phase-03/seed-idempotence.json",
+        "artifacts/seed/local-manifest.json",
+        "artifacts/seed/testnet-manifest.json"
+      ],
+      "publicTestnetVerification": "blocked_funding"
+    }
+  ],
+  "requirements": {
+    "R01": "passed",
+    "R02": "passed",
+    "R03": "passed",
+    "R04": "passed",
+    "R05": "passed",
+    "R06": "passed",
+    "R07": "passed",
+    "R08": "passed",
+    "R09": "passed",
+    "R10": "passed"
+  },
+  "scope": {
+    "implementationFiles": [
+      "01_FRONTEND_AND_FOUNDATION.md",
+      "02_WALLET_CORE_AND_SECURITY.md",
+      "03_CHAINS_CONTRACTS_AND_TRANSACTIONS.md",
+      "04_SEEDING_INDEXING_AND_DAPPS.md"
+    ],
+    "authorization": "User explicitly requested: Finish all four implementation files",
+    "implementation": "complete",
+    "localVerification": "passed",
+    "publicTestnetTransactions": "blocked_funding",
+    "publicTestnetReproductionCommand": "pnpm seed:testnets",
+    "excluded": [
+      "Absent optional file 05; outside the four-file scope requested by the user"
+    ],
+    "gateInterpretation": "G3 permits pending public funding; G4 requires accurate per-network blockers. Passing local gates never changes blocked public transaction rows to passed."
+  },
+  "publicNetworkBlockers": [
+    {
+      "networkId": "eip155:11155111",
+      "state": "blocked_funding",
+      "address": "0xfCa64E76497c583F81b87832303fAEF487939B8a",
+      "reason": "Random testnet identity lacks the small gas allocation needed for the complete fixture. Use a legitimate free faucet; human checks are not bypassed.",
+      "reproductionCommand": "pnpm seed:testnets",
+      "evidencePath": "artifacts/seed/testnet-manifest.json"
+    },
+    {
+      "networkId": "eip155:84532",
+      "state": "blocked_funding",
+      "address": "0xaB4027A189ae62c5eCC4280e9e76E5dfFb3A89E7",
+      "reason": "Random testnet identity lacks the small gas allocation needed for the complete fixture. Use a legitimate free faucet; human checks are not bypassed.",
+      "reproductionCommand": "pnpm seed:testnets",
+      "evidencePath": "artifacts/seed/testnet-manifest.json"
+    },
+    {
+      "networkId": "eip155:80002",
+      "state": "blocked_funding",
+      "address": "0xE82027981c45673fde7b55e3e3F303B52F7794D9",
+      "reason": "Random testnet identity lacks the small gas allocation needed for the complete fixture. Use a legitimate free faucet; human checks are not bypassed.",
+      "reproductionCommand": "pnpm seed:testnets",
+      "evidencePath": "artifacts/seed/testnet-manifest.json"
+    },
+    {
+      "networkId": "eip155:97",
+      "state": "blocked_funding",
+      "address": "0x6260E9321A4392d7b8363297e215d6Df0a3bd9fa",
+      "reason": "Random testnet identity lacks the small gas allocation needed for the complete fixture. Use a legitimate free faucet; human checks are not bypassed.",
+      "reproductionCommand": "pnpm seed:testnets",
+      "evidencePath": "artifacts/seed/testnet-manifest.json"
+    },
+    {
+      "networkId": "eip155:998",
+      "state": "blocked_funding",
+      "address": "0x07bcEDBAEE37e70929d80d69a78cB2B0D07670b9",
+      "reason": "Random testnet identity lacks the small gas allocation needed for the complete fixture. Use a legitimate free faucet; human checks are not bypassed.",
+      "reproductionCommand": "pnpm seed:testnets",
+      "evidencePath": "artifacts/seed/testnet-manifest.json"
+    },
+    {
+      "networkId": "eip155:46630",
+      "state": "blocked_funding",
+      "address": "0xb44C089Dd54Fa10c0ACff3342eE8F778Ba533a13",
+      "reason": "Random testnet identity lacks the small gas allocation needed for the complete fixture. Use a legitimate free faucet; human checks are not bypassed.",
+      "reproductionCommand": "pnpm seed:testnets",
+      "evidencePath": "artifacts/seed/testnet-manifest.json"
+    },
+    {
+      "networkId": "eip155:5042002",
+      "state": "blocked_funding",
+      "address": "0x930769664BB1F58369b61040af888f216Cfd16a9",
+      "reason": "Random testnet identity lacks the small gas allocation needed for the complete fixture. Use a legitimate free faucet; human checks are not bypassed.",
+      "reproductionCommand": "pnpm seed:testnets",
+      "evidencePath": "artifacts/seed/testnet-manifest.json"
+    },
+    {
+      "networkId": "solana:devnet",
+      "state": "blocked_funding",
+      "address": "HD5X9K4N3XVN8HrqjNCb73koLeNfw4GnUWko2DC8cQaC",
+      "reason": "Random testnet identity lacks the small gas allocation needed for the complete fixture. Use a legitimate free faucet; human checks are not bypassed.",
+      "reproductionCommand": "pnpm seed:testnets",
+      "evidencePath": "artifacts/seed/testnet-manifest.json"
+    }
+  ],
+  "requirementScope": "Implementation and required local acceptance for files 01\u201304. Public transaction verification remains separate and blocked_funding; no mainnet or optional phase-05 delivery is claimed.",
+  "verificationSummary": {
+    "unitTests": 62,
+    "unitTestFiles": 22,
+    "contractTests": 9,
+    "localChainFamilies": [
+      "evm",
+      "solana",
+      "bitcoin"
+    ],
+    "scenarioChecks": 6,
+    "publicRpcIdentities": 8,
+    "publicTransactionPassed": 0,
+    "publicTransactionBlockedFunding": 8,
+    "dependencyAudit": "No unresolved advisories after checksum/behavior verification of the documented Hardhat Zod-3 security backport; raw version-based registry report retained."
+  }
+}

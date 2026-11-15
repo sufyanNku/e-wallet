@@ -1,0 +1,5 @@
+
+> e-wallet@0.1.0 seed:solana /home/sufyan/Desktop/Dev/E-wallet
+> tsx scripts/seed-solana.ts
+
+Solana: 34 real stages reconciled; metadata and supply assertions passed.

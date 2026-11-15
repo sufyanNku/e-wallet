@@ -1,0 +1,30 @@
+[
+  {
+    "path": "/",
+    "violations": []
+  },
+  {
+    "path": "/send",
+    "violations": []
+  },
+  {
+    "path": "/receive",
+    "violations": []
+  },
+  {
+    "path": "/contacts",
+    "violations": []
+  },
+  {
+    "path": "/collectibles",
+    "violations": []
+  },
+  {
+    "path": "/settings",
+    "violations": []
+  },
+  {
+    "path": "/connect",
+    "violations": []
+  }
+]

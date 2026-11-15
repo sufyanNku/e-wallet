@@ -1,0 +1,14 @@
+{
+  "name": "replacement-evm",
+  "observedAt": "2026-11-13T22:03:41.705Z",
+  "networkId": "eip155:31337",
+  "isolatedBySnapshot": true,
+  "pendingHash": "0xe170ffd082811bcf8cfafcc042835501c6952a92981b3d3e59895a99743a3897",
+  "pendingReceiptAbsent": true,
+  "replacementHash": "0xcc5b70d547d9fb2798d29e1e146842cc0af745048017685186f633d6cd3236e9",
+  "receipt": {
+    "hash": "0xcc5b70d547d9fb2798d29e1e146842cc0af745048017685186f633d6cd3236e9",
+    "status": 1,
+    "blockHash": "0x4715e9ffdf0f4ebe7864fc1e4bd2941e9749547dc57e580a785421d609b7a1c4"
+  }
+}

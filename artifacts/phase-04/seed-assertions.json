@@ -1,0 +1,211 @@
+{
+  "observedAt": "2026-11-14T14:02:25.964Z",
+  "source": "real-local-nodes",
+  "passed": 51,
+  "checks": [
+    {
+      "name": "Solana genesis",
+      "passed": true
+    },
+    {
+      "name": "SOL balance alice",
+      "passed": true
+    },
+    {
+      "name": "SPL balance alice:dUSDC",
+      "passed": true
+    },
+    {
+      "name": "SPL balance alice:sEWLT",
+      "passed": true
+    },
+    {
+      "name": "SPL balance alice:token2022",
+      "passed": true
+    },
+    {
+      "name": "SPL balance alice:unsupported",
+      "passed": true
+    },
+    {
+      "name": "SPL balance alice:frozen",
+      "passed": true
+    },
+    {
+      "name": "SPL balance alice:nft1",
+      "passed": true
+    },
+    {
+      "name": "SPL balance alice:nft2",
+      "passed": true
+    },
+    {
+      "name": "SOL balance bob",
+      "passed": true
+    },
+    {
+      "name": "SPL balance bob:dUSDC",
+      "passed": true
+    },
+    {
+      "name": "SPL balance bob:sEWLT",
+      "passed": true
+    },
+    {
+      "name": "SPL balance bob:token2022",
+      "passed": true
+    },
+    {
+      "name": "SPL balance bob:unsupported",
+      "passed": true
+    },
+    {
+      "name": "SPL balance bob:frozen",
+      "passed": true
+    },
+    {
+      "name": "SPL balance bob:nft1",
+      "passed": true
+    },
+    {
+      "name": "SPL balance bob:nft2",
+      "passed": true
+    },
+    {
+      "name": "SOL balance carol",
+      "passed": true
+    },
+    {
+      "name": "SPL balance carol:dUSDC",
+      "passed": true
+    },
+    {
+      "name": "SPL balance carol:sEWLT",
+      "passed": true
+    },
+    {
+      "name": "SPL balance carol:token2022",
+      "passed": true
+    },
+    {
+      "name": "SPL balance carol:unsupported",
+      "passed": true
+    },
+    {
+      "name": "SPL balance carol:frozen",
+      "passed": true
+    },
+    {
+      "name": "SPL balance carol:nft1",
+      "passed": true
+    },
+    {
+      "name": "SPL balance carol:nft2",
+      "passed": true
+    },
+    {
+      "name": "SOL balance dana",
+      "passed": true
+    },
+    {
+      "name": "SPL balance dana:dUSDC",
+      "passed": true
+    },
+    {
+      "name": "SPL balance dana:sEWLT",
+      "passed": true
+    },
+    {
+      "name": "SPL balance dana:token2022",
+      "passed": true
+    },
+    {
+      "name": "SPL balance dana:unsupported",
+      "passed": true
+    },
+    {
+      "name": "SPL balance dana:frozen",
+      "passed": true
+    },
+    {
+      "name": "SPL balance dana:nft1",
+      "passed": true
+    },
+    {
+      "name": "SPL balance dana:nft2",
+      "passed": true
+    },
+    {
+      "name": "Bitcoin funding epoch",
+      "passed": true
+    },
+    {
+      "name": "Bitcoin watch wallet has no private keys",
+      "passed": true
+    },
+    {
+      "name": "Bitcoin final balance alice:84",
+      "passed": true
+    },
+    {
+      "name": "Bitcoin final balance alice:86",
+      "passed": true
+    },
+    {
+      "name": "Bitcoin final balance bob:84",
+      "passed": true
+    },
+    {
+      "name": "Bitcoin final balance bob:86",
+      "passed": true
+    },
+    {
+      "name": "Bitcoin final balance carol:84",
+      "passed": true
+    },
+    {
+      "name": "Bitcoin final balance carol:86",
+      "passed": true
+    },
+    {
+      "name": "Bitcoin final balance dana:84",
+      "passed": true
+    },
+    {
+      "name": "Bitcoin final balance dana:86",
+      "passed": true
+    },
+    {
+      "name": "Bitcoin canonical six confirmations alice-wpkh-0",
+      "passed": true
+    },
+    {
+      "name": "Bitcoin canonical six confirmations alice-wpkh-1",
+      "passed": true
+    },
+    {
+      "name": "Bitcoin canonical six confirmations alice-tr-0",
+      "passed": true
+    },
+    {
+      "name": "Bitcoin canonical six confirmations alice-tr-1",
+      "passed": true
+    },
+    {
+      "name": "Bitcoin canonical six confirmations bob-wpkh",
+      "passed": true
+    },
+    {
+      "name": "Bitcoin canonical six confirmations carol-wpkh",
+      "passed": true
+    },
+    {
+      "name": "Bitcoin canonical six confirmations SEED-13-84",
+      "passed": true
+    },
+    {
+      "name": "Bitcoin canonical six confirmations SEED-13-86",
+      "passed": true
+    }
+  ]
+}

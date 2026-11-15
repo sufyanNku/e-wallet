@@ -1,0 +1,12 @@
+node_modules
+**/node_modules
+.local
+**/dist
+artifacts
+test-results
+playwright-report
+contracts/artifacts
+contracts/cache
+contracts/types
+.git
+.env*

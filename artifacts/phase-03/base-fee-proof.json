@@ -1,0 +1,12 @@
+{
+  "networkId": "eip155:84532",
+  "source": "public-testnet-node",
+  "observedAt": "2026-11-13T21:22:38.351Z",
+  "observedBlock": "58415441",
+  "state": "passed",
+  "l1Fee": "620",
+  "operatorFee": "0",
+  "maximumExtra": "1240",
+  "signed": false,
+  "broadcast": false
+}

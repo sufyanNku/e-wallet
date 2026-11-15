@@ -1,0 +1,36 @@
+name: ewallet-demo
+services:
+  evm-a:
+    image: ewallet-hardhat:3.22.0
+    build: {context: .., dockerfile: infra/Dockerfile.hardhat}
+    command: ["--network", "localA", "--hostname", "0.0.0.0", "--port", "8545"]
+    ports: ["127.0.0.1:8545:8545"]
+    restart: unless-stopped
+    labels: {org.ewallet.project: ewallet-demo}
+  evm-b:
+    image: ewallet-hardhat:3.22.0
+    command: ["--network", "localB", "--hostname", "0.0.0.0", "--port", "8546"]
+    ports: ["127.0.0.1:8546:8546"]
+    restart: unless-stopped
+    labels: {org.ewallet.project: ewallet-demo}
+  solana:
+    image: ewallet-native:4.4.1-32.1
+    build: {context: ../.local/image-context, dockerfile: ../../infra/Dockerfile.native}
+    entrypoint: ["node", "/opt/ewallet/start-solana.mjs"]
+    command: ["--ledger", "/data/ledger", "--bpf-program", "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s", "/opt/ewallet/programs/token_metadata.so", "--rpc-port", "8899", "--quiet", "--limit-blockstore-size", "2000000"]
+    ports: ["127.0.0.1:8899:8899", "127.0.0.1:8900:8900"]
+    volumes: ["solana-metadata-data:/data"]
+    shm_size: 512mb
+    security_opt: ["seccomp=./solana-seccomp.json"]
+    restart: unless-stopped
+    labels: {org.ewallet.project: ewallet-demo}
+  bitcoin:
+    image: ewallet-native:4.4.1-32.1
+    command: ["bitcoind", "-regtest", "-server", "-listen=0", "-txindex", "-rpcbind=0.0.0.0", "-rpcallowip=172.16.0.0/12", "-rpcallowip=192.168.0.0/16", "-rpcport=18443", "-rpccookiefile=/cookie/auth.cookie", "-datadir=/data", "-printtoconsole=0"]
+    ports: ["127.0.0.1:18443:18443"]
+    volumes: ["bitcoin-data:/data", "../.local/secrets/bitcoin:/cookie"]
+    restart: unless-stopped
+    labels: {org.ewallet.project: ewallet-demo}
+volumes:
+  solana-metadata-data: {labels: {org.ewallet.project: ewallet-demo}}
+  bitcoin-data: {labels: {org.ewallet.project: ewallet-demo}}

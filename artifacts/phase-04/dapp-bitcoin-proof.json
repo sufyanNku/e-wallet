@@ -1,0 +1,11 @@
+{
+  "observedAt": "2026-11-13T21:47:45.630Z",
+  "actualPopup": true,
+  "descriptorConsent": true,
+  "signPsbt": true,
+  "outputsUnchanged": true,
+  "noBroadcastDuringSigning": true,
+  "txid": "885d9a73b58a3733aa082adfe92cd24a7e85e4a023307a3de2b3565831185ca0",
+  "actualMempool": true,
+  "isolatedLedger": true
+}

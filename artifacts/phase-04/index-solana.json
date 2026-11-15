@@ -1,0 +1,13 @@
+{
+  "source": "node",
+  "persistent": true,
+  "networkId": "solana:local",
+  "fingerprint": "J8hef5VDj3VYwjM8hTpzinpcMJfdjm23xd4P7cosSVZA",
+  "transactions": 0,
+  "transfers": 0,
+  "scopedLinks": 0,
+  "balanceSnapshots": 32,
+  "idempotent": true,
+  "coverage": "Available signatures for owner and token accounts; earlier pruned history is unavailable",
+  "isolated": false
+}

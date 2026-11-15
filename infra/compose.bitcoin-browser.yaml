@@ -1,0 +1,8 @@
+name: ewallet-bitcoin-browser-test
+services:
+  bitcoin:
+    image: ewallet-native:4.4.1-32.1
+    command: ["bitcoind", "-regtest", "-server", "-listen=0", "-txindex", "-rpcbind=0.0.0.0", "-rpcallowip=172.16.0.0/12", "-rpcallowip=192.168.0.0/16", "-rpcport=18443", "-rpccookiefile=/cookie/auth.cookie", "-datadir=/data", "-printtoconsole=0"]
+    ports: ["127.0.0.1:18444:18443"]
+    volumes: ["../.local/secrets/bitcoin-browser:/cookie"]
+    labels: {org.ewallet.project: ewallet-bitcoin-browser-test}

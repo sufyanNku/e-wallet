@@ -1,0 +1,14 @@
+{
+  "name": "@ewallet/config",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./abis": "./src/abis.generated.ts",
+    "./rpc": "./src/rpc.ts"
+  },
+  "dependencies": {
+    "@ewallet/domain": "workspace:*"
+  }
+}

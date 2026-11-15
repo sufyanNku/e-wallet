@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "programId": "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s",
+  "repository": "https://github.com/metaplex-foundation/mpl-token-metadata.git",
+  "commit": "7ce760f9e010cb9819ffd7dd86986a44691bd1f8",
+  "sourceVersion": "1.14.0",
+  "cargoBuildSbf": "4.5.0",
+  "platformTools": "v1.57",
+  "rustc": "1.95.0",
+  "architecture": "v1",
+  "lockfileSha256": "e1b79757b7b95c35bf5d27857a2bb4515dc37990cf5837119c7ba0f9f87408fb",
+  "programSha256": "b33deaa180cafda1b70e46347b27bcb3c645f30bf6934f490db67ab7087da514",
+  "rustcSha256": "f7a4ec1b62e27fa990de4c9bd3c38eb7a5ba0a4f41b2e0929a0631c68c9c6e78",
+  "dependencyChanges": {
+    "ahash@0.7.6": "0.7.8",
+    "ahash@0.8.3": "0.8.11",
+    "wasm-bindgen@0.2.87": "0.2.100"
+  },
+  "reason": "Pinned dependency-only lockfile updates required by Rust 1.95; program source unchanged. Original source lockfile fails due to removed stdsimd feature and old wasm-bindgen compiler guard.",
+  "platformToolsUrl": "https://github.com/anza-xyz/platform-tools/releases/download/v1.57/platform-tools-linux-x86_64.tar.bz2",
+  "platformToolsSha256": "b0f7af104adf726fff2a6a09ea2eb2f2d2965c92295f4d7388c08d140e0c2b00",
+  "rustupInitSha256": "b1c8cb14e30889e7e2999e6b69e62d9e9b9ffc0f4df8180564d306d9680e6c55"
+}

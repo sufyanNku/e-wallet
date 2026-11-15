@@ -1,0 +1,14 @@
+{
+  "observedAt": "2026-11-13T22:03:47.980Z",
+  "source": "real-local-node",
+  "networkId": "eip155:31337",
+  "orphanedHash": "0x9a70bfe45a73f89aa5aa25fd87544c5158b82f54083b77a9dab9c07b01d333a8",
+  "canonicalHash": "0xfb182667f7930075f8bfa11ade5fbeac9cfcdfc5a79b7e3b10cdd1cb5d84c724",
+  "oldBlockHash": "0x4762c0bc952d95a9498ef144ece9a2b2dac9336e5b78ae5996e0d593ef1cce7e",
+  "newBlockHash": "0x3b2fa80d19a48af159e583d35a0fc4a550a99ebd7a43af7f12b1644f8d841a9a",
+  "durableRestart": true,
+  "cursorSurvived": true,
+  "orphanedEventsExcluded": true,
+  "replayDeduplicated": true,
+  "snapshotRestored": true
+}

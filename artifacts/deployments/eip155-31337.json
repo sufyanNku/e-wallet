@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "networkId": "eip155:31337",
+  "chainId": "31337",
+  "genesisHash": "0x2af263e036216caae158d7c98de1a3bb15c24844962d79b55d59af8d65cd2ba7",
+  "bootEpoch": "43ed22d20f51ad1ef6671592c77e45bc58c0c29d8a390b06a24b635485ee2fe7",
+  "runId": "ae051036-2bbf-4fc9-b5d1-33c7837792b7",
+  "createdAt": "2026-11-14T14:02:15.899Z",
+  "compiler": {
+    "version": "0.8.38",
+    "evmVersion": "paris"
+  },
+  "deploymentBlock": "1",
+  "contracts": {
+    "dUSDC": {
+      "address": "0x37c0c904534ae7D14C23406B0A5A587115e554db",
+      "codeHash": "0x5aa7988e654ae8a296db27976765a5af595505282357229a1297fce595dedd75",
+      "transactionHash": "0x6468f131346f1e923a7b8b79255033232a0f84ab43a1aba9143a447621dbb16e",
+      "abiHash": "0xd9ae3fd00f88b432a6be35431ed980e8841b6755c42f98fe013d3b94bc014d2c",
+      "blockNumber": "1",
+      "constructorArguments": [
+        "Demo USD Coin",
+        "dUSDC",
+        6,
+        "1000000000000000",
+        "0x1d1e68641C663B586C27a44Cb215e4605D53A2c1"
+      ]
+    },
+    "dDAI": {
+      "address": "0xC1e3A89E5ac56A469b28B140Bd29200cbe173730",
+      "codeHash": "0x5aa03746ccaa4a19b708a79d33715223b5c1a2e6890f3735e4d8dedabdb4cb64",
+      "transactionHash": "0x4a48b99dfbda1261553cf292a7d4c91233caf46598cebf26fa70ce2de90a98a4",
+      "abiHash": "0xd9ae3fd00f88b432a6be35431ed980e8841b6755c42f98fe013d3b94bc014d2c",
+      "blockNumber": "2",
+      "constructorArguments": [
+        "Demo Dai",
+        "dDAI",
+        18,
+        "1000000000000000000000000000",
+        "0x1d1e68641C663B586C27a44Cb215e4605D53A2c1"
+      ]
+    },
+    "EWLT": {
+      "address": "0xac7FEC7cd999C3fEfCa02969F1279617d8a62c80",
+      "codeHash": "0x5aa03746ccaa4a19b708a79d33715223b5c1a2e6890f3735e4d8dedabdb4cb64",
+      "transactionHash": "0x673a72d3829716cf681aca1dbe8e4c6078b813bfbd1b47c8caf81ba784a970a5",
+      "abiHash": "0xd9ae3fd00f88b432a6be35431ed980e8841b6755c42f98fe013d3b94bc014d2c",
+      "blockNumber": "3",
+      "constructorArguments": [
+        "e-wallet Demo Token",
+        "EWLT",
+        18,
+        "1000000000000000000000000000",
+        "0x1d1e68641C663B586C27a44Cb215e4605D53A2c1"
+      ]
+    },
+    "Impostor": {
+      "address": "0xb34ea3FB10DeDE14D5E0A9D7CDbc3451D94E316d",
+      "codeHash": "0x5aa7988e654ae8a296db27976765a5af595505282357229a1297fce595dedd75",
+      "transactionHash": "0x5587f1029b9c8ae9302933e00719e17ee6b4374d68215cacd0c03771413a7782",
+      "abiHash": "0xd9ae3fd00f88b432a6be35431ed980e8841b6755c42f98fe013d3b94bc014d2c",
+      "blockNumber": "4",
+      "constructorArguments": [
+        "Demo Unverified Token",
+        "USDC",
+        6,
+        "1000000000000000",
+        "0x1d1e68641C663B586C27a44Cb215e4605D53A2c1"
+      ]
+    },
+    "DemoNFT721": {
+      "address": "0x8266E177Ed77ea319bA8a016BFf05A29669EDD84",
+      "codeHash": "0x5ad70646c2767cd47f03df348ad81c5d61d61f8886d3361c2f640e37b7f995c3",
+      "transactionHash": "0x59c8330ded668de0821d820841514267699544d38f2d5dff697aa580218a0595",
+      "abiHash": "0xbae5886d85bf2e755d07ccd27b97574be2a324f95fe886d4350605a07ea13bed",
+      "blockNumber": "5",
+      "constructorArguments": [
+        "0x1d1e68641C663B586C27a44Cb215e4605D53A2c1"
+      ]
+    },
+    "DemoNFT1155": {
+      "address": "0x09Ee62afCc3dF6E2C427ABD8E03c9CB79c792c37",
+      "codeHash": "0x1667cc1ef812d98b364738d49d4b5d114668d508aa82d4b515890d4fe0be933d",
+      "transactionHash": "0x41c885b70e35d20690e474697df25b44c9067a754cf160c29e781b8618c01781",
+      "abiHash": "0xb0a423b2a287f10b5e162de93bf55a709e4c0942e82b7c7ef5028b22ddef2cc0",
+      "blockNumber": "6",
+      "constructorArguments": [
+        "0x1d1e68641C663B586C27a44Cb215e4605D53A2c1",
+        "http://127.0.0.1:8787/fixtures/{id}.json"
+      ]
+    },
+    "DemoFaucet": {
+      "address": "0x31F7734Cd9506202FDBAdb0C40ab7dDACC656e89",
+      "codeHash": "0xb87910d3d7b074d7fd397c72dcfdf540f5663805dfad1ba49de269313c73c90e",
+      "transactionHash": "0x6346bda79ca406bd0defc8e14211c3a7f254afa8b936ed8cadd320da2d2b9145",
+      "abiHash": "0x48bc77baa9bcdb74b9cb6832f9be08e5ad5ab1d1b8abdf7e5597cae931a0abf6",
+      "blockNumber": "7",
+      "constructorArguments": [
+        "0x1d1e68641C663B586C27a44Cb215e4605D53A2c1"
+      ]
+    },
+    "SavingsVault": {
+      "address": "0xE46b33aAE029f8505F0C7D20BcE49Bd7123440fE",
+      "codeHash": "0x3a9380526d896aa0ba5a08ab03a78a7d852521d8dd3f25aa1c4c5931aedd8346",
+      "transactionHash": "0x59592aea181d6a697d2a16d42405e744c097e00e4ceac54c004b9c98a9bee6be",
+      "abiHash": "0x7d9bdf333f1f73f2c6b5827e8ba172abe4748f770c9297d954ac35536e103989",
+      "blockNumber": "8",
+      "constructorArguments": [
+        [
+          "0x37c0c904534ae7D14C23406B0A5A587115e554db",
+          "0xC1e3A89E5ac56A469b28B140Bd29200cbe173730"
+        ]
+      ]
+    },
+    "SharedWallet": {
+      "address": "0xf6e523F898B5E2A9394b6D1C662871DfeB995fA0",
+      "codeHash": "0xfa5e900894c525bc2e58b4fa92624695d64f86c4ff8dfa64716a33b33860d255",
+      "transactionHash": "0xc02bf6cbe539e116792792213e79c1b49f9f1c7eb227ce49bf97579f75268052",
+      "abiHash": "0x8b1ac17852ffedc2828b57df88f8165b15ffbc91a6cdccb5490675280cd85286",
+      "blockNumber": "9",
+      "constructorArguments": [
+        [
+          "0x37566338ADFbf56aa41FE8FC38aA92dB1e12aD59",
+          "0x7acEc7C9cFC211a7631B21166Cc7Ff706817a2F3",
+          "0x3f137DC28aA0107aff792a5f2eA69D4B4e42A87D"
+        ]
+      ]
+    },
+    "DemoSwapPool": {
+      "address": "0x02112D278dc6D127e82Ce2022ebD1E3476c6656C",
+      "codeHash": "0xf581290a1b84ebe39f3320411035e5c2b4c316693bb0d91595c884e335e385db",
+      "transactionHash": "0xa38994aedcd2021b3b1b6e716a672bae47686714c607e949d17c278c43fff9c4",
+      "abiHash": "0x893ce6a650e3b1c047c479ff22d9dc2aa224291c8a9efbe881f5494a9a017f69",
+      "blockNumber": "10",
+      "constructorArguments": [
+        "0x37c0c904534ae7D14C23406B0A5A587115e554db",
+        "0xC1e3A89E5ac56A469b28B140Bd29200cbe173730"
+      ]
+    },
+    "DemoBridgeLock": {
+      "address": "0x349A7032EF84086483942E1bA4f3bFf86d4d1658",
+      "codeHash": "0xcdd73019879aa948453388e4a55de279814ea0021f932517511e515a2e154ce9",
+      "transactionHash": "0x853ff48e83a0d0a123449ce369e42028b9a8c4de3aae2f78c14026d4ddb7879f",
+      "abiHash": "0x638f1d495b38f0686ebf1dccb38130a6e73bed43f99a5ecdac7a000cd974f4ba",
+      "blockNumber": "11",
+      "constructorArguments": [
+        "0x37c0c904534ae7D14C23406B0A5A587115e554db",
+        31338
+      ]
+    }
+  },
+  "assets": [
+    {
+      "symbol": "dUSDC",
+      "name": "Demo USD Coin",
+      "standard": "erc20",
+      "reference": "0x37c0c904534ae7D14C23406B0A5A587115e554db",
+      "decimals": 6,
+      "hidden": false
+    },
+    {
+      "symbol": "dDAI",
+      "name": "Demo Dai",
+      "standard": "erc20",
+      "reference": "0xC1e3A89E5ac56A469b28B140Bd29200cbe173730",
+      "decimals": 18,
+      "hidden": false
+    },
+    {
+      "symbol": "EWLT",
+      "name": "e-wallet Demo Token",
+      "standard": "erc20",
+      "reference": "0xac7FEC7cd999C3fEfCa02969F1279617d8a62c80",
+      "decimals": 18,
+      "hidden": false
+    },
+    {
+      "symbol": "USDC",
+      "name": "Demo Unverified Token",
+      "standard": "erc20",
+      "reference": "0xb34ea3FB10DeDE14D5E0A9D7CDbc3451D94E316d",
+      "decimals": 6,
+      "hidden": true
+    },
+    {
+      "symbol": "dCAMP",
+      "name": "Demo Campus Pass",
+      "standard": "erc721",
+      "reference": "0x8266E177Ed77ea319bA8a016BFf05A29669EDD84",
+      "decimals": 0,
+      "tokenIds": [
+        "101",
+        "102",
+        "103"
+      ],
+      "hidden": false
+    },
+    {
+      "symbol": "dSTUDY",
+      "name": "Demo Study Club",
+      "standard": "erc1155",
+      "reference": "0x09Ee62afCc3dF6E2C427ABD8E03c9CB79c792c37",
+      "decimals": 0,
+      "tokenIds": [
+        "1",
+        "2"
+      ],
+      "hidden": false
+    }
+  ]
+}

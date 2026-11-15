@@ -1,0 +1,1978 @@
+{
+  "schemaVersion": 1,
+  "seedVersion": 1,
+  "runId": "7bd96e7a-b45c-4664-9199-1553b8098bbc",
+  "createdAt": "2026-11-14T14:02:37.018Z",
+  "mode": "local",
+  "warning": "Public insecure local fixtures. Test assets have no monetary value.",
+  "nodes": [
+    {
+      "networkId": "eip155:31337",
+      "identity": "31337",
+      "bootEpoch": "43ed22d20f51ad1ef6671592c77e45bc58c0c29d8a390b06a24b635485ee2fe7"
+    },
+    {
+      "networkId": "eip155:31338",
+      "identity": "31338",
+      "bootEpoch": "39fe772995f5fa85decbddbf97436308a6fdc90d74f631d00f0f57065407bf47"
+    },
+    {
+      "networkId": "solana:local",
+      "identity": "J8hef5VDj3VYwjM8hTpzinpcMJfdjm23xd4P7cosSVZA",
+      "bootEpoch": null
+    },
+    {
+      "networkId": "bitcoin:regtest",
+      "identity": "0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206",
+      "bootEpoch": "60338c10f8611d661b2906d2c396e078452cccda3b774f18d5a4a49ea191c50c"
+    }
+  ],
+  "toolVersions": {
+    "node": "v24.22.3",
+    "pnpm": "10.34.9",
+    "hardhat": "3.22.0",
+    "solana": "4.4.1",
+    "bitcoin": "32.1"
+  },
+  "publicIdentities": {
+    "evm": {
+      "alice": {
+        "evm": {
+          "id": "fixture-alice:evm:m/44'/60'/0'/0/0",
+          "rootWalletId": "fixture-alice",
+          "family": "evm",
+          "address": "0x37566338ADFbf56aa41FE8FC38aA92dB1e12aD59",
+          "path": "m/44'/60'/0'/0/0",
+          "index": 0,
+          "name": "Account 1"
+        },
+        "solana": {
+          "id": "fixture-alice:solana:m/44'/501'/0'/0'",
+          "rootWalletId": "fixture-alice",
+          "family": "solana",
+          "address": "DMWBhx8jdZYJcToewhXkMk9awBjZfW7W6H6BM6P2rTnB",
+          "path": "m/44'/501'/0'/0'",
+          "index": 0,
+          "name": "Account 1"
+        },
+        "segwit": {
+          "id": "fixture-alice:bitcoin:m/84'/1'/0'/0/0",
+          "rootWalletId": "fixture-alice",
+          "family": "bitcoin",
+          "address": "bcrt1qrnnndt33lw89uth54kqmujahgpylg8dcgdv7vj",
+          "path": "m/84'/1'/0'/0/0",
+          "index": 0,
+          "name": "Account 1"
+        },
+        "taproot": {
+          "id": "fixture-alice:bitcoin:m/86'/1'/0'/0/0",
+          "rootWalletId": "fixture-alice",
+          "family": "bitcoin",
+          "address": "bcrt1p5xck6ss7hguku0u3vwqtswn8w79kv5s022dyurjxavhmntruuwsqxtusrj",
+          "path": "m/86'/1'/0'/0/0",
+          "index": 0,
+          "name": "Account 1"
+        }
+      },
+      "bob": {
+        "evm": {
+          "id": "fixture-bob:evm:m/44'/60'/0'/0/0",
+          "rootWalletId": "fixture-bob",
+          "family": "evm",
+          "address": "0x7acEc7C9cFC211a7631B21166Cc7Ff706817a2F3",
+          "path": "m/44'/60'/0'/0/0",
+          "index": 0,
+          "name": "Account 1"
+        },
+        "solana": {
+          "id": "fixture-bob:solana:m/44'/501'/0'/0'",
+          "rootWalletId": "fixture-bob",
+          "family": "solana",
+          "address": "CDmZ9h44ygNNv4VufV3oAPN569i5EGzo56SrETXfsJ8q",
+          "path": "m/44'/501'/0'/0'",
+          "index": 0,
+          "name": "Account 1"
+        },
+        "segwit": {
+          "id": "fixture-bob:bitcoin:m/84'/1'/0'/0/0",
+          "rootWalletId": "fixture-bob",
+          "family": "bitcoin",
+          "address": "bcrt1qvu3hu3u5ywnq0ugxsenyxhwmc6d06hqcdlm84m",
+          "path": "m/84'/1'/0'/0/0",
+          "index": 0,
+          "name": "Account 1"
+        },
+        "taproot": {
+          "id": "fixture-bob:bitcoin:m/86'/1'/0'/0/0",
+          "rootWalletId": "fixture-bob",
+          "family": "bitcoin",
+          "address": "bcrt1p7p46ezldwqm8nh0yrg737haj6z7473ctq5xzj9znfd8tj6jatdqsw3d8gp",
+          "path": "m/86'/1'/0'/0/0",
+          "index": 0,
+          "name": "Account 1"
+        }
+      },
+      "carol": {
+        "evm": {
+          "id": "fixture-carol:evm:m/44'/60'/0'/0/0",
+          "rootWalletId": "fixture-carol",
+          "family": "evm",
+          "address": "0x3f137DC28aA0107aff792a5f2eA69D4B4e42A87D",
+          "path": "m/44'/60'/0'/0/0",
+          "index": 0,
+          "name": "Account 1"
+        },
+        "solana": {
+          "id": "fixture-carol:solana:m/44'/501'/0'/0'",
+          "rootWalletId": "fixture-carol",
+          "family": "solana",
+          "address": "3gqSFposVWMWDpCDjERu7cgTST3bSwcvPsbyqqbYmwFA",
+          "path": "m/44'/501'/0'/0'",
+          "index": 0,
+          "name": "Account 1"
+        },
+        "segwit": {
+          "id": "fixture-carol:bitcoin:m/84'/1'/0'/0/0",
+          "rootWalletId": "fixture-carol",
+          "family": "bitcoin",
+          "address": "bcrt1qgkq0nv9hmlee49d5pekts5fvwnvsaznlqcjyq7",
+          "path": "m/84'/1'/0'/0/0",
+          "index": 0,
+          "name": "Account 1"
+        },
+        "taproot": {
+          "id": "fixture-carol:bitcoin:m/86'/1'/0'/0/0",
+          "rootWalletId": "fixture-carol",
+          "family": "bitcoin",
+          "address": "bcrt1p6ycwjrtpn78g4ecq5qdj3qepdmnp9ne0gmr5hf9gzhyzsyljuz8qe26w6s",
+          "path": "m/86'/1'/0'/0/0",
+          "index": 0,
+          "name": "Account 1"
+        }
+      },
+      "dana": {
+        "evm": {
+          "id": "fixture-dana:evm:m/44'/60'/0'/0/0",
+          "rootWalletId": "fixture-dana",
+          "family": "evm",
+          "address": "0x59d2Ae8eBb5bbbc4cdB7E973a4E8c7634e0640Ef",
+          "path": "m/44'/60'/0'/0/0",
+          "index": 0,
+          "name": "Account 1"
+        },
+        "solana": {
+          "id": "fixture-dana:solana:m/44'/501'/0'/0'",
+          "rootWalletId": "fixture-dana",
+          "family": "solana",
+          "address": "DCe1gftiez28mZz3XAznkBvLMJ7TkDKnwaxdVJeYE3CG",
+          "path": "m/44'/501'/0'/0'",
+          "index": 0,
+          "name": "Account 1"
+        },
+        "segwit": {
+          "id": "fixture-dana:bitcoin:m/84'/1'/0'/0/0",
+          "rootWalletId": "fixture-dana",
+          "family": "bitcoin",
+          "address": "bcrt1qzy2n86jz53ejcw8v4x3nx660v67x0udmqpuvlh",
+          "path": "m/84'/1'/0'/0/0",
+          "index": 0,
+          "name": "Account 1"
+        },
+        "taproot": {
+          "id": "fixture-dana:bitcoin:m/86'/1'/0'/0/0",
+          "rootWalletId": "fixture-dana",
+          "family": "bitcoin",
+          "address": "bcrt1pm04khnpt8pj2rmvc5tw9h33dgg0e0gf9q3xf7s0pa3ntqnjj3g9qstkzqa",
+          "path": "m/86'/1'/0'/0/0",
+          "index": 0,
+          "name": "Account 1"
+        }
+      }
+    },
+    "solana": {
+      "alice": {
+        "id": "fixture-alice:solana:m/44'/501'/0'/0'",
+        "rootWalletId": "fixture-alice",
+        "family": "solana",
+        "address": "DMWBhx8jdZYJcToewhXkMk9awBjZfW7W6H6BM6P2rTnB",
+        "path": "m/44'/501'/0'/0'",
+        "index": 0,
+        "name": "Account 1"
+      },
+      "bob": {
+        "id": "fixture-bob:solana:m/44'/501'/0'/0'",
+        "rootWalletId": "fixture-bob",
+        "family": "solana",
+        "address": "CDmZ9h44ygNNv4VufV3oAPN569i5EGzo56SrETXfsJ8q",
+        "path": "m/44'/501'/0'/0'",
+        "index": 0,
+        "name": "Account 1"
+      },
+      "carol": {
+        "id": "fixture-carol:solana:m/44'/501'/0'/0'",
+        "rootWalletId": "fixture-carol",
+        "family": "solana",
+        "address": "3gqSFposVWMWDpCDjERu7cgTST3bSwcvPsbyqqbYmwFA",
+        "path": "m/44'/501'/0'/0'",
+        "index": 0,
+        "name": "Account 1"
+      },
+      "dana": {
+        "id": "fixture-dana:solana:m/44'/501'/0'/0'",
+        "rootWalletId": "fixture-dana",
+        "family": "solana",
+        "address": "DCe1gftiez28mZz3XAznkBvLMJ7TkDKnwaxdVJeYE3CG",
+        "path": "m/44'/501'/0'/0'",
+        "index": 0,
+        "name": "Account 1"
+      }
+    },
+    "bitcoin": {
+      "alice": [
+        {
+          "purpose": 84,
+          "accountIndex": 0,
+          "rootFingerprint": "0f09f381",
+          "xpub": "tpubDCAVQRxWnkXjyYbsHdUsHA7krYSRyVS8EuWeWE6K2V34goMaUCdCTjfSFS8ZkE5iESaWQsZoM9HL7ZANi5bW7Ly3EqDqthEyvdZHSrBTNHq"
+        },
+        {
+          "purpose": 86,
+          "accountIndex": 0,
+          "rootFingerprint": "0f09f381",
+          "xpub": "tpubDC6sFjEmUwAk55rsMZ7fVbQWuXiN3Pn6iCXcXjuqcgNJEDyhLgQkdXqJfZGpysX2Spx1Wm9KfJy8s55F4V8sbqaFZ9synSVo2jSuUjTZCYK"
+        }
+      ],
+      "bob": [
+        {
+          "purpose": 84,
+          "accountIndex": 0,
+          "rootFingerprint": "471ee604",
+          "xpub": "tpubDCqE9A1no7mkqF12WH3axsyWXy3dR1uM2pB4jbyM2py5tD47y2eEHhxNxPNXvFGPJzMJJGdAizNtdq7E1vyyBaiJMqv1kT8R71U8HHMb2xj"
+        },
+        {
+          "purpose": 86,
+          "accountIndex": 0,
+          "rootFingerprint": "471ee604",
+          "xpub": "tpubDCpsuAh1UCfM3nGqVLjNTEAPDU3xtqFSwuA6SNrsayWz7LLCyBqkJWuGkfy1gRiAUx15szXZxchpRTks2Am7qwAJR7UiSEjd3v6HjFJKgiW"
+        }
+      ],
+      "carol": [
+        {
+          "purpose": 84,
+          "accountIndex": 0,
+          "rootFingerprint": "74bed913",
+          "xpub": "tpubDCwXvipd7RNsnLQ8GiC9KLRtJEcx8vAUVGT9QHWriPrXG3zYzaKjZQeHaM2wtVAGQdWj9EQoWfvHfonxWfQ1mt44APjbWehtf3qV5e8DzVN"
+        },
+        {
+          "purpose": 86,
+          "accountIndex": 0,
+          "rootFingerprint": "74bed913",
+          "xpub": "tpubDC4fv5m1nxYizn6pmzqN1f7ZoYq5c26JsknBisXLe1tBXDADsrsRdJnnx1kgqpBYSgRQz3VPKUaCQXCuM48eZcvcY2DDVVVph1GRxq8s3gd"
+        }
+      ],
+      "dana": [
+        {
+          "purpose": 84,
+          "accountIndex": 0,
+          "rootFingerprint": "a44a5989",
+          "xpub": "tpubDC5LduN84Rix7FRNTuqdJRZDtDfGtDTBSBtzkeMSQYZDm5Y3GvBRtGXVXETweBHHqLZcdvtketV6gs3jbkXT8KMSHYdBuPNqeJfRjL9NkeC"
+        },
+        {
+          "purpose": 86,
+          "accountIndex": 0,
+          "rootFingerprint": "a44a5989",
+          "xpub": "tpubDCEegaGhKXakp8XmPRVduyM13Qa2gGPZ8hU3sFWeEc6N57KDgMS1nttKgYwoWTJdnYa3bBm4GEwyfPpekNwWfav6nYQJgTaYfXNa3KRiEcZ"
+        }
+      ]
+    }
+  },
+  "deployments": [
+    {
+      "schemaVersion": 1,
+      "networkId": "eip155:31337",
+      "chainId": "31337",
+      "genesisHash": "0x2af263e036216caae158d7c98de1a3bb15c24844962d79b55d59af8d65cd2ba7",
+      "bootEpoch": "43ed22d20f51ad1ef6671592c77e45bc58c0c29d8a390b06a24b635485ee2fe7",
+      "runId": "ae051036-2bbf-4fc9-b5d1-33c7837792b7",
+      "createdAt": "2026-11-14T14:02:15.899Z",
+      "compiler": {
+        "version": "0.8.38",
+        "evmVersion": "paris"
+      },
+      "deploymentBlock": "1",
+      "contracts": {
+        "dUSDC": {
+          "address": "0x37c0c904534ae7D14C23406B0A5A587115e554db",
+          "codeHash": "0x5aa7988e654ae8a296db27976765a5af595505282357229a1297fce595dedd75",
+          "transactionHash": "0x6468f131346f1e923a7b8b79255033232a0f84ab43a1aba9143a447621dbb16e",
+          "abiHash": "0xd9ae3fd00f88b432a6be35431ed980e8841b6755c42f98fe013d3b94bc014d2c",
+          "blockNumber": "1",
+          "constructorArguments": [
+            "Demo USD Coin",
+            "dUSDC",
+            6,
+            "1000000000000000",
+            "0x1d1e68641C663B586C27a44Cb215e4605D53A2c1"
+          ]
+        },
+        "dDAI": {
+          "address": "0xC1e3A89E5ac56A469b28B140Bd29200cbe173730",
+          "codeHash": "0x5aa03746ccaa4a19b708a79d33715223b5c1a2e6890f3735e4d8dedabdb4cb64",
+          "transactionHash": "0x4a48b99dfbda1261553cf292a7d4c91233caf46598cebf26fa70ce2de90a98a4",
+          "abiHash": "0xd9ae3fd00f88b432a6be35431ed980e8841b6755c42f98fe013d3b94bc014d2c",
+          "blockNumber": "2",
+          "constructorArguments": [
+            "Demo Dai",
+            "dDAI",
+            18,
+            "1000000000000000000000000000",
+            "0x1d1e68641C663B586C27a44Cb215e4605D53A2c1"
+          ]
+        },
+        "EWLT": {
+          "address": "0xac7FEC7cd999C3fEfCa02969F1279617d8a62c80",
+          "codeHash": "0x5aa03746ccaa4a19b708a79d33715223b5c1a2e6890f3735e4d8dedabdb4cb64",
+          "transactionHash": "0x673a72d3829716cf681aca1dbe8e4c6078b813bfbd1b47c8caf81ba784a970a5",
+          "abiHash": "0xd9ae3fd00f88b432a6be35431ed980e8841b6755c42f98fe013d3b94bc014d2c",
+          "blockNumber": "3",
+          "constructorArguments": [
+            "e-wallet Demo Token",
+            "EWLT",
+            18,
+            "1000000000000000000000000000",
+            "0x1d1e68641C663B586C27a44Cb215e4605D53A2c1"
+          ]
+        },
+        "Impostor": {
+          "address": "0xb34ea3FB10DeDE14D5E0A9D7CDbc3451D94E316d",
+          "codeHash": "0x5aa7988e654ae8a296db27976765a5af595505282357229a1297fce595dedd75",
+          "transactionHash": "0x5587f1029b9c8ae9302933e00719e17ee6b4374d68215cacd0c03771413a7782",
+          "abiHash": "0xd9ae3fd00f88b432a6be35431ed980e8841b6755c42f98fe013d3b94bc014d2c",
+          "blockNumber": "4",
+          "constructorArguments": [
+            "Demo Unverified Token",
+            "USDC",
+            6,
+            "1000000000000000",
+            "0x1d1e68641C663B586C27a44Cb215e4605D53A2c1"
+          ]
+        },
+        "DemoNFT721": {
+          "address": "0x8266E177Ed77ea319bA8a016BFf05A29669EDD84",
+          "codeHash": "0x5ad70646c2767cd47f03df348ad81c5d61d61f8886d3361c2f640e37b7f995c3",
+          "transactionHash": "0x59c8330ded668de0821d820841514267699544d38f2d5dff697aa580218a0595",
+          "abiHash": "0xbae5886d85bf2e755d07ccd27b97574be2a324f95fe886d4350605a07ea13bed",
+          "blockNumber": "5",
+          "constructorArguments": [
+            "0x1d1e68641C663B586C27a44Cb215e4605D53A2c1"
+          ]
+        },
+        "DemoNFT1155": {
+          "address": "0x09Ee62afCc3dF6E2C427ABD8E03c9CB79c792c37",
+          "codeHash": "0x1667cc1ef812d98b364738d49d4b5d114668d508aa82d4b515890d4fe0be933d",
+          "transactionHash": "0x41c885b70e35d20690e474697df25b44c9067a754cf160c29e781b8618c01781",
+          "abiHash": "0xb0a423b2a287f10b5e162de93bf55a709e4c0942e82b7c7ef5028b22ddef2cc0",
+          "blockNumber": "6",
+          "constructorArguments": [
+            "0x1d1e68641C663B586C27a44Cb215e4605D53A2c1",
+            "http://127.0.0.1:8787/fixtures/{id}.json"
+          ]
+        },
+        "DemoFaucet": {
+          "address": "0x31F7734Cd9506202FDBAdb0C40ab7dDACC656e89",
+          "codeHash": "0xb87910d3d7b074d7fd397c72dcfdf540f5663805dfad1ba49de269313c73c90e",
+          "transactionHash": "0x6346bda79ca406bd0defc8e14211c3a7f254afa8b936ed8cadd320da2d2b9145",
+          "abiHash": "0x48bc77baa9bcdb74b9cb6832f9be08e5ad5ab1d1b8abdf7e5597cae931a0abf6",
+          "blockNumber": "7",
+          "constructorArguments": [
+            "0x1d1e68641C663B586C27a44Cb215e4605D53A2c1"
+          ]
+        },
+        "SavingsVault": {
+          "address": "0xE46b33aAE029f8505F0C7D20BcE49Bd7123440fE",
+          "codeHash": "0x3a9380526d896aa0ba5a08ab03a78a7d852521d8dd3f25aa1c4c5931aedd8346",
+          "transactionHash": "0x59592aea181d6a697d2a16d42405e744c097e00e4ceac54c004b9c98a9bee6be",
+          "abiHash": "0x7d9bdf333f1f73f2c6b5827e8ba172abe4748f770c9297d954ac35536e103989",
+          "blockNumber": "8",
+          "constructorArguments": [
+            [
+              "0x37c0c904534ae7D14C23406B0A5A587115e554db",
+              "0xC1e3A89E5ac56A469b28B140Bd29200cbe173730"
+            ]
+          ]
+        },
+        "SharedWallet": {
+          "address": "0xf6e523F898B5E2A9394b6D1C662871DfeB995fA0",
+          "codeHash": "0xfa5e900894c525bc2e58b4fa92624695d64f86c4ff8dfa64716a33b33860d255",
+          "transactionHash": "0xc02bf6cbe539e116792792213e79c1b49f9f1c7eb227ce49bf97579f75268052",
+          "abiHash": "0x8b1ac17852ffedc2828b57df88f8165b15ffbc91a6cdccb5490675280cd85286",
+          "blockNumber": "9",
+          "constructorArguments": [
+            [
+              "0x37566338ADFbf56aa41FE8FC38aA92dB1e12aD59",
+              "0x7acEc7C9cFC211a7631B21166Cc7Ff706817a2F3",
+              "0x3f137DC28aA0107aff792a5f2eA69D4B4e42A87D"
+            ]
+          ]
+        },
+        "DemoSwapPool": {
+          "address": "0x02112D278dc6D127e82Ce2022ebD1E3476c6656C",
+          "codeHash": "0xf581290a1b84ebe39f3320411035e5c2b4c316693bb0d91595c884e335e385db",
+          "transactionHash": "0xa38994aedcd2021b3b1b6e716a672bae47686714c607e949d17c278c43fff9c4",
+          "abiHash": "0x893ce6a650e3b1c047c479ff22d9dc2aa224291c8a9efbe881f5494a9a017f69",
+          "blockNumber": "10",
+          "constructorArguments": [
+            "0x37c0c904534ae7D14C23406B0A5A587115e554db",
+            "0xC1e3A89E5ac56A469b28B140Bd29200cbe173730"
+          ]
+        },
+        "DemoBridgeLock": {
+          "address": "0x349A7032EF84086483942E1bA4f3bFf86d4d1658",
+          "codeHash": "0xcdd73019879aa948453388e4a55de279814ea0021f932517511e515a2e154ce9",
+          "transactionHash": "0x853ff48e83a0d0a123449ce369e42028b9a8c4de3aae2f78c14026d4ddb7879f",
+          "abiHash": "0x638f1d495b38f0686ebf1dccb38130a6e73bed43f99a5ecdac7a000cd974f4ba",
+          "blockNumber": "11",
+          "constructorArguments": [
+            "0x37c0c904534ae7D14C23406B0A5A587115e554db",
+            31338
+          ]
+        }
+      },
+      "assets": [
+        {
+          "symbol": "dUSDC",
+          "name": "Demo USD Coin",
+          "standard": "erc20",
+          "reference": "0x37c0c904534ae7D14C23406B0A5A587115e554db",
+          "decimals": 6,
+          "hidden": false
+        },
+        {
+          "symbol": "dDAI",
+          "name": "Demo Dai",
+          "standard": "erc20",
+          "reference": "0xC1e3A89E5ac56A469b28B140Bd29200cbe173730",
+          "decimals": 18,
+          "hidden": false
+        },
+        {
+          "symbol": "EWLT",
+          "name": "e-wallet Demo Token",
+          "standard": "erc20",
+          "reference": "0xac7FEC7cd999C3fEfCa02969F1279617d8a62c80",
+          "decimals": 18,
+          "hidden": false
+        },
+        {
+          "symbol": "USDC",
+          "name": "Demo Unverified Token",
+          "standard": "erc20",
+          "reference": "0xb34ea3FB10DeDE14D5E0A9D7CDbc3451D94E316d",
+          "decimals": 6,
+          "hidden": true
+        },
+        {
+          "symbol": "dCAMP",
+          "name": "Demo Campus Pass",
+          "standard": "erc721",
+          "reference": "0x8266E177Ed77ea319bA8a016BFf05A29669EDD84",
+          "decimals": 0,
+          "tokenIds": [
+            "101",
+            "102",
+            "103"
+          ],
+          "hidden": false
+        },
+        {
+          "symbol": "dSTUDY",
+          "name": "Demo Study Club",
+          "standard": "erc1155",
+          "reference": "0x09Ee62afCc3dF6E2C427ABD8E03c9CB79c792c37",
+          "decimals": 0,
+          "tokenIds": [
+            "1",
+            "2"
+          ],
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "networkId": "eip155:31338",
+      "chainId": "31338",
+      "genesisHash": "0x2af263e036216caae158d7c98de1a3bb15c24844962d79b55d59af8d65cd2ba7",
+      "bootEpoch": "39fe772995f5fa85decbddbf97436308a6fdc90d74f631d00f0f57065407bf47",
+      "runId": "3ffe359b-6c8d-4741-aebe-b08fd3ae0bbb",
+      "createdAt": "2026-11-14T14:02:16.299Z",
+      "compiler": {
+        "version": "0.8.38",
+        "evmVersion": "paris"
+      },
+      "deploymentBlock": "1",
+      "contracts": {
+        "bdUSDC": {
+          "address": "0x37c0c904534ae7D14C23406B0A5A587115e554db",
+          "codeHash": "0x5aa7988e654ae8a296db27976765a5af595505282357229a1297fce595dedd75",
+          "transactionHash": "0x213c389da748d9367309ec1f0e635faf1053ec996869027c57265cc215197b52",
+          "abiHash": "0xd9ae3fd00f88b432a6be35431ed980e8841b6755c42f98fe013d3b94bc014d2c",
+          "blockNumber": "1",
+          "constructorArguments": [
+            "Demo Bridged USD Coin",
+            "bdUSDC",
+            6,
+            "1000000000000000",
+            "0x1d1e68641C663B586C27a44Cb215e4605D53A2c1"
+          ]
+        },
+        "DemoBridgeMint": {
+          "address": "0xC1e3A89E5ac56A469b28B140Bd29200cbe173730",
+          "codeHash": "0xb7e878824de39447aa3ea7354d993bb7c769701da1a39a720ba8eb3c097d37dc",
+          "transactionHash": "0x1e50a01ce482339afa054cf1e802ba0d90f44530e37c3baa00cc962c3555b7cd",
+          "abiHash": "0x45405f3bb9fb44b07aff2f652fd87f4853ca23cffd1522694dc05d4d4f22b246",
+          "blockNumber": "2",
+          "constructorArguments": [
+            "0x37c0c904534ae7D14C23406B0A5A587115e554db",
+            "0x349A7032EF84086483942E1bA4f3bFf86d4d1658",
+            "0x1d1e68641C663B586C27a44Cb215e4605D53A2c1"
+          ]
+        }
+      },
+      "assets": [
+        {
+          "symbol": "bdUSDC",
+          "name": "Demo Bridged USD Coin",
+          "standard": "erc20",
+          "reference": "0x37c0c904534ae7D14C23406B0A5A587115e554db",
+          "decimals": 6,
+          "hidden": false
+        }
+      ]
+    }
+  ],
+  "tokens": [
+    {
+      "symbol": "dUSDC",
+      "name": "Demo USD Coin",
+      "standard": "erc20",
+      "reference": "0x37c0c904534ae7D14C23406B0A5A587115e554db",
+      "decimals": 6,
+      "hidden": false
+    },
+    {
+      "symbol": "dDAI",
+      "name": "Demo Dai",
+      "standard": "erc20",
+      "reference": "0xC1e3A89E5ac56A469b28B140Bd29200cbe173730",
+      "decimals": 18,
+      "hidden": false
+    },
+    {
+      "symbol": "EWLT",
+      "name": "e-wallet Demo Token",
+      "standard": "erc20",
+      "reference": "0xac7FEC7cd999C3fEfCa02969F1279617d8a62c80",
+      "decimals": 18,
+      "hidden": false
+    },
+    {
+      "symbol": "USDC",
+      "name": "Demo Unverified Token",
+      "standard": "erc20",
+      "reference": "0xb34ea3FB10DeDE14D5E0A9D7CDbc3451D94E316d",
+      "decimals": 6,
+      "hidden": true
+    },
+    {
+      "symbol": "dCAMP",
+      "name": "Demo Campus Pass",
+      "standard": "erc721",
+      "reference": "0x8266E177Ed77ea319bA8a016BFf05A29669EDD84",
+      "decimals": 0,
+      "tokenIds": [
+        "101",
+        "102",
+        "103"
+      ],
+      "hidden": false
+    },
+    {
+      "symbol": "dSTUDY",
+      "name": "Demo Study Club",
+      "standard": "erc1155",
+      "reference": "0x09Ee62afCc3dF6E2C427ABD8E03c9CB79c792c37",
+      "decimals": 0,
+      "tokenIds": [
+        "1",
+        "2"
+      ],
+      "hidden": false
+    },
+    {
+      "symbol": "bdUSDC",
+      "name": "Demo Bridged USD Coin",
+      "standard": "erc20",
+      "reference": "0x37c0c904534ae7D14C23406B0A5A587115e554db",
+      "decimals": 6,
+      "hidden": false
+    },
+    {
+      "address": "FbGz4WNFE5r8jvAUhDAt5n5unh4WABBi9qZJFRtaW4he",
+      "decimals": 6,
+      "program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "name": "Demo USD Coin",
+      "symbol": "dUSDC"
+    },
+    {
+      "address": "3e1aWqgLHQJu8jTvqdoShY9NezFXUmYby8UjVP79JCwU",
+      "decimals": 9,
+      "program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "name": "Solana e-wallet Demo Token",
+      "symbol": "sEWLT"
+    },
+    {
+      "address": "Ds7paCc68je7U79sVsbzjhTDhyjmFUdJ2Peh7pPBkQgy",
+      "decimals": 6,
+      "program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+      "name": "Demo Extension-free Token-2022",
+      "symbol": "d2022"
+    },
+    {
+      "address": "AyMYU7L89j1SWvH5qRKqTPc6vTHN8vtptaz88npG4BD2",
+      "decimals": 6,
+      "program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+      "name": "Demo Nontransferable Token",
+      "symbol": "dNO"
+    },
+    {
+      "address": "B7DnPpNBbPbJ9Y9tCkRiJ6Vv84oVvmjTR4n2U2vQ1Yq7",
+      "decimals": 6,
+      "program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "name": "Demo Frozen Token",
+      "symbol": "dICE"
+    },
+    {
+      "address": "B5BXZUNnuAwy1v6fxccQbL2QbvrdLunYiUiCDZQiFnRL",
+      "decimals": 0,
+      "program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "name": "Campus Pass #1",
+      "symbol": "dCAMP"
+    },
+    {
+      "address": "FGToodZvx8VWGNVAV2UKsNNoq7vJEfyFuordhugWmhBL",
+      "decimals": 0,
+      "program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "name": "Campus Pass #2",
+      "symbol": "dCAMP"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "deploy:dUSDC",
+      "networkId": "eip155:31337",
+      "identifier": "0x6468f131346f1e923a7b8b79255033232a0f84ab43a1aba9143a447621dbb16e",
+      "state": "confirmed",
+      "fee": "1573170000000000",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "deploy:dDAI",
+      "networkId": "eip155:31337",
+      "identifier": "0x4a48b99dfbda1261553cf292a7d4c91233caf46598cebf26fa70ce2de90a98a4",
+      "state": "confirmed",
+      "fee": "1483904603130696",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "deploy:EWLT",
+      "networkId": "eip155:31337",
+      "identifier": "0x673a72d3829716cf681aca1dbe8e4c6078b813bfbd1b47c8caf81ba784a970a5",
+      "state": "confirmed",
+      "fee": "1405765654350240",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "deploy:Impostor",
+      "networkId": "eip155:31337",
+      "identifier": "0x5587f1029b9c8ae9302933e00719e17ee6b4374d68215cacd0c03771413a7782",
+      "state": "confirmed",
+      "fee": "1336897011394008",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "deploy:DemoNFT721",
+      "networkId": "eip155:31337",
+      "identifier": "0x59c8330ded668de0821d820841514267699544d38f2d5dff697aa580218a0595",
+      "state": "confirmed",
+      "fee": "2133232045403432",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "deploy:DemoNFT1155",
+      "networkId": "eip155:31337",
+      "identifier": "0x41c885b70e35d20690e474697df25b44c9067a754cf160c29e781b8618c01781",
+      "state": "confirmed",
+      "fee": "2102996273743640",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "deploy:DemoFaucet",
+      "networkId": "eip155:31337",
+      "identifier": "0x6346bda79ca406bd0defc8e14211c3a7f254afa8b936ed8cadd320da2d2b9145",
+      "state": "confirmed",
+      "fee": "795542864368208",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "deploy:SavingsVault",
+      "networkId": "eip155:31337",
+      "identifier": "0x59592aea181d6a697d2a16d42405e744c097e00e4ceac54c004b9c98a9bee6be",
+      "state": "confirmed",
+      "fee": "863411305226267",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "deploy:SharedWallet",
+      "networkId": "eip155:31337",
+      "identifier": "0xc02bf6cbe539e116792792213e79c1b49f9f1c7eb227ce49bf97579f75268052",
+      "state": "confirmed",
+      "fee": "1299899244685050",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "deploy:DemoSwapPool",
+      "networkId": "eip155:31337",
+      "identifier": "0xa38994aedcd2021b3b1b6e716a672bae47686714c607e949d17c278c43fff9c4",
+      "state": "confirmed",
+      "fee": "1202891685006354",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "deploy:DemoBridgeLock",
+      "networkId": "eip155:31337",
+      "identifier": "0x853ff48e83a0d0a123449ce369e42028b9a8c4de3aae2f78c14026d4ddb7879f",
+      "state": "confirmed",
+      "fee": "470525204675968",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:dUSDC:alice",
+      "networkId": "eip155:31337",
+      "identifier": "0xf8047df23446529d175100f47bce9cd406e9345c9a987521b1d3ddde81439992",
+      "state": "confirmed",
+      "fee": "86023591574080",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:dUSDC:bob",
+      "networkId": "eip155:31337",
+      "identifier": "0x121606631378ce234e9115cc618b261e92e00891f3e0b4e62d90838b6782aae2",
+      "state": "confirmed",
+      "fee": "63897774614724",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:dUSDC:carol",
+      "networkId": "eip155:31337",
+      "identifier": "0x30e3aee5cca523be85ef3af64d5e27304afce99df96222c78a2a5f3d19bcff8d",
+      "state": "confirmed",
+      "fee": "62655166013658",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "role:dUSDC:faucet",
+      "networkId": "eip155:31337",
+      "identifier": "0x4f06e5666cad765dfadb1a458f34f9364debb770ca8b455f69eaf1ed9a63a5c4",
+      "state": "confirmed",
+      "fee": "58806484522240",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "faucet:dUSDC:config",
+      "networkId": "eip155:31337",
+      "identifier": "0x2c4d939fa0cbfe7658f7844f1f4e301ea88bdfb19cc8c72a774e72cde843a428",
+      "state": "confirmed",
+      "fee": "55268712509076",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:dDAI:alice",
+      "networkId": "eip155:31337",
+      "identifier": "0x9ac6b995ede2e66f1f2268b5cf56d845b1c0b122680c561800b57ead8fd18b76",
+      "state": "confirmed",
+      "fee": "78788170123019",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:dDAI:bob",
+      "networkId": "eip155:31337",
+      "identifier": "0xdd7e9aafaf40e33deab51411f1c2c1ec3cd83e4b0c28b5f9deeb7ad12264392d",
+      "state": "confirmed",
+      "fee": "59106302212627",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:dDAI:carol",
+      "networkId": "eip155:31337",
+      "identifier": "0x0a550084d7538bfb0c0cbc40cb0edd936576fb1acad912d2ad00d42669795aa0",
+      "state": "confirmed",
+      "fee": "58467541039494",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "role:dDAI:faucet",
+      "networkId": "eip155:31337",
+      "identifier": "0xa09668310eb7281327f09ed242d95269bdf462b972a25d91298beb83be8315a6",
+      "state": "confirmed",
+      "fee": "55262284566720",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "faucet:dDAI:config",
+      "networkId": "eip155:31337",
+      "identifier": "0xdf48c2566130d055df1e342931c2f52f65e6e5d550ce758ee7998c827a8e3cca",
+      "state": "confirmed",
+      "fee": "52358655647035",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:EWLT:alice",
+      "networkId": "eip155:31337",
+      "identifier": "0x0a1b1398c3c766dd4264b79018c3608de3f454f7a0f8816babcc5e40db0b7fec",
+      "state": "confirmed",
+      "fee": "75029597292425",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:EWLT:bob",
+      "networkId": "eip155:31337",
+      "identifier": "0x04ab202e7968d94d4e906aabdd0f6b0b65714c4b4e64616a3dd7a77c51b3b36f",
+      "state": "confirmed",
+      "fee": "56603651857875",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:EWLT:carol",
+      "networkId": "eip155:31337",
+      "identifier": "0xe9e2f7962c1a4b61e61cce87efa4405055e4d9e2971ea1e19a2e036962367322",
+      "state": "confirmed",
+      "fee": "56275661597550",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "role:EWLT:faucet",
+      "networkId": "eip155:31337",
+      "identifier": "0x85a189907a02c66bdafa22ab95238d78def97d7cbec802cefe33427c735fd28f",
+      "state": "confirmed",
+      "fee": "53442009859840",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "faucet:EWLT:config",
+      "networkId": "eip155:31337",
+      "identifier": "0x01b512efd18c223cfefc5d7eec22f3e8cc1fd59a9716e00708528cab0f0cfdff",
+      "state": "confirmed",
+      "fee": "50836368153131",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:impostor",
+      "networkId": "eip155:31337",
+      "identifier": "0xfaeacbd7c9c513a5b6afa9d6f6412072f4df15ccfc36a70f415f161533c1f42a",
+      "state": "confirmed",
+      "fee": "73056680478914",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:nft:101",
+      "networkId": "eip155:31337",
+      "identifier": "0x1eb95c0a90306531be00e3afa7fa47e63664d46c8a73c0c09272e51092b89818",
+      "state": "confirmed",
+      "fee": "146924283508163",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:nft:102",
+      "networkId": "eip155:31337",
+      "identifier": "0x8fc00c9b7321cd9ab82467eeba7af34141654f71ffaa4e3cb02df0772c454dac",
+      "state": "confirmed",
+      "fee": "129003757687981",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:nft:103",
+      "networkId": "eip155:31337",
+      "identifier": "0xa25c90701768a8a8a42d484bb42504eb14753fd17afda9baab03da5216e11edf",
+      "state": "confirmed",
+      "fee": "146087507694303",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:1155:alice:1",
+      "networkId": "eip155:31337",
+      "identifier": "0x69e74f38d28b11d1e9c36ee565440676ac9d017a467a011fb72815ca190b0fcb",
+      "state": "confirmed",
+      "fee": "53771894331480",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:1155:alice:2",
+      "networkId": "eip155:31337",
+      "identifier": "0xd0e542485ba9464fca37a28659b11c6fe3711a1bc530d6d4480bf83a37808138",
+      "state": "confirmed",
+      "fee": "53661103197624",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:1155:bob:1",
+      "networkId": "eip155:31337",
+      "identifier": "0x303c3ab4df142a2c93db97740515ca7b91abb0979e449984f988f93a8f17f531",
+      "state": "confirmed",
+      "fee": "53564136575976",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:pool-mint:dUSDC",
+      "networkId": "eip155:31337",
+      "identifier": "0x30700761643fb26d18ba4400b322cfdb2aaccd6b8daa89bd063ca0a6c339f27e",
+      "state": "confirmed",
+      "fee": "54546144611826",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:pool-approve:dUSDC",
+      "networkId": "eip155:31337",
+      "identifier": "0x7e2c6582321354f333891697c5d4b3d3ae459941517704fa38e984a835fd208f",
+      "state": "confirmed",
+      "fee": "46833889879296",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:pool-mint:dDAI",
+      "networkId": "eip155:31337",
+      "identifier": "0x17b2a5e737dc365b967a587c5694636be7e9db7865817c3188f5c8abbcc81a14",
+      "state": "confirmed",
+      "fee": "54440377631600",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:pool-approve:dDAI",
+      "networkId": "eip155:31337",
+      "identifier": "0x8adf162a006b98e38d6ef4609ef6857a84a1dfa33b0144ee00f881896647d272",
+      "state": "confirmed",
+      "fee": "46763245215162",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:pool-init",
+      "networkId": "eip155:31337",
+      "identifier": "0x60653eb947b7e1b3d2f56579c09838f03811b9f2f29cd6f57f5295dd25f2b41d",
+      "state": "confirmed",
+      "fee": "162344159091550",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-01",
+      "networkId": "eip155:31337",
+      "identifier": "0x4236ad4cfb3a40d1e864798428623d123d6135ab50051cfbfed8c0f6336fe766",
+      "state": "confirmed",
+      "fee": "21121449972000",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-02",
+      "networkId": "eip155:31337",
+      "identifier": "0x2ba469757a6d9fc4beed6c2cb6a1c817ac6e0b74077b5cb15dbe1a410f095647",
+      "state": "confirmed",
+      "fee": "34707768819426",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-03",
+      "networkId": "eip155:31337",
+      "identifier": "0xa79b05fe579b4c1fc46b26224131a05a563f097212cb185e33d2cd63e2342dea",
+      "state": "confirmed",
+      "fee": "34649788420395",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-04-721",
+      "networkId": "eip155:31337",
+      "identifier": "0x5918cc0a75f26d68cf3e2f4e028ad4dbe72f4a1a8dd2b2b39fcbe48b8da3ae96",
+      "state": "confirmed",
+      "fee": "45808871594176",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-04-1155",
+      "networkId": "eip155:31337",
+      "identifier": "0x7179872a28ac6dfe514fd09c59644ad5c17c8d44438e52ea68005b7d791ef8c2",
+      "state": "confirmed",
+      "fee": "57321793886200",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-05-claim",
+      "networkId": "eip155:31337",
+      "identifier": "0xc65297609874dc6462235bfe4893e64385f10099663b584f69810203be1a869f",
+      "state": "confirmed",
+      "fee": "91740575942981",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-05-cooldown",
+      "networkId": "eip155:31337",
+      "identifier": "0xd0931a0c236fe5da41ed57b5a2154c38af58607aa357da94cd7349936b84ac1f",
+      "state": "confirmed",
+      "fee": "31778379488800",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-06-allowance",
+      "networkId": "eip155:31337",
+      "identifier": "0xb4a3cdd96eec562b6b605fe0fa905b0274172fb7ca18c6600173faddf5a9ef03",
+      "state": "confirmed",
+      "fee": "46470457748880",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-06-deposit:0",
+      "networkId": "eip155:31337",
+      "identifier": "0x6a0685dd2a6846815cbcd7f80f3612c48e4a0e9cb65a8c55917ce915cb3d069b",
+      "state": "confirmed",
+      "fee": "206045346835768",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-06-deposit:1",
+      "networkId": "eip155:31337",
+      "identifier": "0x2d3a3abe9cd2e4c6cace34e2dd2deb9fe1fc821e9a0ef569ca58909482e47e0b",
+      "state": "confirmed",
+      "fee": "171734901066104",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-06-deposit:2",
+      "networkId": "eip155:31337",
+      "identifier": "0xfea64c92ed0a2b0d084ce8aefa3b62391372d5d46f90a0ea6a072c7085d28e23",
+      "state": "confirmed",
+      "fee": "166930484416996",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-06-withdraw",
+      "networkId": "eip155:31337",
+      "identifier": "0xe272d5c6370570976aa3c1d954d6fc2ffaa82bc348b48ecedbf5d79057431158",
+      "state": "confirmed",
+      "fee": "77585661477995",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-07-approve",
+      "networkId": "eip155:31337",
+      "identifier": "0xc828349fc7b1c6fcacbb14c5fde74df1df474cc66867c9690bcf573e664f5bfe",
+      "state": "confirmed",
+      "fee": "46412479707330",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-07-swap",
+      "networkId": "eip155:31337",
+      "identifier": "0x346099762212ada90b032bad52c5212a2421e2ce8cc6e73e6c5a1b6d2823c0ad",
+      "state": "confirmed",
+      "fee": "80166783942325",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-08-native",
+      "networkId": "eip155:31337",
+      "identifier": "0x39cd1cea1b6cb8fbe7e35c38a05a2574f4f61c3a58413f7751586519c657ed42",
+      "state": "confirmed",
+      "fee": "21071517752775",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-08-token",
+      "networkId": "eip155:31337",
+      "identifier": "0x4d00e7d710f8e6ea77f7e2e00757b1e91e0c365aec27c2ee89f7cfc829f2e013",
+      "state": "confirmed",
+      "fee": "46853143131531",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-09-proposal:A",
+      "networkId": "eip155:31337",
+      "identifier": "0x579c10441cded532b406069945e16b07f1f017e687d56cc80fe00e110de0360b",
+      "state": "confirmed",
+      "fee": "189651880495616",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-09-approve:alice:A",
+      "networkId": "eip155:31337",
+      "identifier": "0x7b548505b84359bfc482846f4d920c5a663290a8fb613a8d868a0b8d7e05a81e",
+      "state": "confirmed",
+      "fee": "74347101092524",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-09-proposal:B",
+      "networkId": "eip155:31337",
+      "identifier": "0x1d645f4cce62650120dbbf1185a8abdebf7f2dd1f0f72d4fdbcc82169de59512",
+      "state": "confirmed",
+      "fee": "172517423390858",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-09-approve:alice:B",
+      "networkId": "eip155:31337",
+      "identifier": "0x12e63b1d824ca0843311efde8c540169f63e0ee47481325991f93d4c4e08bb85",
+      "state": "confirmed",
+      "fee": "74349976897680",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-09-approve:bob:B",
+      "networkId": "eip155:31337",
+      "identifier": "0x49149ee2ff2c7e8ecd7b5c875236f562512d16a1e127977f717ef03a3c15dbdc",
+      "state": "confirmed",
+      "fee": "57240201864320",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-09-execute:B",
+      "networkId": "eip155:31337",
+      "identifier": "0xe223261af17c9576e2f82da694f9e3dd4a49416efa63153a20cd3227b42cd8d4",
+      "state": "confirmed",
+      "fee": "65737307144453",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-10-approve",
+      "networkId": "eip155:31337",
+      "identifier": "0x865755e82bb443d24221258e016e374e38a91fe9ec6cc93403ab2509bd7f79e8",
+      "state": "confirmed",
+      "fee": "46389543494436",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-10-lock",
+      "networkId": "eip155:31337",
+      "identifier": "0xe3129a42e60c2cf1d28e472fbaf690a8f3c2f691a3ed8247fff2e4e64514ac2b",
+      "state": "confirmed",
+      "fee": "85843315333976",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-14-allowance",
+      "networkId": "eip155:31337",
+      "identifier": "0xce67ff257894b2ee84009868765d38dc53db0b501f0c9b9956a5082b1f549196",
+      "state": "confirmed",
+      "fee": "46386609685416",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "roles:revoke-deployer:dUSDC",
+      "networkId": "eip155:31337",
+      "identifier": "0xf9996c22a8ade039285083c6baeef1be5a8dd6d67b8f8b6daff6c9492a9c2801",
+      "state": "confirmed",
+      "fee": "29583363911144",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "roles:revoke-deployer:dDAI",
+      "networkId": "eip155:31337",
+      "identifier": "0x48130f66a528e002221e8b442b8ddb36921a682465847ada19053c113e66a90e",
+      "state": "confirmed",
+      "fee": "29582694087756",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "roles:revoke-deployer:EWLT",
+      "networkId": "eip155:31337",
+      "identifier": "0xf6f74577d230407bd9b6f400db6f953730c4177b92b72ad4ac778cbbba0a9ef5",
+      "state": "confirmed",
+      "fee": "29582107910952",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "roles:revoke-deployer:Impostor",
+      "networkId": "eip155:31337",
+      "identifier": "0xf08d214cef2b15093d4f4a070deaf47e6429655b5611d19a5484fcaae8672750",
+      "state": "confirmed",
+      "fee": "29581594939698",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "roles:revoke-deployer:DemoNFT721",
+      "networkId": "eip155:31337",
+      "identifier": "0xb8ec32702e2ef498372e9f68f2255b5398d866fc3b21c809ba0390557cd0d3f6",
+      "state": "confirmed",
+      "fee": "29603148374400",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "roles:revoke-deployer:DemoNFT1155",
+      "networkId": "eip155:31337",
+      "identifier": "0x71a290079fe1992f13c6f97dda687a253afe4d466ed33934ef1c5b922d0b5df5",
+      "state": "confirmed",
+      "fee": "29536749083788",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "deploy:bdUSDC",
+      "networkId": "eip155:31338",
+      "identifier": "0x213c389da748d9367309ec1f0e635faf1053ec996869027c57265cc215197b52",
+      "state": "confirmed",
+      "fee": "1573372500000000",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "deploy:DemoBridgeMint",
+      "networkId": "eip155:31338",
+      "identifier": "0x1e50a01ce482339afa054cf1e802ba0d90f44530e37c3baa00cc962c3555b7cd",
+      "state": "confirmed",
+      "fee": "977684483832400",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "role:bridge-mint",
+      "networkId": "eip155:31338",
+      "identifier": "0xff0346795d44376fa589b4fb0973160d271bf7ac3fc1e058f9eff995ac4dd65f",
+      "state": "confirmed",
+      "fee": "86263503811520",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-10-mint",
+      "networkId": "eip155:31338",
+      "identifier": "0xad147e46e4809081a7acf6ea2468308b308be735de9cdac89bc05faad623e3f6",
+      "state": "confirmed",
+      "fee": "165993301098240",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "roles:revoke-deployer:bdUSDC",
+      "networkId": "eip155:31338",
+      "identifier": "0x84ce6d1a81779af5f63c0c92293376d66d6b4dd69bb2ad1397f2de77139fab98",
+      "state": "confirmed",
+      "fee": "44860873715474",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "funding:deployer",
+      "networkId": "solana:local",
+      "identifier": "3KEQ28kMp9ztmChvHqyL3fwRSgtz68zxpszUyZnyMdhN8gWNtDEA8kQ3ZQkit4uH9i4ospnUXTHLdwQPTfwTjJF6",
+      "state": "confirmed",
+      "fee": "0",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "opening:SOL:alice",
+      "networkId": "solana:local",
+      "identifier": "4ubmncvJJBnu6ejBATGy43RCf8FKY3rXPRWDmo5sJGqMGG739onZJHJQZisfuFtxgt46YANHwvFeKR5mFTB4AySm",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "opening:SOL:bob",
+      "networkId": "solana:local",
+      "identifier": "wwmCVq1MTLRaZ3DVt1KsBEBehNNjbMotJGPxggzh9QCUyKCujnhhZKTobHCWVkGEGeF3NPDz8mnihDw9aWNFu4g",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "opening:SOL:carol",
+      "networkId": "solana:local",
+      "identifier": "65HyA5A6gj2vdNe7xTMqTu4mBbPn76xxcM5im5ZweLrF5ua8Zm5HwTnqbNfStYpNJfyAjZpo9a8AWjPyS2dig5eg",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "mint:dUSDC",
+      "networkId": "solana:local",
+      "identifier": "2wL9syCzztwwLviEeopWBnsHJjMog4VDjhEG7axBu6yUD4wvw7Gy7k5BL8LxuzFAPiAraWPpAKsCRwkCfDS2PpUj",
+      "state": "confirmed",
+      "fee": "10000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "mint:sEWLT",
+      "networkId": "solana:local",
+      "identifier": "57eJJ5ND9q1ot9K9ZQRyPFJTred8q2iXpD7kMCBsnwQPWqQnky8zewh5msjPa49YbJ3EChMfBT9E95tqyNR8qdbT",
+      "state": "confirmed",
+      "fee": "10000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "mint:token2022",
+      "networkId": "solana:local",
+      "identifier": "4EdRWFP7iyNcfAmp1VxF1xB4GEB9YMWXAoButLVsVW4XAcBC6cwdECw1izXYy2G143x9MiHVFyrUcPR7GJJpdmug",
+      "state": "confirmed",
+      "fee": "10000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "mint:unsupported",
+      "networkId": "solana:local",
+      "identifier": "3hWEpi4cz2tdstBJAj5LC4qkC4EP9wdcNNjwiunCD4C8yJBfwABJjqxAN76b5W8RhsVBxhT2mmpEvzkjAbDwZJbF",
+      "state": "confirmed",
+      "fee": "10000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "mint:frozen",
+      "networkId": "solana:local",
+      "identifier": "3codX77RwJG7QNU1MeDP3YyUSmUyTRobvknQAh6haWeQo9VFyh95b3oET35rMTD9F3obnXzKZKBjNxAA5pNHsCbV",
+      "state": "confirmed",
+      "fee": "10000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "mint:nft1",
+      "networkId": "solana:local",
+      "identifier": "5433gF2bpwSdqMhj6gNm2LpCdrff4JwqAPz9kBDpREpy41U4Sn6cfMMsM8fV8mNQZEk2xq3nfj4R4SDac73LYPp8",
+      "state": "confirmed",
+      "fee": "10000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "mint:nft2",
+      "networkId": "solana:local",
+      "identifier": "52i2vHicEZRTs7gcKXBbVbqfTj5YUahF3499j5mx6hV2Dp9X2Qt1umY2hbN2MTUh5vjJH5Xj4PvzJCLFLQp859hn",
+      "state": "confirmed",
+      "fee": "10000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "opening:dUSDC:alice",
+      "networkId": "solana:local",
+      "identifier": "3U8EJhcBGr5BHnhBaqLRSkRFVJ9mbZKU9rdfRc2fEVWdtdh4uzt8Ddf3NX5W5X3qG26jBkhtbRAu9WwrVFZVp2BA",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "opening:dUSDC:bob",
+      "networkId": "solana:local",
+      "identifier": "2o3USyE3X27JzNwrL24xtPUjYAEGCvu1WPB4S2QFgG4fqQ5NEJHuvdH34TzRPLbmug83cQT4rbzk4iZcaQ48xD6N",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "opening:dUSDC:carol",
+      "networkId": "solana:local",
+      "identifier": "jHSfLTpHNpV6nuUafpXyCRLeoCDWzppZ1oGxyFQBC2e9C7WjU8icD7KFGS9ktFzYsDz2T7dUQhtnKQsSk53PKrG",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "opening:sEWLT:alice",
+      "networkId": "solana:local",
+      "identifier": "5ojwAdmkfRL2kRddrb7wp4wKM1VfxgYpjdCZx1MySHsiSkDqySYosT5cFuFcadtp6jzeBR4fEkV8hKj3k3sq4Cfa",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "opening:token2022:alice",
+      "networkId": "solana:local",
+      "identifier": "2EEwWTMU7ViYSrhSUqHEZo1Yt5Wn4pGKmDCDXycSyDEnzpjjiH3ojozD8pj5AnudbJTQkTF4gNL3Qq5zM5Zzx3Re",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "opening:unsupported:alice",
+      "networkId": "solana:local",
+      "identifier": "3GLVowR6DMsjaLPfm43iG9gNi7zZsRBPn7Pv6vpFhpdXJhHvBxeksKueMQQDcdsxhsURefEiRfXectBTu251Efyq",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "opening:frozen:alice",
+      "networkId": "solana:local",
+      "identifier": "3e4Kx6AnGyDM1B3d1o5xK7kuW51fGB4FosAsWABzxH9nFnvyncghg4WmfThnWur7nzxc6MeH4zFyjWKbiovRHKZS",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "opening:nft1:alice",
+      "networkId": "solana:local",
+      "identifier": "3g2N4C45wFEpYWuBzjodFJW2haGH7Y3BM21JxRdZ8LaC2WdU6gzJVAesSfteVZg2qn9Un8sFr4EJjPduwRdFWnkE",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "opening:nft2:bob",
+      "networkId": "solana:local",
+      "identifier": "5hsHRBf6KJYu4FW6ee8V1vsVKzDsbfwV13qqY8eyZjDQRfArp4MpQFgjX2D98exFxKeZN8PsSces7nbAV5nGMkX6",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "metadata:dUSDC",
+      "networkId": "solana:local",
+      "identifier": "2GUThm1MzAiNFAqWRsSjzqqVQ3vHzsyw7sVxbtnLwVcc6v8NJffmKkkxp5XVUcFFy64C5YFRdPv3JMAEqor4DeH3",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "revoke-mint:dUSDC",
+      "networkId": "solana:local",
+      "identifier": "3eTpEoJq17nk6QLy3vSJD5UmCFzSLnrbjELALuiycJC4EPZAQjJLypsTVangXupvd7wGk5WiB2Ei6j1vYfGaAmEH",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "metadata:sEWLT",
+      "networkId": "solana:local",
+      "identifier": "tf2WBrWqh3vPF3s4Fk1DrTmG6hb52yQ2h3iqkywBKh7UjQSdqBaStWhjk6nWdGGMByrBafZJQ28oiJ2HXgoVVE6",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "revoke-mint:sEWLT",
+      "networkId": "solana:local",
+      "identifier": "3KVotZvYNky1pSmbiBM6s6HZXpfDjhRRTLd5gUzHSCERKawnZdhaZkTvuvzJ9PDgixRXqtPvwz65FoktzUCWVo6d",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "metadata:frozen",
+      "networkId": "solana:local",
+      "identifier": "2pqRow6qTtHdXsxEcA77X3iQnYpW3ymBTvDXhuwg5jJZWAzdUAjSCvzsseLQuwKQocVQY9iYqUMD4C4eNbrsPDvj",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "revoke-mint:frozen",
+      "networkId": "solana:local",
+      "identifier": "64ixDVrN8Q33U28f2gAHDWszmT21wdDHUnwZ4pYhyYTzsqeynxPkwTNtT5QyNibpRTZVxqueZz2pRcwq1t2NrDp",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "metadata:nft1",
+      "networkId": "solana:local",
+      "identifier": "2Q8G6RyPkaAmatPQuYxRLTGBC85vkEphAHXUDTq8eKxkihsGiJbqXqeAiXt1SZpovH9bwJopSN4AAfVbyi1vSka4",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "edition:nft1",
+      "networkId": "solana:local",
+      "identifier": "4xz4BzdC6QG6Qi8B8nEQthEgWLnFLWJmx1DTWY36C14GW9qYrvgDMb3MCQcVcYD2MFEi3gZUnKpnvuNjqmsaGBkx",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "metadata:nft2",
+      "networkId": "solana:local",
+      "identifier": "2A1xWxabcxEzKS7u1NDe3w2uH4RiExTqJhYAvmi2wVXwv6JhUma21JGQ51VZ1f8JwFfn5BX9G4vZU1dA12v3tewS",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "edition:nft2",
+      "networkId": "solana:local",
+      "identifier": "4MwWmioHk7t36HsCbq7DpajrqF6GNMMTVJ8hx3PFedMHBKqXnep49nrtQ8bLkahPG5aEQKhPzsWsgiX8bGYhLmrY",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "delegate:alice",
+      "networkId": "solana:local",
+      "identifier": "3yRTRGtkePjf1kxLCXum84gPX2CDT9wzcjz5bSKkgL8hCzS4Fk44vtXwHbbpdp6rG8DrxpDrVcQSsY4tr5mETvtj",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "freeze:alice",
+      "networkId": "solana:local",
+      "identifier": "4tirhzQTwK13mo3iTCiqeREYa1CwwEeokwPhkdcweVzePWpiYWcVAXmwwJTFtrtDHd21WV8LeSFCJAJwsVz6nGc2",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "SEED-11-sEWLT",
+      "networkId": "solana:local",
+      "identifier": "4EjuSKwijLJda9mhY69vHn2bsvVLGsEh3mMojKfP7Bfph6gEN1bBUstYbZUAWSZtzeLd5XFEnmYhQugwCxtxqoVk",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "SEED-12-NFT",
+      "networkId": "solana:local",
+      "identifier": "2Datv8FeLABznVWgodzoo4etLHua3woMSdPycrL76pnHow4f9hT2AAWNStzahyA2j7bu5motrhbSLogctc8zwrVk",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "SEED-11-SOL",
+      "networkId": "solana:local",
+      "identifier": "4opapR8N6iHs5vxjWNha5i6eWnStvHjca3vcZ1z5aVmsXuphdAyZrHz99VmpgtJPkM3jtKZxffoNeeshwQr17CrM",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "SEED-11-dUSDC",
+      "networkId": "solana:local",
+      "identifier": "3cF4SCwwHmGCehYsy1poF2EmK4kY8CWG5jpFeqiLCy8VRtouwjDchVvk8it99kv8onXW5B2mHHfgv8sr54dDS1cj",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "SEED-11-fresh-ATA",
+      "networkId": "solana:local",
+      "identifier": "Qoh4KB91X8xqSJRd6knqKLcYRhBCWSChVhFdumUYfjXhE95chHyXiZxLJ5vF1rMymZCUMQEEzWJaNLNfJahmd8d",
+      "state": "confirmed",
+      "fee": "5000",
+      "evidenceStatus": "pruned"
+    },
+    {
+      "id": "alice-wpkh-0",
+      "networkId": "bitcoin:regtest",
+      "identifier": "fd9f3c6f90e077c119c2cf22f655ad1570c40b9f071dc73d2953ec0a9788ec39",
+      "state": "confirmed",
+      "fee": "282",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "alice-wpkh-1",
+      "networkId": "bitcoin:regtest",
+      "identifier": "63264b48f5ce3035e2fe21a60fc578a2e5e282aa23a740fa09f470cde128e804",
+      "state": "confirmed",
+      "fee": "282",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "alice-tr-0",
+      "networkId": "bitcoin:regtest",
+      "identifier": "0a471ee18298e8b66b5976467ff0e3ed02d31c423533eecd6f8a1bef679fe2e6",
+      "state": "confirmed",
+      "fee": "330",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "alice-tr-1",
+      "networkId": "bitcoin:regtest",
+      "identifier": "b8ec4732c12e0c3fed358fa18fc74ae82ec8be9a192ad1e51f069677ffde6910",
+      "state": "confirmed",
+      "fee": "310",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "bob-wpkh",
+      "networkId": "bitcoin:regtest",
+      "identifier": "750ae51b074e9c5cc130621b5cfcaa917e162aedaa302aff3052d7e8562717e7",
+      "state": "confirmed",
+      "fee": "262",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "carol-wpkh",
+      "networkId": "bitcoin:regtest",
+      "identifier": "fd47c9f28e6ef851b34b150b7b348cf35463a7842884c717cc385d1c57e3443d",
+      "state": "confirmed",
+      "fee": "282",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-13-84",
+      "networkId": "bitcoin:regtest",
+      "identifier": "4d4af0d41d66eb88cac6e31035f4d6242b9e89dbb23f2e0bb1a15898d451b910",
+      "state": "confirmed",
+      "fee": "284",
+      "evidenceStatus": "live"
+    },
+    {
+      "id": "SEED-13-86",
+      "networkId": "bitcoin:regtest",
+      "identifier": "8165f9f5f291fc00d3316636a7f18780543b9dfa36a68346128a7b05eebb9612",
+      "state": "confirmed",
+      "fee": "286",
+      "evidenceStatus": "live"
+    }
+  ],
+  "openingAmounts": {
+    "alice": {
+      "nativeETH": "100000000000000000000",
+      "dUSDC": "10000000000",
+      "dDAI": "10000000000000000000000",
+      "EWLT": "2500000000000000000000",
+      "SOL": "100000000000",
+      "BTC_P2WPKH": "75000000",
+      "BTC_P2TR": "50000000"
+    },
+    "note": "Opening allocations precede scenario sends, fees and rent."
+  },
+  "finalAmounts": {
+    "evm": [
+      {
+        "source": "node",
+        "networkId": "eip155:31337",
+        "observedHeight": "70",
+        "observedAt": "2026-11-14T14:02:25.305Z",
+        "balances": {
+          "alice": {
+            "native": "99898167009867965091",
+            "dUSDC@0x37c0c904534ae7D14C23406B0A5A587115e554db": "9900000000",
+            "dDAI@0xC1e3A89E5ac56A469b28B140Bd29200cbe173730": "10099690060900928177460",
+            "EWLT@0xac7FEC7cd999C3fEfCa02969F1279617d8a62c80": "2499999999999999999999",
+            "USDC@0xb34ea3FB10DeDE14D5E0A9D7CDbc3451D94E316d": "7000000"
+          },
+          "bob": {
+            "native": "100099908052029316254",
+            "dUSDC@0x37c0c904534ae7D14C23406B0A5A587115e554db": "4875000000",
+            "dDAI@0xC1e3A89E5ac56A469b28B140Bd29200cbe173730": "5000000000000000000000",
+            "EWLT@0xac7FEC7cd999C3fEfCa02969F1279617d8a62c80": "1000000000000000000000",
+            "USDC@0xb34ea3FB10DeDE14D5E0A9D7CDbc3451D94E316d": "0"
+          },
+          "carol": {
+            "native": "100000000000000000000",
+            "dUSDC@0x37c0c904534ae7D14C23406B0A5A587115e554db": "5025000000",
+            "dDAI@0xC1e3A89E5ac56A469b28B140Bd29200cbe173730": "5000000000000000000000",
+            "EWLT@0xac7FEC7cd999C3fEfCa02969F1279617d8a62c80": "1000000000000000000001",
+            "USDC@0xb34ea3FB10DeDE14D5E0A9D7CDbc3451D94E316d": "0"
+          },
+          "dana": {
+            "native": "0",
+            "dUSDC@0x37c0c904534ae7D14C23406B0A5A587115e554db": "0",
+            "dDAI@0xC1e3A89E5ac56A469b28B140Bd29200cbe173730": "0",
+            "EWLT@0xac7FEC7cd999C3fEfCa02969F1279617d8a62c80": "0",
+            "USDC@0xb34ea3FB10DeDE14D5E0A9D7CDbc3451D94E316d": "0"
+          }
+        }
+      },
+      {
+        "source": "node",
+        "networkId": "eip155:31338",
+        "observedHeight": "5",
+        "observedAt": "2026-11-14T14:02:25.439Z",
+        "balances": {
+          "alice": {
+            "native": "100000000000000000000",
+            "bdUSDC@0x37c0c904534ae7D14C23406B0A5A587115e554db": "25000000"
+          },
+          "bob": {
+            "native": "100000000000000000000",
+            "bdUSDC@0x37c0c904534ae7D14C23406B0A5A587115e554db": "0"
+          },
+          "carol": {
+            "native": "100000000000000000000",
+            "bdUSDC@0x37c0c904534ae7D14C23406B0A5A587115e554db": "0"
+          },
+          "dana": {
+            "native": "0",
+            "bdUSDC@0x37c0c904534ae7D14C23406B0A5A587115e554db": "0"
+          }
+        }
+      }
+    ],
+    "solana": [
+      {
+        "name": "alice",
+        "address": "DMWBhx8jdZYJcToewhXkMk9awBjZfW7W6H6BM6P2rTnB",
+        "sol": "98995896440",
+        "tokens": {
+          "dUSDC": "9987654321",
+          "sEWLT": "2450000000000",
+          "token2022": "100000000",
+          "unsupported": "1000000",
+          "frozen": "1000000",
+          "nft1": "1",
+          "nft2": "1"
+        }
+      },
+      {
+        "name": "bob",
+        "address": "CDmZ9h44ygNNv4VufV3oAPN569i5EGzo56SrETXfsJ8q",
+        "sol": "100997955720",
+        "tokens": {
+          "dUSDC": "5012345678",
+          "sEWLT": "0",
+          "token2022": "0",
+          "unsupported": "0",
+          "frozen": "0",
+          "nft1": "0",
+          "nft2": "0"
+        }
+      },
+      {
+        "name": "carol",
+        "address": "3gqSFposVWMWDpCDjERu7cgTST3bSwcvPsbyqqbYmwFA",
+        "sol": "100000000000",
+        "tokens": {
+          "dUSDC": "5000000000",
+          "sEWLT": "50000000000",
+          "token2022": "0",
+          "unsupported": "0",
+          "frozen": "0",
+          "nft1": "0",
+          "nft2": "0"
+        }
+      },
+      {
+        "name": "dana",
+        "address": "DCe1gftiez28mZz3XAznkBvLMJ7TkDKnwaxdVJeYE3CG",
+        "sol": "0",
+        "tokens": {
+          "dUSDC": "0",
+          "sEWLT": "0",
+          "token2022": "0",
+          "unsupported": "0",
+          "frozen": "0",
+          "nft1": "0",
+          "nft2": "0"
+        }
+      }
+    ],
+    "bitcoin": [
+      {
+        "name": "alice",
+        "purpose": 84,
+        "address": "bcrt1qrnnndt33lw89uth54kqmujahgpylg8dcgdv7vj",
+        "path": "m/84'/1'/0'/0/0",
+        "total": "73999716",
+        "utxos": [
+          {
+            "txid": "4d4af0d41d66eb88cac6e31035f4d6242b9e89dbb23f2e0bb1a15898d451b910",
+            "vout": "1",
+            "address": "bcrt1q8403uy3m7mc85a0s8nh7q3m726w8p3xzg6q205",
+            "scriptPubKey": "00143d5f1e123bf6f07a75f03cefe0477e569c70c4c2",
+            "amount": "0.23999716",
+            "confirmations": "6",
+            "spendable": true,
+            "solvable": true,
+            "desc": "wpkh([0f09f381/84h/1h/0h/1/0]02abe0aefa25f992b96fa5a955576c24cd3def2aa735b3a8999064fd934bb1ecab)#y3qwqq6z",
+            "parent_descs": [
+              "wpkh([0f09f381/84h/1h/0h]tpubDCAVQRxWnkXjyYbsHdUsHA7krYSRyVS8EuWeWE6K2V34goMaUCdCTjfSFS8ZkE5iESaWQsZoM9HL7ZANi5bW7Ly3EqDqthEyvdZHSrBTNHq/1/*)#2ht989hy"
+            ],
+            "safe": true,
+            "value": "23999716"
+          },
+          {
+            "txid": "fd9f3c6f90e077c119c2cf22f655ad1570c40b9f071dc73d2953ec0a9788ec39",
+            "vout": "1",
+            "address": "bcrt1qrnnndt33lw89uth54kqmujahgpylg8dcgdv7vj",
+            "scriptPubKey": "00141ce736ae31fb8e5e2ef4ad81be4bb74049f41db8",
+            "amount": "0.50000000",
+            "confirmations": "12",
+            "spendable": true,
+            "solvable": true,
+            "desc": "wpkh([0f09f381/84h/1h/0h/0/0]0203e6d3f02aebc940c170613425af7316e401f858eb6ff5e80392deae87d83a9a)#h6jnmu02",
+            "parent_descs": [
+              "wpkh([0f09f381/84h/1h/0h]tpubDCAVQRxWnkXjyYbsHdUsHA7krYSRyVS8EuWeWE6K2V34goMaUCdCTjfSFS8ZkE5iESaWQsZoM9HL7ZANi5bW7Ly3EqDqthEyvdZHSrBTNHq/0/*)#mrwy6s8u"
+            ],
+            "safe": true,
+            "value": "50000000"
+          }
+        ]
+      },
+      {
+        "name": "alice",
+        "purpose": 86,
+        "address": "bcrt1p5xck6ss7hguku0u3vwqtswn8w79kv5s022dyurjxavhmntruuwsqxtusrj",
+        "path": "m/86'/1'/0'/0/0",
+        "total": "47999714",
+        "utxos": [
+          {
+            "txid": "8165f9f5f291fc00d3316636a7f18780543b9dfa36a68346128a7b05eebb9612",
+            "vout": "1",
+            "address": "bcrt1pmztqlm2vjxul8m9wylyak76z8ulaf2cy4vyrmhrcww9jtcjv5x9qnv70tw",
+            "scriptPubKey": "5120d8960fed4c91b9f3ecae27c9db7b423f3fd4ab04ab083ddc78738b25e24ca18a",
+            "amount": "0.07999714",
+            "confirmations": "6",
+            "spendable": true,
+            "solvable": true,
+            "desc": "tr([0f09f381/86h/1h/0h/1/0]cf3c2ec58c2cded46ab1ba776768f4763bb3a0aeff76f77429c5cfe50833a9b6)#uzyasam5",
+            "parent_descs": [
+              "tr([0f09f381/86h/1h/0h]tpubDC6sFjEmUwAk55rsMZ7fVbQWuXiN3Pn6iCXcXjuqcgNJEDyhLgQkdXqJfZGpysX2Spx1Wm9KfJy8s55F4V8sbqaFZ9synSVo2jSuUjTZCYK/1/*)#980w85f9"
+            ],
+            "safe": true,
+            "value": "7999714"
+          },
+          {
+            "txid": "0a471ee18298e8b66b5976467ff0e3ed02d31c423533eecd6f8a1bef679fe2e6",
+            "vout": "1",
+            "address": "bcrt1p5xck6ss7hguku0u3vwqtswn8w79kv5s022dyurjxavhmntruuwsqxtusrj",
+            "scriptPubKey": "5120a1b16d421eba396e3f916380b83a67778b66520f529a4e0e46eb2fb9ac7ce3a0",
+            "amount": "0.40000000",
+            "confirmations": "12",
+            "spendable": true,
+            "solvable": true,
+            "desc": "tr([0f09f381/86h/1h/0h/0/0]3077524de325c963b80fb867bf0a0bb4dbae58ebe5b135e39b697458971a33b3)#j7wlavdt",
+            "parent_descs": [
+              "tr([0f09f381/86h/1h/0h]tpubDC6sFjEmUwAk55rsMZ7fVbQWuXiN3Pn6iCXcXjuqcgNJEDyhLgQkdXqJfZGpysX2Spx1Wm9KfJy8s55F4V8sbqaFZ9synSVo2jSuUjTZCYK/0/*)#5n206pea"
+            ],
+            "safe": true,
+            "value": "40000000"
+          }
+        ]
+      },
+      {
+        "name": "bob",
+        "purpose": 84,
+        "address": "bcrt1qvu3hu3u5ywnq0ugxsenyxhwmc6d06hqcdlm84m",
+        "path": "m/84'/1'/0'/0/0",
+        "total": "11000000",
+        "utxos": [
+          {
+            "txid": "750ae51b074e9c5cc130621b5cfcaa917e162aedaa302aff3052d7e8562717e7",
+            "vout": "0",
+            "address": "bcrt1qvu3hu3u5ywnq0ugxsenyxhwmc6d06hqcdlm84m",
+            "scriptPubKey": "001467237e479423a607f1068666435ddbc69afd5c18",
+            "amount": "0.10000000",
+            "confirmations": "12",
+            "spendable": true,
+            "solvable": true,
+            "desc": "wpkh([471ee604/84h/1h/0h/0/0]03e5fc8be3b1947e87e3db876479d99334986622e547dcee80d4bd42b43a746505)#7sl5ty6t",
+            "parent_descs": [
+              "wpkh([471ee604/84h/1h/0h]tpubDCqE9A1no7mkqF12WH3axsyWXy3dR1uM2pB4jbyM2py5tD47y2eEHhxNxPNXvFGPJzMJJGdAizNtdq7E1vyyBaiJMqv1kT8R71U8HHMb2xj/0/*)#vm5670mn"
+            ],
+            "safe": true,
+            "value": "10000000"
+          },
+          {
+            "txid": "4d4af0d41d66eb88cac6e31035f4d6242b9e89dbb23f2e0bb1a15898d451b910",
+            "vout": "0",
+            "address": "bcrt1qvu3hu3u5ywnq0ugxsenyxhwmc6d06hqcdlm84m",
+            "scriptPubKey": "001467237e479423a607f1068666435ddbc69afd5c18",
+            "amount": "0.01000000",
+            "confirmations": "6",
+            "spendable": true,
+            "solvable": true,
+            "desc": "wpkh([471ee604/84h/1h/0h/0/0]03e5fc8be3b1947e87e3db876479d99334986622e547dcee80d4bd42b43a746505)#7sl5ty6t",
+            "parent_descs": [
+              "wpkh([471ee604/84h/1h/0h]tpubDCqE9A1no7mkqF12WH3axsyWXy3dR1uM2pB4jbyM2py5tD47y2eEHhxNxPNXvFGPJzMJJGdAizNtdq7E1vyyBaiJMqv1kT8R71U8HHMb2xj/0/*)#vm5670mn"
+            ],
+            "safe": true,
+            "value": "1000000"
+          }
+        ]
+      },
+      {
+        "name": "bob",
+        "purpose": 86,
+        "address": "bcrt1p7p46ezldwqm8nh0yrg737haj6z7473ctq5xzj9znfd8tj6jatdqsw3d8gp",
+        "path": "m/86'/1'/0'/0/0",
+        "total": "0",
+        "utxos": []
+      },
+      {
+        "name": "carol",
+        "purpose": 84,
+        "address": "bcrt1qgkq0nv9hmlee49d5pekts5fvwnvsaznlqcjyq7",
+        "path": "m/84'/1'/0'/0/0",
+        "total": "12000000",
+        "utxos": [
+          {
+            "txid": "fd47c9f28e6ef851b34b150b7b348cf35463a7842884c717cc385d1c57e3443d",
+            "vout": "0",
+            "address": "bcrt1qgkq0nv9hmlee49d5pekts5fvwnvsaznlqcjyq7",
+            "scriptPubKey": "00144580f9b0b7dff39a95b40e6cb8512c74d90e8a7f",
+            "amount": "0.10000000",
+            "confirmations": "12",
+            "spendable": true,
+            "solvable": true,
+            "desc": "wpkh([74bed913/84h/1h/0h/0/0]0343926e76317a20b191953d02ac2f6743dc69ad3d51459b20ccc39ba96f2cebf5)#2x2q8ny6",
+            "parent_descs": [
+              "wpkh([74bed913/84h/1h/0h]tpubDCwXvipd7RNsnLQ8GiC9KLRtJEcx8vAUVGT9QHWriPrXG3zYzaKjZQeHaM2wtVAGQdWj9EQoWfvHfonxWfQ1mt44APjbWehtf3qV5e8DzVN/0/*)#kc9kpd3d"
+            ],
+            "safe": true,
+            "value": "10000000"
+          },
+          {
+            "txid": "8165f9f5f291fc00d3316636a7f18780543b9dfa36a68346128a7b05eebb9612",
+            "vout": "0",
+            "address": "bcrt1qgkq0nv9hmlee49d5pekts5fvwnvsaznlqcjyq7",
+            "scriptPubKey": "00144580f9b0b7dff39a95b40e6cb8512c74d90e8a7f",
+            "amount": "0.02000000",
+            "confirmations": "6",
+            "spendable": true,
+            "solvable": true,
+            "desc": "wpkh([74bed913/84h/1h/0h/0/0]0343926e76317a20b191953d02ac2f6743dc69ad3d51459b20ccc39ba96f2cebf5)#2x2q8ny6",
+            "parent_descs": [
+              "wpkh([74bed913/84h/1h/0h]tpubDCwXvipd7RNsnLQ8GiC9KLRtJEcx8vAUVGT9QHWriPrXG3zYzaKjZQeHaM2wtVAGQdWj9EQoWfvHfonxWfQ1mt44APjbWehtf3qV5e8DzVN/0/*)#kc9kpd3d"
+            ],
+            "safe": true,
+            "value": "2000000"
+          }
+        ]
+      },
+      {
+        "name": "carol",
+        "purpose": 86,
+        "address": "bcrt1p6ycwjrtpn78g4ecq5qdj3qepdmnp9ne0gmr5hf9gzhyzsyljuz8qe26w6s",
+        "path": "m/86'/1'/0'/0/0",
+        "total": "0",
+        "utxos": []
+      },
+      {
+        "name": "dana",
+        "purpose": 84,
+        "address": "bcrt1qzy2n86jz53ejcw8v4x3nx660v67x0udmqpuvlh",
+        "path": "m/84'/1'/0'/0/0",
+        "total": "0",
+        "utxos": []
+      },
+      {
+        "name": "dana",
+        "purpose": 86,
+        "address": "bcrt1pm04khnpt8pj2rmvc5tw9h33dgg0e0gf9q3xf7s0pa3ntqnjj3g9qstkzqa",
+        "path": "m/86'/1'/0'/0/0",
+        "total": "0",
+        "utxos": []
+      }
+    ]
+  },
+  "syntheticMicroUsdRates": {
+    "ETH": "2000000000",
+    "POL": "500000",
+    "BNB": "300000000",
+    "HYPE": "10000000",
+    "SOL": "100000000",
+    "BTC": "40000000000",
+    "dUSDC": "1000000",
+    "dDAI": "1000000",
+    "EWLT": "100000",
+    "sEWLT": "100000"
+  },
+  "assertions": {
+    "state": "passed",
+    "evidence": [
+      "artifacts/phase-04/seed-assertions.json",
+      "artifacts/phase-03/evm-assertions.json",
+      "artifacts/phase-04/index-evm.json",
+      "artifacts/phase-04/index-solana.json",
+      "artifacts/phase-04/index-bitcoin.json"
+    ]
+  }
+}

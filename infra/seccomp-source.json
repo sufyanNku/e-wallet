@@ -1,0 +1,11 @@
+{
+  "source": "https://raw.githubusercontent.com/moby/profiles/f862455628f78f84c937e967e4a03902fb1dee11/seccomp/default.json",
+  "commit": "f862455628f78f84c937e967e4a03902fb1dee11",
+  "addedSyscalls": [
+    "io_uring_setup",
+    "io_uring_register",
+    "io_uring_enter"
+  ],
+  "scope": "Solana local validator container only",
+  "sha256": "82ca677b573009ae5a6c30d50f5675bb44066fa63b043d75806599b0f5c1fa24"
+}

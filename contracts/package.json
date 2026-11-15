@@ -1,0 +1,21 @@
+{
+  "name": "@ewallet/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "compile": "hardhat build",
+    "test": "hardhat test mocha"
+  },
+  "devDependencies": {
+    "hardhat": "3.22.0",
+    "@nomicfoundation/hardhat-toolbox-mocha-ethers": "4.0.0",
+    "ethers": "6.17.0",
+    "solc": "0.8.38",
+    "@openzeppelin/contracts": "5.4.0",
+    "chai": "6.3.0",
+    "mocha": "12.0.3",
+    "@types/mocha": "10.0.10",
+    "@types/chai": "5.2.3"
+  }
+}

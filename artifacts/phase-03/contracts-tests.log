@@ -1,0 +1,36 @@
+
+> e-wallet@0.1.0 contracts:test /home/sufyan/Desktop/Dev/E-wallet
+> pnpm --filter @ewallet/contracts test
+
+
+> @ewallet/contracts@0.1.0 test /home/sufyan/Desktop/Dev/E-wallet/contracts
+> hardhat test mocha
+
+No contracts to compile
+
+Running Mocha tests
+
+
+  Controlled assets and faucet
+    ✔ enforces token roles, caps, decimals and exact single-unit transfers (92ms)
+    ✔ checks mint ownership, 1155 quantities and receiver rejection
+    ✔ refuses unsupported tokens, duplicate cooldown claims and unauthorized configuration
+
+  Savings principal
+    ✔ locks until chain time, permits owner only, and prevents double withdrawal
+    ✔ rejects zero, unsupported durations/tokens and fee-on-transfer principal
+
+  Two-of-three wallet
+    ✔ requires distinct owners, two current approvals, and prevents duplicate execution
+    ✔ rolls failed external calls back and cannot reenter execution
+
+  Integer constant-product swap
+    ✔ supports mismatched decimals, rounds down, enforces min output/deadline and preserves reserves
+
+  Local-only bridge simulation
+    ✔ binds lock IDs to the destination and rejects replay/unauthorized mint (48ms)
+
+
+  9 passing (323ms)
+
+
