@@ -69,6 +69,30 @@ const api = new NativeApi("http://127.0.0.1:8787", transport),
         : "bitcoin:regtest";
 let snapshot: string | undefined;
 const proofs: Array<Record<string, unknown>> = [];
+async function settled(id: string) {
+  const deadline = Date.now() + 45000;
+  while (Date.now() < deadline) {
+    await wallet.refresh();
+    const record = wallet.getSnapshot().activity.find((item) => item.id === id);
+    if (record && ["confirmed", "finalized"].includes(record.state)) {
+      // Portfolio reads precede receipt reads in refresh. Read once more after
+      // confirmation so balance assertions use the settled ledger as well.
+      await wallet.refresh();
+      return wallet.getSnapshot().activity.find((item) => item.id === id)!;
+    }
+    if (
+      record &&
+      ["reverted", "expired", "rejected", "replaced"].includes(record.state)
+    )
+      throw new Error(
+        "Native transaction did not settle successfully: " + record.state,
+      );
+    await new Promise((resolve) => setTimeout(resolve, 250));
+  }
+  throw new Error(
+    "Native transaction confirmation timed out; no success was assumed.",
+  );
+}
 try {
   if (family === "evm") snapshot = String(await evmControl("evm_snapshot"));
   await wallet.open();
@@ -136,10 +160,14 @@ try {
         6,
         await bitcoinRpc("getnewaddress", [], "ewallet-miner"),
       ]);
-    await wallet.refresh();
-    const current = wallet
+    const current = await settled(record.id);
+    const balanceAfter = wallet
       .getSnapshot()
-      .activity.find((t) => t.id === record.id)!;
+      .balances.find((b) => b.asset.standard === "native")?.raw;
+    if (!balanceAfter || BigInt(balanceAfter) >= BigInt(balance.raw))
+      throw new Error(
+        "Native payment did not produce the expected sender balance decrease.",
+      );
     proofs.push({
       type,
       networkId: network,
@@ -148,9 +176,7 @@ try {
       signedJournalBeforeBroadcast: true,
       state: current.state,
       balanceBefore: balance.raw,
-      balanceAfter: wallet
-        .getSnapshot()
-        .balances.find((b) => b.asset.standard === "native")?.raw,
+      balanceAfter,
       immutableReview: true,
     });
     await (async () => {
@@ -206,7 +232,7 @@ try {
       const result = await wallet.approve(operation.id, operation.digest);
       if (result.state !== "submitted")
         throw new Error("Native " + item.label + " submission failed");
-      await wallet.refresh();
+      await settled(result.id);
       proofs.push({
         type: item.label,
         networkId: network,
@@ -219,8 +245,8 @@ try {
       let quote = await wallet.quote("1000000"),
         operation = await wallet.prepareSwap("1000000");
       if (operation.intent.kind === "approve") {
-        await wallet.approve(operation.id, operation.digest);
-        await wallet.refresh();
+        const allowance = await wallet.approve(operation.id, operation.digest);
+        await settled(allowance.id);
         quote = await wallet.quote("1000000");
         operation = await wallet.prepareSwap("1000000");
       }
@@ -233,7 +259,7 @@ try {
       const result = await wallet.approve(operation.id, operation.digest);
       if (result.state !== "submitted")
         throw new Error("Native swap submission failed");
-      await wallet.refresh();
+      await settled(result.id);
       const after =
         wallet
           .getSnapshot()

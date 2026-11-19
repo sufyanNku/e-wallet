@@ -426,8 +426,14 @@ test("bridge UI locks source tokens and the local relayer mints exactly one cano
     }),
     snapshotB = await destination.send("evm_snapshot", []);
   let previousJournal: string | null = null;
+  let previousStatus: Buffer | null = null;
   try {
     previousJournal = await readFile(".local/relayer-journal.json", "utf8");
+  } catch (e) {
+    if ((e as NodeJS.ErrnoException).code !== "ENOENT") throw e;
+  }
+  try {
+    previousStatus = await readFile("artifacts/seed/bridge-status.json");
   } catch (e) {
     if ((e as NodeJS.ErrnoException).code !== "ENOENT") throw e;
   }
@@ -488,7 +494,7 @@ test("bridge UI locks source tokens and the local relayer mints exactly one cano
           realDestinationMint: true,
           message: minted[0],
           repeatRelayDeduplicated: true,
-          cleanup: "Both EVM snapshots restored; relayer journal restored",
+          cleanup: "Both EVM snapshots restored; relayer journal and status artifact restored",
         },
         null,
         2,
@@ -501,6 +507,12 @@ test("bridge UI locks source tokens and the local relayer mints exactly one cano
       await writeFile(".local/relayer-journal.json", previousJournal);
     else
       await unlink(".local/relayer-journal.json").catch((e) => {
+        if (e.code !== "ENOENT") throw e;
+      });
+    if (previousStatus !== null)
+      await writeFile("artifacts/seed/bridge-status.json", previousStatus);
+    else
+      await unlink("artifacts/seed/bridge-status.json").catch((e) => {
         if (e.code !== "ENOENT") throw e;
       });
   }

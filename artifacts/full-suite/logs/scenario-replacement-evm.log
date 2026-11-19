@@ -1,0 +1,4 @@
+> e-wallet@0.1.0 scenario /home/sufyan/Desktop/Dev/E-wallet
+> tsx scripts/scenario.ts -- replacement-evm
+
+replacement-evm: bounded scenario verified; node restored.

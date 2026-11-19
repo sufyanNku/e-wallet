@@ -1,5 +1,5 @@
 {
-  "observedAt": "2026-11-19T08:36:43.398Z",
+  "observedAt": "2026-11-19T11:00:28.415Z",
   "source": "Native wallet core through real backend handlers and local blockchain nodes",
   "platformBoundary": "Node-hosted native core; device Keychain/Hermes tests recorded separately",
   "fixtureOnly": true,
@@ -10,12 +10,24 @@
       "type": "native",
       "networkId": "solana:local",
       "address": "DMWBhx8jdZYJcToewhXkMk9awBjZfW7W6H6BM6P2rTnB",
-      "hash": "4d66YFGUBH5UVNDRsmXeMGDai38FERXVsHR6MDpcVAMEWScHJ8i6Cvt5DMZ19dwGqXAnj6KG7kh29fJxtiMz7WUS",
+      "hash": "4c9zngyBFqTs1sqHkifrouJKtPjtBoYsxcwPXLFqtwSMtLDecUek2YnPcgCnVXPtAm9bsNJGWXvNHzo9oiRtMgEE",
       "signedJournalBeforeBroadcast": true,
       "state": "confirmed",
       "balanceBefore": "98995896440",
-      "balanceAfter": "98995896440",
+      "balanceAfter": "98994891440",
       "immutableReview": true
+    },
+    {
+      "type": "token",
+      "networkId": "solana:local",
+      "hash": "3UDDwhigiCZYxZDM2gwpfbwzqjUEF8DbjJs5LUcJ25q1v9dpKUeq5nr9xfq5TRCV9243yK7wrrpi9LSWvyVbg6U5",
+      "state": "confirmed"
+    },
+    {
+      "type": "collectible",
+      "networkId": "solana:local",
+      "hash": "34ciy1wKBChyJv8Pn4YkwmxcQmUgjU7jwyD39zve7cgpeDeRKmBPh1YdCwgXTaiVUQ3Et6T1AHM7VbeBtPyCoa3E",
+      "state": "confirmed"
     }
   ],
   "lockedSigningRejected": true,

@@ -1,0 +1,29 @@
+{
+  "source": "node",
+  "networkId": "bitcoin:regtest",
+  "genesisHash": "0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206",
+  "fundingEpoch": "3835a5fe9a2b97521041ebd5b5c5c0021ccccf98b8364322ebba34e91fc20b4b",
+  "isolatedNode": true,
+  "watchWalletPrivateKeysEnabled": false,
+  "signingBoundary": "Browser Dedicated Worker",
+  "proofs": [
+    {
+      "purpose": 84,
+      "txid": "76992033f7d2c1a9fbe57065273cbe75b17c0956b9409acc8e090cee5a29c3d9",
+      "vsize": "141",
+      "recipientDelta": "1000000",
+      "internalChange": true,
+      "confirmedBlocks": 6,
+      "witnessElements": 2
+    },
+    {
+      "purpose": 86,
+      "txid": "4742f827c35e983c78e824d046189b12823e4194be4273995cb58ea0885b1006",
+      "vsize": "142",
+      "recipientDelta": "1000000",
+      "internalChange": true,
+      "confirmedBlocks": 6,
+      "witnessElements": 1
+    }
+  ]
+}

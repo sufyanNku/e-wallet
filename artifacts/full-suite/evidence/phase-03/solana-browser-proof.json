@@ -1,0 +1,46 @@
+{
+  "source": "node",
+  "networkId": "solana:local",
+  "genesisHash": "J4AAvyqKmfZTdFSNHibdS71GruyJYK9RU6cpd1EM3tnY",
+  "isolatedValidator": true,
+  "nativeRecipientDelta": "1000000",
+  "splRecipientDelta": "1",
+  "token2022RecipientDelta": "1",
+  "nftOwner": "CDmZ9h44ygNNv4VufV3oAPN569i5EGzo56SrETXfsJ8q",
+  "delegateRevoked": true,
+  "frozenAndUnsupportedToken2022Blocked": true,
+  "receipts": [
+    {
+      "signature": "5ES3xvQjtP16TTqyfDHNXahd3X9AgoZXXkjur9zL2zhoGRdVXJ5Y7fbfjFUtoGVkYroTuVomM66rUXayVBkfWxmL",
+      "slot": "112",
+      "fee": "5000",
+      "err": null
+    },
+    {
+      "signature": "2xDUiZQ3uxT5DhKdHm3DDqpc3Ej9xEgYugSg2AmaEjMdzJACfT4y8RPMa9FYbu5AgfTefyzKKrbRbZD9p9hEqzPx",
+      "slot": "110",
+      "fee": "5000",
+      "err": null
+    },
+    {
+      "signature": "4eSWjrhCm3toBdN4FvvBX2Q4cSCNUUBVqpSyVNonwW5eMonnVHjksET2A6tBgyPGwZfamwxQ3NGBDq6ubX4A7WTx",
+      "slot": "108",
+      "fee": "5000",
+      "err": null
+    },
+    {
+      "signature": "mKCVDJBYzJTuiW25cY3QP2Zqqb9WxnNogoPR34f2JXRcqVPauMtVHfYR6HMUzrDP751pe2JjXG9WrHT6ExQ66un",
+      "slot": "105",
+      "fee": "5000",
+      "err": null
+    },
+    {
+      "signature": "4HLN6GwqZm9RgHe5315XejHd98Ugxi5RuPtwaZETV2bVZ2oDLwHuH8dzTA3DjinaBQhyWxbWdDNmQSEJvh3YYbHM",
+      "slot": "103",
+      "fee": "5000",
+      "err": null
+    }
+  ],
+  "signingBoundary": "Browser Dedicated Worker; Kit 8 messages",
+  "recording": "Screenshots, traces, videos and page snapshots disabled"
+}

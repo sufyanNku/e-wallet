@@ -1,0 +1,155 @@
+{
+  "config": {
+    "argv": [
+      "/home/sufyan/Desktop/Dev/E-wallet/.local/toolchain/node_modules/node/bin/node",
+      "/home/sufyan/Desktop/Dev/E-wallet/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "playwright.dapp-solana.config.ts"
+    ],
+    "configFile": "/home/sufyan/Desktop/Dev/E-wallet/playwright.dapp-solana.config.ts",
+    "rootDir": "/home/sufyan/Desktop/Dev/E-wallet/tests/browser-dapp",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/sufyan/Desktop/Dev/E-wallet/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/sufyan/Desktop/Dev/E-wallet/tests/browser-dapp",
+        "testIgnore": [],
+        "testMatch": [
+          "solana.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/sufyan/Desktop/Dev/E-wallet/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/home/sufyan/Desktop/Dev/E-wallet/tests/browser-dapp",
+        "snapshotDir": "/home/sufyan/Desktop/Dev/E-wallet/tests/browser-dapp",
+        "testIgnore": [],
+        "testMatch": "solana.spec.ts",
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://127.0.0.1:8787",
+          "headless": true,
+          "launchOptions": {
+            "executablePath": "/opt/google/chrome/chrome",
+            "args": [
+              "--no-sandbox"
+            ]
+          },
+          "screenshot": "off",
+          "trace": "off",
+          "video": "off"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "artifacts/phase-04/dapp-solana-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "solana.spec.ts",
+      "file": "solana.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Wallet Standard connects through a real popup, signs exact bytes and sends a decoded Solana transfer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12587,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T10:53:59.888Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "48e8d7967fb5cf88a270-9d1c0a547e5fc309bd1e",
+          "file": "solana.spec.ts",
+          "line": 27,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-19T10:53:55.422Z",
+    "duration": 17561.684,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

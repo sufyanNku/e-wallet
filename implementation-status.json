@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-19T10:24:15.223783+00:00",
+  "updatedAt": "2026-11-19T11:08:39.080932+00:00",
   "phases": [
     {
       "phase": "01",
@@ -2983,7 +2983,12 @@
       "services/backend/src/runtime-config.ts"
     ],
     "deviceInstallationExecuted": false,
-    "scope": "Android USB/APK and iOS Xcode direct install; development versus standalone builds and actual completion limits."
+    "scope": "Android USB/APK and iOS Xcode direct install; development versus standalone builds and actual completion limits.",
+    "primaryGuidePath": "USER_AND_TESTING_GUIDE.md",
+    "featureGroups": {
+      "web": 28,
+      "native": 16
+    }
   },
   "referenceAppClarity": {
     "state": "passed",
@@ -3059,5 +3064,39 @@
     "visibleLabels": "Neutral wallet/account/credit wording",
     "backendNetworkAndReleaseGuards": "unchanged",
     "realFundsEnabled": false
+  },
+  "fullApplicationRegression": {
+    "state": "passed",
+    "reportPath": "artifacts/full-suite/report.json",
+    "command": "pnpm test:all:local",
+    "completedAt": "2026-11-19T11:02:46.860Z",
+    "passedChecks": 40,
+    "failedChecks": 0,
+    "unitTests": 76,
+    "contractTests": 9,
+    "distinctBrowserScenarios": 21,
+    "nativeChainFamilies": [
+      "evm",
+      "solana",
+      "bitcoin"
+    ],
+    "androidBuild": "passed_debug_apk",
+    "iosHermesBundle": "passed",
+    "physicalDeviceAcceptance": false,
+    "iosNativeBinaryVerified": false,
+    "realFundsEnabled": false,
+    "guidePath": "USER_AND_TESTING_GUIDE.md",
+    "resolvedIssues": [
+      {
+        "kind": "test-harness",
+        "file": "scripts/check-native-wallet.ts",
+        "resolution": "Wait for observed confirmation and refresh settled balances before preparing dependent native transactions; assert sender balance decreases."
+      },
+      {
+        "kind": "test-isolation",
+        "file": "tests/browser-chains/evm.spec.ts",
+        "resolution": "Restore the previous bridge status artifact after the isolated snapshot test so reverted mints are not left in the canonical status file."
+      }
+    ]
   }
 }

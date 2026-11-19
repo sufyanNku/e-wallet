@@ -1,0 +1,5 @@
+> e-wallet@0.1.0 seed:assert /home/sufyan/Desktop/Dev/E-wallet
+> tsx scripts/assert-seed.ts
+
+56/56 actual EVM ledger assertions passed.
+51 Solana/Bitcoin assertions passed, plus EVM assertions.

@@ -5,7 +5,7 @@
   "destinationEpoch": "a0ea07ee79c5b7aeed99f4f8242eda2002d6ef8dc028c87498f64360f8f18f6a",
   "sourceContract": "0x349A7032EF84086483942E1bA4f3bFf86d4d1658",
   "destinationContract": "0xC1e3A89E5ac56A469b28B140Bd29200cbe173730",
-  "observedAt": "2026-11-19T09:37:29.765Z",
+  "observedAt": "2026-11-19T11:06:34.551Z",
   "source": "node",
   "messages": [
     {
@@ -18,7 +18,7 @@
       "sourceBlockHash": "0x9cf134040d35070d9dd497f5f9e8d832ef2800cf63ca60a11bb5a2f063c59ec9",
       "destinationHash": "0xad147e46e4809081a7acf6ea2468308b308be735de9cdac89bc05faad623e3f6",
       "state": "minted",
-      "firstObservedAt": "2026-11-19T09:35:56.683Z"
+      "firstObservedAt": "2026-11-19T11:06:34.274Z"
     }
   ]
 }

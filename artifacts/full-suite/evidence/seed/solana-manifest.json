@@ -1,0 +1,496 @@
+{
+  "schemaVersion": 1,
+  "seedVersion": 1,
+  "networkId": "solana:local",
+  "genesisHash": "J8hef5VDj3VYwjM8hTpzinpcMJfdjm23xd4P7cosSVZA",
+  "observedAt": "2026-11-19T11:00:59.546Z",
+  "metadataProgram": {
+    "schemaVersion": 1,
+    "programId": "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s",
+    "repository": "https://github.com/metaplex-foundation/mpl-token-metadata.git",
+    "commit": "7ce760f9e010cb9819ffd7dd86986a44691bd1f8",
+    "sourceVersion": "1.14.0",
+    "cargoBuildSbf": "4.5.0",
+    "platformTools": "v1.57",
+    "rustc": "1.95.0",
+    "architecture": "v1",
+    "lockfileSha256": "e1b79757b7b95c35bf5d27857a2bb4515dc37990cf5837119c7ba0f9f87408fb",
+    "programSha256": "b33deaa180cafda1b70e46347b27bcb3c645f30bf6934f490db67ab7087da514",
+    "rustcSha256": "f7a4ec1b62e27fa990de4c9bd3c38eb7a5ba0a4f41b2e0929a0631c68c9c6e78",
+    "dependencyChanges": {
+      "ahash@0.7.6": "0.7.8",
+      "ahash@0.8.3": "0.8.11",
+      "wasm-bindgen@0.2.87": "0.2.100"
+    },
+    "reason": "Pinned dependency-only lockfile updates required by Rust 1.95; program source unchanged. Original source lockfile fails due to removed stdsimd feature and old wasm-bindgen compiler guard.",
+    "platformToolsUrl": "https://github.com/anza-xyz/platform-tools/releases/download/v1.57/platform-tools-linux-x86_64.tar.bz2",
+    "platformToolsSha256": "b0f7af104adf726fff2a6a09ea2eb2f2d2965c92295f4d7388c08d140e0c2b00",
+    "rustupInitSha256": "b1c8cb14e30889e7e2999e6b69e62d9e9b9ffc0f4df8180564d306d9680e6c55",
+    "loadedExecutable": true,
+    "binaryHash": "b33deaa180cafda1b70e46347b27bcb3c645f30bf6934f490db67ab7087da514"
+  },
+  "identities": {
+    "alice": {
+      "id": "fixture-alice:solana:m/44'/501'/0'/0'",
+      "rootWalletId": "fixture-alice",
+      "family": "solana",
+      "address": "DMWBhx8jdZYJcToewhXkMk9awBjZfW7W6H6BM6P2rTnB",
+      "path": "m/44'/501'/0'/0'",
+      "index": 0,
+      "name": "Account 1"
+    },
+    "bob": {
+      "id": "fixture-bob:solana:m/44'/501'/0'/0'",
+      "rootWalletId": "fixture-bob",
+      "family": "solana",
+      "address": "CDmZ9h44ygNNv4VufV3oAPN569i5EGzo56SrETXfsJ8q",
+      "path": "m/44'/501'/0'/0'",
+      "index": 0,
+      "name": "Account 1"
+    },
+    "carol": {
+      "id": "fixture-carol:solana:m/44'/501'/0'/0'",
+      "rootWalletId": "fixture-carol",
+      "family": "solana",
+      "address": "3gqSFposVWMWDpCDjERu7cgTST3bSwcvPsbyqqbYmwFA",
+      "path": "m/44'/501'/0'/0'",
+      "index": 0,
+      "name": "Account 1"
+    },
+    "dana": {
+      "id": "fixture-dana:solana:m/44'/501'/0'/0'",
+      "rootWalletId": "fixture-dana",
+      "family": "solana",
+      "address": "DCe1gftiez28mZz3XAznkBvLMJ7TkDKnwaxdVJeYE3CG",
+      "path": "m/44'/501'/0'/0'",
+      "index": 0,
+      "name": "Account 1"
+    }
+  },
+  "mints": {
+    "dUSDC": {
+      "address": "FbGz4WNFE5r8jvAUhDAt5n5unh4WABBi9qZJFRtaW4he",
+      "decimals": 6,
+      "program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "name": "Demo USD Coin",
+      "symbol": "dUSDC"
+    },
+    "sEWLT": {
+      "address": "3e1aWqgLHQJu8jTvqdoShY9NezFXUmYby8UjVP79JCwU",
+      "decimals": 9,
+      "program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "name": "Solana e-wallet Demo Token",
+      "symbol": "sEWLT"
+    },
+    "token2022": {
+      "address": "Ds7paCc68je7U79sVsbzjhTDhyjmFUdJ2Peh7pPBkQgy",
+      "decimals": 6,
+      "program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+      "name": "Demo Extension-free Token-2022",
+      "symbol": "d2022"
+    },
+    "unsupported": {
+      "address": "AyMYU7L89j1SWvH5qRKqTPc6vTHN8vtptaz88npG4BD2",
+      "decimals": 6,
+      "program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+      "name": "Demo Nontransferable Token",
+      "symbol": "dNO"
+    },
+    "frozen": {
+      "address": "B7DnPpNBbPbJ9Y9tCkRiJ6Vv84oVvmjTR4n2U2vQ1Yq7",
+      "decimals": 6,
+      "program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "name": "Demo Frozen Token",
+      "symbol": "dICE"
+    },
+    "nft1": {
+      "address": "B5BXZUNnuAwy1v6fxccQbL2QbvrdLunYiUiCDZQiFnRL",
+      "decimals": 0,
+      "program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "name": "Campus Pass #1",
+      "symbol": "dCAMP"
+    },
+    "nft2": {
+      "address": "FGToodZvx8VWGNVAV2UKsNNoq7vJEfyFuordhugWmhBL",
+      "decimals": 0,
+      "program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "name": "Campus Pass #2",
+      "symbol": "dCAMP"
+    }
+  },
+  "stages": {
+    "funding:deployer": {
+      "signature": "3KEQ28kMp9ztmChvHqyL3fwRSgtz68zxpszUyZnyMdhN8gWNtDEA8kQ3ZQkit4uH9i4ospnUXTHLdwQPTfwTjJF6",
+      "lastValidBlockHeight": "0",
+      "state": "confirmed",
+      "fee": "0"
+    },
+    "opening:SOL:alice": {
+      "signature": "4ubmncvJJBnu6ejBATGy43RCf8FKY3rXPRWDmo5sJGqMGG739onZJHJQZisfuFtxgt46YANHwvFeKR5mFTB4AySm",
+      "lastValidBlockHeight": "693",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "opening:SOL:bob": {
+      "signature": "wwmCVq1MTLRaZ3DVt1KsBEBehNNjbMotJGPxggzh9QCUyKCujnhhZKTobHCWVkGEGeF3NPDz8mnihDw9aWNFu4g",
+      "lastValidBlockHeight": "694",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "opening:SOL:carol": {
+      "signature": "65HyA5A6gj2vdNe7xTMqTu4mBbPn76xxcM5im5ZweLrF5ua8Zm5HwTnqbNfStYpNJfyAjZpo9a8AWjPyS2dig5eg",
+      "lastValidBlockHeight": "695",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "mint:dUSDC": {
+      "signature": "2wL9syCzztwwLviEeopWBnsHJjMog4VDjhEG7axBu6yUD4wvw7Gy7k5BL8LxuzFAPiAraWPpAKsCRwkCfDS2PpUj",
+      "lastValidBlockHeight": "696",
+      "state": "confirmed",
+      "fee": "10000",
+      "historyAvailability": "pruned"
+    },
+    "mint:sEWLT": {
+      "signature": "57eJJ5ND9q1ot9K9ZQRyPFJTred8q2iXpD7kMCBsnwQPWqQnky8zewh5msjPa49YbJ3EChMfBT9E95tqyNR8qdbT",
+      "lastValidBlockHeight": "697",
+      "state": "confirmed",
+      "fee": "10000",
+      "historyAvailability": "pruned"
+    },
+    "mint:token2022": {
+      "signature": "4EdRWFP7iyNcfAmp1VxF1xB4GEB9YMWXAoButLVsVW4XAcBC6cwdECw1izXYy2G143x9MiHVFyrUcPR7GJJpdmug",
+      "lastValidBlockHeight": "698",
+      "state": "confirmed",
+      "fee": "10000",
+      "historyAvailability": "pruned"
+    },
+    "mint:unsupported": {
+      "signature": "3hWEpi4cz2tdstBJAj5LC4qkC4EP9wdcNNjwiunCD4C8yJBfwABJjqxAN76b5W8RhsVBxhT2mmpEvzkjAbDwZJbF",
+      "lastValidBlockHeight": "699",
+      "state": "confirmed",
+      "fee": "10000",
+      "historyAvailability": "pruned"
+    },
+    "mint:frozen": {
+      "signature": "3codX77RwJG7QNU1MeDP3YyUSmUyTRobvknQAh6haWeQo9VFyh95b3oET35rMTD9F3obnXzKZKBjNxAA5pNHsCbV",
+      "lastValidBlockHeight": "700",
+      "state": "confirmed",
+      "fee": "10000",
+      "historyAvailability": "pruned"
+    },
+    "mint:nft1": {
+      "signature": "5433gF2bpwSdqMhj6gNm2LpCdrff4JwqAPz9kBDpREpy41U4Sn6cfMMsM8fV8mNQZEk2xq3nfj4R4SDac73LYPp8",
+      "lastValidBlockHeight": "701",
+      "state": "confirmed",
+      "fee": "10000",
+      "historyAvailability": "pruned"
+    },
+    "mint:nft2": {
+      "signature": "52i2vHicEZRTs7gcKXBbVbqfTj5YUahF3499j5mx6hV2Dp9X2Qt1umY2hbN2MTUh5vjJH5Xj4PvzJCLFLQp859hn",
+      "lastValidBlockHeight": "702",
+      "state": "confirmed",
+      "fee": "10000",
+      "historyAvailability": "pruned"
+    },
+    "opening:dUSDC:alice": {
+      "signature": "3U8EJhcBGr5BHnhBaqLRSkRFVJ9mbZKU9rdfRc2fEVWdtdh4uzt8Ddf3NX5W5X3qG26jBkhtbRAu9WwrVFZVp2BA",
+      "lastValidBlockHeight": "703",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "opening:dUSDC:bob": {
+      "signature": "2o3USyE3X27JzNwrL24xtPUjYAEGCvu1WPB4S2QFgG4fqQ5NEJHuvdH34TzRPLbmug83cQT4rbzk4iZcaQ48xD6N",
+      "lastValidBlockHeight": "704",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "opening:dUSDC:carol": {
+      "signature": "jHSfLTpHNpV6nuUafpXyCRLeoCDWzppZ1oGxyFQBC2e9C7WjU8icD7KFGS9ktFzYsDz2T7dUQhtnKQsSk53PKrG",
+      "lastValidBlockHeight": "705",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "opening:sEWLT:alice": {
+      "signature": "5ojwAdmkfRL2kRddrb7wp4wKM1VfxgYpjdCZx1MySHsiSkDqySYosT5cFuFcadtp6jzeBR4fEkV8hKj3k3sq4Cfa",
+      "lastValidBlockHeight": "706",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "opening:token2022:alice": {
+      "signature": "2EEwWTMU7ViYSrhSUqHEZo1Yt5Wn4pGKmDCDXycSyDEnzpjjiH3ojozD8pj5AnudbJTQkTF4gNL3Qq5zM5Zzx3Re",
+      "lastValidBlockHeight": "707",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "opening:unsupported:alice": {
+      "signature": "3GLVowR6DMsjaLPfm43iG9gNi7zZsRBPn7Pv6vpFhpdXJhHvBxeksKueMQQDcdsxhsURefEiRfXectBTu251Efyq",
+      "lastValidBlockHeight": "708",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "opening:frozen:alice": {
+      "signature": "3e4Kx6AnGyDM1B3d1o5xK7kuW51fGB4FosAsWABzxH9nFnvyncghg4WmfThnWur7nzxc6MeH4zFyjWKbiovRHKZS",
+      "lastValidBlockHeight": "709",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "opening:nft1:alice": {
+      "signature": "3g2N4C45wFEpYWuBzjodFJW2haGH7Y3BM21JxRdZ8LaC2WdU6gzJVAesSfteVZg2qn9Un8sFr4EJjPduwRdFWnkE",
+      "lastValidBlockHeight": "710",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "opening:nft2:bob": {
+      "signature": "5hsHRBf6KJYu4FW6ee8V1vsVKzDsbfwV13qqY8eyZjDQRfArp4MpQFgjX2D98exFxKeZN8PsSces7nbAV5nGMkX6",
+      "lastValidBlockHeight": "711",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "metadata:dUSDC": {
+      "signature": "2GUThm1MzAiNFAqWRsSjzqqVQ3vHzsyw7sVxbtnLwVcc6v8NJffmKkkxp5XVUcFFy64C5YFRdPv3JMAEqor4DeH3",
+      "lastValidBlockHeight": "712",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "revoke-mint:dUSDC": {
+      "signature": "3eTpEoJq17nk6QLy3vSJD5UmCFzSLnrbjELALuiycJC4EPZAQjJLypsTVangXupvd7wGk5WiB2Ei6j1vYfGaAmEH",
+      "lastValidBlockHeight": "713",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "metadata:sEWLT": {
+      "signature": "tf2WBrWqh3vPF3s4Fk1DrTmG6hb52yQ2h3iqkywBKh7UjQSdqBaStWhjk6nWdGGMByrBafZJQ28oiJ2HXgoVVE6",
+      "lastValidBlockHeight": "714",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "revoke-mint:sEWLT": {
+      "signature": "3KVotZvYNky1pSmbiBM6s6HZXpfDjhRRTLd5gUzHSCERKawnZdhaZkTvuvzJ9PDgixRXqtPvwz65FoktzUCWVo6d",
+      "lastValidBlockHeight": "715",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "metadata:frozen": {
+      "signature": "2pqRow6qTtHdXsxEcA77X3iQnYpW3ymBTvDXhuwg5jJZWAzdUAjSCvzsseLQuwKQocVQY9iYqUMD4C4eNbrsPDvj",
+      "lastValidBlockHeight": "716",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "revoke-mint:frozen": {
+      "signature": "64ixDVrN8Q33U28f2gAHDWszmT21wdDHUnwZ4pYhyYTzsqeynxPkwTNtT5QyNibpRTZVxqueZz2pRcwq1t2NrDp",
+      "lastValidBlockHeight": "717",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "metadata:nft1": {
+      "signature": "2Q8G6RyPkaAmatPQuYxRLTGBC85vkEphAHXUDTq8eKxkihsGiJbqXqeAiXt1SZpovH9bwJopSN4AAfVbyi1vSka4",
+      "lastValidBlockHeight": "718",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "edition:nft1": {
+      "signature": "4xz4BzdC6QG6Qi8B8nEQthEgWLnFLWJmx1DTWY36C14GW9qYrvgDMb3MCQcVcYD2MFEi3gZUnKpnvuNjqmsaGBkx",
+      "lastValidBlockHeight": "719",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "metadata:nft2": {
+      "signature": "2A1xWxabcxEzKS7u1NDe3w2uH4RiExTqJhYAvmi2wVXwv6JhUma21JGQ51VZ1f8JwFfn5BX9G4vZU1dA12v3tewS",
+      "lastValidBlockHeight": "720",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "edition:nft2": {
+      "signature": "4MwWmioHk7t36HsCbq7DpajrqF6GNMMTVJ8hx3PFedMHBKqXnep49nrtQ8bLkahPG5aEQKhPzsWsgiX8bGYhLmrY",
+      "lastValidBlockHeight": "721",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "delegate:alice": {
+      "signature": "3yRTRGtkePjf1kxLCXum84gPX2CDT9wzcjz5bSKkgL8hCzS4Fk44vtXwHbbpdp6rG8DrxpDrVcQSsY4tr5mETvtj",
+      "lastValidBlockHeight": "722",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "freeze:alice": {
+      "signature": "4tirhzQTwK13mo3iTCiqeREYa1CwwEeokwPhkdcweVzePWpiYWcVAXmwwJTFtrtDHd21WV8LeSFCJAJwsVz6nGc2",
+      "lastValidBlockHeight": "723",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "SEED-11-sEWLT": {
+      "signature": "4EjuSKwijLJda9mhY69vHn2bsvVLGsEh3mMojKfP7Bfph6gEN1bBUstYbZUAWSZtzeLd5XFEnmYhQugwCxtxqoVk",
+      "lastValidBlockHeight": "724",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "SEED-12-NFT": {
+      "signature": "2Datv8FeLABznVWgodzoo4etLHua3woMSdPycrL76pnHow4f9hT2AAWNStzahyA2j7bu5motrhbSLogctc8zwrVk",
+      "lastValidBlockHeight": "725",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "SEED-11-SOL": {
+      "signature": "4opapR8N6iHs5vxjWNha5i6eWnStvHjca3vcZ1z5aVmsXuphdAyZrHz99VmpgtJPkM3jtKZxffoNeeshwQr17CrM",
+      "lastValidBlockHeight": "20625",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "SEED-11-dUSDC": {
+      "signature": "3cF4SCwwHmGCehYsy1poF2EmK4kY8CWG5jpFeqiLCy8VRtouwjDchVvk8it99kv8onXW5B2mHHfgv8sr54dDS1cj",
+      "lastValidBlockHeight": "20626",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    },
+    "SEED-11-fresh-ATA": {
+      "signature": "Qoh4KB91X8xqSJRd6knqKLcYRhBCWSChVhFdumUYfjXhE95chHyXiZxLJ5vF1rMymZCUMQEEzWJaNLNfJahmd8d",
+      "lastValidBlockHeight": "20627",
+      "state": "confirmed",
+      "fee": "5000",
+      "historyAvailability": "pruned"
+    }
+  },
+  "assertions": [
+    {
+      "mint": "FbGz4WNFE5r8jvAUhDAt5n5unh4WABBi9qZJFRtaW4he",
+      "decimals": 6,
+      "supply": "20000000000",
+      "mintAuthority": null,
+      "state": "passed"
+    },
+    {
+      "mint": "3e1aWqgLHQJu8jTvqdoShY9NezFXUmYby8UjVP79JCwU",
+      "decimals": 9,
+      "supply": "2500000000000",
+      "mintAuthority": null,
+      "state": "passed"
+    },
+    {
+      "mint": "Ds7paCc68je7U79sVsbzjhTDhyjmFUdJ2Peh7pPBkQgy",
+      "decimals": 6,
+      "supply": "100000000",
+      "mintAuthority": "HvNCBEpEtBocgmPFYpaMgnT8aFmWXoEveKS36SkvssRD",
+      "state": "passed"
+    },
+    {
+      "mint": "AyMYU7L89j1SWvH5qRKqTPc6vTHN8vtptaz88npG4BD2",
+      "decimals": 6,
+      "supply": "1000000",
+      "mintAuthority": "HvNCBEpEtBocgmPFYpaMgnT8aFmWXoEveKS36SkvssRD",
+      "state": "passed"
+    },
+    {
+      "mint": "B7DnPpNBbPbJ9Y9tCkRiJ6Vv84oVvmjTR4n2U2vQ1Yq7",
+      "decimals": 6,
+      "supply": "1000000",
+      "mintAuthority": null,
+      "state": "passed"
+    },
+    {
+      "mint": "B5BXZUNnuAwy1v6fxccQbL2QbvrdLunYiUiCDZQiFnRL",
+      "decimals": 0,
+      "supply": "1",
+      "mintAuthority": "4gM8ZDqTksgcpQcFcFSwoWJ9pABBNwu43iQ78Rk95dFQ",
+      "state": "passed"
+    },
+    {
+      "mint": "FGToodZvx8VWGNVAV2UKsNNoq7vJEfyFuordhugWmhBL",
+      "decimals": 0,
+      "supply": "1",
+      "mintAuthority": "5BepP4zraW94v7ZPfFcFjTnkCiC3C7Vn6Xuxe2QJReQf",
+      "state": "passed"
+    }
+  ],
+  "freshRecipient": {
+    "address": "CVJ9rajAPeiZQa2zPDXhXqViacA9Nyk2M2VxwykZPvoW",
+    "path": "m/44'/501'/1'/0'",
+    "tokenAccount": "4Nw2ogYDWX2NPEsYqc1kcofsn3ittYEBN9vo1TdFchHy",
+    "amount": "1"
+  },
+  "finalBalances": [
+    {
+      "name": "alice",
+      "address": "DMWBhx8jdZYJcToewhXkMk9awBjZfW7W6H6BM6P2rTnB",
+      "sol": "98995896440",
+      "tokens": {
+        "dUSDC": "9987654321",
+        "sEWLT": "2450000000000",
+        "token2022": "100000000",
+        "unsupported": "1000000",
+        "frozen": "1000000",
+        "nft1": "1",
+        "nft2": "1"
+      }
+    },
+    {
+      "name": "bob",
+      "address": "CDmZ9h44ygNNv4VufV3oAPN569i5EGzo56SrETXfsJ8q",
+      "sol": "100997955720",
+      "tokens": {
+        "dUSDC": "5012345678",
+        "sEWLT": "0",
+        "token2022": "0",
+        "unsupported": "0",
+        "frozen": "0",
+        "nft1": "0",
+        "nft2": "0"
+      }
+    },
+    {
+      "name": "carol",
+      "address": "3gqSFposVWMWDpCDjERu7cgTST3bSwcvPsbyqqbYmwFA",
+      "sol": "100000000000",
+      "tokens": {
+        "dUSDC": "5000000000",
+        "sEWLT": "50000000000",
+        "token2022": "0",
+        "unsupported": "0",
+        "frozen": "0",
+        "nft1": "0",
+        "nft2": "0"
+      }
+    },
+    {
+      "name": "dana",
+      "address": "DCe1gftiez28mZz3XAznkBvLMJ7TkDKnwaxdVJeYE3CG",
+      "sol": "0",
+      "tokens": {
+        "dUSDC": "0",
+        "sEWLT": "0",
+        "token2022": "0",
+        "unsupported": "0",
+        "frozen": "0",
+        "nft1": "0",
+        "nft2": "0"
+      }
+    }
+  ]
+}

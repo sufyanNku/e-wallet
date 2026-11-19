@@ -1,0 +1,36 @@
+{
+  "sourceNetworkId": "eip155:31337",
+  "destinationNetworkId": "eip155:31338",
+  "sourceEpoch": "b463e53e83055c1bbd57a9ed749c02603379cec34ece84b7bcc191877fa93310",
+  "destinationEpoch": "a0ea07ee79c5b7aeed99f4f8242eda2002d6ef8dc028c87498f64360f8f18f6a",
+  "sourceContract": "0x349A7032EF84086483942E1bA4f3bFf86d4d1658",
+  "destinationContract": "0xC1e3A89E5ac56A469b28B140Bd29200cbe173730",
+  "observedAt": "2026-11-19T10:50:52.559Z",
+  "source": "node",
+  "messages": [
+    {
+      "id": "0x8b00bd97b291c01aff856feab5703cd86a87848146ff83d307c378aacca003d6",
+      "nonce": "0",
+      "sender": "0x37566338ADFbf56aa41FE8FC38aA92dB1e12aD59",
+      "recipient": "0x37566338ADFbf56aa41FE8FC38aA92dB1e12aD59",
+      "amount": "25000000",
+      "sourceHash": "0xe3129a42e60c2cf1d28e472fbaf690a8f3c2f691a3ed8247fff2e4e64514ac2b",
+      "sourceBlockHash": "0x9cf134040d35070d9dd497f5f9e8d832ef2800cf63ca60a11bb5a2f063c59ec9",
+      "destinationHash": "0xad147e46e4809081a7acf6ea2468308b308be735de9cdac89bc05faad623e3f6",
+      "state": "minted",
+      "firstObservedAt": "2026-11-19T10:50:52.190Z"
+    },
+    {
+      "id": "0x2adc3f4465632201aff3eeb74fc3361a22f4f1016aaeb131a6add9021542b24f",
+      "nonce": "1",
+      "sender": "0x37566338ADFbf56aa41FE8FC38aA92dB1e12aD59",
+      "recipient": "0x37566338ADFbf56aa41FE8FC38aA92dB1e12aD59",
+      "amount": "1000000",
+      "sourceHash": "0xf57c50ef22b02578091a2e5b94b3466945e5421272e1e2a4e4fbdcbaf672e03a",
+      "sourceBlockHash": "0xed4d10bdec7240d71fd39ba912e4295c5eb4766a13677fe82e02ea769b6f65e9",
+      "destinationHash": "0x5e6280d2234294b9caa8d0d2596476a7798b6f0ad1763d728d53cb3f15bc112e",
+      "state": "minted",
+      "firstObservedAt": "2026-11-19T10:50:52.203Z"
+    }
+  ]
+}

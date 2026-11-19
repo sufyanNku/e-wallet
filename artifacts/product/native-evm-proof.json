@@ -1,5 +1,5 @@
 {
-  "observedAt": "2026-11-19T08:57:10.968Z",
+  "observedAt": "2026-11-19T10:59:46.709Z",
   "source": "Native wallet core through real backend handlers and local blockchain nodes",
   "platformBoundary": "Node-hosted native core; device Keychain/Hermes tests recorded separately",
   "fixtureOnly": true,
@@ -32,7 +32,7 @@
     {
       "type": "swap",
       "networkId": "eip155:31337",
-      "hash": "0x0fa674b78b283c1a748c9e5ce97631e593970e9ae60ec225c17a23446775f921",
+      "hash": "0x1473ab9b021d8431c03d92a474498b4f050b89c914542020bbff5557843f002a",
       "outputSymbol": "dDAI",
       "quotedOutput": "996799935206225751",
       "actualOutput": "996799935206225751",

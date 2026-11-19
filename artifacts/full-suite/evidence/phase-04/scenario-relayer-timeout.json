@@ -1,0 +1,22 @@
+{
+  "name": "relayer-timeout",
+  "observedAt": "2026-11-19T10:52:01.545Z",
+  "networkId": "eip155:31337",
+  "isolatedBySnapshot": true,
+  "source": "real-local-lock-with-controlled-relayer-withholding",
+  "state": "timeout",
+  "message": {
+    "id": "0x3f2336578527f9753d11c5d96463e09703b915519e8712e98d34094b26144083",
+    "nonce": "1",
+    "sender": "0x37566338ADFbf56aa41FE8FC38aA92dB1e12aD59",
+    "recipient": "0x37566338ADFbf56aa41FE8FC38aA92dB1e12aD59",
+    "amount": "1",
+    "sourceHash": "0x78da7fa5dc7ba433766def84773256259d19c9140266d6ebd307dde94ef99f99",
+    "sourceBlockHash": "0xe9c228d73c6e550919dd60027bdb6224f893de35869404f5b90e93f29a449dbc",
+    "destinationHash": null,
+    "state": "timeout",
+    "firstObservedAt": "2026-11-19T10:52:01.998Z"
+  },
+  "mintBroadcast": false,
+  "note": "Tokens remain locked until relayer resumes or the isolated snapshot is restored; no refund was advertised."
+}

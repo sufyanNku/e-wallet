@@ -1,0 +1,121 @@
+> e-wallet@0.1.0 mobile:test:chains /home/sufyan/Desktop/Dev/E-wallet
+> tsx scripts/test-native.ts
+
+Native evm signing, public-node reconciliation, immutable review, durable journal and lock checks passed.
+
+> e-wallet@0.1.0 build:wallet /home/sufyan/Desktop/Dev/E-wallet
+> vite build --config apps/wallet/vite.config.ts --mode wallet-local
+
+vite v8.3.8 building client environment for wallet-local...
+transforming...
+[INEFFECTIVE_DYNAMIC_IMPORT] packages/chain-bitcoin/src/index.ts is dynamically imported by packages/chain-bitcoin/src/adapter.ts but also statically imported by packages/chain-bitcoin/src/adapter.ts, packages/chain-bitcoin/src/external.ts, packages/wallet-core/src/bitcoin-signer.ts, packages/wallet-core/src/core.ts, dynamic import will not move module into another chunk.
+
+✓ 2355 modules transformed.
+rendering chunks...
+computing gzip size...
+apps/wallet/dist/assets/src-B52C-euK.js                                    0.04 kB
+apps/wallet/dist/wallet-config.json                                        0.07 kB │ gzip:     0.07 kB
+apps/wallet/dist/assets/rolldown-runtime-4tVxZq34.js                       0.23 kB
+apps/wallet/dist/index.html                                                0.68 kB │ gzip:     0.39 kB
+apps/wallet/dist/assets/manrope-vietnamese-wght-normal-usUDDRr7.woff2      8.52 kB
+apps/wallet/dist/assets/manrope-greek-wght-normal-DL7QRZyv.woff2           9.44 kB
+apps/wallet/dist/assets/manrope-cyrillic-wght-normal-Dvxsihut.woff2       14.50 kB
+apps/wallet/dist/assets/manrope-latin-ext-wght-normal-Ch3YOpNY.woff2      15.12 kB
+apps/wallet/dist/assets/manrope-latin-wght-normal-DHIcAJRg.woff2          24.83 kB
+apps/wallet/dist/assets/src-C_y0Qv_i.js                                  292.17 kB
+apps/wallet/dist/assets/secp256k1-CBqUmpIR.wasm                        1,242.47 kB │ gzip: 1,160.98 kB
+apps/wallet/dist/assets/signing.worker-DNjWXQ-y.js                     1,998.18 kB
+apps/wallet/dist/assets/index-DragJyxd.css                                42.60 kB │ gzip:    12.82 kB
+apps/wallet/dist/assets/index-CpKL-Okh.js                              1,039.03 kB │ gzip:   310.39 kB
+
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[INEFFECTIVE_DYNAMIC_IMPORT] apps/wallet/src/real-gateway.ts is dynamically imported by apps/wallet/src/main.tsx but also statically imported by apps/wallet/src/connect-page.tsx, dynamic import will not move module into another chunk.
+
+✓ built in 2.05s
+ Network ewallet-browser-test_default Creating
+ Network ewallet-browser-test_default Created
+ Container ewallet-browser-test-solana-1 Creating
+ Container ewallet-browser-test-solana-1 Created
+ Container ewallet-browser-test-solana-1 Starting
+ Container ewallet-browser-test-solana-1 Started
+Solana stage reconciled: opening:SOL:alice
+Solana stage reconciled: opening:SOL:bob
+Solana stage reconciled: opening:SOL:carol
+Solana stage reconciled: mint:dUSDC
+Solana stage reconciled: mint:sEWLT
+Solana stage reconciled: mint:token2022
+Solana stage reconciled: mint:unsupported
+Solana stage reconciled: mint:frozen
+Solana stage reconciled: mint:nft1
+Solana stage reconciled: mint:nft2
+Solana stage reconciled: opening:dUSDC:alice
+Solana stage reconciled: opening:dUSDC:bob
+Solana stage reconciled: opening:dUSDC:carol
+Solana stage reconciled: opening:sEWLT:alice
+Solana stage reconciled: opening:token2022:alice
+Solana stage reconciled: opening:unsupported:alice
+Solana stage reconciled: opening:frozen:alice
+Solana stage reconciled: opening:nft1:alice
+Solana stage reconciled: opening:nft2:bob
+Solana stage reconciled: metadata:dUSDC
+Solana stage reconciled: revoke-mint:dUSDC
+Solana stage reconciled: metadata:sEWLT
+Solana stage reconciled: revoke-mint:sEWLT
+Solana stage reconciled: metadata:frozen
+Solana stage reconciled: revoke-mint:frozen
+Solana stage reconciled: metadata:nft1
+Solana stage reconciled: edition:nft1
+Solana stage reconciled: metadata:nft2
+Solana stage reconciled: edition:nft2
+Solana stage reconciled: delegate:alice
+Solana stage reconciled: freeze:alice
+Solana stage reconciled: SEED-11-sEWLT
+Solana stage reconciled: SEED-11-SOL
+Solana stage reconciled: SEED-11-dUSDC
+Solana stage reconciled: SEED-11-fresh-ATA
+Solana stage reconciled: SEED-12-NFT
+Solana: 37 real stages reconciled; metadata and supply assertions passed.
+solana: actual chain activity indexed and repeated-batch deduplication verified.
+/home/sufyan/Desktop/Dev/E-wallet/packages/native-wallet/src/wallet.ts:525
+      throw new Error(
+            ^
+
+Error: Wait for the current transaction to settle before preparing another.
+    at NativeWallet.prepare (/home/sufyan/Desktop/Dev/E-wallet/packages/native-wallet/src/wallet.ts:525:13)
+    at <anonymous> (/home/sufyan/Desktop/Dev/E-wallet/scripts/check-native-wallet.ts:197:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+Node.js v24.22.3
+ Container ewallet-browser-test-solana-1 Stopping
+ Container ewallet-browser-test-solana-1 Stopped
+ Container ewallet-browser-test-solana-1 Removing
+ Container ewallet-browser-test-solana-1 Removed
+ Network ewallet-browser-test_default Removing
+ Network ewallet-browser-test_default Removed
+/home/sufyan/Desktop/Dev/E-wallet/scripts/test-solana-browser.ts:21
+        : reject(new Error(command + " failed (" + code + ")")),
+                 ^
+
+Error: pnpm failed (1)
+    at ChildProcess.<anonymous> (/home/sufyan/Desktop/Dev/E-wallet/scripts/test-solana-browser.ts:21:18)
+    at ChildProcess.wrapper (node:events:639:12)
+    at ChildProcess.emit (node:events:514:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:324:12)
+
+Node.js v24.22.3
+/home/sufyan/Desktop/Dev/E-wallet/scripts/test-native.ts:13
+        : reject(new Error("Native chain verification failed.")),
+                 ^
+
+Error: Native chain verification failed.
+    at ChildProcess.<anonymous> (/home/sufyan/Desktop/Dev/E-wallet/scripts/test-native.ts:13:18)
+    at ChildProcess.wrapper (node:events:639:12)
+    at ChildProcess.emit (node:events:514:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:324:12)
+
+Node.js v24.22.3
+ ELIFECYCLE  Command failed with exit code 1.

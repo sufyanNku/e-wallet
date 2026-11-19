@@ -121,8 +121,8 @@
       "boundary": "Configuration validation only; deployment was not performed."
     }
   ],
-  "unitTests": 70,
-  "unitTestFiles": 26,
+  "unitTests": 76,
+  "unitTestFiles": 27,
   "android": {
     "package": "app.ewallet.wallet",
     "version": "0.2.0",
@@ -132,12 +132,13 @@
       "x86_64"
     ],
     "apkPath": "apps/mobile/android/app/build/outputs/apk/debug/app-debug.apk",
-    "bytes": 114246207,
-    "sha256": "dd1a8812ef4e46d8c44175fbab40e55c9436cecddbd8b3a131e3647ab1c9e4e7",
+    "bytes": 114250661,
+    "sha256": "9289dc804a27bc3f2ee2335043d524ef8920c5271e67cb839e63e3013a407e62",
     "requiresMetro": true,
     "physicalDeviceVerified": false,
     "emulatorStartup": "blocked_adb_remained_offline",
-    "stableLocalApkPath": ".local/releases/e-wallet-0.2.0-debug.apk"
+    "stableLocalApkPath": ".local/releases/e-wallet-0.2.0-debug.apk",
+    "latestBuildEvidence": "artifacts/full-suite/logs/android-debug-package.log"
   },
   "ios": {
     "sourceProject": "apps/mobile/ios/ewallet.xcodeproj",
@@ -169,5 +170,14 @@
       }
     }
   },
-  "nativeBundleMetadataSha256": "66d7b4e860ec9e08c7c6fc453251c5f9c4256c26b1ebf36e1ec719b86b8aaed6"
+  "nativeBundleMetadataSha256": "66d7b4e860ec9e08c7c6fc453251c5f9c4256c26b1ebf36e1ec719b86b8aaed6",
+  "latestFullSuite": {
+    "path": "artifacts/full-suite/report.json",
+    "completedAt": "2026-11-19T11:02:46.860Z",
+    "passedChecks": 40,
+    "failedChecks": 0,
+    "unitTests": 76,
+    "browserScenarios": 21,
+    "physicalDeviceVerified": false
+  }
 }

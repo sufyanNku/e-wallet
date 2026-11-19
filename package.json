@@ -8,6 +8,7 @@
     "node": ">=24.15.0 <25"
   },
   "scripts": {
+    "test:all:local": "tsx scripts/verify-application.ts",
     "demo:setup": "tsx scripts/setup-team-demo.ts",
     "demo:dev": "tsx scripts/dev-team-demo.ts",
     "test:demo": "pnpm build:wallet && playwright test --config playwright.team-demo.config.ts",

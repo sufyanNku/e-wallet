@@ -1,0 +1,590 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-11-19T10:47:45.206Z",
+  "updatedAt": "2026-11-19T11:02:46.860Z",
+  "state": "passed",
+  "scope": "Complete automated local application regression; manual/device and public-funding limits remain separate",
+  "totalChecks": 40,
+  "passedChecks": 40,
+  "failedChecks": 0,
+  "realFundsEnabled": false,
+  "sourceFingerprint": "f716436e14a4b0080a911630f656d493bf059a59ee67ad6c0dc4fb5a0461a947",
+  "previousFailures": [
+    {
+      "name": "native-chain-proofs",
+      "command": "pnpm mobile:test:chains",
+      "state": "failed",
+      "exitCode": 1,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:55:16.813Z",
+      "completedAt": "2026-11-19T10:56:07.093Z",
+      "evidencePath": "artifacts/full-suite/logs/native-chain-proofs-failed-1.log"
+    }
+  ],
+  "checks": [
+    {
+      "name": "preflight",
+      "command": "pnpm preflight",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:47:45.214Z",
+      "completedAt": "2026-11-19T10:47:46.248Z",
+      "evidencePath": "artifacts/full-suite/logs/preflight.log"
+    },
+    {
+      "name": "frozen-install",
+      "command": "pnpm install --frozen-lockfile --offline",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:47:46.249Z",
+      "completedAt": "2026-11-19T10:47:48.318Z",
+      "evidencePath": "artifacts/full-suite/logs/frozen-install.log"
+    },
+    {
+      "name": "typecheck",
+      "command": "pnpm typecheck",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:47:48.318Z",
+      "completedAt": "2026-11-19T10:47:58.022Z",
+      "evidencePath": "artifacts/full-suite/logs/typecheck.log"
+    },
+    {
+      "name": "mobile-typecheck",
+      "command": "pnpm mobile:typecheck",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:47:58.023Z",
+      "completedAt": "2026-11-19T10:48:02.483Z",
+      "evidencePath": "artifacts/full-suite/logs/mobile-typecheck.log"
+    },
+    {
+      "name": "lint-and-boundaries",
+      "command": "pnpm lint",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:48:02.483Z",
+      "completedAt": "2026-11-19T10:48:07.443Z",
+      "evidencePath": "artifacts/full-suite/logs/lint-and-boundaries.log"
+    },
+    {
+      "name": "unit-and-security",
+      "command": "pnpm test:unit",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:48:07.444Z",
+      "completedAt": "2026-11-19T10:48:34.455Z",
+      "evidencePath": "artifacts/full-suite/logs/unit-and-security.log"
+    },
+    {
+      "name": "contracts",
+      "command": "pnpm contracts:test",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:48:34.456Z",
+      "completedAt": "2026-11-19T10:48:37.503Z",
+      "evidencePath": "artifacts/full-suite/logs/contracts.log"
+    },
+    {
+      "name": "dataset-before",
+      "command": "pnpm seed:assert",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:48:37.504Z",
+      "completedAt": "2026-11-19T10:48:41.059Z",
+      "evidencePath": "artifacts/full-suite/logs/dataset-before.log"
+    },
+    {
+      "name": "preview-build",
+      "command": "pnpm build:web",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:48:41.064Z",
+      "completedAt": "2026-11-19T10:48:43.800Z",
+      "evidencePath": "artifacts/full-suite/logs/preview-build.log"
+    },
+    {
+      "name": "web-ui-accessibility-responsive",
+      "command": "pnpm test:ui",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:48:43.800Z",
+      "completedAt": "2026-11-19T10:49:11.542Z",
+      "evidencePath": "artifacts/full-suite/logs/web-ui-accessibility-responsive.log"
+    },
+    {
+      "name": "local-wallet-build",
+      "command": "pnpm build:wallet",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:49:11.543Z",
+      "completedAt": "2026-11-19T10:49:14.562Z",
+      "evidencePath": "artifacts/full-suite/logs/local-wallet-build.log"
+    },
+    {
+      "name": "release-boundary",
+      "command": "pnpm exec node scripts/check-release.mjs",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:49:14.564Z",
+      "completedAt": "2026-11-19T10:49:15.116Z",
+      "evidencePath": "artifacts/full-suite/logs/release-boundary.log"
+    },
+    {
+      "name": "core-browser",
+      "command": "pnpm test:browser-core",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:49:15.117Z",
+      "completedAt": "2026-11-19T10:49:33.127Z",
+      "evidencePath": "artifacts/full-suite/logs/core-browser.log"
+    },
+    {
+      "name": "evm-browser",
+      "command": "pnpm exec playwright test --config playwright.chains.config.ts",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:49:33.128Z",
+      "completedAt": "2026-11-19T10:50:57.320Z",
+      "evidencePath": "artifacts/full-suite/logs/evm-browser.log"
+    },
+    {
+      "name": "reference-build",
+      "command": "pnpm build:dapp",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:50:57.321Z",
+      "completedAt": "2026-11-19T10:50:59.955Z",
+      "evidencePath": "artifacts/full-suite/logs/reference-build.log"
+    },
+    {
+      "name": "evm-popup",
+      "command": "pnpm exec playwright test --config playwright.dapp.config.ts",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:50:59.956Z",
+      "completedAt": "2026-11-19T10:51:32.260Z",
+      "evidencePath": "artifacts/full-suite/logs/evm-popup.log"
+    },
+    {
+      "name": "accounts-and-rbac",
+      "command": "pnpm test:demo",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:51:32.261Z",
+      "completedAt": "2026-11-19T10:51:48.626Z",
+      "evidencePath": "artifacts/full-suite/logs/accounts-and-rbac.log"
+    },
+    {
+      "name": "backend-indexing-and-reorg",
+      "command": "pnpm test:integration",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:51:48.627Z",
+      "completedAt": "2026-11-19T10:51:55.569Z",
+      "evidencePath": "artifacts/full-suite/logs/backend-indexing-and-reorg.log"
+    },
+    {
+      "name": "scenario-pending-evm",
+      "command": "pnpm scenario -- pending-evm",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:51:55.570Z",
+      "completedAt": "2026-11-19T10:51:56.918Z",
+      "evidencePath": "artifacts/full-suite/logs/scenario-pending-evm.log"
+    },
+    {
+      "name": "scenario-replacement-evm",
+      "command": "pnpm scenario -- replacement-evm",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:51:56.919Z",
+      "completedAt": "2026-11-19T10:51:58.295Z",
+      "evidencePath": "artifacts/full-suite/logs/scenario-replacement-evm.log"
+    },
+    {
+      "name": "scenario-reverted-evm",
+      "command": "pnpm scenario -- reverted-evm",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:51:58.296Z",
+      "completedAt": "2026-11-19T10:51:59.438Z",
+      "evidencePath": "artifacts/full-suite/logs/scenario-reverted-evm.log"
+    },
+    {
+      "name": "scenario-rpc-outage",
+      "command": "pnpm scenario -- rpc-outage",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:51:59.439Z",
+      "completedAt": "2026-11-19T10:52:00.517Z",
+      "evidencePath": "artifacts/full-suite/logs/scenario-rpc-outage.log"
+    },
+    {
+      "name": "scenario-relayer-timeout",
+      "command": "pnpm scenario -- relayer-timeout",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:52:00.517Z",
+      "completedAt": "2026-11-19T10:53:02.291Z",
+      "evidencePath": "artifacts/full-suite/logs/scenario-relayer-timeout.log"
+    },
+    {
+      "name": "solana-browser-and-popup",
+      "command": "pnpm test:browser-solana",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:53:02.292Z",
+      "completedAt": "2026-11-19T10:54:13.523Z",
+      "evidencePath": "artifacts/full-suite/logs/solana-browser-and-popup.log"
+    },
+    {
+      "name": "bitcoin-browser-and-popup",
+      "command": "pnpm test:browser-bitcoin",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:54:13.523Z",
+      "completedAt": "2026-11-19T10:55:16.812Z",
+      "evidencePath": "artifacts/full-suite/logs/bitcoin-browser-and-popup.log"
+    },
+    {
+      "name": "native-chain-proofs",
+      "command": "pnpm mobile:test:chains",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T10:59:34.430Z",
+      "completedAt": "2026-11-19T11:00:54.843Z",
+      "evidencePath": "artifacts/full-suite/logs/native-chain-proofs.log"
+    },
+    {
+      "name": "seed-idempotence",
+      "command": "pnpm exec tsx scripts/check-seed-idempotence.ts",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T11:00:54.845Z",
+      "completedAt": "2026-11-19T11:01:03.744Z",
+      "evidencePath": "artifacts/full-suite/logs/seed-idempotence.log"
+    },
+    {
+      "name": "dataset-after",
+      "command": "pnpm seed:assert",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T11:01:03.745Z",
+      "completedAt": "2026-11-19T11:01:06.926Z",
+      "evidencePath": "artifacts/full-suite/logs/dataset-after.log"
+    },
+    {
+      "name": "network-identities",
+      "command": "pnpm networks:check",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T11:01:06.927Z",
+      "completedAt": "2026-11-19T11:01:10.254Z",
+      "evidencePath": "artifacts/full-suite/logs/network-identities.log"
+    },
+    {
+      "name": "live-market-observation",
+      "command": "pnpm exec tsx scripts/check-market-live.ts",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T11:01:10.256Z",
+      "completedAt": "2026-11-19T11:01:11.808Z",
+      "evidencePath": "artifacts/full-suite/logs/live-market-observation.log"
+    },
+    {
+      "name": "dependency-audit",
+      "command": "pnpm audit:verified",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T11:01:11.809Z",
+      "completedAt": "2026-11-19T11:01:14.877Z",
+      "evidencePath": "artifacts/full-suite/logs/dependency-audit.log"
+    },
+    {
+      "name": "native-dependency-compatibility",
+      "command": "pnpm --filter @ewallet/mobile exec expo install --check",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T11:01:14.879Z",
+      "completedAt": "2026-11-19T11:01:17.082Z",
+      "evidencePath": "artifacts/full-suite/logs/native-dependency-compatibility.log"
+    },
+    {
+      "name": "native-android-ios-bundles",
+      "command": "pnpm mobile:export",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T11:01:17.082Z",
+      "completedAt": "2026-11-19T11:01:55.618Z",
+      "evidencePath": "artifacts/full-suite/logs/native-android-ios-bundles.log"
+    },
+    {
+      "name": "android-debug-package",
+      "command": "pnpm mobile:build:android",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T11:01:55.619Z",
+      "completedAt": "2026-11-19T11:02:32.032Z",
+      "evidencePath": "artifacts/full-suite/logs/android-debug-package.log"
+    },
+    {
+      "name": "deployment-configuration",
+      "command": "pnpm exec docker compose --file infra/deployment/compose.yaml config --quiet",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T11:02:32.364Z",
+      "completedAt": "2026-11-19T11:02:32.815Z",
+      "evidencePath": "artifacts/full-suite/logs/deployment-configuration.log"
+    },
+    {
+      "name": "testnet-build",
+      "command": "pnpm build:testnet",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T11:02:33.160Z",
+      "completedAt": "2026-11-19T11:02:36.064Z",
+      "evidencePath": "artifacts/full-suite/logs/testnet-build.log"
+    },
+    {
+      "name": "testnet-release-boundary",
+      "command": "pnpm exec node scripts/check-release.mjs",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T11:02:36.412Z",
+      "completedAt": "2026-11-19T11:02:36.891Z",
+      "evidencePath": "artifacts/full-suite/logs/testnet-release-boundary.log"
+    },
+    {
+      "name": "restore-local-build",
+      "command": "pnpm build:wallet",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T11:02:37.232Z",
+      "completedAt": "2026-11-19T11:02:39.793Z",
+      "evidencePath": "artifacts/full-suite/logs/restore-local-build.log"
+    },
+    {
+      "name": "real-funds-stay-disabled",
+      "command": "pnpm release:check --require-ready",
+      "state": "passed",
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "startedAt": "2026-11-19T11:02:40.139Z",
+      "completedAt": "2026-11-19T11:02:40.829Z",
+      "evidencePath": "artifacts/full-suite/logs/real-funds-stay-disabled.log"
+    },
+    {
+      "name": "development-startup",
+      "command": "pnpm exec tsx scripts/check-dev.ts",
+      "state": "passed",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "startedAt": "2026-11-19T11:02:41.184Z",
+      "completedAt": "2026-11-19T11:02:45.975Z",
+      "evidencePath": "artifacts/full-suite/logs/development-startup.log"
+    }
+  ],
+  "observations": {
+    "networks": [
+      {
+        "networkId": "eip155:31337",
+        "state": "passed",
+        "expected": "31337",
+        "observed": "31337",
+        "observedAt": "2026-11-19T11:01:07.682Z",
+        "source": "node"
+      },
+      {
+        "networkId": "eip155:31338",
+        "state": "passed",
+        "expected": "31338",
+        "observed": "31338",
+        "observedAt": "2026-11-19T11:01:07.712Z",
+        "source": "node"
+      },
+      {
+        "networkId": "eip155:84532",
+        "state": "passed",
+        "expected": "84532",
+        "observed": "84532",
+        "observedAt": "2026-11-19T11:01:07.746Z",
+        "source": "node"
+      },
+      {
+        "networkId": "eip155:11155111",
+        "state": "passed",
+        "expected": "11155111",
+        "observed": "11155111",
+        "observedAt": "2026-11-19T11:01:07.713Z",
+        "source": "node"
+      },
+      {
+        "networkId": "eip155:80002",
+        "state": "passed",
+        "expected": "80002",
+        "observed": "80002",
+        "observedAt": "2026-11-19T11:01:07.749Z",
+        "source": "node"
+      },
+      {
+        "networkId": "eip155:998",
+        "state": "passed",
+        "expected": "998",
+        "observed": "998",
+        "observedAt": "2026-11-19T11:01:08.526Z",
+        "source": "node"
+      },
+      {
+        "networkId": "eip155:97",
+        "state": "passed",
+        "expected": "97",
+        "observed": "97",
+        "observedAt": "2026-11-19T11:01:08.226Z",
+        "source": "node"
+      },
+      {
+        "networkId": "solana:local",
+        "state": "passed",
+        "expected": "record-at-boot",
+        "observed": "J8hef5VDj3VYwjM8hTpzinpcMJfdjm23xd4P7cosSVZA",
+        "observedAt": "2026-11-19T11:01:09.268Z",
+        "source": "node"
+      },
+      {
+        "networkId": "eip155:46630",
+        "state": "passed",
+        "expected": "46630",
+        "observed": "46630",
+        "observedAt": "2026-11-19T11:01:08.618Z",
+        "source": "node"
+      },
+      {
+        "networkId": "bitcoin:regtest",
+        "state": "passed",
+        "expected": "0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206",
+        "observed": "0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206",
+        "observedAt": "2026-11-19T11:01:09.302Z",
+        "source": "node"
+      },
+      {
+        "networkId": "eip155:5042002",
+        "state": "passed",
+        "expected": "5042002",
+        "observed": "5042002",
+        "observedAt": "2026-11-19T11:01:08.960Z",
+        "source": "node"
+      },
+      {
+        "networkId": "solana:devnet",
+        "state": "passed",
+        "expected": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+        "observed": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+        "observedAt": "2026-11-19T11:01:09.270Z",
+        "source": "node"
+      }
+    ],
+    "market": {
+      "assets": 3,
+      "stale": false,
+      "observedAt": "2026-11-19T11:01:11.784Z"
+    },
+    "androidPackage": {
+      "path": "apps/mobile/android/app/build/outputs/apk/debug/app-debug.apk",
+      "bytes": 114250661,
+      "sha256": "9289dc804a27bc3f2ee2335043d524ef8920c5271e67cb839e63e3013a407e62",
+      "requiresMetro": true
+    }
+  },
+  "notExecuted": [
+    {
+      "check": "Android physical-device acceptance and camera/Keystore/privacy behavior",
+      "reason": "Requires a connected physical Android device; APK compilation and native-core proofs are separate checks."
+    },
+    {
+      "check": "iOS native binary and physical-device acceptance",
+      "reason": "Requires macOS/Xcode and an iPhone; exported Hermes bundles are checked here."
+    },
+    {
+      "check": "Public-testnet funded transactions",
+      "reason": "Requires funded random test identities; RPC identity observations do not prove a funded send."
+    },
+    {
+      "check": "Mainnet/client launch",
+      "reason": "Deferred by the user; no real funds enabled or sent."
+    }
+  ],
+  "evidenceDirectory": "artifacts/full-suite/evidence",
+  "postRunChecks": [
+    {
+      "name": "final-typecheck",
+      "state": "passed",
+      "exitCode": 0,
+      "evidencePath": "artifacts/full-suite/logs/final-typecheck.log"
+    },
+    {
+      "name": "final-lint",
+      "state": "passed",
+      "exitCode": 0,
+      "evidencePath": "artifacts/full-suite/logs/final-lint.log"
+    },
+    {
+      "name": "bridge-status-artifact-isolation",
+      "state": "passed",
+      "exitCode": 0,
+      "evidencePath": "artifacts/full-suite/logs/bridge-artifact-isolation.log",
+      "canonicalStatusSha256": "e78b1745c31e94355d11798a484953cdce6ed47347feaf720a0014b2beabc007",
+      "statusBytesUnchangedAfterSnapshotTest": true
+    }
+  ],
+  "resolvedIssues": [
+    {
+      "kind": "test-harness",
+      "file": "scripts/check-native-wallet.ts",
+      "resolution": "Wait for observed confirmation and refresh settled balances before preparing dependent native transactions; assert sender balance decreases."
+    },
+    {
+      "kind": "test-isolation",
+      "file": "tests/browser-chains/evm.spec.ts",
+      "resolution": "Restore the previous bridge status artifact after the isolated snapshot test so reverted mints are not left in the canonical status file."
+    }
+  ]
+}

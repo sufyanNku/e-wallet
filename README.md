@@ -1,5 +1,7 @@
 # e-wallet
 
+New here? Read [USER_AND_TESTING_GUIDE.md](USER_AND_TESTING_GUIDE.md) for all 28 feature groups, step-by-step usage and developer checks. After local setup, stop development servers and run `pnpm test:all:local` for the sequential application regression suite.
+
 A self-custody wallet with a redesigned React web client and a **React Native / Expo Android and iOS app**. The existing EVM, Solana and Bitcoin integrations are retained. Native and web signing run on the user's device; the backend handles public data.
 
 **Current release: early access, local chains and testnets only. Real funds are disabled.** The November 19 product expansion supersedes the original browser-only scope in specification 01. Implementation and verification evidence for this expansion lives under `artifacts/product/`; the original four specification gates remain historical evidence rather than a production-launch certification.

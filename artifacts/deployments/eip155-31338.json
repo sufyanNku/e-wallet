@@ -4,8 +4,8 @@
   "chainId": "31338",
   "genesisHash": "0x2af263e036216caae158d7c98de1a3bb15c24844962d79b55d59af8d65cd2ba7",
   "bootEpoch": "a0ea07ee79c5b7aeed99f4f8242eda2002d6ef8dc028c87498f64360f8f18f6a",
-  "runId": "04ab4fca-9b37-4c91-b118-dc32dd986ecc",
-  "createdAt": "2026-11-19T08:31:14.053Z",
+  "runId": "5e8572be-d469-411e-81a6-a3514f35c359",
+  "createdAt": "2026-11-19T11:00:58.575Z",
   "compiler": {
     "version": "0.8.38",
     "evmVersion": "paris"

@@ -1,0 +1,5 @@
+> e-wallet@0.1.0 release:check /home/sufyan/Desktop/Dev/E-wallet
+> tsx scripts/release-check.ts --require-ready
+
+Real funds disabled. Outstanding release checks: independentSecurityAudit, mainnetAdapterAcceptance, mainnetVaultIsolation, productionRpcAndIndexer, restoreAndIncidentDrill, androidPhysicalDeviceAcceptance, iosPhysicalDeviceAcceptance, clientPrivacyAndTermsApproval, storeSigningAndDistribution
+ ELIFECYCLE  Command failed with exit code 1.

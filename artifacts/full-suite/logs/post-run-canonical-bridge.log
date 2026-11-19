@@ -1,0 +1,4 @@
+> e-wallet@0.1.0 relayer /home/sufyan/Desktop/Dev/E-wallet
+> tsx scripts/relayer.ts --once
+
+Bridge simulation: 1 canonical destination mints observed.
