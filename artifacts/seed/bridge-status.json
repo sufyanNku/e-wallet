@@ -5,7 +5,7 @@
   "destinationEpoch": "a0ea07ee79c5b7aeed99f4f8242eda2002d6ef8dc028c87498f64360f8f18f6a",
   "sourceContract": "0x349A7032EF84086483942E1bA4f3bFf86d4d1658",
   "destinationContract": "0xC1e3A89E5ac56A469b28B140Bd29200cbe173730",
-  "observedAt": "2026-11-19T09:37:13.322Z",
+  "observedAt": "2026-11-19T09:37:29.765Z",
   "source": "node",
   "messages": [
     {
