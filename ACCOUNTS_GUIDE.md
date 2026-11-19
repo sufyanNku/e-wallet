@@ -34,21 +34,21 @@ Running `pnpm accounts:setup` again **preserves existing passwords, balances, hi
 
 ## 2. Start Accounts
 
-Stop any previous `pnpm dev` with **Ctrl+C** in its terminal, then run:
+Start Accounts with:
 
 ```sh
 pnpm dev:accounts
 ```
 
-Open **http://127.0.0.1:5173/accounts**.
+Open the **Account logins and RBAC** URL printed by the launcher; normally **http://127.0.0.1:5173/accounts**. Occupied ports are skipped automatically.
 
 You can also select **Sign in to your account** on the wallet welcome page, or **Accounts** in the wallet sidebar.
 
-The command enables `EWALLET_ACCOUNTS=1` for this process. Ordinary `pnpm dev` leaves the account API disabled. If the existing backend is still running without that flag, startup tells you to stop it first.
+The command enables `EWALLET_ACCOUNTS=1` for this process. Ordinary `pnpm dev` leaves the account API disabled. Each launch starts its own backend on an available port with the matching origin configuration.
 
 The dev launcher may report that blockchain nodes need starting or seeding. Those messages concern the separate crypto wallet; the SQLite account ledger works without the nodes.
 
-Use the exact `127.0.0.1` address above. Cookies, allowed origins and browser storage depend on the origin. Port **5174** is the developer reference dapp, not the Accounts area.
+Use the exact `127.0.0.1` URL printed in your terminal. Cookies, allowed origins and browser storage depend on the origin. The separately printed developer reference dapp is a connection tool.
 
 ## 3. Transfer credits between two users
 
@@ -110,8 +110,8 @@ These are application permissions for local use, not a production custody or rea
 
 ## 6. Troubleshooting and checks
 
-- **“Account service is unavailable” appears:** Stop the old server, run `pnpm accounts:setup`, then `pnpm dev:accounts`.
-- **Port 5173/8787 is occupied:** Stop the earlier project terminal before restarting. Do not run two dev launchers on the same ports.
+- **“Account service is unavailable” appears:** Run `pnpm accounts:setup` and `pnpm dev:accounts`, then open the Accounts URL printed for that run.
+- **A preferred port is occupied:** The launcher selects another port automatically. Open the new URL printed in the terminal; your earlier server continues running.
 - **Login fails:** Check the matching username/password in the local credential file. Check whether Admin suspended the Member. Wait one minute after repeated failed attempts.
 - **Alice and Bob become the same user:** Their browser windows share cookies. Use a separate browser profile or one normal window plus one private window.
 - **Session expired:** Sign in again; after the underlying browser session expires, reload the page first. Balances and history persist.

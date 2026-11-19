@@ -7,7 +7,9 @@ type Probe =
   | "replay";
 let recorded: ConnectorRequest | null = null;
 export function protocolProbe(kind: Probe): Promise<unknown> {
-  const origin = "http://127.0.0.1:8787",
+  const origin = new URL(
+      import.meta.env.VITE_EWALLET_APPROVAL_URL ?? "http://127.0.0.1:8787",
+    ).origin,
     channel = Array.from(crypto.getRandomValues(new Uint8Array(32)), (b) =>
       b.toString(16).padStart(2, "0"),
     ).join(""),

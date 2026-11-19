@@ -47,12 +47,12 @@ Use this option for username login, credit transfers and roles. Blockchain nodes
    ```
 
 3. `pnpm node --version` should show **v24.22.3**. The workspace selects this runtime even if your terminal normally uses Node 22.
-4. Open **http://127.0.0.1:5173/accounts**.
+4. Open the **Account logins and RBAC** URL printed in the terminal, normally **http://127.0.0.1:5173/accounts**.
 5. Read the generated usernames and passwords from `.local/local/accounts-credentials.json`.
 6. Sign in as Alice in a normal browser window and Bob in an incognito window.
 7. Follow features 26–28 below. For detailed login and role checks, see [ACCOUNTS_GUIDE.md](ACCOUNTS_GUIDE.md).
 
-Stop an existing development server with **Ctrl+C** before starting another one. Re-running setup preserves existing account balances, passwords and history.
+The launcher automatically selects available ports and keeps existing servers running. Re-running setup preserves existing account balances, passwords and history.
 
 ### Option B: complete crypto-wallet environment
 
@@ -71,14 +71,14 @@ This starts the web wallet, Accounts API, reference connection application and l
 
 On Windows PowerShell, replace the last command with `$env:EWALLET_ACCOUNTS="1"; pnpm dev`.
 
-Open these addresses:
+The usual addresses are listed below. If a port is occupied, `pnpm dev` prints the replacement URLs and configures the services to match. Open the URLs printed for your current run:
 
 - **Wallet:** http://127.0.0.1:5173
 - **Accounts:** http://127.0.0.1:5173/accounts
 - **Reference connection application:** http://127.0.0.1:5174
 - **Built wallet and connection approvals:** http://127.0.0.1:8787
 
-Use these exact addresses. `localhost`, `127.0.0.1`, port 5173 and port 8787 have different browser storage or security rules.
+Use the exact printed addresses. `localhost`, `127.0.0.1` and different ports have separate browser vaults. Changing ports does not erase the vault at an earlier address.
 
 ### Get a populated crypto wallet
 
@@ -378,7 +378,7 @@ Record phone model, OS version, app version, result and any error. Native biomet
 
 ## 7. Common problems
 
-- **The page looks like a connection tool:** You opened port 5174. Open the wallet at port 5173.
+- **The page looks like a connection tool:** Open the **Open your wallet** URL printed by `pnpm dev`, rather than the developer reference URL.
 - **The wallet is empty:** A new phrase creates new addresses. Restore the prepared Alice testing phrase if you need the seeded holdings.
 - **Balances belong to another network:** Check both the account selector and network selector.
 - **Sending a token fails despite a token balance:** The sender may lack the native asset required for the network fee.

@@ -1,9 +1,10 @@
 import { spawn, type ChildProcess } from "node:child_process";
-import { existsSync } from "node:fs";
-import { createServer } from "node:net";
 import { currentEpoch } from "../services/backend/src/environment";
 import { readFile } from "node:fs/promises";
+import { DevPorts, preferredPort } from "./dev-ports.ts";
+
 const children: ChildProcess[] = [];
+const ports = new DevPorts();
 let stopping = false;
 function stop(code = 0) {
   if (stopping) return;
@@ -17,12 +18,14 @@ function stop(code = 0) {
       }
     }
   }
+  void ports.close();
   process.exitCode = code;
 }
-function launch(args: string[]) {
+function launch(args: string[], env: NodeJS.ProcessEnv) {
+  if (stopping) return;
   const child = spawn("pnpm", args, {
     stdio: "inherit",
-    env: process.env,
+    env,
     detached: process.platform !== "win32",
   });
   children.push(child);
@@ -31,90 +34,119 @@ function launch(args: string[]) {
     if (!stopping) stop(code ?? 1);
   });
 }
-async function available(port: number) {
-  return new Promise<boolean>((resolve) => {
-    const server = createServer();
-    server.once("error", () => resolve(false));
-    server.listen(port, "127.0.0.1", () => server.close(() => resolve(true)));
-  });
-}
 for (const signal of ["SIGINT", "SIGTERM"] as const)
   process.once(signal, () => stop());
-if (Number(process.versions.node.split(".")[0]) !== 24)
-  throw new Error("Use Node 24 from .nvmrc.");
-for (const id of ["eip155:31337", "eip155:31338"]) {
-  try {
-    const epoch = await currentEpoch(id),
-      manifest = JSON.parse(
-        await readFile(
-          ".local/state/deployments/" + id.replace(":", "-") + ".json",
-          "utf8",
-        ),
+
+async function start() {
+  if (Number(process.versions.node.split(".")[0]) !== 24)
+    throw new Error("Use Node 24 from .nvmrc.");
+  for (const id of ["eip155:31337", "eip155:31338"]) {
+    try {
+      const epoch = await currentEpoch(id),
+        manifest = JSON.parse(
+          await readFile(
+            ".local/state/deployments/" + id.replace(":", "-") + ".json",
+            "utf8",
+          ),
+        );
+      if (epoch.bootEpoch !== manifest.bootEpoch)
+        console.log(id + ": needs_seed. Run pnpm seed:local.");
+    } catch {
+      console.log(
+        id +
+          ": node or seed unavailable. Run pnpm infra:up and pnpm seed:local for local execution.",
       );
-    if (epoch.bootEpoch !== manifest.bootEpoch)
-      console.log(id + ": needs_seed. Run pnpm seed:local.");
-  } catch {
-    console.log(
-      id +
-        ": node or seed unavailable. Run pnpm infra:up and pnpm seed:local for real local execution.",
-    );
+    }
+    if (stopping) return;
   }
-}
-if (!existsSync("apps/wallet/dist/wallet-config.json"))
-  await new Promise<void>((resolve, reject) => {
-    const child = spawn("pnpm", ["build:wallet"], { stdio: "inherit" });
-    child.once("error", reject);
-    child.once("exit", (code) =>
-      code === 0 ? resolve() : reject(new Error("Wallet build failed")),
-    );
-  });
-if (await available(8787)) launch(["serve:web"]);
-else {
-  const response = await fetch("http://127.0.0.1:8787/api/v1/health", {
-      signal: AbortSignal.timeout(2000),
-    }),
-    body = (await response.json()) as { data: { service: string } };
-  if (!response.ok || body.data.service !== "e-wallet")
-    throw new Error("Port 8787 belongs to another service.");
-  if (process.env.EWALLET_ACCOUNTS === "1") {
-    const status = await fetch("http://127.0.0.1:8787/api/v1/accounts/status", {
-      signal: AbortSignal.timeout(2000),
+  const built = await readFile(
+    "apps/wallet/dist/wallet-config.json",
+    "utf8",
+  ).catch(() => "{}");
+  if (JSON.parse(built).mode !== "local")
+    await new Promise<void>((resolve, reject) => {
+      const child = spawn("pnpm", ["build:wallet"], {
+        stdio: "inherit",
+        detached: process.platform !== "win32",
+      });
+      children.push(child);
+      child.once("error", reject);
+      child.once("exit", (code) =>
+        code === 0 ? resolve() : reject(new Error("Wallet build failed")),
+      );
     });
-    if (!status.ok || !(await status.json()).data?.enabled)
-      throw new Error(
-        "Stop the existing pnpm dev process, then run pnpm dev:accounts to enable Accounts.",
-      );
-  }
-  console.log("Using the existing e-wallet backend.");
-}
-if (!(await available(5173))) {
-  stop(1);
-  throw new Error(
-    "Port 5173 is occupied. Stop the existing development server first.",
+  if (stopping) return;
+
+  const backend = await ports.reserve(preferredPort(process.env.PORT, 8787));
+  const wallet = await ports.reserve(
+    preferredPort(process.env.EWALLET_WALLET_PORT, 5173),
   );
-}
-launch([
-  "exec",
-  "vite",
-  "--config",
-  "apps/wallet/vite.config.ts",
-  "--mode",
-  "wallet-local",
-]);
-if (process.argv[2] !== "wallet") {
-  if (!(await available(5174))) {
-    stop(1);
-    throw new Error(
-      "Port 5174 is occupied. Stop the existing reference dapp server first.",
-    );
+  const reference =
+    process.argv[2] === "wallet"
+      ? null
+      : await ports.reserve(preferredPort(process.env.EWALLET_DAPP_PORT, 5174));
+  if (stopping) return;
+  const origin = (port: number) => "http://127.0.0.1:" + port;
+  const env = {
+    ...process.env,
+    HOST: "127.0.0.1",
+    PORT: String(backend),
+    EWALLET_WALLET_PORT: String(wallet),
+    ...(reference === null ? {} : { EWALLET_DAPP_PORT: String(reference) }),
+    EWALLET_PUBLIC_ORIGINS: [
+      ...new Set([
+        origin(backend),
+        origin(wallet),
+        ...(process.env.EWALLET_PUBLIC_ORIGINS?.split(",")
+          .map((value) => value.trim())
+          .filter(Boolean) ?? []),
+      ]),
+    ].join(","),
+    VITE_EWALLET_API_URL: origin(backend),
+    VITE_EWALLET_APPROVAL_URL: origin(backend),
+    VITE_EWALLET_WALLET_URL: origin(wallet),
+  };
+  await ports.release(backend);
+  launch(["serve:web"], env);
+  await ports.release(wallet);
+  launch(
+    [
+      "exec",
+      "vite",
+      "--config",
+      "apps/wallet/vite.config.ts",
+      "--mode",
+      "wallet-local",
+    ],
+    env,
+  );
+  if (reference !== null) {
+    await ports.release(reference);
+    launch(["dev:dapp"], env);
+    launch(["relayer", "--watch"], env);
   }
-  launch(["dev:dapp"]);
-  launch(["relayer", "--watch"]);
-}
-console.log(
-  "Open your wallet: http://127.0.0.1:5173\nDeveloper reference dapp (connection tests): http://127.0.0.1:5174\nBackend and built approval windows: http://127.0.0.1:8787\nExisting nodes are used without reset or reseeding.",
-);
-if (process.env.EWALLET_ACCOUNTS === "1")
   console.log(
-    "Account logins and RBAC: http://127.0.0.1:5173/accounts (SQLite demo credits; no blockchain funds).",
+    "Open your wallet: " +
+      origin(wallet) +
+      (reference === null
+        ? ""
+        : "\nDeveloper reference dapp (connection tests): " +
+          origin(reference)) +
+      "\nBackend and built approval windows: " +
+      origin(backend) +
+      "\nExisting nodes are used without reset or reseeding.",
   );
+  if (process.env.EWALLET_ACCOUNTS === "1")
+    console.log("Account logins and RBAC: " + origin(wallet) + "/accounts");
+}
+try {
+  await start();
+} catch (error) {
+  if (!stopping)
+    console.error(
+      error instanceof Error ? error.message : "Development startup failed.",
+    );
+  stop(1);
+} finally {
+  await ports.close();
+}

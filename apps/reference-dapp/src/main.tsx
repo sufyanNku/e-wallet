@@ -19,8 +19,11 @@ import {
 } from "@ewallet/provider";
 import "./style.css";
 const connector = createEWalletConnector({
-  walletUrl: "http://127.0.0.1:8787/",
+  walletUrl:
+    import.meta.env.VITE_EWALLET_APPROVAL_URL ?? "http://127.0.0.1:8787/",
 });
+const walletUrl =
+  import.meta.env.VITE_EWALLET_WALLET_URL ?? "http://127.0.0.1:5173/";
 const { wallet: solanaWallet } = registerEWalletSolana(connector);
 function App() {
   const [family, setFamily] = useState<"evm" | "solana" | "bitcoin">("evm"),
@@ -128,8 +131,16 @@ function App() {
   return (
     <main>
       <aside className="wallet-entry" aria-label="Open the wallet application">
-        <div><strong>This is the connection reference app.</strong><p>Looking for the dark wallet? Open the wallet application on port 5173.</p></div>
-        <a href="http://127.0.0.1:5173/" target="_blank" rel="noopener noreferrer">Open wallet ↗</a>
+        <div>
+          <strong>This is the connection reference app.</strong>
+          <p>
+            Looking for the dark wallet? Open the wallet application using the
+            link below.
+          </p>
+        </div>
+        <a href={walletUrl} target="_blank" rel="noopener noreferrer">
+          Open wallet ↗
+        </a>
       </aside>
       <p className="eyebrow">CONNECTION REFERENCE</p>
       <h1>

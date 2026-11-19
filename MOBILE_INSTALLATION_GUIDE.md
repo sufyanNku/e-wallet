@@ -11,6 +11,8 @@ The application currently supports local chains and public testnets; real funds 
 - **Backend and built wallet approval windows:** <http://127.0.0.1:8787>.
 - **Metro:** port **8081** — serves JavaScript to native debug builds.
 
+These are preferred development ports. `pnpm dev` automatically chooses free replacements when needed; use its printed wallet and backend URLs. Existing services remain running.
+
 A newly created wallet starts empty. Restore the prepared local identity after seeding to view actual node-backed holdings. There is no frontend-only sample-balance mode.
 
 ## 2. Prepare the repository and backend
@@ -53,6 +55,8 @@ Continue when the phone appears as `device`. `unauthorized` means approval is pe
 adb reverse tcp:8787 tcp:8787
 adb reverse tcp:8081 tcp:8081
 ```
+
+If the backend selected a different port, set `EXPO_PUBLIC_API_URL` to that printed backend origin when building the app and reverse that port instead. For example, for backend port 8788, use `adb reverse tcp:8788 tcp:8788`. Keep the separate Metro route on 8081.
 
 These routes let the phone use `http://127.0.0.1:8787` for this project's API and port 8081 for Metro. They may need to be recreated after reconnecting the phone. They do not expose your computer to the public internet.
 
@@ -185,7 +189,7 @@ For private testing on additional registered devices, a team enrolled in the App
 
 ## 6. Troubleshooting
 
-- **Light developer page instead of dark wallet:** use port **5173**, not **5174**.
+- **Developer reference page instead of wallet:** use the **Open your wallet** URL printed by the launcher.
 - **Android app cannot load JavaScript:** start Metro, recreate the two `adb reverse` routes, and check `adb devices`.
 - **iPhone app cannot load JavaScript:** use Metro's LAN binding, correct development server host, same reachable network and firewall access.
 - **Balances/API fail while the app opens:** check the API URL, HTTPS trust, backend Host allowlist and `/api/v1/health`. A functioning Metro server does not imply a functioning backend.

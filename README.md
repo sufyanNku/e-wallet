@@ -18,7 +18,7 @@ pnpm accounts:setup
 EWALLET_ACCOUNTS=1 pnpm dev
 ```
 
-Open the wallet at **http://127.0.0.1:5173**. Open **/accounts** for username login. Port **5174** hosts the separate developer reference application; port **8787** hosts the API and built wallet used by connection approvals.
+Open the **Open your wallet** URL printed by `pnpm dev`. Preferred ports are 5173 for the wallet, 5174 for the reference application and 8787 for the backend/approval wallet. If occupied, the launcher automatically selects free ports and configures the API proxy, exact allowed origins and approval links together. It leaves existing services running. Append `/accounts` to the printed wallet URL for username login.
 
 A newly created wallet is empty. Restore the prepared Alice phrase from the ignored `.local/secrets/alice.json` file to use seeded holdings. The local identities are deliberately public and insecure: never use them on public networks or for real funds. Accounts passwords are generated separately in `.local/local/accounts-credentials.json`.
 
@@ -30,7 +30,9 @@ pnpm accounts:setup
 pnpm dev:accounts
 ```
 
-Stop an existing development server before starting another. Accounts is enabled only when explicitly requested and remains restricted to local use.
+Each launch uses its own available ports. You can set preferred starting ports with `EWALLET_WALLET_PORT`, `EWALLET_DAPP_PORT` and `PORT`; occupied preferences still fall back automatically. Accounts is enabled only when explicitly requested and remains restricted to local use.
+
+A different wallet port is a different browser origin, with its own encrypted vault. Existing vaults remain at their original URLs. Use the printed addresses rather than an old bookmark.
 
 ## Data and seeding
 
