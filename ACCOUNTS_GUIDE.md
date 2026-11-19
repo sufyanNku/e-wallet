@@ -11,11 +11,10 @@ The workspace automatically selects Node **24.22.3** for pnpm commands.
 git pull --ff-only
 pnpm install --frozen-lockfile
 pnpm node --version
-pnpm build:wallet
 pnpm accounts:setup
 ```
 
-Setup creates these accounts:
+Setup (or the first local startup) prepares these accounts:
 
 - `alice` — **Member**, initially 1,000.00 credits.
 - `bob` — **Member**, initially 1,000.00 credits.
@@ -44,7 +43,7 @@ Open the **Account logins and RBAC** URL printed by the launcher; normally **htt
 
 You can also select **Sign in to your account** on the wallet welcome page, or **Accounts** in the wallet sidebar.
 
-The command enables `EWALLET_ACCOUNTS=1` for this process. Ordinary `pnpm dev` leaves the account API disabled. Each launch starts its own backend on an available port with the matching origin configuration.
+Both `pnpm dev` and `pnpm dev:accounts` enable and prepare Accounts automatically for local development. Each launch starts its own backend on an available port with the matching origin configuration. Set `EWALLET_ACCOUNTS=0` with `pnpm dev` to deliberately disable account access.
 
 The dev launcher may report that blockchain nodes need starting or seeding. Those messages concern the separate crypto wallet; the SQLite account ledger works without the nodes.
 
@@ -104,7 +103,7 @@ Admin can suspend/re-enable **Member** accounts. Admin cannot change anyone's pa
 - Debit, credit, receipt and transfer audit event are committed together in one SQLite transaction. Insufficient funds, negative/zero amounts, extra decimal places, self-transfers and suspended recipients are rejected.
 - Each reviewed transfer has a request ID. Retrying that request returns its existing receipt instead of making a second debit; changing the amount or recipient under the same ID is rejected.
 - Account suspension invalidates existing account sessions immediately. Login failures are throttled; after five failures against one account, wait one minute.
-- The feature is off by default and refuses production mode, public-testnet mode and non-loopback server binding.
+- The local development launcher enables Accounts automatically. The standalone API keeps it disabled unless configured, and still refuses production mode, public-testnet mode and non-loopback server binding.
 
 These are application permissions for local use, not a production custody or real-money banking system. Administrator access to the computer/database itself is outside the application permission boundary.
 

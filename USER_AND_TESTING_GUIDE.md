@@ -41,8 +41,6 @@ Use this option for username login, credit transfers and roles. Blockchain nodes
    ```sh
    pnpm install --frozen-lockfile
    pnpm node --version
-   pnpm build:wallet
-   pnpm accounts:setup
    pnpm dev:accounts
    ```
 
@@ -63,13 +61,12 @@ pnpm install --frozen-lockfile
 pnpm preflight
 pnpm infra:up
 pnpm seed:local
-pnpm accounts:setup
-EWALLET_ACCOUNTS=1 pnpm dev
+pnpm dev
 ```
 
 This starts the web wallet, Accounts API, reference connection application and local bridge relayer. Docker hosts the local chain nodes. Allow the seed command to finish before opening the wallet.
 
-On Windows PowerShell, replace the last command with `$env:EWALLET_ACCOUNTS="1"; pnpm dev`.
+`pnpm dev` prepares local Accounts automatically and preserves existing credentials and balances. To disable this local feature deliberately, set `EWALLET_ACCOUNTS=0`.
 
 The usual addresses are listed below. If a port is occupied, `pnpm dev` prints the replacement URLs and configures the services to match. Open the URLs printed for your current run:
 
@@ -384,7 +381,7 @@ Record phone model, OS version, app version, result and any error. Native biomet
 - **Sending a token fails despite a token balance:** The sender may lack the native asset required for the network fee.
 - **A second login replaces the first:** Use independent browser profiles rather than two tabs sharing cookies.
 - **You forgot the crypto-wallet password:** Restore from your recovery phrase in a fresh browser profile/device and choose a new password. There is no email reset for a self-custody wallet. An encrypted backup file still needs its own password.
-- **Accounts are unavailable:** Stop the existing server and start `pnpm dev:accounts`, or use `EWALLET_ACCOUNTS=1 pnpm dev` for the complete environment.
+- **Accounts are unavailable:** Restart with `pnpm dev` and open the wallet URL printed by that run. Accounts is prepared automatically in local development. Check that `EWALLET_ACCOUNTS=0` is not set.
 - **The app cannot reach the backend:** Android needs ADB port reversal for the documented USB setup. A physical iPhone needs a reachable HTTPS API.
 - **A test says a port is occupied:** Stop the existing development/Metro/test process. Do not reset Docker volumes to solve a port conflict.
 - **After tests, screens look different:** Run `pnpm build:wallet` and restart the intended development command. Local and testnet builds share an output directory.
@@ -400,7 +397,7 @@ The full-suite report distinguishes automated passes, external-service limitatio
 After testing, restart the project:
 
 ```sh
-EWALLET_ACCOUNTS=1 pnpm dev
+pnpm dev
 ```
 
 For a short account walkthrough, follow features **26 → 27 → 28**. For the crypto wallet, follow **02 → 10 → 12 → 14 → 15**.

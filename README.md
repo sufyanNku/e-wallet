@@ -14,8 +14,7 @@ pnpm node --version
 pnpm preflight
 pnpm infra:up
 pnpm seed:local
-pnpm accounts:setup
-EWALLET_ACCOUNTS=1 pnpm dev
+pnpm dev
 ```
 
 Open the **Open your wallet** URL printed by `pnpm dev`. Preferred ports are 5173 for the wallet, 5174 for the reference application and 8787 for the backend/approval wallet. If occupied, the launcher automatically selects free ports and configures the API proxy, exact allowed origins and approval links together. It leaves existing services running. Append `/accounts` to the printed wallet URL for username login.
@@ -25,12 +24,10 @@ A newly created wallet is empty. Restore the prepared Alice phrase from the igno
 For Accounts without blockchain nodes:
 
 ```sh
-pnpm build:wallet
-pnpm accounts:setup
 pnpm dev:accounts
 ```
 
-Each launch uses its own available ports. You can set preferred starting ports with `EWALLET_WALLET_PORT`, `EWALLET_DAPP_PORT` and `PORT`; occupied preferences still fall back automatically. Accounts is enabled only when explicitly requested and remains restricted to local use.
+Each launch uses its own available ports. You can set preferred starting ports with `EWALLET_WALLET_PORT`, `EWALLET_DAPP_PORT` and `PORT`; occupied preferences still fall back automatically. Accounts is enabled and initialized automatically by `pnpm dev` in local development. Existing passwords, balances and history are preserved. Set `EWALLET_ACCOUNTS=0` to turn it off; production and public-testnet restrictions remain enforced.
 
 A different wallet port is a different browser origin, with its own encrypted vault. Existing vaults remain at their original URLs. Use the printed addresses rather than an old bookmark.
 

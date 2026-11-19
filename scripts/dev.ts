@@ -87,10 +87,15 @@ async function start() {
       : await ports.reserve(preferredPort(process.env.EWALLET_DAPP_PORT, 5174));
   if (stopping) return;
   const origin = (port: number) => "http://127.0.0.1:" + port;
+  const accounts =
+    process.env.EWALLET_ACCOUNTS !== "0" &&
+    process.env.NODE_ENV !== "production" &&
+    (process.env.EWALLET_MODE ?? "local") === "local";
   const env = {
     ...process.env,
     HOST: "127.0.0.1",
     PORT: String(backend),
+    EWALLET_ACCOUNTS: accounts ? "1" : "0",
     EWALLET_WALLET_PORT: String(wallet),
     ...(reference === null ? {} : { EWALLET_DAPP_PORT: String(reference) }),
     EWALLET_PUBLIC_ORIGINS: [
@@ -106,6 +111,27 @@ async function start() {
     VITE_EWALLET_APPROVAL_URL: origin(backend),
     VITE_EWALLET_WALLET_URL: origin(wallet),
   };
+  if (accounts) {
+    await new Promise<void>((resolve, reject) => {
+      const child = spawn("pnpm", ["accounts:setup"], {
+        stdio: "inherit",
+        env,
+        detached: process.platform !== "win32",
+      });
+      children.push(child);
+      child.once("error", reject);
+      child.once("exit", (code) =>
+        code === 0
+          ? resolve()
+          : reject(
+              new Error(
+                "Account setup failed; existing accounts were not reset.",
+              ),
+            ),
+      );
+    });
+  }
+  if (stopping) return;
   await ports.release(backend);
   launch(["serve:web"], env);
   await ports.release(wallet);
@@ -136,7 +162,7 @@ async function start() {
       origin(backend) +
       "\nExisting nodes are used without reset or reseeding.",
   );
-  if (process.env.EWALLET_ACCOUNTS === "1")
+  if (accounts)
     console.log("Account logins and RBAC: " + origin(wallet) + "/accounts");
 }
 try {

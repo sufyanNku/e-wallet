@@ -1,9 +1,8 @@
 import "./report-paths.ts";
 import assert from "node:assert/strict";
-import { spawn, execFile, type ChildProcess } from "node:child_process";
+import { spawn, type ChildProcess } from "node:child_process";
 import { createServer, type Server } from "node:http";
 import { open, writeFile, readFile, mkdtemp, rm } from "node:fs/promises";
-import { promisify } from "node:util";
 import { chromium } from "@playwright/test";
 
 const directory = await mkdtemp(".local/dev-smoke-");
@@ -35,9 +34,8 @@ try {
     EWALLET_DAPP_PORT: "5174",
     EWALLET_DATABASE_PATH: directory + "/backend.sqlite",
     EWALLET_PUBLIC_ORIGINS: undefined,
-    EWALLET_ACCOUNTS: "1",
+    EWALLET_ACCOUNTS: undefined,
   };
-  await promisify(execFile)("pnpm", ["accounts:setup"], { env });
   child = spawn("pnpm", ["dev"], {
     stdio: ["ignore", log.fd, log.fd],
     env,

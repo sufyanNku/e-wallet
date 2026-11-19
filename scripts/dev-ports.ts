@@ -21,7 +21,9 @@ export class DevPorts {
           ? 0
           : preferred + attempt;
       if (this.reservations.has(port)) continue;
-      const server = createServer();
+      // Browser auto-reconnects can reach a reserved port during setup. Never
+      // retain those sockets: server.close() must finish before Vite can bind.
+      const server = createServer((socket) => socket.destroy());
       const listening = await new Promise<boolean>((resolve, reject) => {
         server.once("error", (error: NodeJS.ErrnoException) => {
           if (["EADDRINUSE", "EACCES"].includes(error.code ?? ""))
