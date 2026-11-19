@@ -1,4 +1,5 @@
 import { Discover } from "./discover";
+import { TeamDemo } from "./team-demo";
 import { RealEvaluation } from "./real-evaluation";
 import { ConnectPage } from "./connect-page";
 import { RealService, RealServices } from "./real-services";
@@ -169,6 +170,7 @@ function Shell() {
             <FlaskConical size={19} />
             Network status
           </NavLink>
+          {__WALLET_MODE__ === "local" && <NavLink to="/team-demo"><ShieldCheck size={19} /> Classroom demo</NavLink>}
         </div>
       </aside>
       <div className="app-body">
@@ -461,6 +463,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {__WALLET_MODE__ === "local" && <Route path="/team-demo" element={<TeamDemo />} />}
         {__WALLET_MODE__ !== "mock" && (
           <Route element={<OnboardingShell />}>
             <Route path="/connect" element={<ConnectPage />} />

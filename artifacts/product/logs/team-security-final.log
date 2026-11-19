@@ -1,0 +1,12 @@
+RUN  v4.1.12 /home/sufyan/Desktop/Dev/E-wallet
+
+ ✓ tests/security/team-demo.test.ts (6 tests) 2636ms
+   ✓ requires authentication, exact origin, CSRF and honest credentials; revokes logout and expiry  544ms
+   ✓ blocks admin access and forged ownership, performs exact transfers and prevents replay  438ms
+   ✓ enforces Auditor read-only access and immediately revokes suspended Members  513ms
+   ✓ throttles repeated bad passwords even across public sessions  666ms
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  15:05:31
+   Duration  2.94s (transform 87ms, setup 0ms, import 175ms, tests 2.64s, environment 0ms)

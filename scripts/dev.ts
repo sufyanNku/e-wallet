@@ -76,6 +76,11 @@ else {
     body = (await response.json()) as { data: { service: string } };
   if (!response.ok || body.data.service !== "e-wallet")
     throw new Error("Port 8787 belongs to another service.");
+  if (process.env.EWALLET_TEAM_DEMO === "1") {
+    const status = await fetch("http://127.0.0.1:8787/api/v1/team-demo/status", { signal: AbortSignal.timeout(2000) });
+    if (!status.ok || !(await status.json()).data?.enabled)
+      throw new Error("Stop the existing pnpm dev process, then run pnpm demo:dev to enable classroom accounts.");
+  }
   console.log("Using the existing e-wallet backend.");
 }
 if (!(await available(5173))) {
@@ -105,3 +110,5 @@ if (process.argv[2] !== "wallet") {
 console.log(
   "Open your wallet: http://127.0.0.1:5173\nDeveloper reference dapp (connection tests): http://127.0.0.1:5174\nBackend and built approval windows: http://127.0.0.1:8787\nExisting nodes are used without reset or reseeding.",
 );
+if (process.env.EWALLET_TEAM_DEMO === "1")
+  console.log("Classroom logins and RBAC: http://127.0.0.1:5173/team-demo (SQLite demo credits; no blockchain funds).");

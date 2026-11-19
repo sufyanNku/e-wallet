@@ -19,7 +19,7 @@ it("migrates idempotently and commits event deduplication, watch isolation and c
         n: number;
       }
     ).n,
-  ).toBe(8);
+  ).toBe(9);
   db.prepare(
     "INSERT INTO sessions(id,csrf_hash,expires_at) VALUES (?,?,?)",
   ).run("alice", "hash", Date.now() + 60000);

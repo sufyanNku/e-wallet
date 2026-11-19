@@ -28,6 +28,7 @@ export function RealWelcome() {
         <Link className="button secondary" to="/import">
           Restore wallet
         </Link>
+        {__WALLET_MODE__ === "local" && <Link className="text-link" to="/team-demo">Classroom demo · Account login and roles</Link>}
       </div>
       <p className="muted small">
         Keys stay in this browser. We cannot reset a lost recovery phrase.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-19T09:34:16.357117Z",
+  "updatedAt": "2026-11-19T10:06:07.398472+00:00",
   "phases": [
     {
       "phase": "01",
@@ -3014,6 +3014,37 @@
       "mobileWidth": 390,
       "horizontalClipping": false,
       "guide": "MOBILE_INSTALLATION_GUIDE.md"
+    }
+  },
+  "classroomDemo": {
+    "state": "passed",
+    "scope": "Local web demo with server-enforced Member/Admin/Auditor permissions and atomic SQLite demo-credit transfers",
+    "guidePath": "RBAC_DEMO_GUIDE.md",
+    "verificationPath": "artifacts/product/team-demo-verification.json",
+    "browserProofPath": "artifacts/product/team-demo-browser.json",
+    "commands": [
+      "pnpm demo:setup",
+      "pnpm demo:dev",
+      "pnpm test:demo"
+    ],
+    "realFundsEnabled": false,
+    "blockchainTransfers": false,
+    "nativeLoginIncluded": false,
+    "defaultEnabled": false,
+    "checks": {
+      "unitTests": 76,
+      "unitTestFiles": 27,
+      "focusedSecurityTests": 6,
+      "browserScenarioTests": 1,
+      "responsiveWidths": [
+        320,
+        390,
+        768,
+        1440
+      ],
+      "accessibilityViolations": 0,
+      "typecheck": "passed",
+      "lint": "passed"
     }
   }
 }

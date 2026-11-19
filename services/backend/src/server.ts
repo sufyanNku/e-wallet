@@ -1,4 +1,5 @@
 import { registerMarkets } from "./markets";
+import { registerTeamDemo, teamDemoEnabled } from "./team-demo";
 import { runtimeConfig } from "./runtime-config";
 import { observeBridge } from "./bridge-observer";
 import { localManifestSchema } from "../../../packages/domain/src/local-manifest";
@@ -107,6 +108,7 @@ export async function buildServer(options: { databasePath?: string } = {}) {
     runtime,
   );
   registerMarkets(app);
+  registerTeamDemo(app, sessions.db, sessions.session, teamDemoEnabled() && frontendMode === "local");
   await registerBitcoinWatch(app, sessions.db, sessions.session);
   const indexer = await registerWatchApi(app, sessions.db, sessions.session);
   registerReadApi(app, sessions.db, sessions.session, indexer);

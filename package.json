@@ -8,6 +8,9 @@
     "node": ">=24.15.0 <25"
   },
   "scripts": {
+    "demo:setup": "tsx scripts/setup-team-demo.ts",
+    "demo:dev": "tsx scripts/dev-team-demo.ts",
+    "test:demo": "pnpm build:wallet && playwright test --config playwright.team-demo.config.ts",
     "dev:ui": "vite --config apps/wallet/vite.config.ts --mode mock",
     "build:web": "vite build --config apps/wallet/vite.config.ts --mode mock",
     "serve:web": "tsx services/backend/src/server.ts",

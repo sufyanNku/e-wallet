@@ -1,0 +1,160 @@
+.team-demo {
+  min-height: 100dvh;
+  background: var(--bg, #121116);
+}
+.team-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.4rem max(1rem, calc((100% - 1120px) / 2));
+  border-bottom: 1px solid #302d37;
+}
+.team-header .brand {
+  margin-right: auto;
+}
+.team-main {
+  max-width: 1120px;
+  margin: auto;
+  padding: 2.5rem 1.5rem 5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+.team-title h1 {
+  margin: 0.25rem 0 0.75rem;
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  letter-spacing: -0.055em;
+}
+.team-title .eyebrow {
+  color: #bea1f5;
+  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+}
+.team-login-grid,
+.team-wallet-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+.team-demo h2 {
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.team-demo .panel {
+  padding: 1.5rem;
+  min-width: 0;
+}
+.team-explainer {
+  padding: 1.5rem;
+  line-height: 1.7;
+}
+.team-explainer p {
+  margin: 1rem 0;
+}
+.team-account-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.team-account-heading h2 {
+  font-size: 1.6rem;
+  margin: 0;
+}
+.team-account-heading p {
+  margin-bottom: 0;
+}
+.team-balance {
+  padding: 2rem;
+  border-radius: 1.2rem;
+  background: #30253e;
+  border: 1px solid #4d3b62;
+  min-height: 220px;
+}
+.team-balance > strong {
+  display: block;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.055em;
+  overflow-wrap: anywhere;
+}
+.team-balance p {
+  color: #d0bbeb;
+}
+.team-history,
+.team-users {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.team-history li,
+.team-users li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid #302d37;
+  padding: 1rem 0;
+}
+.team-history p,
+.team-users p {
+  margin: 0.3rem 0;
+  font-size: 0.8rem;
+}
+.team-history code {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: 0.7rem;
+  color: #afa5bb;
+}
+.team-history li > div {
+  min-width: 0;
+}
+.team-history li > strong,
+.team-users li > span {
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+.team-permission-check {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.team-demo pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  padding: 1rem;
+  background: #201c27;
+}
+.team-demo .notice {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 700px) {
+  .team-login-grid,
+  .team-wallet-grid {
+    grid-template-columns: 1fr;
+  }
+  .team-header {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .team-header .brand {
+    font-size: 1.2rem;
+  }
+  .team-header .text-link {
+    font-size: 0.75rem;
+  }
+  .team-main {
+    padding: 1.5rem 1rem 4rem;
+  }
+  .team-history li,
+  .team-users li,
+  .team-permission-check,
+  .team-account-heading {
+    flex-wrap: wrap;
+  }
+}

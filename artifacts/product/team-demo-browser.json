@@ -1,0 +1,27 @@
+{
+  "observedAt": "2026-11-19T09:55:26.437Z",
+  "source": "Actual browser and isolated SQLite database",
+  "twoIndependentLogins": true,
+  "transferAmount": "25.15",
+  "aliceBalance": "974.85",
+  "bobBalance": "1025.15",
+  "memberAdminDenied": 403,
+  "auditorTransferDenied": 403,
+  "suspendedSessionRevoked": true,
+  "reenablePreservedBalance": true,
+  "mobileWidth": 390,
+  "horizontalClipping": false,
+  "realFundsEnabled": false,
+  "testedWidths": [
+    320,
+    390,
+    768,
+    1440
+  ],
+  "accessibilityViolations": 0,
+  "screenshots": [
+    "team-demo-alice.png",
+    "team-demo-auditor.png",
+    "team-demo-mobile.png"
+  ]
+}

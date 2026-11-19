@@ -6,6 +6,10 @@ A self-custody wallet with a redesigned React web client and a **React Native / 
 
 The product now includes wallet-first navigation, token search, a command palette, notifications, market discovery, native secure storage, QR receive/scanning, native transaction review, on-chain balances/history, local swaps and collectible transfer flows. Market watch uses Coinbase spot quotes; demo portfolio values remain clearly separate. Original e-wallet branding is retained.
 
+## Classroom logins and RBAC
+
+For a two-account presentation, follow [RBAC_DEMO_GUIDE.md](RBAC_DEMO_GUIDE.md). Run `pnpm build:wallet`, `pnpm demo:setup`, then `pnpm demo:dev`, and open **http://127.0.0.1:5173/team-demo**. Alice and Bob are Members; separate Admin and Auditor accounts demonstrate server-enforced permissions. Passwords are generated locally under ignored `.local/`. This area transfers **SQLite demo credits**, not blockchain assets or real money. It is disabled by default and unavailable in production/testnet mode. No chain node is needed for the classroom ledger.
+
 ## Android and iOS
 
 For direct phone installation without publishing, follow [MOBILE_INSTALLATION_GUIDE.md](MOBILE_INSTALLATION_GUIDE.md).
