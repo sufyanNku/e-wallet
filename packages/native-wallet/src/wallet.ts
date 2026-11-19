@@ -912,18 +912,43 @@ export class NativeWallet {
   }
   async reset(password: string) {
     this.assert();
-    await decryptNativeSecret((await this.store.get(this.slot))!, password);
+    const generation = this.generation;
+    const target = await this.resetTarget();
+    await decryptNativeSecret(target, password);
+    this.assert(generation);
+    await this.forgetWallet(target, "RESET WALLET", true);
+  }
+  async resetTarget() {
+    const target = await this.store.get(this.slot);
+    if (!target) throw new Error("There is no saved wallet to reset.");
+    return target;
+  }
+  async forgetWallet(
+    target: string,
+    confirmation: string,
+    acknowledged: boolean,
+  ) {
+    if (!acknowledged || confirmation !== "RESET WALLET")
+      throw new Error("Confirm your recovery backup and type RESET WALLET.");
+    if (!target || (await this.store.get(this.slot)) !== target)
+      throw new Error("Wallet data changed. Open the reset screen again.");
     this.lock();
-    await this.store.remove(this.slot);
+    // Keep the vault if public-data cleanup fails, so removal can be retried.
     await this.store.remove("public.testnet.v1");
     await this.store.remove("journal.testnet.v1");
+    await this.store.remove(this.slot);
+    this.envelope = null;
     this.journal = [];
     this.emit({
       initialized: false,
       accounts: [],
+      selectedAccountId: "",
       balances: [],
       activity: [],
       collectibles: [],
+      history: undefined,
+      status: "idle",
+      updatedAt: null,
     });
   }
 }

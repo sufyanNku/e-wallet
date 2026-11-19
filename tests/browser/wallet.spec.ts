@@ -89,7 +89,13 @@ test("real wallet routes and onboarding fit phone, tablet and desktop widths", a
         /\bclassroom\b|\buniversity\b|\binstructor\b|\bmock\b/iu,
       );
     }
-    for (const path of ["/welcome", "/create", "/import", "/unlock"]) {
+    for (const path of [
+      "/welcome",
+      "/create",
+      "/import",
+      "/unlock",
+      "/reset",
+    ]) {
       await walletRoute(page, path);
       expect(
         await page.evaluate(
@@ -116,6 +122,8 @@ test("built wallet routes remain accessible without a frontend data fallback", a
     "/collectibles",
     "/settings",
     "/connect",
+    "/unlock",
+    "/reset",
   ]) {
     await walletRoute(page, path);
     const result = await new AxeBuilder({ page })

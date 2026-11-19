@@ -268,6 +268,36 @@ export class RealWalletGateway implements WalletGateway {
     this.status(
       await this.client.request("vault.reset", { password, acknowledged }),
     );
+    this.clearResetState();
+  }
+  async resetTarget() {
+    const status = coreStatusSchema.parse(
+      await this.client.request("session.status", {}),
+    );
+    if (!status.walletId || status.revision === null)
+      throw new Error("There is no saved wallet to reset.");
+    return { walletId: status.walletId, revision: status.revision };
+  }
+  async forgetWallet(
+    target: { walletId: string; revision: number },
+    confirmation: string,
+    acknowledged: boolean,
+  ) {
+    if (!acknowledged || confirmation !== "RESET WALLET")
+      throw new Error("Confirm your recovery backup and type RESET WALLET.");
+    this.status(
+      await this.client.request("vault.forget", {
+        ...target,
+        confirmation: "RESET WALLET",
+        acknowledged: true,
+      }),
+    );
+    this.clearResetState();
+  }
+  private clearResetState() {
+    this.bitcoinReceive.clear();
+    this.historyPages.clear();
+    this.mediaCache.clear();
     this.emit({
       balances: [],
       contacts: [],

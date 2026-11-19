@@ -1,4 +1,5 @@
 import { BitcoinAccess } from "./bitcoin-access";
+import { ResetWallet } from "./reset-wallet";
 import { Dropdown } from "@ewallet/ui";
 import { displayNetworkName, displayAssetName } from "@ewallet/domain";
 import { Discover } from "./discover";
@@ -498,6 +499,7 @@ export default function App() {
           <Route path="/create" element={<Create />} />
           <Route path="/import" element={<Import />} />
           <Route path="/unlock" element={<Unlock />} />
+          <Route path="/reset" element={<ResetWallet />} />
         </Route>
         <Route element={<Guard />}>
           <Route element={<Shell />}>

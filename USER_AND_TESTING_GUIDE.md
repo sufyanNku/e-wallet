@@ -121,7 +121,7 @@ For each feature, follow **Use**, then check **Developer test**. Automated suite
 
 ### 02. Restore a crypto wallet — web and mobile
 
-**Use:** Choose Restore wallet or I already have a wallet. Enter the recovery words and optional BIP39 passphrase, then set a wallet password. Words pasted with commas are accepted. If a wallet is already saved, choose **Open existing wallet** or **Unlock existing wallet**. To replace it, first back it up and use the explicit removal flow in Settings; restoring cannot overwrite saved keys. A separate browser profile lets you restore independently.
+**Use:** Choose Restore wallet or I already have a wallet. Enter the recovery words and optional BIP39 passphrase, then set a wallet password. Words pasted with commas are accepted. If a wallet is already saved, choose **Open existing wallet** or **Unlock existing wallet**. The locked screen also offers **Create new wallet**, **Restore wallet** and **Reset wallet**. Creation/restoration of a different wallet first asks you to acknowledge your backup and type **RESET WALLET** before removing the saved copy. Cancel keeps it intact. Use a separate browser profile to keep both wallets independently.
 
 **Developer test:** Restore the same testing phrase in two independent profiles. Their addresses must match for the same network/account path. Invalid words must fail. A different BIP39 passphrase creates different accounts. Automated: Core browser and native-core suites.
 
@@ -153,9 +153,9 @@ Settings also offers **Export public metadata** for inspecting public account in
 
 ### 07. Reset the wallet on a device or browser — web and mobile
 
-**Use:** Back up your recovery phrase first. In Settings, choose the wallet-removal/reset action, enter the password and acknowledge the backup requirement.
+**Use:** Back up your recovery phrase first. Choose **Reset wallet** on the locked screen or in Settings. Read what will be removed, select the recovery-backup acknowledgment, type **RESET WALLET**, then confirm. The old password is not required to remove the local copy. Creation/restoration actions use the same confirmation and then open the chosen next step. Reset cannot reveal keys or move blockchain assets; without recovery information, removing the local copy can permanently lose access.
 
-**Developer test:** Missing acknowledgment and wrong passwords must fail. A successful reset returns to onboarding. It must remove only that local wallet, not another browser profile, another device or blockchain holdings. Restore in a disposable profile to confirm recovery. Automated: Core and native lifecycle tests; manually check the native reset screen.
+**Developer test:** Missing acknowledgment or incorrect typed confirmation must keep Reset disabled. Cancel must preserve the wallet. A confirmation for a wallet/revision changed in another tab must fail. Verify Reset → welcome, Create → creation and Restore → import from the locked screen. Restore the same phrase afterward and compare addresses. Cleanup failure must keep the encrypted vault available for retry. Reset must leave other browser profiles, devices, blockchain holdings and backend credit balances intact. Automated: Core browser, Worker/storage and native lifecycle tests; manually check the native reset screen.
 
 ### 08. Manage accounts and recover additional accounts — web and mobile
 

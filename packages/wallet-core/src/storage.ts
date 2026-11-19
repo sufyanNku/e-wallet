@@ -143,7 +143,7 @@ export class VaultStore {
       await tx.done;
     });
   }
-  async reset(expectedRevision: number) {
+  async reset(expectedRevision: number, expectedWalletId?: string) {
     return this.exclusive("vault-write", async () => {
       const db = await this.db,
         tx = db.transaction(
@@ -158,9 +158,11 @@ export class VaultStore {
           ],
           "readwrite",
         );
+      const current = await tx.objectStore("vault").get("root");
       if (
-        (await tx.objectStore("vault").get("root"))?.revision !==
-        expectedRevision
+        current?.revision !== expectedRevision ||
+        (expectedWalletId !== undefined &&
+          current?.walletId !== expectedWalletId)
       ) {
         tx.abort();
         await tx.done.catch(() => {});
@@ -177,8 +179,12 @@ export class VaultStore {
   async close() {
     (await this.db).close();
   }
-  async permissions(){return(await this.db).getAll('permissions');}
-  async savePermission<T extends{id:string}>(permission:T){await(await this.db).put('permissions',permission,permission.id);}
+  async permissions() {
+    return (await this.db).getAll("permissions");
+  }
+  async savePermission<T extends { id: string }>(permission: T) {
+    await (await this.db).put("permissions", permission, permission.id);
+  }
   async allJournal() {
     return (await this.db).getAll("journal");
   }

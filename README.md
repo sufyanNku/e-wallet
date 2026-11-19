@@ -23,6 +23,8 @@ A newly created wallet is empty. Restore the prepared Alice phrase from the igno
 
 Crypto wallets unlock with a wallet password and require no username. After creating a wallet on local web, you can optionally register a credit account with your own username and account password. Choose **Credit account** in the sidebar to return to it. New registrations are Members with zero credits; existing users can transfer credits to them. **Sign out of wallet** locks signing keys and ends the credit-account session; **Lock wallet** only locks the signing vault.
 
+The locked screen offers **Create new wallet**, **Restore wallet** and **Reset wallet**. Replacing a saved wallet requires a recovery-backup acknowledgment and typing **RESET WALLET**; canceling preserves it. Reset removes the device/browser copy without requiring the forgotten password. It cannot recover keys, move assets or reset backend credit balances. Use a separate browser profile to keep an additional independent wallet. Two independently generated wallets remain different even if their owners choose the same password: wallet keys come from random recovery words, while the password encrypts the device copy.
+
 For Accounts without blockchain nodes:
 
 ```sh

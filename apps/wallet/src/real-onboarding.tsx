@@ -4,6 +4,7 @@ import { WalletCards, KeyRound } from "lucide-react";
 import { Button, Field, Panel, Notice } from "@ewallet/ui";
 import { useWallet, useAction } from "./context";
 import type { RealWalletGateway } from "./real-gateway";
+import { WalletAccessActions } from "./reset-wallet";
 export function RealWelcome() {
   const { snapshot: s } = useWallet();
   return (
@@ -43,6 +44,7 @@ export function RealWelcome() {
           </Link>
         )}
       </div>
+      {s.initialized && <WalletAccessActions />}
       <p className="muted small">
         Unlock this wallet with its wallet password; no username is needed.
         Credit accounts have a separate username and account password.
@@ -78,6 +80,7 @@ function SavedWallet() {
           existing keys.
         </p>
       </Panel>
+      <WalletAccessActions />
       <Link className="text-link" to="/welcome">
         Back to welcome
       </Link>
@@ -395,7 +398,8 @@ export function RealUnlock() {
       <h1>Your wallet is locked</h1>
       <p className="muted">
         Enter the wallet password you chose when you created or restored this
-        wallet. No username is needed. Reloading or closing a window locks it.
+        wallet. It unlocks only the wallet saved in this browser. Reloading or
+        closing a window locks it.
       </p>
       <Panel>
         <form
@@ -412,6 +416,8 @@ export function RealUnlock() {
             label="Wallet password"
             type="password"
             autoComplete="off"
+            required
+            maxLength={1024}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -421,10 +427,22 @@ export function RealUnlock() {
           </Button>
         </form>
       </Panel>
+      <WalletAccessActions />
+      <details className="wallet-password-help">
+        <summary>What if someone else uses the same password?</summary>
+        <p>
+          Each new wallet has randomly generated recovery words and keys. The
+          password encrypts your saved wallet; it does not create its addresses
+          or identify you to a server. Two people choosing the same password
+          still have different wallets. Someone with a copy of your encrypted
+          wallet and its password could unlock that copy.
+        </p>
+      </details>
       <p className="muted small">
-        Forgot this password? Restore your recovery words in a private browser
-        window to recover access without deleting the wallet saved here. An
-        encrypted backup still needs its own password.
+        Forgot this password? Choose Restore wallet to reset this browser’s
+        saved wallet and restore your recovery words with a new password. Use a
+        separate browser profile to restore without removing the saved wallet
+        here. An encrypted backup still needs its own password.
       </p>
       {s.lastError && s.lastError.code !== "LOCKED" && (
         <Notice tone="warning">{s.lastError.message}</Notice>

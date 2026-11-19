@@ -94,6 +94,88 @@ test("real Worker creates a wallet, verifies recovery backup and locks on reload
     page.getByRole("heading", { name: "Your wallet is locked" }),
   ).toBeVisible();
 });
+test("locked-screen reset, create and restore actions preserve the wallet until explicit confirmation", async ({
+  page,
+}) => {
+  test.setTimeout(60000);
+  await restore(page);
+  await page.getByRole("button", { name: "Lock wallet", exact: true }).click();
+  await page.getByLabel("Wallet password", { exact: true }).fill("short");
+  await page
+    .getByRole("button", { name: "Unlock wallet", exact: true })
+    .click();
+  await expect(
+    page.getByText(
+      "Unable to unlock. Check your password or encrypted backup.",
+      { exact: true },
+    ),
+  ).toBeVisible();
+  await page
+    .getByText("What if someone else uses the same password?", { exact: true })
+    .click();
+  await expect(
+    page.getByText(
+      /Two people choosing the same password still have different wallets/,
+    ),
+  ).toBeVisible();
+  await page
+    .getByRole("link", { name: "Create new wallet", exact: true })
+    .click();
+  await expect(
+    page.getByRole("button", {
+      name: "Reset and create new wallet",
+      exact: true,
+    }),
+  ).toBeDisabled();
+  await page
+    .getByRole("link", { name: "Cancel and keep saved wallet", exact: true })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "Your wallet is locked", exact: true }),
+  ).toBeVisible();
+  const confirmReset = async (name: string) => {
+    const button = page.getByRole("button", { name, exact: true });
+    await page
+      .getByLabel("Type RESET WALLET to confirm", { exact: true })
+      .fill("RESET WALLET");
+    await expect(button).toBeDisabled();
+    await page.getByRole("checkbox").check();
+    await button.click();
+  };
+  await page
+    .getByRole("link", { name: "Create new wallet", exact: true })
+    .click();
+  await confirmReset("Reset and create new wallet");
+  await expect(
+    page.getByRole("heading", { name: "Create wallet", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByLabel("Wallet password", { exact: true }),
+  ).toBeVisible();
+  await restore(page);
+  await page.getByRole("button", { name: "Lock wallet", exact: true }).click();
+  await page.getByRole("link", { name: "Restore wallet", exact: true }).click();
+  await confirmReset("Reset and restore wallet");
+  await expect(
+    page.getByLabel("Recovery phrase (12 or 24 English words)", {
+      exact: true,
+    }),
+  ).toBeVisible();
+  await restore(page);
+  await page
+    .getByRole("button", { name: "Manage accounts", exact: true })
+    .click();
+  await expect(
+    page.locator("code").filter({ hasText: vectors.accounts[0].address }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Close dialog", exact: true }).click();
+  await page.getByRole("button", { name: "Lock wallet", exact: true }).click();
+  await page.getByRole("link", { name: "Reset wallet", exact: true }).click();
+  await confirmReset("Reset wallet");
+  await expect(
+    page.getByRole("link", { name: "Create wallet", exact: true }),
+  ).toBeVisible();
+});
 test("published-vector recovery, encrypted export/restore, password changes, storage and cross-tab lock", async ({
   page,
   context,

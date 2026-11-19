@@ -71,7 +71,12 @@ export class WorkerClient {
       message = parseWorkerRequest({ protocolVersion: 1, id, method, payload });
     } catch {
       return Promise.reject(
-        new WalletError("INVALID_REQUEST", "Invalid wallet request."),
+        new WalletError(
+          "INVALID_REQUEST",
+          method === "vault.unlock"
+            ? "Enter your wallet password, up to 1,024 UTF-8 bytes."
+            : "Invalid wallet request.",
+        ),
       );
     }
     return new Promise((resolve, reject) => {

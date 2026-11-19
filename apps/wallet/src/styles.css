@@ -187,6 +187,25 @@ main:focus {
   flex-direction: column;
   gap: 16px;
 }
+.wallet-access-actions {
+  margin-top: 24px;
+  gap: 12px;
+}
+.wallet-access-actions .text-link {
+  text-align: center;
+  padding: 8px;
+}
+.wallet-password-help {
+  margin-top: 24px;
+  text-align: left;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.wallet-password-help summary {
+  color: var(--mint);
+  cursor: pointer;
+}
 .app-shell {
   min-height: 100dvh;
   display: grid;

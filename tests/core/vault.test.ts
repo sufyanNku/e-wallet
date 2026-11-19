@@ -14,6 +14,23 @@ import {
 import vectors from "../../fixtures/derivation-vectors.json";
 const password = "Test-only password with spaces";
 describe("encrypted vault", () => {
+  it("keeps independently generated wallets distinct even when they share a password", async () => {
+    const a = createSecret(),
+      b = createSecret();
+    const first = await seal(a, password),
+      second = await seal(b, password);
+    expect(first.walletId).not.toBe(second.walletId);
+    expect(first.kdf.saltBase64).not.toBe(second.kdf.saltBase64);
+    const openedA = await unseal(first, password),
+      openedB = await unseal(second, password);
+    expect(
+      derivePublic(openedA, first.walletId, { family: "evm", index: 0 })
+        .address,
+    ).not.toBe(
+      derivePublic(openedB, second.walletId, { family: "evm", index: 0 })
+        .address,
+    );
+  });
   it("uses fresh salt/IV, authenticated parameters and exact passwords", async () => {
     const secret = importSecret(vectors.mnemonic);
     const a = await seal(secret, password),

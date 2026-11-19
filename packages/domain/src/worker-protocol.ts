@@ -15,11 +15,20 @@ export const coreStatusSchema = z.object({
   lockReason: z.string(),
   mode: z.enum(["local", "testnet"]),
   revision: z.number().nullable(),
+  walletId: z.string().uuid().nullable(),
 });
 export type CoreStatus = z.infer<typeof coreStatusSchema>;
 const password = z
   .string()
   .min(12)
+  .max(1024)
+  .refine(
+    (p) => new TextEncoder().encode(p).length <= 1024,
+    "Password exceeds 1,024 UTF-8 bytes",
+  );
+const passwordAttempt = z
+  .string()
+  .min(1)
   .max(1024)
   .refine(
     (p) => new TextEncoder().encode(p).length <= 1024,
@@ -133,7 +142,7 @@ export const workerRequestSchema = z.discriminatedUnion("method", [
       })
       .strict(),
   ),
-  message("vault.unlock", z.object({ password }).strict()),
+  message("vault.unlock", z.object({ password: passwordAttempt }).strict()),
   message(
     "vault.lock",
     z.object({ reason: z.string().max(100).default("Explicit lock") }).strict(),
@@ -159,6 +168,17 @@ export const workerRequestSchema = z.discriminatedUnion("method", [
   message(
     "vault.reset",
     z.object({ password, acknowledged: z.boolean() }).strict(),
+  ),
+  message(
+    "vault.forget",
+    z
+      .object({
+        acknowledged: z.literal(true),
+        confirmation: z.literal("RESET WALLET"),
+        walletId: z.string().uuid(),
+        revision: z.number().int().nonnegative(),
+      })
+      .strict(),
   ),
   message("accounts.list", empty),
   message("portfolio.refresh", empty),

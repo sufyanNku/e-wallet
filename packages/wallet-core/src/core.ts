@@ -76,6 +76,7 @@ export class WalletCore {
   private accountId = "";
   private networkId = "eip155:31337";
   private revision: number | null = null;
+  private walletId: string | null = null;
   private approvals = new ApprovalLedger();
   private queue: Promise<unknown> = Promise.resolve();
   private initialized: Promise<void>;
@@ -209,7 +210,11 @@ export class WalletCore {
     this.checkDeadline();
     const envelope = await this.store.envelope();
     const accounts = await this.store.accounts();
-    if (this.secret && this.revision !== envelope?.revision)
+    if (
+      this.secret &&
+      (this.revision !== envelope?.revision ||
+        this.walletId !== envelope?.walletId)
+    )
       this.lock("Wallet changed in another window");
     return {
       initialized: Boolean(envelope),
@@ -225,6 +230,7 @@ export class WalletCore {
       lockReason: this.lockReason,
       mode: this.mode,
       revision: envelope?.revision ?? null,
+      walletId: envelope?.walletId ?? null,
     };
   }
   private async freshUnlock(password: string) {
@@ -252,7 +258,11 @@ export class WalletCore {
   }
   private async assertRevision() {
     const envelope = await this.store.envelope();
-    if (this.secret && envelope?.revision !== this.revision) {
+    if (
+      this.secret &&
+      (envelope?.revision !== this.revision ||
+        envelope?.walletId !== this.walletId)
+    ) {
       this.lock("Wallet changed in another window");
       throw new WalletError(
         "SESSION_INVALIDATED",
@@ -264,6 +274,7 @@ export class WalletCore {
     this.lock("New unlocked session");
     this.secret = secret;
     this.revision = envelope.revision;
+    this.walletId = envelope.walletId;
     this.lastTouch = this.clock();
     this.hiddenAt = null;
     const accounts = await this.store.accounts();
@@ -654,9 +665,21 @@ export class WalletCore {
           );
         await this.assertRevision();
         const { envelope } = await this.freshUnlock(request.payload.password);
-        await this.store.reset(envelope.revision);
+        await this.store.reset(envelope.revision, envelope.walletId);
         this.lock("Wallet reset");
         this.revision = null;
+        return this.status();
+      }
+      case "vault.forget": {
+        // Removing local ciphertext cannot recover or sign with its keys.
+        // Bind the destructive confirmation to the exact saved root/revision.
+        await this.store.reset(
+          request.payload.revision,
+          request.payload.walletId,
+        );
+        this.lock("Wallet removed from this browser");
+        this.revision = null;
+        this.accountId = "";
         return this.status();
       }
       case "accounts.list":

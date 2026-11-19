@@ -95,3 +95,50 @@ it("native locking cancels a pending KDF setup instead of exposing its words", a
   expect(wallet.getSnapshot().initialized).toBe(false);
   expect(await store.get("vault.testnet.v1")).toBeNull();
 }, 30000);
+it("native forgotten-password removal requires confirmation, rejects stale targets and preserves a vault on cleanup failure", async () => {
+  const { store, data } = memory();
+  const wallet = new NativeWallet(
+    store,
+    random,
+    new NativeApi("http://127.0.0.1:8787"),
+  );
+  await wallet.open();
+  const password = "a private test password";
+  await wallet.restore(phrase, password, password);
+  const original = await wallet.resetTarget();
+  const address = wallet.getSnapshot().accounts[0].address;
+  await wallet.changePassword(
+    password,
+    "another private test password",
+    "another private test password",
+  );
+  wallet.lock();
+  await expect(
+    wallet.forgetWallet(original, "RESET WALLET", true),
+  ).rejects.toThrow("changed");
+  const target = await wallet.resetTarget();
+  await expect(wallet.forgetWallet(target, "RESET", true)).rejects.toThrow(
+    "type RESET WALLET",
+  );
+  await expect(
+    wallet.forgetWallet(target, "RESET WALLET", false),
+  ).rejects.toThrow("recovery backup");
+  expect(await wallet.resetTarget()).toBe(target);
+  const remove = store.remove;
+  store.remove = async () => {
+    throw new Error("Keychain cleanup failed");
+  };
+  await expect(
+    wallet.forgetWallet(target, "RESET WALLET", true),
+  ).rejects.toThrow("cleanup failed");
+  expect(data.get("vault.testnet.v1")).toBe(target);
+  expect(wallet.getSnapshot().initialized).toBe(true);
+  expect(wallet.getSnapshot().locked).toBe(true);
+  store.remove = remove;
+  await wallet.forgetWallet(target, "RESET WALLET", true);
+  expect(wallet.getSnapshot().initialized).toBe(false);
+  expect(wallet.getSnapshot().accounts).toEqual([]);
+  expect(await store.get("vault.testnet.v1")).toBeNull();
+  await wallet.restore(phrase, password, password);
+  expect(wallet.getSnapshot().accounts[0].address).toBe(address);
+}, 30000);

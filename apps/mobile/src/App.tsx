@@ -125,6 +125,12 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
     [background, setBackground] = useState(false),
     [cameraPermission, requestCameraPermission] = useCameraPermissions();
   const [nftAsset, setNftAsset] = useState<AssetBalance | null>(null);
+  const [resetChoice, setResetChoice] = useState<
+    "create" | "restore" | "welcome" | null
+  >(null);
+  const [resetTarget, setResetTarget] = useState<string | null>(null);
+  const [resetConfirmation, setResetConfirmation] = useState("");
+  const [resetAcknowledged, setResetAcknowledged] = useState(false);
   const account = s.accounts.find((a) => a.id === s.selectedAccountId),
     network = networkById(s.networkId),
     asset =
@@ -142,13 +148,19 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
     setAck(false);
     setNextPassword("");
     setReview(null);
+    setResetChoice(null);
+    setResetTarget(null);
+    setResetConfirmation("");
+    setResetAcknowledged(false);
   };
   useEffect(() => {
-    if (s.locked) {
+    // A completed reset already selected creation/restoration. A delayed lock
+    // effect must not replace that destination with the default screen.
+    if (s.locked && wallet.getSnapshot().initialized) {
       clearSecrets();
       setScreen("wallet");
     }
-  }, [s.locked]);
+  }, [s.locked, wallet]);
   useEffect(() => {
     const subscription = AppState.addEventListener("change", (state) => {
       if (state !== "active") {
@@ -276,6 +288,116 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
         <Mark />
         <Text style={[ui.title, { marginTop: 20 }]}>Wallet locked</Text>
       </View>
+    );
+  const startReset = (choice: "create" | "restore" | "welcome") =>
+    void run(async () => {
+      const target = await wallet.resetTarget();
+      setResetTarget(target);
+      setResetChoice(choice);
+      setResetConfirmation("");
+      setResetAcknowledged(false);
+    });
+  const resetActions = (
+    <View style={{ gap: 12, marginTop: 20 }}>
+      <Button secondary disabled={busy} onPress={() => startReset("create")}>
+        Create new wallet
+      </Button>
+      <Button secondary disabled={busy} onPress={() => startReset("restore")}>
+        Restore wallet
+      </Button>
+      <Button secondary disabled={busy} onPress={() => startReset("welcome")}>
+        Reset wallet
+      </Button>
+    </View>
+  );
+  if (resetChoice && s.initialized)
+    return (
+      <KeyboardAvoidingView
+        style={ui.screen}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+      >
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={[ui.content, { paddingTop: 45 }]}
+        >
+          <Mark />
+          <Text style={ui.title}>
+            {resetChoice === "create"
+              ? "Create a new wallet"
+              : resetChoice === "restore"
+                ? "Restore another wallet"
+                : "Reset wallet"}
+          </Text>
+          <Note>
+            Reset removes this device’s encrypted wallet and local history. It
+            does not move blockchain assets. Without your recovery phrase, you
+            can permanently lose access. You do not need the old password to
+            remove local wallet data.
+          </Note>
+          <Pressable
+            accessibilityRole="checkbox"
+            accessibilityState={{ checked: resetAcknowledged }}
+            accessibilityLabel="I have saved my recovery backup"
+            onPress={() => setResetAcknowledged(!resetAcknowledged)}
+            style={{ paddingVertical: 18 }}
+          >
+            <Text style={ui.subtitle}>
+              {resetAcknowledged ? "✓" : "○"} I have saved my recovery backup
+              and understand that reset removes this wallet from this device.
+            </Text>
+          </Pressable>
+          <Input
+            label="Type RESET WALLET to confirm"
+            value={resetConfirmation}
+            onChangeText={setResetConfirmation}
+            autoCapitalize="characters"
+          />
+          {error && <Note error>{error}</Note>}
+          <Button
+            disabled={
+              busy ||
+              !resetTarget ||
+              !resetAcknowledged ||
+              resetConfirmation !== "RESET WALLET"
+            }
+            onPress={() =>
+              void run(async () => {
+                const next = resetChoice;
+                if (!resetTarget)
+                  throw new Error("Open the reset screen again.");
+                await wallet.forgetWallet(
+                  resetTarget,
+                  resetConfirmation,
+                  resetAcknowledged,
+                );
+                clearSecrets();
+                go(next);
+              })
+            }
+          >
+            {busy
+              ? "Removing saved wallet…"
+              : resetChoice === "create"
+                ? "Reset and create new wallet"
+                : resetChoice === "restore"
+                  ? "Reset and restore wallet"
+                  : "Reset wallet"}
+          </Button>
+          <Button
+            secondary
+            disabled={busy}
+            onPress={() => {
+              setResetChoice(null);
+              setResetTarget(null);
+              setResetConfirmation("");
+              setResetAcknowledged(false);
+              setError("");
+            }}
+          >
+            Cancel and keep saved wallet
+          </Button>
+        </ScrollView>
+      </KeyboardAvoidingView>
     );
   if (!s.initialized) {
     return (
@@ -505,9 +627,16 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
             {busy ? "Unlocking…" : "Unlock wallet"}
           </Button>
           <Note>
-            Forgot your password? Keep your recovery phrase safe. Your browser
-            wallet is separate from this device.
+            Each new wallet has random recovery words and keys. The password
+            only encrypts this device’s saved wallet. Two people using the same
+            password still have different wallets.
           </Note>
+          {resetActions}
+          <Text style={[ui.subtitle, { fontSize: 12 }]}>
+            Forgot your password? Restore wallet lets you remove this device’s
+            saved wallet and restore your recovery phrase with a new password.
+            An encrypted backup still needs its password.
+          </Text>
         </ScrollView>
       </KeyboardAvoidingView>
     );
@@ -1064,24 +1193,7 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
                   This removes the encrypted wallet from this device. Keep your
                   recovery phrase before continuing.
                 </Text>
-                <Input
-                  label="Type REMOVE to confirm"
-                  value={phrase}
-                  onChangeText={setPhrase}
-                />
-                <View style={{ height: 15 }} />
-                <Button
-                  secondary
-                  disabled={busy || phrase !== "REMOVE"}
-                  onPress={() =>
-                    void run(async () => {
-                      await wallet.reset(password);
-                      clearSecrets();
-                    })
-                  }
-                >
-                  Remove this wallet
-                </Button>
+                {resetActions}
               </View>
             </>
           )}

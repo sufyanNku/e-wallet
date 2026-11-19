@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { WalletAccessActions } from "./reset-wallet";
 import {
   Button,
   Field,
@@ -20,7 +21,6 @@ export function RealSettings() {
   const [password, setPassword] = useState(""),
     [next, setNext] = useState(""),
     [confirm, setConfirm] = useState(""),
-    [ack, setAck] = useState(false),
     [words, setWords] = useState<string[]>([]),
     [discovered, setDiscovered] = useState("");
   return (
@@ -191,24 +191,11 @@ export function RealSettings() {
               Reset removes only this application's local encrypted wallet and
               public data. It cannot delete blockchain funds.
             </Notice>
-            <label className="check">
-              <input
-                type="checkbox"
-                checked={ack}
-                onChange={(e) => setAck(e.target.checked)}
-              />{" "}
-              I have my offline recovery backup and want to reset this browser
-              wallet.
-            </label>
-            <Button
-              variant="danger"
-              disabled={action.busy}
-              onClick={() =>
-                void action.run(() => gateway.reset(password, ack))
-              }
-            >
-              Reset wallet after password verification
-            </Button>
+            <p className="muted">
+              Choose what to do next. Every replacement asks for a backup
+              acknowledgment and typed confirmation before removing saved keys.
+            </p>
+            <WalletAccessActions />
           </Panel>
         </div>
       </div>

@@ -36,6 +36,57 @@ async function imported(core: WalletCore) {
   });
 }
 describe("Worker lifecycle and storage transactions", () => {
+  it("removes a locked wallet only after exact confirmation bound to its saved root and revision", async () => {
+    const { store, core } = setup();
+    await imported(core);
+    const envelope = (await store.envelope())!;
+    await store.setPreference("reset-regression", "remove with wallet");
+    await call(core, "vault.lock", { reason: "Forgotten password" });
+    const wrong = await core.dispatch({
+      protocolVersion: 1,
+      id: crypto.randomUUID(),
+      method: "vault.unlock",
+      payload: { password: "short" },
+    });
+    expect(wrong.ok ? null : wrong.error.code).toBe("VAULT_DECRYPT");
+    const payload = {
+      acknowledged: true,
+      confirmation: "RESET WALLET",
+      walletId: envelope.walletId,
+      revision: envelope.revision,
+    };
+    for (const invalid of [
+      { ...payload, acknowledged: false },
+      { ...payload, confirmation: "RESET" },
+      { ...payload, walletId: crypto.randomUUID() },
+      { ...payload, revision: envelope.revision + 1 },
+    ]) {
+      const result = await core.dispatch({
+        protocolVersion: 1,
+        id: crypto.randomUUID(),
+        method: "vault.forget",
+        payload: invalid,
+      });
+      expect(result.ok).toBe(false);
+      expect(await store.envelope()).toEqual(envelope);
+    }
+    const other = setup();
+    await other.store.setPreference("unrelated", "keep");
+    await core.dispatch({
+      protocolVersion: 1,
+      id: crypto.randomUUID(),
+      method: "vault.forget",
+      payload,
+    });
+    expect((await core.status()).initialized).toBe(false);
+    expect((await core.status()).locked).toBe(true);
+    expect(await store.accounts()).toEqual([]);
+    expect(await store.preference("reset-regression", "gone")).toBe("gone");
+    expect(await other.store.preference("unrelated", "gone")).toBe("keep");
+    const fresh = new WalletCore(store, "local");
+    expect((await fresh.status()).initialized).toBe(false);
+    await Promise.all([store.close(), other.store.close()]);
+  });
   it("persists only ciphertext and public metadata; each new Worker starts locked", async () => {
     const { store, core } = setup();
     await imported(core);
