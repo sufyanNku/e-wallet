@@ -1,3 +1,5 @@
+import { BitcoinAccess } from "./bitcoin-access";
+import { Dropdown } from "@ewallet/ui";
 import { displayNetworkName, displayAssetName } from "@ewallet/domain";
 import { Discover } from "./discover";
 import { AccountsPage } from "./accounts";
@@ -25,6 +27,7 @@ import {
   Settings2,
   FlaskConical,
   LockKeyhole,
+  LogOut,
   Plus,
   ArrowLeftRight,
   ShieldCheck,
@@ -81,7 +84,7 @@ function Guard() {
   );
 }
 function Shell() {
-  const { snapshot: s, gateway } = useWallet(),
+  const { snapshot: s, gateway, notify } = useWallet(),
     action = useAction();
   const accountOpen = useUiState((v) => v.accountsOpen),
     setAccountOpen = useUiState((v) => v.setAccountsOpen);
@@ -154,9 +157,55 @@ function Shell() {
           </NavLink>
           {__WALLET_MODE__ === "local" && (
             <NavLink to="/accounts">
-              <ShieldCheck size={19} /> Accounts
+              <ShieldCheck size={19} /> Credit account
             </NavLink>
           )}
+          <Button
+            variant="ghost"
+            aria-label="Sign out of wallet"
+            onClick={async () => {
+              gateway.lock();
+              try {
+                if (__WALLET_MODE__ === "local") {
+                  const signal = AbortSignal.timeout(8000);
+                  const status = await fetch("/api/v1/accounts/status", {
+                    cache: "no-store",
+                    signal,
+                  });
+                  if (!status.ok)
+                    throw new Error("Account service unavailable");
+                  if ((await status.json()).data.enabled) {
+                    const session = await fetch("/api/v1/session", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: "{}",
+                      signal,
+                    });
+                    if (!session.ok) throw new Error("Session unavailable");
+                    const token = (await session.json()).data.csrfToken;
+                    const logout = await fetch("/api/v1/accounts/logout", {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-Token": token,
+                      },
+                      body: "{}",
+                      signal,
+                    });
+                    if (!logout.ok) throw new Error("Account sign-out failed");
+                  }
+                }
+                notify("Signed out. Your wallet is locked.");
+              } catch {
+                notify(
+                  "Wallet locked. Account sign-out could not finish. Open Credit account to retry signing out.",
+                );
+              }
+            }}
+          >
+            <LogOut size={18} />{" "}
+            <span className="nav-label">Sign out of wallet</span>
+          </Button>
         </div>
       </aside>
       <div className="app-body">
@@ -188,10 +237,10 @@ function Shell() {
             <label className="sr-only" htmlFor="network">
               Selected network
             </label>
-            <select
+            <Dropdown
               id="network"
               value={s.networkId}
-              onChange={(e) => gateway.selectNetwork(e.target.value)}
+              onValueChange={(e) => gateway.selectNetwork(e)}
             >
               {networks
                 .filter(
@@ -204,7 +253,7 @@ function Shell() {
                     {displayNetworkName(n)}
                   </option>
                 ))}
-            </select>
+            </Dropdown>
             <Button
               variant="secondary"
               onClick={() => setAccountOpen(true)}
@@ -221,12 +270,17 @@ function Shell() {
               onClick={() => gateway.lock()}
             >
               <LockKeyhole size={19} />
+              <span className="desktop-label">Lock wallet</span>
             </Button>
           </div>
         </header>
         <main id="main-content" tabIndex={-1}>
           <RouteFocus />
-          {s.lastError && <Notice tone="error">{s.lastError.message}</Notice>}
+          {s.lastError && s.lastError.code !== "WATCH_CONSENT" && (
+            <Notice tone="error">{s.lastError.message}</Notice>
+          )}
+          {s.bitcoinWatchConsentRequired &&
+            networkById(s.networkId).family === "bitcoin" && <BitcoinAccess />}
           <Outlet />
         </main>
         <footer className="page-footer">

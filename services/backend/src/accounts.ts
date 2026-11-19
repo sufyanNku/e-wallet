@@ -123,6 +123,101 @@ export function registerAccounts(
     }
     return user;
   };
+  const issueSession = (
+    user: User,
+    req: FastifyRequest,
+    reply: FastifyReply,
+  ) => {
+    const session = publicSession(req)!;
+    const token = randomBytes(32).toString("base64url");
+    const expiresAt = Math.min(session.expires_at, Date.now() + 30 * 60 * 1000);
+    db.transaction(() => {
+      db.prepare(
+        "UPDATE account_users SET failed_logins=0,locked_until=0 WHERE id=?",
+      ).run(user.id);
+      db.prepare(
+        "DELETE FROM account_sessions WHERE public_session_id=? OR expires_at<=?",
+      ).run(session.id, Date.now());
+      db.prepare("INSERT INTO account_sessions VALUES (?,?,?,?)").run(
+        hash(token),
+        user.id,
+        session.id,
+        expiresAt,
+      );
+      audit(user.id, "login");
+    })();
+    reply.setCookie(cookieName, token, {
+      httpOnly: true,
+      sameSite: "strict",
+      path: cookiePath,
+      secure: req.protocol === "https",
+      maxAge: Math.max(0, Math.floor((expiresAt - Date.now()) / 1000)),
+    });
+    return { data: { user: publicUser(user) } };
+  };
+  app.post<{
+    Body: { username: string; password: string; displayName: string };
+  }>(
+    prefix + "/register",
+    {
+      config: {
+        rateLimit: {
+          max: 10,
+          timeWindow: "1 minute",
+          groupId: "accounts-register",
+        },
+      },
+      schema: {
+        body: {
+          type: "object",
+          additionalProperties: false,
+          required: ["username", "password", "displayName"],
+          properties: {
+            username: {
+              type: "string",
+              pattern: "^[A-Za-z][A-Za-z0-9_]{2,31}$",
+            },
+            password: { type: "string", minLength: 12, maxLength: 256 },
+            displayName: { type: "string", minLength: 1, maxLength: 80 },
+          },
+        },
+      },
+    },
+    async (req, reply) => {
+      if (publicSession(req)?.client_kind !== "browser")
+        return fail(
+          reply,
+          403,
+          "Start a browser session before creating an account.",
+        );
+      const username = req.body.username.toLowerCase(),
+        name = req.body.displayName.trim();
+      if (!name) return fail(reply, 400, "Enter your name.");
+      const salt = randomBytes(16).toString("hex"),
+        key = await accountPasswordHash(req.body.password, salt),
+        id = randomUUID();
+      const passwordHash = key.toString("hex");
+      key.fill(0);
+      const created = db.transaction(() => {
+        const result = db
+          .prepare(
+            "INSERT INTO account_users(id,username,display_name,role,password_salt,password_hash,balance_cents) VALUES (?,?,?,'member',?,?,0) ON CONFLICT(username) DO NOTHING",
+          )
+          .run(id, username, name, salt, passwordHash);
+        if (result.changes === 0) return false;
+        audit(id, "registered", id);
+        return true;
+      })();
+      if (!created)
+        return fail(
+          reply,
+          409,
+          "That username is already taken. Choose another or sign in.",
+        );
+      reply.code(201);
+      return issueSession(find(id)!, req, reply);
+    },
+  );
   app.post<{ Body: { username: string; password: string } }>(
     prefix + "/login",
     {
@@ -186,31 +281,7 @@ export function registerAccounts(
       const current = find(user.id);
       if (!current?.enabled || current.locked_until > Date.now())
         return fail(reply, 401, "Sign-in failed.");
-      const token = randomBytes(32).toString("base64url"),
-        expiresAt = Math.min(session.expires_at, Date.now() + 30 * 60 * 1000);
-      db.transaction(() => {
-        db.prepare(
-          "UPDATE account_users SET failed_logins=0,locked_until=0 WHERE id=?",
-        ).run(user.id);
-        db.prepare(
-          "DELETE FROM account_sessions WHERE public_session_id=? OR expires_at<=?",
-        ).run(session.id, Date.now());
-        db.prepare("INSERT INTO account_sessions VALUES (?,?,?,?)").run(
-          hash(token),
-          user.id,
-          session.id,
-          expiresAt,
-        );
-        audit(user.id, "login");
-      })();
-      reply.setCookie(cookieName, token, {
-        httpOnly: true,
-        sameSite: "strict",
-        path: cookiePath,
-        secure: req.protocol === "https",
-        maxAge: Math.max(0, Math.floor((expiresAt - Date.now()) / 1000)),
-      });
-      return { data: { user: publicUser(user) } };
+      return issueSession(user, req, reply);
     },
   );
   app.post(

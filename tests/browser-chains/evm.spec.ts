@@ -1,3 +1,4 @@
+import { chooseOption } from "../helpers/select-option";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { expect } from "../helpers/private-expect";
@@ -56,14 +57,14 @@ async function importFixture(page: Page, name = "alice") {
     .getByLabel("New wallet password", { exact: true })
     .fill("Public local test-only password");
   await page
-    .getByLabel("Confirm new wallet password")
+    .getByLabel("Confirm new wallet password", { exact: true })
     .fill("Public local test-only password");
   await page
     .getByRole("button", { name: "Restore wallet", exact: true })
     .click();
   await expect(
     page.getByRole("heading", { name: "Your wallet", exact: true }),
-  ).toBeVisible();
+  ).toBeVisible({ timeout: 20000 });
   await expect(page.getByText("dUSDC", { exact: true }))
     .toBeVisible({ timeout: 15000 })
     .catch(async () => {
@@ -150,11 +151,10 @@ test("real browser approves and broadcasts an EVM native payment, token payment 
     beforeToken = BigInt(await usdc.balanceOf(bob));
   await page.locator('a[href="/"]').first().click();
   await page.getByRole("link", { name: "Send", exact: true }).click();
-  await page
-    .getByLabel("Asset", { exact: true })
-    .selectOption(
-      `eip155:31337/erc20/${deployment.contracts.dUSDC.address.toLowerCase()}/`,
-    );
+  await chooseOption(
+    page.getByLabel("Asset", { exact: true }),
+    `eip155:31337/erc20/${deployment.contracts.dUSDC.address.toLowerCase()}/`,
+  );
   await page.getByLabel("Recipient address", { exact: true }).fill(bob);
   await page.getByLabel("Amount (dUSDC)", { exact: true }).fill("0.000001");
   await page.getByRole("button", { name: "Review payment" }).click();
@@ -309,7 +309,7 @@ test("real contract UI executes an AMM swap, a vault withdrawal and a faucet cla
     ),
     newPosition = String(await stateVault.positionCount());
   await page.getByLabel("Deposit (dUSDC)", { exact: true }).fill("1");
-  await page.getByLabel("Lock duration", { exact: true }).selectOption("3600");
+  await chooseOption(page.getByLabel("Lock duration", { exact: true }), "3600");
   await page
     .getByRole("button", { name: "Review exact vault allowance", exact: true })
     .click();

@@ -148,7 +148,9 @@ try {
     .getByLabel("Recovery phrase (12 or 24 English words)")
     .fill(identity.mnemonic);
   await page.getByLabel("New wallet password", { exact: true }).fill(password);
-  await page.getByLabel("Confirm new wallet password").fill(password);
+  await page
+    .getByLabel("Confirm new wallet password", { exact: true })
+    .fill(password);
   await page
     .getByRole("button", { name: "Restore wallet", exact: true })
     .click();
@@ -171,7 +173,9 @@ try {
     .getByLabel("Recovery phrase (12 or 24 English words)")
     .fill(identity.mnemonic);
   await page.getByLabel("New wallet password", { exact: true }).fill(password);
-  await page.getByLabel("Confirm new wallet password").fill(password);
+  await page
+    .getByLabel("Confirm new wallet password", { exact: true })
+    .fill(password);
   await page
     .getByRole("button", { name: "Restore wallet", exact: true })
     .click();

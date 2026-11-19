@@ -153,15 +153,13 @@ test("receive QR and actual token metadata are checked against the selected netw
   await expect(
     page.getByLabel("Recipient address", { exact: true }),
   ).toHaveValue(manifest.identities.alice.evm.address);
-  await page
-    .getByLabel("QR or address text")
-    .fill(
-      JSON.stringify({
-        address: manifest.identities.bob.evm.address,
-        network: "eip155:84532",
-        amount: "1",
-      }),
-    );
+  await page.getByLabel("QR or address text").fill(
+    JSON.stringify({
+      address: manifest.identities.bob.evm.address,
+      network: "eip155:84532",
+      amount: "1",
+    }),
+  );
   await page
     .getByRole("button", { name: "Read pasted request", exact: true })
     .click();

@@ -1,3 +1,4 @@
+import { chooseOption } from "../helpers/select-option";
 import { test, type Page } from "@playwright/test";
 import { expect } from "../helpers/private-expect";
 import { readFile, writeFile } from "node:fs/promises";
@@ -29,7 +30,9 @@ test("Bitcoin project API connects with descriptor consent, reviews a PSBT and b
     .getByLabel("Recovery phrase (12 or 24 English words)")
     .fill(fixture.mnemonic);
   await page.getByLabel("New wallet password", { exact: true }).fill(password);
-  await page.getByLabel("Confirm new wallet password").fill(password);
+  await page
+    .getByLabel("Confirm new wallet password", { exact: true })
+    .fill(password);
   await page
     .getByRole("button", { name: "Restore wallet", exact: true })
     .click();
@@ -40,9 +43,10 @@ test("Bitcoin project API connects with descriptor consent, reviews a PSBT and b
   await dapp.goto("http://127.0.0.1:5174");
   await dapp.getByRole("button", { name: "BITCOIN", exact: true }).click();
   const connection = await popup(dapp, "Connect bitcoin");
-  await connection
-    .getByLabel("Approval network")
-    .selectOption("bitcoin:regtest");
+  await chooseOption(
+    connection.getByLabel("Approval network"),
+    "bitcoin:regtest",
+  );
   await connection.getByRole("checkbox").check();
   await connection
     .getByRole("button", { name: "Approve connection", exact: true })

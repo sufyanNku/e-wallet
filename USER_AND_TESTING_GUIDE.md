@@ -115,19 +115,19 @@ For each feature, follow **Use**, then check **Developer test**. Automated suite
 
 ### 01. Create a crypto wallet — web and mobile
 
-**Use:** Choose Create wallet, set and confirm a password, save the recovery words offline, and complete the backup-word check.
+**Use:** Choose Create wallet, set and confirm a password of at least 12 characters, save the recovery words offline, and complete the backup-word check. Use the eye controls to show/hide passwords. On local web, you can then choose a username for a separate credit account, sign into an existing one, or continue to your wallet. A crypto wallet itself unlocks with its wallet password and needs no username.
 
 **Developer test:** Try a short password, mismatched passwords and a wrong backup answer. Each must be rejected. Correct answers should open the wallet. A fresh wallet may correctly show no assets. Automated: Core browser and unit/security suites; repeat the native screen flow on a device.
 
 ### 02. Restore a crypto wallet — web and mobile
 
-**Use:** Choose Restore wallet or I already have a wallet. Enter the exact recovery words and optional BIP39 passphrase, then set a wallet password.
+**Use:** Choose Restore wallet or I already have a wallet. Enter the recovery words and optional BIP39 passphrase, then set a wallet password. Words pasted with commas are accepted. If a wallet is already saved, choose **Open existing wallet** or **Unlock existing wallet**. To replace it, first back it up and use the explicit removal flow in Settings; restoring cannot overwrite saved keys. A separate browser profile lets you restore independently.
 
 **Developer test:** Restore the same testing phrase in two independent profiles. Their addresses must match for the same network/account path. Invalid words must fail. A different BIP39 passphrase creates different accounts. Automated: Core browser and native-core suites.
 
 ### 03. Lock, unlock and automatic locking — web and mobile
 
-**Use:** Lock the wallet using the lock control, then enter the wallet password to unlock. Web Settings lets you change the inactivity timeout. Mobile locks when backgrounded and after inactivity.
+**Use:** Choose **Lock wallet**, then enter the wallet password to unlock. Choose **Sign out of wallet** in the web sidebar or mobile Settings when finished. Web sign-out also revokes the credit-account session; the lock control only locks signing keys. Account-page **Sign out** revokes its session and locks the wallet too. Web Settings lets you change the inactivity timeout. Mobile locks when backgrounded and after inactivity. Signing out preserves the encrypted wallet.
 
 **Developer test:** Reject a wrong password. Locking must prevent preparation/signing. Reload a web window and confirm it starts locked. Locking one web window should lock other windows of the same wallet origin. Test native backgrounding and inactivity on the device. Automated: Core browser, native-core and security suites.
 
@@ -165,7 +165,7 @@ Settings also offers **Export public metadata** for inspecting public account in
 
 ### 09. Select a network — web and mobile
 
-**Use:** Open the network selector and choose the network required by your asset or recipient. The address may change when switching between EVM, Solana and Bitcoin.
+**Use:** Open the network selector and choose the network required by your asset or recipient. On web, all dropdowns share the dark theme: use the mouse, arrow keys and Enter; Escape closes a menu. The address may change when switching between EVM, Solana and Bitcoin. If Bitcoin asks for balance access, read **What information is shared?**, select the public-address lookup checkbox, then choose **Enable Bitcoin balances**. This shares public address information with the backend, never private keys.
 
 **Developer test:** Check the selected network, address format, fee symbol and holdings after switching. A payment request for a different network must not be silently accepted. Bitcoin needs its public-descriptor watch enabled where requested. Automated: UI, EVM, Solana, Bitcoin and protocol suites.
 
@@ -271,9 +271,9 @@ After connecting, try **Sign message** in the reference application. Unlock its 
 
 ### 26. Sign in and out of an account — web only
 
-**Use:** Open `/accounts`. Sign in using the generated `alice`, `bob`, `admin` or `auditor` credentials. Use Sign out when finished.
+**Use:** Open `/accounts`. Choose **Create account**, enter your name, choose a username and account password, and confirm it. New Members start with zero credits and can receive transfers. Return through **Existing account** with your chosen username/password. Alternatively, use the generated `alice`, `bob`, `admin` or `auditor` credentials. Use **Sign out** when finished. Wallet unlock remains separate and requires only its wallet password.
 
-**Developer test:** Wrong credentials must fail. Sign-out and expiry must invalidate access. Repeated failures must be throttled. A login request cannot assign itself a role. Automated: Accounts browser and security suites.
+**Developer test:** Create a wallet and complete its backup, verify the registration offer, register a username, sign out, and sign back in with it. Check that duplicate usernames and mismatched passwords fail; a new Member has zero credits and cannot assign a role or balance. Wrong credentials must fail. Both sign-out paths must invalidate the server session and lock the wallet. Repeated failures must be throttled. Automated: Accounts browser and security suites.
 
 ### 27. Transfer account credits — web only
 

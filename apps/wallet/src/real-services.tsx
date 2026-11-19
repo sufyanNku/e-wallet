@@ -276,8 +276,8 @@ function LiveService({
           <Select
             label="Slippage tolerance"
             value={slippage}
-            onChange={(e) => {
-              setSlippage(e.target.value);
+            onValueChange={(e) => {
+              setSlippage(e);
               setQuote(null);
             }}
           >
@@ -317,8 +317,8 @@ function LiveService({
                 <dd>{new Date(quote.expiresAt).toLocaleTimeString()}</dd>
               </dl>
               <Notice>
-                Quotes reflect pool reserves. After an allowance
-                transaction, request a fresh quote.
+                Quotes reflect pool reserves. After an allowance transaction,
+                request a fresh quote.
               </Notice>
               <div className="form-actions">
                 {BigInt(quote.allowance) < BigInt(quote.amountIn) && (
@@ -371,7 +371,7 @@ function LiveService({
               <Select
                 label="Lock duration"
                 value={duration}
-                onChange={(e) => setDuration(e.target.value)}
+                onValueChange={(e) => setDuration(e)}
               >
                 <option value="60">60 seconds</option>
                 <option value="300">5 minutes</option>
@@ -487,7 +487,7 @@ function LiveService({
               <Select
                 label="Proposal asset"
                 value={assetType}
-                onChange={(e) => setAssetType(e.target.value)}
+                onValueChange={(e) => setAssetType(e)}
               >
                 <option value="erc20">dUSDC</option>
                 <option value="native">ETH</option>
@@ -642,15 +642,13 @@ function LiveService({
       )}
       {service === "bridge" && (
         <>
-          <Notice tone="warning">
-            Review both networks before bridging.
-          </Notice>
+          <Notice tone="warning">Review both networks before bridging.</Notice>
           <Panel className="narrow-panel">
             <h2>Local Ethereum A → Local Ethereum B</h2>
             <p>
-              The trusted relayer mints destination tokens after
-              observing the source event. No decentralized security or automatic
-              refund is provided.
+              The trusted relayer mints destination tokens after observing the
+              source event. No decentralized security or automatic refund is
+              provided.
             </p>
             {input("Source amount (dUSDC)")}
             <Address value={d.contracts.bridge} />
@@ -684,7 +682,8 @@ function LiveService({
             </div>
             <Notice>
               pnpm dev runs the local CLI relayer. You can also run pnpm relayer
-              --once. After timeout, resume the relayer. No automatic refund is provided.
+              --once. After timeout, resume the relayer. No automatic refund is
+              provided.
             </Notice>
             <Button variant="secondary" onClick={() => void bridge.refetch()}>
               Check relayer status

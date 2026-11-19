@@ -1,3 +1,4 @@
+import { Dropdown } from "@ewallet/ui";
 import { displayNetworkName } from "@ewallet/domain";
 import { useEffect, useRef, useState } from "react";
 import { networks, networkById } from "@ewallet/config";
@@ -260,13 +261,13 @@ export function ConnectPage() {
         <>
           <label>
             Network
-            <select
+            <Dropdown
               aria-label="Approval network"
               disabled={busy || opened.current}
               value={s.networkId}
-              onChange={(e) => {
+              onValueChange={(e) => {
                 void run(async () => {
-                  await real!.selectConnectorNetwork(e.target.value);
+                  await real!.selectConnectorNetwork(e);
                 });
               }}
             >
@@ -281,17 +282,17 @@ export function ConnectPage() {
                     {displayNetworkName(n)}
                   </option>
                 ))}
-            </select>
+            </Dropdown>
           </label>
           <label>
             Account
-            <select
+            <Dropdown
               aria-label="Approval account"
               disabled={busy || opened.current}
               value={s.selectedAccountId}
-              onChange={(e) => {
+              onValueChange={(e) => {
                 void run(async () => {
-                  await real!.selectConnectorAccount(e.target.value);
+                  await real!.selectConnectorAccount(e);
                 });
               }}
             >
@@ -302,14 +303,15 @@ export function ConnectPage() {
                     {a.name} · {a.path}
                   </option>
                 ))}
-            </select>
+            </Dropdown>
           </label>
           <p>Selected signing account</p>
           {account && <Address value={account.address} />}
           <p>
-            Grant: this origin, this account, {displayNetworkName(networkById(s.networkId))},
-            and the requested supported methods. Expires in 24 hours. Every
-            signing request needs a separate review.
+            Grant: this origin, this account,{" "}
+            {displayNetworkName(networkById(s.networkId))}, and the requested
+            supported methods. Expires in 24 hours. Every signing request needs
+            a separate review.
           </p>
           {incoming.request.family === "bitcoin" && (
             <label className="checkbox-label">
@@ -366,7 +368,9 @@ export function ConnectPage() {
           </Notice>
           <dl className="details">
             <dt>Network</dt>
-            <dd>{displayNetworkName(networkById(prepared.review.networkId))}</dd>
+            <dd>
+              {displayNetworkName(networkById(prepared.review.networkId))}
+            </dd>
             <dt>Signing account</dt>
             <dd>
               <Address value={prepared.review.accountAddress} />

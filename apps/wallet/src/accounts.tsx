@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
+import { useWallet } from "./context";
 import { ArrowLeftRight, LogOut, ShieldCheck } from "lucide-react";
 import { Button, Field, Notice, Panel, Select } from "@ewallet/ui";
 import type {
@@ -17,6 +18,11 @@ class AccountError extends Error {
   }
 }
 export function AccountsPage() {
+  const { gateway } = useWallet();
+  const [params, setParams] = useSearchParams();
+  const registering = params.get("mode") === "register";
+  const [displayName, setDisplayName] = useState("");
+  const [confirmation, setConfirmation] = useState("");
   const [enabled, setEnabled] = useState<boolean | null>(null);
   const [dashboard, setDashboard] = useState<AccountDashboard | null>(null);
   const [admin, setAdmin] = useState<AccountAdmin | null>(null);
@@ -146,7 +152,7 @@ export function AccountsPage() {
           </span>{" "}
           e-wallet
         </Link>
-        <Link to="/welcome" className="text-link">
+        <Link to="/" className="text-link">
           Back to crypto wallet
         </Link>
         {dashboard && (
@@ -156,6 +162,8 @@ export function AccountsPage() {
             onClick={() =>
               void action(async () => {
                 await request("/logout", "POST");
+                gateway.lock();
+                setParams({});
                 clearAccount();
                 setNotice("You have signed out.");
               })
@@ -168,9 +176,12 @@ export function AccountsPage() {
       <main className="account-main" id="main-content">
         <div className="account-title">
           <p className="eyebrow">YOUR ACCOUNT</p>
-          <h1>Accounts. Roles. Transfers.</h1>
+          <h1>
+            {registering && !dashboard ? "Create your account" : "Your account"}
+          </h1>
           <p className="muted">
-            Manage your balance, payments and account access.
+            Choose a username for credit transfers. Your crypto wallet unlocks
+            separately with its wallet password.
           </p>
         </div>
         {error && <Notice tone="error">{error}</Notice>}
@@ -191,7 +202,33 @@ export function AccountsPage() {
           <div className="account-login-grid">
             <Panel>
               <ShieldCheck size={28} />
-              <h2>Sign in to your account</h2>
+              <h2>
+                {registering
+                  ? "Choose your sign-in details"
+                  : "Sign in to your account"}
+              </h2>
+              <div className="account-auth-tabs">
+                <Button
+                  type="button"
+                  variant={!registering ? "primary" : "secondary"}
+                  onClick={() => {
+                    setParams({});
+                    setError("");
+                  }}
+                >
+                  Existing account
+                </Button>
+                <Button
+                  type="button"
+                  variant={registering ? "primary" : "secondary"}
+                  onClick={() => {
+                    setParams({ mode: "register" });
+                    setError("");
+                  }}
+                >
+                  Create account
+                </Button>
+              </div>
               <form
                 className="stack"
                 onSubmit={(e) => {
@@ -199,42 +236,105 @@ export function AccountsPage() {
                   void action(async () => {
                     clearAccount();
                     try {
-                      await request("/login", "POST", { username, password });
+                      if (registering) {
+                        if (password !== confirmation)
+                          throw new Error("Passwords do not match.");
+                        await request("/register", "POST", {
+                          username: username.trim(),
+                          displayName: displayName.trim(),
+                          password,
+                        });
+                        setNotice(
+                          "Account created. Sign in next time with @" +
+                            username.trim().toLowerCase() +
+                            " and your account password.",
+                        );
+                      } else
+                        await request("/login", "POST", { username, password });
                       await refresh();
                     } finally {
                       setPassword("");
+                      setConfirmation("");
                     }
                   });
                 }}
               >
+                {registering && (
+                  <Field
+                    label="Your name"
+                    autoComplete="name"
+                    value={displayName}
+                    required
+                    maxLength={80}
+                    onChange={(e) => setDisplayName(e.target.value)}
+                  />
+                )}
                 <Field
                   label="Username"
                   autoComplete="username"
                   autoCapitalize="none"
                   value={username}
                   required
-                  maxLength={64}
+                  maxLength={32}
+                  minLength={3}
+                  pattern="[A-Za-z][A-Za-z0-9_]{2,31}"
+                  hint={
+                    registering
+                      ? "3–32 characters: start with a letter; use letters, numbers or underscores."
+                      : "Use the username you chose when creating this account."
+                  }
                   onChange={(e) => setUsername(e.target.value)}
                 />
                 <Field
                   label="Password"
                   type="password"
-                  autoComplete="current-password"
+                  autoComplete={
+                    registering ? "new-password" : "current-password"
+                  }
+                  minLength={registering ? 12 : undefined}
                   value={password}
                   required
                   maxLength={256}
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                {registering && (
+                  <Field
+                    label="Confirm account password"
+                    type="password"
+                    autoComplete="new-password"
+                    value={confirmation}
+                    onChange={(e) => setConfirmation(e.target.value)}
+                    minLength={12}
+                    required
+                  />
+                )}
                 <Button type="submit" disabled={busy}>
-                  {busy ? "Signing in…" : "Sign in"}
+                  {busy
+                    ? "Please wait…"
+                    : registering
+                      ? "Create account and sign in"
+                      : "Sign in"}
                 </Button>
               </form>
             </Panel>
             <section className="account-explainer">
-              <h2>Access that fits your role.</h2>
+              <h2>
+                {params.get("from") === "wallet"
+                  ? "Your crypto wallet is ready."
+                  : "Two ways to use e-wallet"}
+              </h2>
               <p>
-                <strong>Member</strong> · Alice and Bob can send credits and see
-                their own transfer history.
+                A crypto wallet is unlocked on this device with its wallet
+                password. It does not have a username. An account uses the
+                username and password you choose here for credit transfers.
+              </p>
+              <Link className="button secondary" to="/">
+                Continue to your wallet
+              </Link>
+              <h3>Account permissions</h3>
+              <p>
+                <strong>Member</strong> · Members can send credits and see their
+                own transfer history.
               </p>
               <p>
                 <strong>Admin</strong> · Reviews all activity and can suspend or
@@ -314,7 +414,7 @@ export function AccountsPage() {
                         <Select
                           label="Recipient"
                           value={recipientId}
-                          onChange={(e) => setRecipientId(e.target.value)}
+                          onValueChange={(e) => setRecipientId(e)}
                           required
                         >
                           <option value="">Choose an account</option>

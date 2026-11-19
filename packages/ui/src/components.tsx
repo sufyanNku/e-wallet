@@ -1,11 +1,12 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { X, ArrowUpRight, WalletCards } from "lucide-react";
+import { X, ArrowUpRight, WalletCards, Eye, EyeOff } from "lucide-react";
 import {
   useId,
+  useEffect,
+  useState,
   type ButtonHTMLAttributes,
   type InputHTMLAttributes,
   type ReactNode,
-  type SelectHTMLAttributes,
 } from "react";
 
 export function Button({
@@ -25,6 +26,7 @@ export function Field({
   label,
   error,
   hint,
+  type,
   ...props
 }: InputHTMLAttributes<HTMLInputElement> & {
   label: string;
@@ -32,35 +34,64 @@ export function Field({
   hint?: string;
 }) {
   const id = useId();
+  const [revealed, setRevealed] = useState(false);
+  const password = type === "password";
+  useEffect(() => {
+    if (props.value === "" || props.disabled || !password) setRevealed(false);
+  }, [props.value, props.disabled, password]);
+  useEffect(() => {
+    if (!password) return;
+    const hide = () => setRevealed(false);
+    const visibility = () => {
+      if (document.hidden) hide();
+    };
+    window.addEventListener("blur", hide);
+    document.addEventListener("visibilitychange", visibility);
+    return () => {
+      window.removeEventListener("blur", hide);
+      document.removeEventListener("visibilitychange", visibility);
+    };
+  }, [password]);
+  const input = (
+    <input
+      {...props}
+      type={password && revealed ? "text" : type}
+      id={id}
+      aria-invalid={Boolean(error)}
+      aria-describedby={error || hint ? `${id}-help` : undefined}
+    />
+  );
   return (
     <div className="field">
       <label htmlFor={id}>{label}</label>
-      <input
-        {...props}
-        id={id}
-        aria-invalid={Boolean(error)}
-        aria-describedby={error || hint ? `${id}-help` : undefined}
-      />
+      {password ? (
+        <div className="password-input">
+          {input}
+          <button
+            className="password-toggle"
+            type="button"
+            disabled={props.disabled}
+            aria-label={`${revealed ? "Hide" : "Show"} ${label}`}
+            aria-controls={id}
+            aria-pressed={revealed}
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => setRevealed((value) => !value)}
+          >
+            {revealed ? (
+              <EyeOff size={19} aria-hidden="true" />
+            ) : (
+              <Eye size={19} aria-hidden="true" />
+            )}
+          </button>
+        </div>
+      ) : (
+        input
+      )}
       {(error || hint) && (
         <small id={`${id}-help`} className={error ? "error" : "muted"}>
           {error || hint}
         </small>
       )}
-    </div>
-  );
-}
-export function Select({
-  label,
-  children,
-  ...props
-}: SelectHTMLAttributes<HTMLSelectElement> & { label: string }) {
-  const id = useId();
-  return (
-    <div className="field">
-      <label htmlFor={id}>{label}</label>
-      <select {...props} id={id}>
-        {children}
-      </select>
     </div>
   );
 }

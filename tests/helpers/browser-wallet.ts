@@ -14,7 +14,7 @@ export async function openWallet(page: Page) {
     .getByLabel("New wallet password", { exact: true })
     .fill("Isolated browser test password");
   await page
-    .getByLabel("Confirm new wallet password")
+    .getByLabel("Confirm new wallet password", { exact: true })
     .fill("Isolated browser test password");
   await page
     .getByRole("button", { name: "Restore wallet", exact: true })

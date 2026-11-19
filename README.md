@@ -21,6 +21,8 @@ Open the **Open your wallet** URL printed by `pnpm dev`. Preferred ports are 517
 
 A newly created wallet is empty. Restore the prepared Alice phrase from the ignored `.local/secrets/alice.json` file to use seeded holdings. The local identities are deliberately public and insecure: never use them on public networks or for real funds. Accounts passwords are generated separately in `.local/local/accounts-credentials.json`.
 
+Crypto wallets unlock with a wallet password and require no username. After creating a wallet on local web, you can optionally register a credit account with your own username and account password. Choose **Credit account** in the sidebar to return to it. New registrations are Members with zero credits; existing users can transfer credits to them. **Sign out of wallet** locks signing keys and ends the credit-account session; **Lock wallet** only locks the signing vault.
+
 For Accounts without blockchain nodes:
 
 ```sh

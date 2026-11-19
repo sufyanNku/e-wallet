@@ -226,7 +226,7 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
   }
   function go(next: Screen) {
     wallet.touch();
-    if(next==='wallet')setNftAsset(null);
+    if (next === "wallet") setNftAsset(null);
     setError("");
     setNotice("");
     setReview(null);
@@ -421,7 +421,11 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
                 onPress={() =>
                   void run(async () => {
                     if (screen === "restore") {
-                      await wallet.restore(phrase, password, confirm);
+                      await wallet.restore(
+                        phrase.replace(/[,;，]+/g, " ").trim(),
+                        password,
+                        confirm,
+                      );
                       clearSecrets();
                       go("wallet");
                       return;
@@ -472,7 +476,9 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
           <Text style={[ui.title, { fontSize: 38, marginTop: 20 }]}>
             Welcome back.
           </Text>
-          <Text style={ui.subtitle}>Unlock to access your wallet.</Text>
+          <Text style={ui.subtitle}>
+            Enter this device’s wallet password. No username is needed.
+          </Text>
           <Input
             label="Wallet password"
             secureTextEntry
@@ -669,7 +675,9 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
                   >
                     <Coin symbol={b.symbol} />
                     <View style={{ flex: 1, gap: 5 }}>
-                      <Text style={styles.assetName}>{displayAssetName(b.name)}</Text>
+                      <Text style={styles.assetName}>
+                        {displayAssetName(b.name)}
+                      </Text>
                       <Text style={styles.small}>{b.symbol}</Text>
                     </View>
                     <View style={{ alignItems: "flex-end", gap: 5 }}>
@@ -715,7 +723,8 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
             <>
               <Note>
                 Receive only {network.feeAsset.symbol} and supported tokens on{" "}
-                {displayNetworkName(network)}. Check the selected network before sharing this address.
+                {displayNetworkName(network)}. Check the selected network before
+                sharing this address.
               </Note>
               <View style={styles.qr}>
                 <QRCode
@@ -790,8 +799,8 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
                 keyboardType="decimal-pad"
               />
               <Text style={ui.subtitle}>
-                Network: {displayNetworkName(network)}. Network fees are shown before you
-                approve.
+                Network: {displayNetworkName(network)}. Network fees are shown
+                before you approve.
               </Text>
               <Button
                 disabled={busy || !asset || !recipient || !amount}
@@ -824,7 +833,27 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
                       </Text>
                       <Text selectable style={styles.small}>
                         {item.hash ? short(item.hash) : "Awaiting signature"}
-                      </Text>{item.direction==='outgoing'&&!item.id.startsWith('indexed:')&&['signed','submission_unknown','submitted'].includes(item.state)&&<Button secondary disabled={busy} onPress={()=>void run(async()=>{await wallet.retrySubmission(item.id);setNotice('Retried the exact saved transaction. No new transaction was signed.');})}>Retry saved transaction</Button>}
+                      </Text>
+                      {item.direction === "outgoing" &&
+                        !item.id.startsWith("indexed:") &&
+                        ["signed", "submission_unknown", "submitted"].includes(
+                          item.state,
+                        ) && (
+                          <Button
+                            secondary
+                            disabled={busy}
+                            onPress={() =>
+                              void run(async () => {
+                                await wallet.retrySubmission(item.id);
+                                setNotice(
+                                  "Retried the exact saved transaction. No new transaction was signed.",
+                                );
+                              })
+                            }
+                          >
+                            Retry saved transaction
+                          </Button>
+                        )}
                     </View>
                     <Text
                       style={[
@@ -875,13 +904,15 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
                     <View style={styles.nftArtwork}>
                       <Icon name="image" size={52} tint={color.accent} />
                     </View>
-                    <Text style={ui.sectionTitle}>{displayAssetName(item.name)}</Text>
+                    <Text style={ui.sectionTitle}>
+                      {displayAssetName(item.name)}
+                    </Text>
                     <Text selectable style={styles.small}>
                       {short(item.asset.reference)}
                     </Text>
                     <Text style={ui.subtitle}>
-                      Ownership verified on {displayNetworkName(network)}. External media is
-                      not loaded automatically.
+                      Ownership verified on {displayNetworkName(network)}.
+                      External media is not loaded automatically.
                     </Text>
                     <Button
                       secondary
@@ -938,6 +969,11 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
                 <Row label="When app closes" value="Lock immediately" />
                 <Row label="Key storage" value="Device keychain" />
                 <Row label="Lock wallet" onPress={() => wallet.lock()} />
+                <Row
+                  label="Sign out of wallet"
+                  value="Keep encrypted wallet"
+                  onPress={() => wallet.lock()}
+                />
               </View>
               <View style={ui.card}>
                 <Text style={ui.sectionTitle}>Recovery and password</Text>
@@ -1152,11 +1188,7 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
                     <Row
                       key={n.id}
                       label={displayNetworkName(n)}
-                      value={
-                        s.networkId === n.id
-                          ? "Selected"
-                          : "Available"
-                      }
+                      value={s.networkId === n.id ? "Selected" : "Available"}
                       onPress={() => {
                         wallet.selectNetwork(n.id);
                         setSheet(null);
@@ -1223,7 +1255,9 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
                 </Text>
                 <Row
                   label="Network"
-                  value={displayNetworkName(networkById(review.intent.networkId))}
+                  value={displayNetworkName(
+                    networkById(review.intent.networkId),
+                  )}
                 />
                 <Row
                   label="From"
@@ -1314,9 +1348,7 @@ function MarketWatch({ wallet }: { wallet: NativeWallet }) {
   }, [wallet]);
   return (
     <>
-      <Text style={ui.subtitle}>
-        Live market references.
-      </Text>
+      <Text style={ui.subtitle}>Live market references.</Text>
       <Text style={ui.sectionTitle}>Market watch</Text>
       {quotes?.assets.map((item) => (
         <View style={styles.asset} key={item.symbol}>
@@ -1366,7 +1398,8 @@ function Swap({
   return (
     <>
       <Text style={ui.subtitle}>
-        Swap tokens through the selected pool. Network and contract checks run before every review.
+        Swap tokens through the selected pool. Network and contract checks run
+        before every review.
       </Text>
       <Input
         label="You pay (dUSDC)"

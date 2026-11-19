@@ -89,7 +89,6 @@ function BalanceRows({ balances }: { balances: AssetBalance[] }) {
   );
 }
 export function Home() {
-  const [watchAcknowledged, setWatchAcknowledged] = useState(false);
   const [assetSearch, setAssetSearch] = useState("");
   const { snapshot: s, gateway, notify } = useWallet(),
     action = useAction();
@@ -98,6 +97,7 @@ export function Home() {
   const assets = s.balances.filter(
     (b) =>
       !b.hidden &&
+      (b.asset.standard === "native" || BigInt(b.raw) > 0n) &&
       (b.name + b.symbol).toLowerCase().includes(assetSearch.toLowerCase()),
   );
   return (
@@ -121,38 +121,21 @@ export function Home() {
           </Button>
         }
       />
-      {n.family === "bitcoin" && s.bitcoinWatchConsentRequired && (
-        <Panel>
-          <h2>Enable watch-only discovery</h2>
-          <p>
-            The configured local backend receives this account’s public ranged
-            descriptors. They reveal current and future receive/change addresses
-            and their activity. The backend uses a watch-only Bitcoin Core
-            wallet; private keys stay in this browser’s Worker.
-          </p>
-          <label className="checkbox-label">
-            <input
-              type="checkbox"
-              checked={watchAcknowledged}
-              onChange={(e) => setWatchAcknowledged(e.target.checked)}
-            />
-            I understand that public descriptors reveal this account’s address
-            activity.
-          </label>
-          <Button
-            disabled={!watchAcknowledged || action.busy}
-            onClick={() =>
-              void action.run(async () => {
-                await gateway.connectBitcoinWatch?.();
-                setWatchAcknowledged(false);
-              })
-            }
-          >
-            Enable public descriptor watch
-          </Button>
-          {action.error && <Notice tone="error">{action.error}</Notice>}
-        </Panel>
-      )}
+      {s.balanceStatus === "ready" &&
+        !s.bitcoinWatchConsentRequired &&
+        s.balances.every((b) => BigInt(b.raw) === 0n) && (
+          <Panel>
+            <h2>Your wallet is ready to receive</h2>
+            <p>
+              This wallet currently has no assets on {displayNetworkName(n)}.
+              Use your receive address to add assets; changing networks shows a
+              separate balance.
+            </p>
+            <Link className="button secondary" to="/receive">
+              Receive assets
+            </Link>
+          </Panel>
+        )}
       {s.balances.some((b) => b.stale) && (
         <Notice tone="warning">
           Balances are stale. Refresh before preparing a payment.
@@ -522,8 +505,8 @@ export function ActivityList({ asset }: { asset?: string }) {
         <Select
           label="Status"
           value={status}
-          onChange={(e) => {
-            setStatus(e.target.value);
+          onValueChange={(e) => {
+            setStatus(e);
             setPage(1);
           }}
         >
@@ -535,8 +518,8 @@ export function ActivityList({ asset }: { asset?: string }) {
         <Select
           label="Operation"
           value={kind}
-          onChange={(e) => {
-            setKind(e.target.value);
+          onValueChange={(e) => {
+            setKind(e);
             setPage(1);
           }}
         >

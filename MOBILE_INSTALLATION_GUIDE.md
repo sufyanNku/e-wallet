@@ -203,4 +203,6 @@ For private testing on additional registered devices, a team enrolled in the App
 
 Follow the device checklist in [USER_AND_TESTING_GUIDE.md](USER_AND_TESTING_GUIDE.md#6-complete-the-phone-checklist). Record the phone model, OS, build and results. JavaScript exports, an Android APK build and Node-hosted chain tests do not prove that camera permissions, secure storage or privacy controls work on a physical phone.
 
+The native wallet unlocks with the wallet password you chose on that device; no username is required. Use the eye beside each password field to show/hide it. In Settings, **Sign out of wallet** locks the wallet and keeps its encrypted storage. Open the app again and enter the wallet password to return. Username registration and credit-account transfers are available in the web application, as explained in [ACCOUNTS_GUIDE.md](ACCOUNTS_GUIDE.md).
+
 Physical-device acceptance, iOS native compilation/signing, native external dapp protocols and biometric unlock remain outstanding. Future real-funds requirements remain in `release-config.json`; run `pnpm release:check` to inspect them. Private installation does not enable real funds.

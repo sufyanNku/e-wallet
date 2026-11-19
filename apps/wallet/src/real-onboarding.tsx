@@ -5,6 +5,7 @@ import { Button, Field, Panel, Notice } from "@ewallet/ui";
 import { useWallet, useAction } from "./context";
 import type { RealWalletGateway } from "./real-gateway";
 export function RealWelcome() {
+  const { snapshot: s } = useWallet();
   return (
     <div className="onboarding">
       <div className="welcome-mark">
@@ -16,20 +17,70 @@ export function RealWelcome() {
         In your wallet.
       </h1>
       <p className="intro">
-        Send, receive and explore across networks. You hold the keys; your recovery phrase keeps you in control.
+        Send, receive and explore across networks. You hold the keys; your
+        recovery phrase keeps you in control.
       </p>
       <div className="stack">
-        <Link className="button primary" to="/create">
-          Create wallet
+        {s.initialized && (
+          <Link className="button primary" to={s.locked ? "/unlock" : "/"}>
+            {s.locked ? "Unlock saved wallet" : "Open saved wallet"}
+          </Link>
+        )}
+        {!s.initialized && (
+          <Link className="button primary" to="/create">
+            Create wallet
+          </Link>
+        )}
+        <Link
+          className="button secondary"
+          to={s.initialized ? (s.locked ? "/unlock" : "/settings") : "/import"}
+        >
+          {s.initialized ? "Manage saved wallet" : "Restore wallet"}
         </Link>
-        <Link className="button secondary" to="/import">
-          Restore wallet
-        </Link>
-        {__WALLET_MODE__ === "local" && <Link className="text-link" to="/accounts">Sign in to your account</Link>}
+        {__WALLET_MODE__ === "local" && (
+          <Link className="text-link" to="/accounts">
+            Account sign-in and registration
+          </Link>
+        )}
       </div>
       <p className="muted small">
-        Keys stay in this browser. We cannot reset a lost recovery phrase.
+        Unlock this wallet with its wallet password; no username is needed.
+        Credit accounts have a separate username and account password.
       </p>
+    </div>
+  );
+}
+function SavedWallet() {
+  const { snapshot: s } = useWallet();
+  return (
+    <div className="onboarding wide">
+      <h1>A wallet is already saved here</h1>
+      <Panel>
+        <h2>Open your existing wallet</h2>
+        <p>
+          This browser already contains an encrypted wallet. Unlock it with the
+          password you chose when creating it; you do not need a username.
+        </p>
+        <div className="form-actions">
+          <Link className="button primary" to={s.locked ? "/unlock" : "/"}>
+            {s.locked ? "Unlock existing wallet" : "Open existing wallet"}
+          </Link>
+          <Link
+            className="button secondary"
+            to={s.locked ? "/unlock" : "/settings"}
+          >
+            Manage wallet
+          </Link>
+        </div>
+        <p className="muted">
+          To use different recovery words, first back up this wallet, then
+          remove it in Settings. Restoring never silently overwrites your
+          existing keys.
+        </p>
+      </Panel>
+      <Link className="text-link" to="/welcome">
+        Back to welcome
+      </Link>
     </div>
   );
 }
@@ -64,6 +115,7 @@ export function RealCreate() {
       setStep(0);
     }
   }, [s.lastError]);
+  if (s.initialized && step === 0) return <SavedWallet />;
   return (
     <div className="onboarding wide">
       <Link className="text-link" to="/welcome">
@@ -78,9 +130,7 @@ export function RealCreate() {
           ][step]
         }
       </h1>
-      <p className="muted">
-        Step {step + 1} of 3
-      </p>
+      <p className="muted">Step {step + 1} of 3</p>
       <Notice tone="warning">
         Keep recovery words private and offline. Never share them with anyone.
       </Notice>
@@ -106,7 +156,14 @@ export function RealCreate() {
               } else {
                 await gateway.finishBackup(answers, ack);
                 setAnswers(["", "", ""]);
-                nav("/");
+                const accounts = await fetch("/api/v1/accounts/status")
+                  .then((r) => (r.ok ? r.json() : null))
+                  .catch(() => null);
+                nav(
+                  accounts?.data?.enabled
+                    ? "/accounts?mode=register&from=wallet"
+                    : "/",
+                );
               }
             });
           }}
@@ -180,7 +237,7 @@ export function RealCreate() {
   );
 }
 export function RealImport() {
-  const { gateway } = useWallet(),
+  const { gateway, snapshot: s } = useWallet(),
     nav = useNavigate(),
     action = useAction();
   const [mnemonic, setMnemonic] = useState(""),
@@ -190,6 +247,7 @@ export function RealImport() {
     [encrypted, setEncrypted] = useState(""),
     [ack, setAck] = useState(false),
     [kind, setKind] = useState<"phrase" | "encrypted">("phrase");
+  if (s.initialized) return <SavedWallet />;
   return (
     <div className="onboarding wide">
       <Link className="text-link" to="/welcome">
@@ -197,8 +255,7 @@ export function RealImport() {
       </Link>
       <h1>Restore your wallet</h1>
       <Notice tone="warning">
-        Recovery requires your exact words and optional
-        BIP39 passphrase.
+        Recovery requires your exact words and optional BIP39 passphrase.
       </Notice>
       <div className="form-actions">
         <Button
@@ -221,7 +278,7 @@ export function RealImport() {
             void action.run(async () => {
               if (kind === "phrase")
                 await gateway.restorePhrase(
-                  mnemonic,
+                  mnemonic.replace(/[,;，]+/g, " ").trim(),
                   password,
                   confirm,
                   passphrase,
@@ -337,8 +394,8 @@ export function RealUnlock() {
       <KeyRound size={36} className="mint" />
       <h1>Your wallet is locked</h1>
       <p className="muted">
-        Each browser window unlocks separately. Reloading or closing a window
-        clears its unlocked session.
+        Enter the wallet password you chose when you created or restored this
+        wallet. No username is needed. Reloading or closing a window locks it.
       </p>
       <Panel>
         <form
@@ -365,10 +422,13 @@ export function RealUnlock() {
         </form>
       </Panel>
       <p className="muted small">
-        Forgot your password? Restore from your recovery phrase or an encrypted
-        backup with its password. There is no email reset.
+        Forgot this password? Restore your recovery words in a private browser
+        window to recover access without deleting the wallet saved here. An
+        encrypted backup still needs its own password.
       </p>
-      {s.lastError && <Notice tone="warning">{s.lastError.message}</Notice>}
+      {s.lastError && s.lastError.code !== "LOCKED" && (
+        <Notice tone="warning">{s.lastError.message}</Notice>
+      )}
     </div>
   );
 }

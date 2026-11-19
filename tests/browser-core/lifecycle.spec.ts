@@ -2,15 +2,18 @@ import { expect } from "../helpers/private-expect";
 import { test, type Page } from "@playwright/test";
 import { writeFile, mkdir } from "node:fs/promises";
 import vectors from "../../fixtures/derivation-vectors.json" with { type: "json" };
+import { walletRoute } from "../helpers/browser-wallet";
 const password = "Public vector-only test password",
   nextPassword = "Changed vector-only test password";
 async function restore(page: Page) {
   await page.goto("/import");
   await page
     .getByLabel("Recovery phrase (12 or 24 English words)")
-    .fill(vectors.mnemonic);
+    .fill(vectors.mnemonic.split(" ").join(", "));
   await page.getByLabel("New wallet password", { exact: true }).fill(password);
-  await page.getByLabel("Confirm new wallet password").fill(password);
+  await page
+    .getByLabel("Confirm new wallet password", { exact: true })
+    .fill(password);
   await page
     .getByRole("button", { name: "Restore wallet", exact: true })
     .click();
@@ -29,7 +32,23 @@ test("real Worker creates a wallet, verifies recovery backup and locks on reload
 }) => {
   await page.goto("/create");
   await page.getByLabel("Wallet password", { exact: true }).fill(password);
-  await page.getByLabel("Confirm wallet password").fill(password);
+  await page
+    .getByLabel("Confirm wallet password", { exact: true })
+    .fill(password);
+  for (const label of ["Wallet password", "Confirm wallet password"]) {
+    const field = page.getByLabel(label, { exact: true });
+    expect(await field.getAttribute("type")).toBe("password");
+    await page
+      .getByRole("button", { name: "Show " + label, exact: true })
+      .click();
+    expect(await field.getAttribute("type")).toBe("text");
+    await expect(field).toHaveValue(password);
+    await page
+      .getByRole("button", { name: "Hide " + label, exact: true })
+      .click();
+    expect(await field.getAttribute("type")).toBe("password");
+  }
+
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await expect(
     page.getByRole("heading", { name: "Back up your recovery phrase" }),
@@ -55,6 +74,21 @@ test("real Worker creates a wallet, verifies recovery backup and locks on reload
   await expect(
     page.getByRole("heading", { name: "Your wallet", exact: true }),
   ).toBeVisible();
+  for (const route of ["/import", "/create"]) {
+    await walletRoute(page, route);
+    await expect(
+      page.getByRole("heading", { name: "A wallet is already saved here" }),
+    ).toBeVisible();
+    await expect(
+      page.getByLabel("Recovery phrase (12 or 24 English words)"),
+    ).toHaveCount(0);
+    await page
+      .getByRole("link", { name: "Open existing wallet", exact: true })
+      .click();
+    await expect(
+      page.getByRole("heading", { name: "Your wallet", exact: true }),
+    ).toBeVisible();
+  }
   await page.reload();
   await expect(
     page.getByRole("heading", { name: "Your wallet is locked" }),
@@ -73,7 +107,9 @@ test("published-vector recovery, encrypted export/restore, password changes, sto
   });
   page.on("console", (m) => consoleMessages.push(m.text()));
   await restore(page);
-  await expect(page.getByRole('button',{name:'Lock wallet',exact:true})).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Lock wallet", exact: true }),
+  ).toBeVisible();
   await page.evaluate(() => {
     const script = document.createElement("script");
     script.textContent =
@@ -89,7 +125,9 @@ test("published-vector recovery, encrypted export/restore, password changes, sto
   ).toBeVisible();
   await page.getByRole("button", { name: "Close dialog" }).click();
   await settings(page);
-  await page.getByLabel("Current wallet password").fill(password);
+  await page
+    .getByLabel("Current wallet password", { exact: true })
+    .fill(password);
   const download = page.waitForEvent("download");
   await page
     .getByRole("button", { name: "Export encrypted backup", exact: true })
@@ -99,11 +137,15 @@ test("published-vector recovery, encrypted export/restore, password changes, sto
   for await (const b of (await file.createReadStream())!)
     backup += b.toString();
   expect(backup.includes(vectors.mnemonic)).toBe(false);
-  await page.getByLabel("Current wallet password").fill(password);
+  await page
+    .getByLabel("Current wallet password", { exact: true })
+    .fill(password);
   await page
     .getByLabel("New wallet password", { exact: true })
     .fill(nextPassword);
-  await page.getByLabel("Confirm new wallet password").fill(nextPassword);
+  await page
+    .getByLabel("Confirm new wallet password", { exact: true })
+    .fill(nextPassword);
   await page
     .getByRole("button", { name: "Change password", exact: true })
     .click();
@@ -115,7 +157,9 @@ test("published-vector recovery, encrypted export/restore, password changes, sto
   await expect(
     another.getByRole("heading", { name: "Your wallet is locked" }),
   ).toBeVisible();
-  await another.getByLabel("Wallet password").fill(nextPassword);
+  await another
+    .getByLabel("Wallet password", { exact: true })
+    .fill(nextPassword);
   await another
     .getByRole("button", { name: "Unlock wallet", exact: true })
     .click();
@@ -130,7 +174,7 @@ test("published-vector recovery, encrypted export/restore, password changes, sto
     another.getByRole("heading", { name: "Your wallet is locked" }),
   ).toBeVisible();
   await page.reload();
-  await page.getByLabel("Wallet password").fill(nextPassword);
+  await page.getByLabel("Wallet password", { exact: true }).fill(nextPassword);
   await page
     .getByRole("button", { name: "Unlock wallet", exact: true })
     .click();
@@ -172,7 +216,9 @@ test("published-vector recovery, encrypted export/restore, password changes, sto
       mimeType: "application/json",
       buffer: Buffer.from(backup),
     });
-    await restored.getByLabel("Backup password").fill(password);
+    await restored
+      .getByLabel("Backup password", { exact: true })
+      .fill(password);
     await restored.getByRole("checkbox").check();
     await restored
       .getByRole("button", { name: "Restore wallet", exact: true })

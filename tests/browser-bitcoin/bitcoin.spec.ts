@@ -1,3 +1,4 @@
+import { chooseOption } from "../helpers/select-option";
 import { test, type Page } from "@playwright/test";
 import { expect } from "../helpers/private-expect";
 import { readFile, writeFile } from "node:fs/promises";
@@ -9,7 +10,10 @@ import { satoshis, bitcoin } from "@ewallet/chain-bitcoin";
 process.env.EWALLET_ISOLATED_BITCOIN_TEST = "1";
 process.env.PLAYWRIGHT_NO_COPY_PROMPT = "1";
 const manifest = JSON.parse(
-  await readFile(".local/reports/chains/isolated-bitcoin-manifest.json", "utf8"),
+  await readFile(
+    ".local/reports/chains/isolated-bitcoin-manifest.json",
+    "utf8",
+  ),
 );
 async function enableWatch(page: Page) {
   await expect
@@ -17,20 +21,18 @@ async function enableWatch(page: Page) {
       async () =>
         (await page
           .getByRole("heading", {
-            name: "Enable watch-only discovery",
+            name: "Enable Bitcoin balance access",
             exact: true,
           })
           .count()) > 0,
     )
     .toBe(true);
   await page
-    .getByLabel(
-      "I understand that public descriptors reveal this account’s address activity.",
-    )
+    .getByLabel("I allow public-address lookup for this Bitcoin account.")
     .check();
   await page
     .getByRole("button", {
-      name: "Enable public descriptor watch",
+      name: "Enable Bitcoin balances",
       exact: true,
     })
     .click();
@@ -43,7 +45,7 @@ async function enableWatch(page: Page) {
         async () =>
           await page
             .getByRole("heading", {
-              name: "Enable watch-only discovery",
+              name: "Enable Bitcoin balance access",
               exact: true,
             })
             .count(),
@@ -74,7 +76,7 @@ test("browser Worker sends P2WPKH and key-path P2TR PSBTs, recognizes internal c
     .getByLabel("New wallet password", { exact: true })
     .fill("Public local test-only password");
   await page
-    .getByLabel("Confirm new wallet password")
+    .getByLabel("Confirm new wallet password", { exact: true })
     .fill("Public local test-only password");
   await page
     .getByRole("button", { name: "Restore wallet", exact: true })
@@ -82,9 +84,10 @@ test("browser Worker sends P2WPKH and key-path P2TR PSBTs, recognizes internal c
   await expect(
     page.getByRole("heading", { name: "Your wallet", exact: true }),
   ).toBeVisible();
-  await page
-    .getByRole("combobox", { name: "Selected network", exact: true })
-    .selectOption("bitcoin:regtest");
+  await chooseOption(
+    page.getByRole("combobox", { name: "Selected network", exact: true }),
+    "bitcoin:regtest",
+  );
   await enableWatch(page);
   const bob = manifest.finalBalances.find(
       (b: { name: string; purpose: number }) =>

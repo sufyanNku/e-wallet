@@ -1,3 +1,4 @@
+import { chooseOption } from "../helpers/select-option";
 import { expect } from "../helpers/private-expect";
 import { openWallet, walletRoute } from "../helpers/browser-wallet";
 import { test } from "@playwright/test";
@@ -68,22 +69,25 @@ test("accounts, contacts, network scoping and balance privacy remain usable", as
     page.getByRole("button", { name: "Edit Payment contact", exact: true }),
   ).toBeVisible();
   await route("/send");
-  await page
-    .getByLabel("Choose a saved contact", { exact: true })
-    .selectOption({ label: "Payment contact" });
+  await chooseOption(
+    page.getByLabel("Choose a saved contact", { exact: true }),
+    { label: "Payment contact" },
+  );
   await expect(
     page.getByLabel("Recipient address", { exact: true }),
   ).toHaveValue("0x2222222222222222222222222222222222222222");
-  await page
-    .getByLabel("Selected network", { exact: true })
-    .selectOption("solana:local");
+  await chooseOption(
+    page.getByLabel("Selected network", { exact: true }),
+    "solana:local",
+  );
   await route("/contacts");
   await expect(
     page.getByRole("button", { name: "Edit Payment contact", exact: true }),
   ).toHaveCount(0);
-  await page
-    .getByLabel("Selected network", { exact: true })
-    .selectOption("eip155:31337");
+  await chooseOption(
+    page.getByLabel("Selected network", { exact: true }),
+    "eip155:31337",
+  );
   await page
     .getByRole("button", { name: "Delete Payment contact", exact: true })
     .click();

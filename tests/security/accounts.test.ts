@@ -162,9 +162,9 @@ it("requires authentication, exact origin, CSRF and honest credentials; revokes 
     expect((await b.request("/dashboard")).statusCode).toBe(401);
     expect(
       (
-        db
-          .prepare("SELECT password_hash FROM account_users LIMIT 1")
-          .get() as { password_hash: string }
+        db.prepare("SELECT password_hash FROM account_users LIMIT 1").get() as {
+          password_hash: string;
+        }
       ).password_hash,
     ).not.toBe(password);
   } finally {
@@ -208,9 +208,7 @@ it("blocks admin access and forged ownership, performs exact transfers and preve
     expect((await a.request("/dashboard")).json().data.balance).toBe("974.85");
     expect((await b.request("/dashboard")).json().data.balance).toBe("1025.15");
     expect(
-      db
-        .prepare("SELECT SUM(balance_cents) AS total FROM account_users")
-        .get(),
+      db.prepare("SELECT SUM(balance_cents) AS total FROM account_users").get(),
     ).toEqual({ total: 200000 });
     expect(
       db.prepare("SELECT COUNT(*) AS count FROM account_transfers").get(),
@@ -270,9 +268,7 @@ it("rejects invalid amounts and recipients and cannot overdraw on concurrent req
     expect(results.map((r) => r.statusCode).sort()).toEqual([201, 409]);
     expect((await a.request("/dashboard")).json().data.balance).toBe("250.00");
     expect(
-      db
-        .prepare("SELECT SUM(balance_cents) AS total FROM account_users")
-        .get(),
+      db.prepare("SELECT SUM(balance_cents) AS total FROM account_users").get(),
     ).toEqual({ total: 200000 });
   } finally {
     await app.close();
@@ -349,6 +345,66 @@ it("throttles repeated bad passwords even across public sessions", async () => {
       ids.alice,
     );
     expect((await other.login("alice")).statusCode).toBe(200);
+  } finally {
+    await app.close();
+  }
+});
+
+it("registers a chosen username with no privilege or balance escalation and supports later sign-in", async () => {
+  const { app, db, browser } = await setup();
+  try {
+    const b = await browser();
+    const payload = {
+      username: "Morgan_7",
+      displayName: "Morgan",
+      password: "New registered account password",
+    };
+    expect(
+      (await b.request("/register", "POST", { ...payload, role: "admin" }))
+        .statusCode,
+    ).toBe(400);
+    expect(
+      (
+        await b.request("/register", "POST", payload, {
+          "x-csrf-token": "wrong",
+        })
+      ).statusCode,
+    ).toBe(403);
+    const created = await b.request("/register", "POST", payload);
+    expect(created.statusCode).toBe(201);
+    expect(created.json().data.user).toMatchObject({
+      username: "morgan_7",
+      role: "member",
+      displayName: "Morgan",
+    });
+    expect((await b.request("/dashboard")).json().data.balance).toBe("0.00");
+    expect((await b.request("/admin")).statusCode).toBe(403);
+    expect(
+      (
+        await b.request("/register", "POST", {
+          ...payload,
+          username: "morgan_7",
+        })
+      ).statusCode,
+    ).toBe(409);
+    expect(
+      (await b.request("/register", "POST", { ...payload, username: "ADMIN" }))
+        .statusCode,
+    ).toBe(409);
+    const stored = db
+      .prepare(
+        "SELECT password_hash,role,balance_cents FROM account_users WHERE username='morgan_7'",
+      )
+      .get() as { password_hash: string; role: string; balance_cents: number };
+    expect(stored.password_hash).not.toBe(payload.password);
+    expect(stored.role).toBe("member");
+    expect(stored.balance_cents).toBe(0);
+    await b.request("/logout", "POST");
+    expect((await b.request("/dashboard")).statusCode).toBe(401);
+    expect((await b.login("morgan_7", payload.password)).statusCode).toBe(200);
+    expect((await b.request("/dashboard")).json().data.user.username).toBe(
+      "morgan_7",
+    );
   } finally {
     await app.close();
   }

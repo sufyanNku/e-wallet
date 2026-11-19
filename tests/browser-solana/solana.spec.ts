@@ -1,10 +1,14 @@
+import { chooseOption } from "../helpers/select-option";
 import { expect } from "../helpers/private-expect";
 import { test, type Page } from "@playwright/test";
 import { readFile, writeFile } from "node:fs/promises";
 import { parse } from "lossless-json";
 process.env.PLAYWRIGHT_NO_COPY_PROMPT = "1";
 const manifest = JSON.parse(
-    await readFile(".local/reports/chains/isolated-solana-manifest.json", "utf8"),
+    await readFile(
+      ".local/reports/chains/isolated-solana-manifest.json",
+      "utf8",
+    ),
   ),
   alice = manifest.identities.alice.address,
   bob = manifest.identities.bob.address,
@@ -67,9 +71,10 @@ async function send(
 ) {
   await home(page);
   await page.getByRole("link", { name: "Send", exact: true }).click();
-  await page
-    .getByLabel("Asset", { exact: true })
-    .selectOption(`solana:local/${standard}/${mint}/`);
+  await chooseOption(
+    page.getByLabel("Asset", { exact: true }),
+    `solana:local/${standard}/${mint}/`,
+  );
   await page.getByLabel("Recipient address", { exact: true }).fill(recipient);
   await page.getByLabel(`Amount (${symbol})`, { exact: true }).fill(amount);
   await page.getByRole("button", { name: "Review payment" }).click();
@@ -90,17 +95,23 @@ test("browser Worker signs SOL, SPL with missing ATA, Token-2022 and a standard 
     .getByLabel("New wallet password", { exact: true })
     .fill("Public local test-only password");
   await page
-    .getByLabel("Confirm new wallet password")
+    .getByLabel("Confirm new wallet password", { exact: true })
     .fill("Public local test-only password");
   await page
     .getByRole("button", { name: "Restore wallet", exact: true })
     .click();
-  await expect(
-    page.getByRole("heading", { name: "Your wallet", exact: true }),
-  ).toBeVisible({timeout:15000}).catch(async()=>{throw new Error("Restore did not open portfolio. Public errors: "+(await page.getByRole("alert").allTextContents()).join(" | "));});
-  await page
-    .getByRole("combobox", { name: "Selected network", exact: true })
-    .selectOption("solana:local");
+  await expect(page.getByRole("heading", { name: "Your wallet", exact: true }))
+    .toBeVisible({ timeout: 15000 })
+    .catch(async () => {
+      throw new Error(
+        "Restore did not open portfolio. Public errors: " +
+          (await page.getByRole("alert").allTextContents()).join(" | "),
+      );
+    });
+  await chooseOption(
+    page.getByRole("combobox", { name: "Selected network", exact: true }),
+    "solana:local",
+  );
   await expect(page.getByText("sEWLT", { exact: true })).toBeVisible({
     timeout: 15000,
   });
@@ -112,9 +123,10 @@ test("browser Worker signs SOL, SPL with missing ATA, Token-2022 and a standard 
   const tokenBefore = await tokens(dana, manifest.mints.sEWLT.address);
   await home(page);
   await page.getByRole("link", { name: "Send", exact: true }).click();
-  await page
-    .getByLabel("Asset", { exact: true })
-    .selectOption(`solana:local/spl/${manifest.mints.sEWLT.address}/`);
+  await chooseOption(
+    page.getByLabel("Asset", { exact: true }),
+    `solana:local/spl/${manifest.mints.sEWLT.address}/`,
+  );
   await page.getByLabel("Recipient address", { exact: true }).fill(dana);
   await page.getByLabel("Amount (sEWLT)", { exact: true }).fill("0.000000001");
   await page.getByRole("button", { name: "Review payment" }).click();
@@ -171,9 +183,10 @@ test("browser Worker signs SOL, SPL with missing ATA, Token-2022 and a standard 
   ]) {
     await home(page);
     await page.getByRole("link", { name: "Send", exact: true }).click();
-    await page
-      .getByLabel("Asset", { exact: true })
-      .selectOption(`solana:local/${standard}/${manifest.mints[key].address}/`);
+    await chooseOption(
+      page.getByLabel("Asset", { exact: true }),
+      `solana:local/${standard}/${manifest.mints[key].address}/`,
+    );
     await page.getByLabel("Recipient address", { exact: true }).fill(dana);
     await page
       .getByLabel(`Amount (${label})`, { exact: true })

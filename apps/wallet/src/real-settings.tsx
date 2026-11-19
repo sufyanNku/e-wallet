@@ -36,8 +36,8 @@ export function RealSettings() {
             <Select
               label="Auto-lock after inactivity"
               value={s.autoLockMinutes}
-              onChange={(e) =>
-                gateway.setAutoLock(Number(e.target.value) as 1 | 5 | 15)
+              onValueChange={(e) =>
+                gateway.setAutoLock(Number(e) as 1 | 5 | 15)
               }
             >
               <option value="1">1 minute</option>
@@ -127,8 +127,23 @@ export function RealSettings() {
         <div className="stack">
           <Panel>
             <h2>Public account metadata</h2>
-            <label className="checkbox-label"><input type="checkbox" checked={s.remoteMediaAllowed===true} onChange={e=>void action.run(()=>gateway.setRemoteMediaAllowed?.(e.target.checked))}/>Allow remote NFT media when I request it</label>
-            <p className="muted">Remote servers can learn which media was requested. Images stay blocked until you request details; safe cached local images remain available.</p>
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                checked={s.remoteMediaAllowed === true}
+                onChange={(e) =>
+                  void action.run(() =>
+                    gateway.setRemoteMediaAllowed?.(e.target.checked),
+                  )
+                }
+              />
+              Allow remote NFT media when I request it
+            </label>
+            <p className="muted">
+              Remote servers can learn which media was requested. Images stay
+              blocked until you request details; safe cached local images remain
+              available.
+            </p>
             <p className="muted">
               Save public paths and indexes to help restore derived accounts.
               This does not replace your recovery phrase.
@@ -146,7 +161,10 @@ export function RealSettings() {
             </Button>
             <h3 className="subheading">Supported path discovery</h3>
             <p className="muted">
-              Scan supported {networkById(s.networkId).family} paths using the selected node. Used EVM/Solana accounts are recovered locally; Bitcoin scans the consented account’s receive and change branches. Coverage and bounds are shown in the result.
+              Scan supported {networkById(s.networkId).family} paths using the
+              selected node. Used EVM/Solana accounts are recovered locally;
+              Bitcoin scans the consented account’s receive and change branches.
+              Coverage and bounds are shown in the result.
             </p>
             <Button
               variant="secondary"

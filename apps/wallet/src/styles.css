@@ -619,6 +619,30 @@ textarea::placeholder {
 .field small {
   font-weight: 400;
 }
+.password-input {
+  position: relative;
+}
+.password-input input {
+  padding-right: 52px;
+}
+.password-toggle {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: 42px;
+  min-height: 42px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted, #aaa4b6);
+  display: grid;
+  place-items: center;
+}
+.password-toggle:hover {
+  color: var(--text, #f1f4ee);
+}
 .field input[type="file"] {
   font-size: 12px;
   padding: 12px;
@@ -1499,4 +1523,30 @@ summary {
   }
 }
 
-.connect-page{max-width:44rem;margin:0 auto;padding:1.5rem 0 4rem}.connector-origin{font-weight:700;font-size:1.3rem;overflow-wrap:anywhere}.message-preview{white-space:pre-wrap;overflow-wrap:anywhere;max-height:28rem;overflow:auto;background:var(--surface-muted,#f0f1ed);border:1px solid var(--border,#deded8);padding:1rem;border-radius:.5rem;font-size:.85rem}.connect-page .details dd{overflow-wrap:anywhere}.connect-page button{margin:.5rem .5rem .5rem 0}
+.connect-page {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 1.5rem 0 4rem;
+}
+.connector-origin {
+  font-weight: 700;
+  font-size: 1.3rem;
+  overflow-wrap: anywhere;
+}
+.message-preview {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 28rem;
+  overflow: auto;
+  background: var(--surface-muted, #f0f1ed);
+  border: 1px solid var(--border, #deded8);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+}
+.connect-page .details dd {
+  overflow-wrap: anywhere;
+}
+.connect-page button {
+  margin: 0.5rem 0.5rem 0.5rem 0;
+}

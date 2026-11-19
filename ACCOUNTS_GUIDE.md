@@ -41,7 +41,20 @@ pnpm dev:accounts
 
 Open the **Account logins and RBAC** URL printed by the launcher; normally **http://127.0.0.1:5173/accounts**. Occupied ports are skipped automatically.
 
-You can also select **Sign in to your account** on the wallet welcome page, or **Accounts** in the wallet sidebar.
+You can also select **Account sign-in and registration** on the wallet welcome page, or **Credit account** in the wallet sidebar.
+
+### Create your own username
+
+1. On `/accounts`, choose **Create account**. New wallet creation also offers this page after the recovery-word check.
+2. Enter your name, a username of 3–32 characters starting with a letter (letters, numbers and underscores), and an account password of at least 12 characters. Confirm the password.
+3. Use the eye beside either password field to show or hide it, then choose **Create account and sign in**.
+4. Keep your chosen username and account password. Next time, use **Existing account** to sign in with them.
+
+New registrations are Members with **0.00 credits**. Another Member can transfer credits to them. Registration cannot create Admin/Auditor privileges or grant itself a balance. Existing seeded credentials remain available for the two-user walkthrough below.
+
+The **wallet password** unlocks the encrypted crypto wallet on this browser; it needs no username. The **account password** signs into the SQLite credit ledger. Signing into Accounts does not unlock signing keys. Use **Back to crypto wallet** to return, then unlock the wallet if needed.
+
+Use **Sign out** in the account header to revoke the account session and lock the wallet. **Sign out of wallet** in the wallet sidebar also ends the credit-account session. The header **Lock wallet** control locks signing keys without ending the credit-account session. No sign-out deletes your saved wallet or balances.
 
 Both `pnpm dev` and `pnpm dev:accounts` enable and prepare Accounts automatically for local development. Each launch starts its own backend on an available port with the matching origin configuration. Set `EWALLET_ACCOUNTS=0` with `pnpm dev` to deliberately disable account access.
 
@@ -85,7 +98,7 @@ While signed in as Alice or Bob, click **Check admin permission**. The UI makes 
 5. As Admin, click **Enable Alice**.
 6. Sign Alice in again. Her balance and history are preserved.
 
-Admin can suspend/re-enable **Member** accounts. Admin cannot change anyone's password, impersonate a Member, or edit balances through an API. Account roles are assigned by the local setup command; the login request cannot choose or upgrade a role.
+Admin can suspend/re-enable **Member** accounts. Admin cannot change anyone's password, impersonate a Member, or edit balances through an API. The local setup command prepares the privileged roles; registration always creates a Member. Login cannot choose or upgrade a role.
 
 **Auditor read-only access**
 

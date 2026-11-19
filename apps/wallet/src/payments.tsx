@@ -99,9 +99,12 @@ export function Send() {
     return (
       <>
         <PageTitle title="Send" />
-        <Empty title="No assets available">
-          Receive assets before sending.
-        </Empty>
+        {!s.bitcoinWatchConsentRequired && (
+          <Empty title="Your wallet is ready to receive">
+            <p>Receive assets on the selected network before sending.</p>
+            <Button onClick={() => nav("/receive")}>Receive assets</Button>
+          </Empty>
+        )}
       </>
     );
   return (
@@ -133,7 +136,7 @@ export function Send() {
             <Select
               label="Asset"
               value={assetKey(b.asset)}
-              onChange={(e) => setKey(e.target.value)}
+              onValueChange={(e) => setKey(e)}
             >
               {s.balances
                 .filter((b) => !b.hidden)
@@ -154,7 +157,7 @@ export function Send() {
             <Select
               label="Choose a saved contact"
               value=""
-              onChange={(e) => setRecipient(e.target.value)}
+              onValueChange={(e) => setRecipient(e)}
             >
               <option value="">Select contact…</option>
               {s.contacts
@@ -288,8 +291,8 @@ export function Receive() {
           <Select
             label="Bitcoin receive address type"
             value={type}
-            onChange={(e) => {
-              const type = e.target.value as "p2wpkh" | "p2tr";
+            onValueChange={(e) => {
+              const type = e as "p2wpkh" | "p2tr";
               setType(type);
               {
                 const current = s.accounts.find(

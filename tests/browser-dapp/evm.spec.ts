@@ -52,7 +52,9 @@ test("built cross-origin popup connects, signs messages, sends a payment and rev
     await page
       .getByLabel("New wallet password", { exact: true })
       .fill(password);
-    await page.getByLabel("Confirm new wallet password").fill(password);
+    await page
+      .getByLabel("Confirm new wallet password", { exact: true })
+      .fill(password);
     await page
       .getByRole("button", { name: "Restore wallet", exact: true })
       .click();

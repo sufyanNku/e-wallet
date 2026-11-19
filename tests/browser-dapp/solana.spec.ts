@@ -1,3 +1,4 @@
+import { chooseOption } from "../helpers/select-option";
 import { test, type Page } from "@playwright/test";
 import { expect } from "../helpers/private-expect";
 import { readFile, writeFile } from "node:fs/promises";
@@ -43,7 +44,9 @@ test("Wallet Standard connects through a real popup, signs exact bytes and sends
     .getByLabel("Recovery phrase (12 or 24 English words)")
     .fill(fixture.mnemonic);
   await page.getByLabel("New wallet password", { exact: true }).fill(password);
-  await page.getByLabel("Confirm new wallet password").fill(password);
+  await page
+    .getByLabel("Confirm new wallet password", { exact: true })
+    .fill(password);
   await page
     .getByRole("button", { name: "Restore wallet", exact: true })
     .click();
@@ -54,7 +57,7 @@ test("Wallet Standard connects through a real popup, signs exact bytes and sends
   await dapp.goto("http://127.0.0.1:5174");
   await dapp.getByRole("button", { name: "SOLANA", exact: true }).click();
   const connection = await popup(dapp, "Connect solana");
-  await connection.getByLabel("Approval network").selectOption("solana:local");
+  await chooseOption(connection.getByLabel("Approval network"), "solana:local");
   await expect(
     connection.getByText("Selected signing account", { exact: true }),
   ).toBeVisible();

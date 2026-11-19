@@ -1,10 +1,11 @@
-import { type PropsWithChildren } from "react";
+import { useEffect, useState, type PropsWithChildren } from "react";
 import {
   Pressable,
   Text,
   TextInput,
   View,
   StyleSheet,
+  AppState,
   type TextInputProps,
 } from "react-native";
 import Svg, { Path, Circle } from "react-native-svg";
@@ -35,6 +36,8 @@ const paths: Record<string, string> = {
   add: "M12 4v16M4 12h16",
   image: "M3 3h18v18H3zM3 16l6-7 5 6 3-3 4 5",
   eye: "M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0",
+  eyeOff:
+    "M3 3l18 18M10 5.2A11 11 0 0 1 12 5c6 0 10 7 10 7a19 19 0 0 1-3 3.8M6.3 6.3A23 23 0 0 0 2 12s4 7 10 7a12 12 0 0 0 5.7-1.7M9.9 9.9a3 3 0 0 0 4.2 4.2",
   close: "m5 5 14 14M19 5 5 19",
   compass: "m8 16 3-7 5-2-3 7z",
 };
@@ -102,21 +105,62 @@ export function Button({
     </Pressable>
   );
 }
-export function Input({ label, ...props }: TextInputProps & { label: string }) {
+export function Input({
+  label,
+  secureTextEntry,
+  style,
+  ...props
+}: TextInputProps & { label: string }) {
+  const [revealed, setRevealed] = useState(false);
+  useEffect(() => {
+    if (props.value === "" || props.editable === false || !secureTextEntry)
+      setRevealed(false);
+  }, [props.value, props.editable, secureTextEntry]);
+  useEffect(() => {
+    if (!secureTextEntry) return;
+    const subscription = AppState.addEventListener("change", (state) => {
+      if (state !== "active") setRevealed(false);
+    });
+    return () => subscription.remove();
+  }, [secureTextEntry]);
   return (
     <View style={ui.field}>
       <Text style={ui.label}>{label}</Text>
-      <TextInput
-        accessibilityLabel={label}
-        placeholderTextColor="#7f8a80"
-        autoCapitalize="none"
-        autoCorrect={false}
-        style={[
-          ui.input,
-          props.multiline && { minHeight: 110, textAlignVertical: "top" },
-        ]}
-        {...props}
-      />
+      <View style={ui.inputContainer}>
+        <TextInput
+          accessibilityLabel={label}
+          placeholderTextColor="#7f8a80"
+          autoCapitalize="none"
+          autoCorrect={false}
+          style={[
+            ui.input,
+            props.multiline && { minHeight: 110, textAlignVertical: "top" },
+            secureTextEntry && { paddingRight: 58 },
+            style,
+          ]}
+          {...props}
+          secureTextEntry={Boolean(secureTextEntry && !revealed)}
+        />
+        {secureTextEntry && (
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel={`${revealed ? "Hide" : "Show"} ${label}`}
+            accessibilityState={{
+              checked: revealed,
+              disabled: props.editable === false,
+            }}
+            disabled={props.editable === false}
+            onPress={() => setRevealed((value) => !value)}
+            style={ui.passwordToggle}
+          >
+            <Icon
+              name={revealed ? "eyeOff" : "eye"}
+              size={21}
+              tint={color.muted}
+            />
+          </Pressable>
+        )}
+      </View>
     </View>
   );
 }
@@ -233,6 +277,17 @@ export const ui = StyleSheet.create({
   },
   buttonText: { color: "#2d1c4b", fontSize: 14, fontWeight: "700" },
   field: { gap: 9 },
+  inputContainer: { position: "relative" },
+  passwordToggle: {
+    position: "absolute",
+    right: 3,
+    top: 3,
+    bottom: 3,
+    width: 48,
+    minHeight: 46,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   label: { fontSize: 12, color: color.muted, fontWeight: "500" },
   input: {
     backgroundColor: "#211e29",
