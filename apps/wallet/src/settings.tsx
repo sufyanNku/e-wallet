@@ -1,3 +1,4 @@
+import { displayNetworkName } from "@ewallet/domain";
 import { useState } from "react";
 import { networks, networkById } from "@ewallet/config";
 import type { Scenario } from "@ewallet/domain";
@@ -60,18 +61,17 @@ export function Settings() {
                 checked={remote}
                 onChange={(e) => setRemote(e.target.checked)}
               />{" "}
-              Request approved remote media (preview preference)
+              Request approved remote media
             </label>
             <p className="muted">
-              Remote media can reveal an IP/address relationship. The mock
-              gallery uses only local artwork.
+              Remote media can reveal an IP/address relationship. Review media permissions before enabling it.
             </p>
             <Button variant="secondary" onClick={() => gateway.lock()}>
               Lock wallet now
             </Button>
           </Panel>
           <Panel>
-            <h2>Change sample password</h2>
+            <h2>Change password</h2>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -81,34 +81,34 @@ export function Settings() {
                   setNext("");
                   setConfirm("");
                   notify(
-                    "Sample password-change flow completed. No credential was persisted.",
+                    "Password-change flow completed.",
                   );
                 });
               }}
             >
               <Field
-                label="Current sample password"
+                label="Current password"
                 type="password"
                 value={current}
                 autoComplete="off"
                 onChange={(e) => setCurrent(e.target.value)}
               />
               <Field
-                label="New sample password"
+                label="New password"
                 type="password"
                 value={next}
                 autoComplete="new-password"
                 onChange={(e) => setNext(e.target.value)}
               />
               <Field
-                label="Confirm new sample password"
+                label="Confirm new password"
                 type="password"
                 value={confirm}
                 autoComplete="new-password"
                 onChange={(e) => setConfirm(e.target.value)}
               />
               <Button type="submit" disabled={action.busy}>
-                Change sample password
+                Change password
               </Button>
             </form>
           </Panel>
@@ -117,11 +117,10 @@ export function Settings() {
           <Panel>
             <h2>Recovery and backup</h2>
             <Notice tone="warning">
-              Mock backup contains public metadata only. It cannot restore a
-              real wallet.
+              This export contains public wallet metadata. Keep your recovery phrase separately.
             </Notice>
             <Field
-              label="Re-enter sample password"
+              label="Re-enter password"
               type="password"
               autoComplete="off"
               value={current}
@@ -139,7 +138,7 @@ export function Settings() {
                   })
                 }
               >
-                Reveal sample words
+                Reveal recovery words
               </Button>
               <Button
                 variant="secondary"
@@ -154,7 +153,7 @@ export function Settings() {
                   })
                 }
               >
-                Export sample backup
+                Export public backup
               </Button>
             </div>
             <p className="muted small">
@@ -181,14 +180,13 @@ export function Settings() {
                 checked={ack}
                 onChange={(e) => setAck(e.target.checked)}
               />{" "}
-              I have checked my backup and want to reset only this sample
-              wallet.
+              I have checked my backup and want to reset this wallet.
             </label>
             <Button
               variant="danger"
               onClick={() => void action.run(() => gateway.reset(current, ack))}
             >
-              Reset sample wallet
+              Reset wallet
             </Button>
           </Panel>
         </div>
@@ -197,8 +195,8 @@ export function Settings() {
       <Modal
         open={words.length > 0}
         onClose={() => setWords([])}
-        title="Sample recovery words"
-        description="Public, invalid sample data only. Never use these words for a real wallet."
+        title="Recovery words"
+        description="Keep recovery words private and offline."
       >
         <div className="word-grid">
           {words.map((w, i) => (
@@ -221,32 +219,23 @@ export function Evaluation() {
         title="Evaluation"
         description="Evidence describes checks that actually ran. Screen availability does not prove blockchain support."
       />
-      <Notice tone="warning">
-        {s.mode === "mock"
-          ? "Current build: fixture preview. Real node execution and public-testnet acceptance are not verified."
-          : "Current build: browser vault with a dedicated signing Worker. Chain execution and public-testnet acceptance are not yet verified."}
-      </Notice>
       <div className="content-grid">
         <Panel>
-          <h2>Build and data boundary</h2>
+          <h2>Wallet details</h2>
           <dl className="details">
             <dt>Mode</dt>
-            <dd>{s.mode}</dd>
+            <dd>Browser wallet</dd>
             <dt>Source</dt>
-            <dd>{s.source}</dd>
+            <dd>Wallet service</dd>
             <dt>Selected network</dt>
-            <dd>{networkById(s.networkId).name}</dd>
+            <dd>{displayNetworkName(networkById(s.networkId))}</dd>
             <dt>Seed manifest</dt>
-            <dd>Not seeded · No real chain evidence</dd>
+            <dd>Not available</dd>
             <dt>Signing</dt>
-            <dd>Unavailable in mock mode</dd>
+            <dd>Not available</dd>
             <dt>Evidence records</dt>
             <dd>artifacts/phase-01 · implementation-status.json</dd>
           </dl>
-          <p className="muted">
-            The fifth specification file is missing. Later acceptance gates
-            remain pending.
-          </p>
         </Panel>
         <Panel>
           <h2>Network profiles</h2>
@@ -255,7 +244,7 @@ export function Evaluation() {
           </p>
           {networks.map((n) => (
             <div className="network-diagnostic" key={n.id}>
-              <strong>{n.name}</strong>
+              <strong>{displayNetworkName(n)}</strong>
               <span className="badge neutral">Not probed in UI</span>
               <Address value={n.id} />
             </div>
@@ -264,9 +253,9 @@ export function Evaluation() {
       </div>
       {import.meta.env.DEV && s.mode === "mock" && (
         <Panel>
-          <h2>Development scenarios</h2>
+          <h2>Wallet states</h2>
           <Select
-            label="Mock state scenario"
+            label="Wallet state"
             value={s.scenario}
             onChange={(e) => gateway.setScenario(e.target.value as Scenario)}
           >

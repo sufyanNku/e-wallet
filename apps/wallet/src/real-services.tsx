@@ -28,11 +28,11 @@ export function RealServices() {
     <>
       <PageTitle
         title="Contract services"
-        description="Verified local contracts · Real transactions · Test tokens have no cash value."
+        description="Manage tokens, allowances and contract operations."
       />
       <div className="service-grid">
         {[
-          ["faucet", "Test faucet", "Claim capped local demo tokens."],
+          ["faucet", "Faucet", "Claim tokens within the available allowance."],
           [
             "swap",
             "Token swap",
@@ -50,7 +50,7 @@ export function RealServices() {
           ],
           [
             "bridge",
-            "Bridge simulation",
+            "Bridge",
             "Local lock and mint through a trusted CLI relayer.",
           ],
         ].map(([route, title, text]) => (
@@ -224,11 +224,11 @@ function LiveService({
       <PageTitle
         title={
           {
-            faucet: "Test faucet",
-            swap: "Swap test tokens",
+            faucet: "Faucet",
+            swap: "Swap tokens",
             vault: "Savings vault",
             shared: "Shared wallet",
-            bridge: "Bridge simulation",
+            bridge: "Bridge",
           }[service]
         }
         description="Real local transactions require a separate review and signature."
@@ -243,7 +243,6 @@ function LiveService({
             60-second cooldown · {d.faucet.claims} / {d.faucet.maximumClaims}{" "}
             claims used.
           </p>
-          <Notice>Demo tokens have no cash value.</Notice>
           {BigInt(d.faucet.nextClaimAt) > BigInt(d.chainTimestamp) && (
             <Notice>
               Next eligible chain time:{" "}
@@ -318,7 +317,7 @@ function LiveService({
                 <dd>{new Date(quote.expiresAt).toLocaleTimeString()}</dd>
               </dl>
               <Notice>
-                Pool prices are synthetic demo values. After an allowance
+                Quotes reflect pool reserves. After an allowance
                 transaction, request a fresh quote.
               </Notice>
               <div className="form-actions">
@@ -644,12 +643,12 @@ function LiveService({
       {service === "bridge" && (
         <>
           <Notice tone="warning">
-            Bridge simulation — local test tokens only.
+            Review both networks before bridging.
           </Notice>
           <Panel className="narrow-panel">
             <h2>Local Ethereum A → Local Ethereum B</h2>
             <p>
-              The trusted CLI relayer mints destination test tokens after
+              The trusted relayer mints destination tokens after
               observing the source event. No decentralized security or automatic
               refund is provided.
             </p>
@@ -685,8 +684,7 @@ function LiveService({
             </div>
             <Notice>
               pnpm dev runs the local CLI relayer. You can also run pnpm relayer
-              --once. After timeout: locked in simulation; resume relayer or
-              reset local demo. No automatic refund is provided.
+              --once. After timeout, resume the relayer. No automatic refund is provided.
             </Notice>
             <Button variant="secondary" onClick={() => void bridge.refetch()}>
               Check relayer status

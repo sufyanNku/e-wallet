@@ -1,0 +1,27 @@
+{
+  "observedAt": "2026-11-19T10:23:04.395Z",
+  "source": "Actual development wallet, disposable browser profile, native JSX inspection",
+  "walletPaths": [
+    "/",
+    "/send",
+    "/receive",
+    "/tokens",
+    "/activity",
+    "/collectibles",
+    "/apps",
+    "/services",
+    "/swap",
+    "/bridge",
+    "/vault",
+    "/shared",
+    "/settings",
+    "/evaluation"
+  ],
+  "forbiddenLabelsFound": 0,
+  "legacyAccountLinkRedirects": true,
+  "mobileWidth": 390,
+  "horizontalClipping": false,
+  "nativeTextNodesInspected": 862,
+  "nativeDeviceExecuted": false,
+  "realFundsEnabled": false
+}

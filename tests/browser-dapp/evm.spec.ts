@@ -126,7 +126,7 @@ test("built cross-origin popup connects, signs messages, sends a payment and rev
     const bob = manifest.identities.bob.evm.address,
       before = await provider.getBalance(bob);
     await dapp.getByLabel("Recipient", { exact: true }).fill(bob);
-    const payment = await popupFrom(dapp, "Send 0.001 test ETH");
+    const payment = await popupFrom(dapp, "Send 0.001 ETH");
     await payment
       .getByRole("button", { name: "Review request", exact: true })
       .click();

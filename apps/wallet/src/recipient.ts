@@ -12,5 +12,5 @@ export function validateRecipient(address: string, networkId: string) {
   if (f === "solana" && !/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address))
     fail("RECIPIENT", "Enter a Solana address.");
   if (f === "bitcoin" && !/^bcrt1[ac-hj-np-z02-9]{20,90}$/.test(address))
-    fail("RECIPIENT", "This mock requires a Bitcoin regtest address (bcrt1).");
+    fail("RECIPIENT", "This network requires a Bitcoin address starting with bcrt1.");
 }

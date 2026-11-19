@@ -1,3 +1,4 @@
+import { displayNetworkName, displayAssetName } from "@ewallet/domain";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import { useState } from "react";
 import {
@@ -65,7 +66,7 @@ function BalanceRows({ balances }: { balances: AssetBalance[] }) {
           <div className="asset-name">
             <strong>{b.symbol}</strong>
             <small>
-              {b.name}
+              {displayAssetName(b.name)}
               {!b.verified ? " · Unverified" : ""}
             </small>
           </div>
@@ -113,7 +114,7 @@ export function Home() {
                 await gateway.refresh();
                 notify(
                   s.mode === "mock"
-                    ? "Sample balances refreshed."
+                    ? "Balances refreshed."
                     : "Node balances refreshed.",
                 );
               })
@@ -160,7 +161,7 @@ export function Home() {
         )}
       {s.scenario === "rpc-offline" && (
         <Notice tone="error">
-          Network disconnected. Last-known fixture data is shown; sending is
+          Network disconnected. Last-known balances are shown; sending is
           unavailable.
         </Notice>
       )}
@@ -172,7 +173,7 @@ export function Home() {
       <div className="overview-grid">
         <Panel className="balance-panel">
           <div className="section-heading">
-            <span className="muted">Total demo value</span>
+            <span className="muted">Total value</span>
             <Button
               variant="ghost"
               aria-label={s.hiddenAmounts ? "Show amounts" : "Hide amounts"}
@@ -189,7 +190,7 @@ export function Home() {
                 : formatUsd(value.microUsd)}
           </div>
           <p className="muted">
-            Demo valuation · {n.name}
+            Portfolio · {displayNetworkName(n)}
             {value.missingPriceCount > 0 ? " · Partial valuation" : ""}
           </p>
           <div className="quick-actions">
@@ -226,7 +227,7 @@ export function Home() {
           </div>
           <div className="insight-row">
             <span>Network</span>
-            <strong>{n.name}</strong>
+            <strong>{displayNetworkName(n)}</strong>
           </div>
           <div className="insight-row">
             <span>Assets</span>
@@ -312,7 +313,7 @@ export function Home() {
               : s.balanceStatus === "ready"
                 ? "Receive your first assets to see them here."
                 : s.mode === "mock"
-                  ? "Receive test assets or visit the sample faucet to get started."
+                  ? "Receive assets or open the faucet to get started."
                   : "Balances are not available yet. Refresh to reconnect to the network."}
             <br />
             <Link className="text-link" to="/faucet">
@@ -322,15 +323,14 @@ export function Home() {
         )}
         <p className="footnote">
           {s.source === "fixture"
-            ? "Sample data"
+            ? "Wallet balances"
             : s.balanceStatus === "unavailable"
               ? "Network unavailable"
               : "On-chain balances"}{" "}
           · Updated{" "}
           {s.balanceStatus === "unavailable"
             ? "No observation yet"
-            : new Date(s.updatedAt).toLocaleTimeString()}{" "}
-          · Demo prices, not market quotes.
+            : new Date(s.updatedAt).toLocaleTimeString()}
         </p>
       </Panel>
       {action.error && <Notice tone="error">{action.error}</Notice>}
@@ -350,8 +350,8 @@ export function AssetDetails() {
   return (
     <>
       <PageTitle
-        title={b.name}
-        description={`${b.symbol} · ${networkById(b.asset.networkId).name}`}
+        title={displayAssetName(b.name)}
+        description={`${b.symbol} · ${displayNetworkName(networkById(b.asset.networkId))}`}
       />
       <Panel>
         <Coin symbol={b.symbol} />
@@ -373,7 +373,7 @@ export function AssetDetails() {
           </dd>
           <dt>Source</dt>
           <dd>
-            {b.observation.source === "node" ? "On-chain" : "Sample data"} ·
+            {b.observation.source === "node" ? "On-chain" : "Wallet balances"} ·
             block {b.observation.observedHeight}
           </dd>
         </dl>
@@ -423,7 +423,7 @@ export function TokenManagement() {
         />
         {s.balances
           .filter((b) =>
-            `${b.name} ${b.symbol}`
+            `${displayAssetName(b.name)} ${b.symbol}`
               .toLowerCase()
               .includes(search.toLowerCase()),
           )
@@ -434,7 +434,7 @@ export function TokenManagement() {
                 <strong>{b.symbol}</strong>
                 <small className="muted block">
                   {b.verified
-                    ? "Registry sample"
+                    ? "Registry entry"
                     : "Unverified / possible spam"}
                 </small>
               </div>
@@ -450,7 +450,7 @@ export function TokenManagement() {
       <Panel>
         <h2>Import custom token</h2>
         <Notice tone="warning">
-          Mock metadata review only. A readable symbol is not proof of trust.
+          Review token metadata carefully. A readable symbol is not proof of trust.
         </Notice>
         <form
           onSubmit={(e) => {
@@ -473,7 +473,7 @@ export function TokenManagement() {
           />
           <div className="form-grid">
             <Field
-              label="Sample symbol"
+              label="Token symbol"
               value={symbol}
               maxLength={30}
               onChange={(e) => setSymbol(e.target.value)}
@@ -492,11 +492,11 @@ export function TokenManagement() {
               onChange={(e) => setAck(e.target.checked)}
             />{" "}
             I reviewed the identifier and metadata on{" "}
-            {networkById(s.networkId).name}.
+            {displayNetworkName(networkById(s.networkId))}.
           </label>
           {action.error && <Notice tone="error">{action.error}</Notice>}
           <Button type="submit" disabled={action.busy}>
-            Import sample token
+            Import token
           </Button>
         </form>
       </Panel>
@@ -651,7 +651,7 @@ export function ActivityList({ asset }: { asset?: string }) {
             <dt>Data source</dt>
             <dd>
               {record.source === "fixture"
-                ? "Fixture · no explorer transaction exists"
+                ? "Explorer transaction unavailable"
                 : "Node · inclusion thresholds are application policy"}
             </dd>
           </dl>
@@ -702,7 +702,7 @@ export function Collectibles() {
               )}
             </div>
             <div>
-              <h3>{c.name}</h3>
+              <h3>{displayAssetName(c.name)}</h3>
               <p className="muted">
                 Quantity {c.quantity} ·{" "}
                 {c.metadataStatus === "safe"
@@ -721,7 +721,7 @@ export function Collectibles() {
       )}
       {c && (
         <Panel>
-          <h2>{c.name}</h2>
+          <h2>{displayAssetName(c.name)}</h2>
           <Address value={c.asset.reference} />
           <p>
             Owned quantity: {c.quantity} · ID {c.asset.tokenId ?? "mint"}
@@ -831,7 +831,7 @@ export function ConnectedApps() {
       <Panel>
         <h2>Token authorizations</h2>
         <p className="muted">
-          Coverage is limited to the sample tracked range. Disconnecting does
+          Coverage is limited to the tracked range. Disconnecting does
           not revoke allowances.
         </p>
         {networkById(s.networkId).family === "bitcoin" ? (
@@ -839,7 +839,7 @@ export function ConnectedApps() {
         ) : token && !revoked ? (
           <div className="permission-row">
             <div>
-              <strong>dUSDC · Sample spender</strong>
+              <strong>dUSDC · Spender</strong>
               <p>Exact allowance: 25 dUSDC</p>
               <Address value="0x8888888888888888888888888888888888888888" />
             </div>
@@ -865,7 +865,7 @@ export function ConnectedApps() {
             </Button>
           </div>
         ) : (
-          <Notice>No tracked sample authorizations.</Notice>
+          <Notice>No tracked authorizations.</Notice>
         )}
         {action.error && <Notice tone="error">{action.error}</Notice>}
       </Panel>
@@ -883,17 +883,17 @@ export function ConnectionApproval() {
         description="An app is asking to view your selected public account."
       />
       <Panel>
-        <Notice tone="warning">Fixture connection preview</Notice>
+        <Notice tone="warning">Review connection permissions</Notice>
         <h2>http://127.0.0.1:5174</h2>
         <p className="muted">
-          This exact sample origin can request public addresses. Every signing
+          This exact origin can request public addresses. Every signing
           request needs a separate review.
         </p>
         <dl className="details">
           <dt>Account</dt>
           <dd>{s.accounts.find((a) => a.id === s.selectedAccountId)?.name}</dd>
           <dt>Network</dt>
-          <dd>{networkById(s.networkId).name}</dd>
+          <dd>{displayNetworkName(networkById(s.networkId))}</dd>
           <dt>Methods</dt>
           <dd>View public account · Request transfer approval</dd>
           <dt>Grant duration</dt>
@@ -914,11 +914,11 @@ export function ConnectionApproval() {
             <Button
               onClick={() => {
                 setResult(
-                  "Sample connection approved. Public account access only.",
+                  "Connection approved. Public account access only.",
                 );
               }}
             >
-              Allow sample connection
+              Allow connection
             </Button>
           </div>
         )}

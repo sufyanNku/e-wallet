@@ -44,7 +44,7 @@ export function TeamDemo() {
       }).then(async (r) => {
         if (!r.ok) {
           csrf.current = null;
-          throw new Error("The demo session could not start. Reload to retry.");
+          throw new Error("Your session could not start. Reload to retry.");
         }
         return (await r.json()).data.csrfToken as string;
       }));
@@ -65,7 +65,7 @@ export function TeamDemo() {
       const data = await response.json();
       if (!response.ok)
         throw new DemoError(
-          data.error?.message ?? "The demo request failed.",
+          data.error?.message ?? "The request failed.",
           response.status,
         );
       return data.data as T;
@@ -101,7 +101,7 @@ export function TeamDemo() {
     void fetch("/api/v1/team-demo/status", { cache: "no-store" })
       .then(async (r) => {
         if (!r.ok)
-          throw new Error("Restart the backend to load classroom accounts.");
+          throw new Error("The account service is unavailable. Please try again.");
         const status = await r.json();
         if (!active) return;
         setEnabled(status.data.enabled);
@@ -130,7 +130,7 @@ export function TeamDemo() {
     try {
       await fn();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "The demo request failed.");
+      setError(e instanceof Error ? e.message : "The request failed.");
     } finally {
       setBusy(false);
     }
@@ -155,7 +155,7 @@ export function TeamDemo() {
               void action(async () => {
                 await request("/logout", "POST");
                 clearAccount();
-                setNotice("Signed out of the classroom demo.");
+                setNotice("You have signed out.");
               })
             }
           >
@@ -165,28 +165,25 @@ export function TeamDemo() {
       </header>
       <main className="team-main" id="main-content">
         <div className="team-title">
-          <p className="eyebrow">LOCAL CLASSROOM DEMO</p>
+          <p className="eyebrow">YOUR ACCOUNT</p>
           <h1>Accounts. Roles. Transfers.</h1>
           <p className="muted">
-            Demo credits · No real money or blockchain transaction.
+            Manage your balance, payments and account access.
           </p>
         </div>
         {error && <Notice tone="error">{error}</Notice>}
         {notice && <Notice tone="success">{notice}</Notice>}
         {enabled === null && !error && (
-          <p role="status">Connecting to the classroom demo…</p>
+          <p role="status">Connecting to your account…</p>
         )}
         {enabled === false && (
           <Panel>
-            <h2>Enable classroom accounts</h2>
+            <h2>Account service is unavailable</h2>
             <p>
-              Stop the current development server, run these commands in the
-              project folder, then open this page again.
+              Contact your administrator to enable account access.
             </p>
-            <pre>pnpm demo:setup{"\n"}pnpm demo:dev</pre>
             <p className="muted">
-              Setup saves randomly generated passwords in
-              .local/local/team-demo-credentials.json. See RBAC_DEMO_GUIDE.md.
+              Sign-in details are provided by your administrator.
             </p>
           </Panel>
         )}
@@ -194,7 +191,7 @@ export function TeamDemo() {
           <div className="team-login-grid">
             <Panel>
               <ShieldCheck size={28} />
-              <h2>Sign in to the demo</h2>
+              <h2>Sign in to your account</h2>
               <form
                 className="stack"
                 onSubmit={(e) => {
@@ -234,7 +231,7 @@ export function TeamDemo() {
               </form>
             </Panel>
             <section className="team-explainer">
-              <h2>One presentation, three roles.</h2>
+              <h2>Access that fits your role.</h2>
               <p>
                 <strong>Member</strong> · Alice and Bob can send credits and see
                 their own transfer history.
@@ -274,15 +271,15 @@ export function TeamDemo() {
             </div>
             <div className="team-wallet-grid">
               <section className="team-balance">
-                <p>Available demo credits</p>
+                <p>Available credits</p>
                 <strong data-testid="team-balance">{dashboard.balance}</strong>
-                <p>Local balance · Demo only</p>
+                <p>Account balance</p>
               </section>
               <Panel>
                 {dashboard.canTransfer ? (
                   <>
                     <h2>
-                      <ArrowLeftRight size={20} /> Send demo credits
+                      <ArrowLeftRight size={20} /> Send credits
                     </h2>
                     {!review ? (
                       <form
@@ -324,7 +321,7 @@ export function TeamDemo() {
                           ))}
                         </Select>
                         <Field
-                          label="Amount in demo credits"
+                          label="Amount in credits"
                           inputMode="decimal"
                           value={amount}
                           onChange={(e) => setAmount(e.target.value)}
@@ -343,7 +340,7 @@ export function TeamDemo() {
                       <div className="stack">
                         <h3>Confirm transfer</h3>
                         <p>
-                          Send <strong>{review.amount} demo credits</strong> to{" "}
+                          Send <strong>{review.amount} credits</strong> to{" "}
                           <strong>
                             {dashboard.recipients.find(
                               (r) => r.id === review.recipientId,
@@ -460,7 +457,7 @@ export function TeamDemo() {
               {!dashboard.transfers.length ? (
                 <p className="muted">
                   No transfers yet. Send credits from Alice to Bob to start the
-                  demonstration.
+                  transfer history.
                 </p>
               ) : (
                 <ol className="team-history">

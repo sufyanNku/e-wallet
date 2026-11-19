@@ -51,7 +51,7 @@ export function registerReadApi(
               ? "This public watch is not authorized for the current session."
               : invalid
                 ? "Invalid public data query."
-                : "Public data unavailable; no fixture fallback was used.",
+                : "Public data is unavailable. Refresh to retry.",
             correlationId: req.id,
           },
         });

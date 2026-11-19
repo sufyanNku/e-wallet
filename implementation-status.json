@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-19T10:06:07.398472+00:00",
+  "updatedAt": "2026-11-19T10:24:15.223783+00:00",
   "phases": [
     {
       "phase": "01",
@@ -2786,7 +2786,9 @@
       "androidBuild": "passed_debug_apk",
       "iosBundle": "passed",
       "iosBinary": "blocked_macos_xcode",
-      "deviceAcceptance": "blocked_emulator_boot_and_missing_ios_toolchain"
+      "deviceAcceptance": "blocked_emulator_boot_and_missing_ios_toolchain",
+      "launchTrack": "deferred_by_user",
+      "currentPriority": "Testing and instructor presentations"
     }
   },
   "publicNetworkBlockers": [
@@ -3045,6 +3047,17 @@
       "accessibilityViolations": 0,
       "typecheck": "passed",
       "lint": "passed"
-    }
+    },
+    "accountRoute": "/accounts",
+    "legacyRouteRedirect": "/team-demo",
+    "presentationLabels": "Accounts and credits; testing scope remains documented in guide"
+  },
+  "presentationCopy": {
+    "state": "passed",
+    "verificationPath": "artifacts/product/presentation-verification.json",
+    "browserProofPath": "artifacts/product/presentation-browser.json",
+    "visibleLabels": "Neutral wallet/account/credit wording",
+    "backendNetworkAndReleaseGuards": "unchanged",
+    "realFundsEnabled": false
   }
 }

@@ -472,3 +472,4 @@ export interface WalletGateway {
   newBitcoinReceive?(): Promise<void>;
   setScenario(scenario: Scenario): void;
 }
+export { displayAccountName, displayAssetName, displayNetworkName } from "./presentation";

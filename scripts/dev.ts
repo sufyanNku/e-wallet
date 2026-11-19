@@ -111,4 +111,4 @@ console.log(
   "Open your wallet: http://127.0.0.1:5173\nDeveloper reference dapp (connection tests): http://127.0.0.1:5174\nBackend and built approval windows: http://127.0.0.1:8787\nExisting nodes are used without reset or reseeding.",
 );
 if (process.env.EWALLET_TEAM_DEMO === "1")
-  console.log("Classroom logins and RBAC: http://127.0.0.1:5173/team-demo (SQLite demo credits; no blockchain funds).");
+  console.log("Account logins and RBAC: http://127.0.0.1:5173/accounts (SQLite demo credits; no blockchain funds).");

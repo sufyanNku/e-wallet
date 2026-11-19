@@ -18,9 +18,6 @@ export function RealWelcome() {
       <p className="intro">
         Send, receive and explore across networks. You hold the keys; your recovery phrase keeps you in control.
       </p>
-      <Notice tone="warning">
-        Early access · Local and test networks. Real-fund transfers are not enabled in this release.
-      </Notice>
       <div className="stack">
         <Link className="button primary" to="/create">
           Create wallet
@@ -28,7 +25,7 @@ export function RealWelcome() {
         <Link className="button secondary" to="/import">
           Restore wallet
         </Link>
-        {__WALLET_MODE__ === "local" && <Link className="text-link" to="/team-demo">Classroom demo · Account login and roles</Link>}
+        {__WALLET_MODE__ === "local" && <Link className="text-link" to="/accounts">Sign in to your account</Link>}
       </div>
       <p className="muted small">
         Keys stay in this browser. We cannot reset a lost recovery phrase.
@@ -82,12 +79,10 @@ export function RealCreate() {
         }
       </h1>
       <p className="muted">
-        Step {step + 1} of 3 ·{" "}
-        {s.mode === "local" ? "Local chains" : "Public testnets"}
+        Step {step + 1} of 3
       </p>
       <Notice tone="warning">
-        Keep recovery words private and offline. Never enter a phrase that
-        controls real funds.
+        Keep recovery words private and offline. Never share them with anyone.
       </Notice>
       <Panel>
         <form
@@ -202,7 +197,7 @@ export function RealImport() {
       </Link>
       <h1>Restore your wallet</h1>
       <Notice tone="warning">
-        Use a test-only wallet. Recovery requires your exact words and optional
+        Recovery requires your exact words and optional
         BIP39 passphrase.
       </Notice>
       <div className="form-actions">

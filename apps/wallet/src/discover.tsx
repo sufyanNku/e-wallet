@@ -92,8 +92,7 @@ export function Discover() {
           {q.data?.source ?? "Coinbase spot"}
           {q.data?.observedAt
             ? " · Observed " + new Date(q.data.observedAt).toLocaleTimeString()
-            : ""}{" "}
-          · Market references do not value your test assets.
+            : ""}
         </p>
       </Panel>
       <div className="discover-actions">
@@ -128,7 +127,7 @@ export function Discover() {
         ))}
       </div>
       <Link className="text-link" to="/services">
-        Explore test-network tools <ArrowUpRight size={16} />
+        Explore network tools <ArrowUpRight size={16} />
       </Link>
     </>
   );

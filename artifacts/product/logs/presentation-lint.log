@@ -1,0 +1,4 @@
+> e-wallet@0.1.0 lint /home/sufyan/Desktop/Dev/E-wallet
+> eslint . && node scripts/check-boundaries.mjs
+
+Import boundaries passed: UI/dapp/backend have no secret-code imports.

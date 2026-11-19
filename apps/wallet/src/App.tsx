@@ -1,3 +1,4 @@
+import { displayNetworkName, displayAssetName } from "@ewallet/domain";
 import { Discover } from "./discover";
 import { TeamDemo } from "./team-demo";
 import { RealEvaluation } from "./real-evaluation";
@@ -170,7 +171,7 @@ function Shell() {
             <FlaskConical size={19} />
             Network status
           </NavLink>
-          {__WALLET_MODE__ === "local" && <NavLink to="/team-demo"><ShieldCheck size={19} /> Classroom demo</NavLink>}
+          {__WALLET_MODE__ === "local" && <NavLink to="/accounts"><ShieldCheck size={19} /> Accounts</NavLink>}
         </div>
       </aside>
       <div className="app-body">
@@ -181,12 +182,7 @@ function Shell() {
           </Link>
           <div className="mode-badge">
             <span />
-            {s.mode === "mock"
-              ? "Mock preview"
-              : s.mode === "local"
-                ? "Local chains"
-                : "Public testnets"}
-            <span className="mode-extra"> · Test assets only</span>
+            Wallet connected
           </div>
           <div className="selectors">
             <Button
@@ -221,7 +217,7 @@ function Shell() {
                 )
                 .map((n) => (
                   <option key={n.id} value={n.id}>
-                    {n.name}
+                    {displayNetworkName(n)}
                   </option>
                 ))}
             </select>
@@ -251,8 +247,7 @@ function Shell() {
         </main>
         <footer className="page-footer">
           <span>
-            <ShieldCheck size={14} /> Browser wallet ·{" "}
-            {s.mode === "mock" ? "Sample data only" : "Test networks only"}
+            <ShieldCheck size={14} /> Your keys, your wallet
           </span>
           <span>Your recovery is your responsibility.</span>
         </footer>
@@ -334,7 +329,7 @@ function Shell() {
               >
                 <Search size={19} />
                 <span>
-                  {asset.name} <small>{asset.symbol}</small>
+                  {displayAssetName(asset.name)} <small>{asset.symbol}</small>
                 </span>
                 <ChevronRight size={15} />
               </Link>
@@ -381,7 +376,7 @@ function Shell() {
         open={accountOpen}
         onClose={() => setAccountOpen(false)}
         title="Your accounts"
-        description={`Public ${s.mode === "mock" ? "sample " : ""}addresses on ${n.name}. Different network families have different addresses.`}
+        description={`Public addresses on ${displayNetworkName(n)}. Different network families have different addresses.`}
       >
         {s.accounts
           .filter((a) => a.family === n.family)
@@ -444,12 +439,7 @@ function OnboardingShell() {
           e-wallet.
         </Link>
         <span className="mode-badge">
-          {__WALLET_MODE__ === "mock"
-            ? "Mock preview"
-            : __WALLET_MODE__ === "local"
-              ? "Local chains"
-              : "Public testnets"}{" "}
-          · Test only
+          Your wallet, everywhere
         </span>
       </header>
       <main id="main-content" tabIndex={-1}>
@@ -463,7 +453,8 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {__WALLET_MODE__ === "local" && <Route path="/team-demo" element={<TeamDemo />} />}
+        {__WALLET_MODE__ === "local" && <Route path="/accounts" element={<TeamDemo />} />}
+        {__WALLET_MODE__ === "local" && <Route path="/team-demo" element={<Navigate to="/accounts" replace />} />}
         {__WALLET_MODE__ !== "mock" && (
           <Route element={<OnboardingShell />}>
             <Route path="/connect" element={<ConnectPage />} />

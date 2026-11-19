@@ -107,7 +107,7 @@ export class EvmAdapter {
     )
       throw new WalletError(
         "NEEDS_SEED",
-        "Local chain restarted. Rebuild its demo dataset before using contracts.",
+        "The network restarted. Refresh its configuration before using contracts.",
       );
     return m;
   }
@@ -1196,7 +1196,7 @@ export class EvmAdapter {
     if (env.bootEpoch !== payload.bootEpoch)
       throw new WalletError(
         "CHAIN_RESTARTED",
-        "The local chain restarted. Cancel this operation and rebuild the demo environment.",
+        "The network restarted. Cancel this operation and refresh its configuration.",
       );
     const tx = Transaction.from(payload.unsignedTransaction);
     if (

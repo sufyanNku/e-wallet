@@ -1,4 +1,5 @@
 import type Database from "better-sqlite3";
+import { displayAccountName } from "@ewallet/domain";
 import type { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
 import {
   createHash,
@@ -52,7 +53,7 @@ type PublicSession = {
 const publicUser = (user: User) => ({
   id: user.id,
   username: user.username,
-  displayName: user.display_name,
+  displayName: displayAccountName(user.display_name),
   role: user.role,
 });
 const fail = (reply: FastifyReply, code: number, message: string) =>
@@ -68,7 +69,7 @@ export function registerTeamDemo(
 ) {
   app.get(prefix + "/status", async (_req, reply) => {
     reply.header("Cache-Control", "no-store");
-    return { data: { enabled, unit: "Demo credits", realFundsEnabled: false } };
+    return { data: { enabled, unit: "Credits", realFundsEnabled: false } };
   });
   // Disabled by default, never enabled for a production/testnet service.
   if (!enabled) return;
@@ -99,7 +100,7 @@ export function registerTeamDemo(
       !/^[A-Za-z0-9_-]{43}$/.test(token) ||
       session?.client_kind !== "browser"
     ) {
-      fail(reply, 401, "Sign in to the classroom demo.");
+      fail(reply, 401, "Sign in to your account.");
       return;
     }
     const user = db
@@ -112,7 +113,7 @@ export function registerTeamDemo(
       fail(
         reply,
         401,
-        "Your demo session expired or this account is suspended. Sign in again.",
+        "Your session expired or this account is suspended. Sign in again.",
       );
       return;
     }
@@ -153,7 +154,7 @@ export function registerTeamDemo(
       reply.header("Cache-Control", "no-store");
       const session = publicSession(req);
       if (session?.client_kind !== "browser")
-        return fail(reply, 403, "Use the browser demo.");
+        return fail(reply, 403, "Use the browser to sign in.");
       const username = req.body.username.toLowerCase(),
         user = db
           .prepare("SELECT * FROM team_demo_users WHERE username=?")
@@ -245,8 +246,8 @@ export function registerTeamDemo(
         };
         return {
           id: row.id,
-          sender: row.sender,
-          recipient: row.recipient,
+          sender: displayAccountName(row.sender),
+          recipient: displayAccountName(row.recipient),
           amount: money(row.amount_cents),
           createdAt: row.createdAt,
         };
@@ -332,7 +333,7 @@ export function registerTeamDemo(
           };
         if (recipient.balance_cents + cents > 100000000)
           return {
-            error: "The recipient would exceed the demo balance limit.",
+            error: "The recipient would exceed the balance limit.",
             status: 400,
           };
         const debit = db
@@ -341,7 +342,7 @@ export function registerTeamDemo(
           )
           .run(cents, user.id, cents);
         if (debit.changes !== 1)
-          return { error: "Insufficient demo credits.", status: 409 };
+          return { error: "Insufficient credits.", status: 409 };
         db.prepare(
           "UPDATE team_demo_users SET balance_cents=balance_cents+? WHERE id=?",
         ).run(cents, recipient.id);
@@ -380,7 +381,10 @@ export function registerTeamDemo(
             `SELECT a.id,u.display_name AS actor,a.action,a.subject_id AS subject,a.created_at AS createdAt
         FROM team_demo_audit a LEFT JOIN team_demo_users u ON u.id=a.actor_id ORDER BY a.id DESC LIMIT 100`,
           )
-          .all(),
+          .all().map((value) => {
+            const event = value as Record<string, unknown>;
+            return { ...event, actor: typeof event.actor === "string" ? displayAccountName(event.actor) : null };
+          }),
       },
     };
   });
@@ -409,7 +413,7 @@ export function registerTeamDemo(
         return fail(
           reply,
           400,
-          "Only Member accounts can be suspended in this demo.",
+          "Only Member accounts can be suspended.",
         );
       db.transaction(() => {
         db.prepare("UPDATE team_demo_users SET enabled=? WHERE id=?").run(

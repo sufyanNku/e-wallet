@@ -310,7 +310,7 @@ export class NativeWallet {
     if (this.signing) throw new Error("Wait for signing to finish.");
     const profile = networkById(id);
     if (profile.environment !== "testnet" && profile.environment !== "local")
-      throw new Error("Real funds are disabled.");
+      throw new Error("This network is unavailable.");
     const account = this.state.accounts.find(
       (a) => a.family === profile.family,
     );

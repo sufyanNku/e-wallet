@@ -78,8 +78,8 @@ export function WalletProvider({
       setResolver(null);
       setMessage(
         result.state === "confirmed"
-          ? `${state.mode === "mock" ? "Sample operation" : "Operation"} confirmed.`
-          : `${state.mode === "mock" ? "Sample operation" : "Operation"} ${result.state}.`,
+          ? `Operation confirmed.`
+          : `Operation ${result.state}.`,
       );
     } catch (e) {
       setError(e instanceof Error ? e.message : "Approval failed.");
@@ -111,9 +111,7 @@ export function WalletProvider({
         {prepared && (
           <>
             <Notice tone="warning">
-              {state.mode === "mock"
-                ? "Fixture preview · No real signature or funds"
-                : "Test-network operation · Signed locally after approval"}
+              Review the recipient, amount and network before approving.
             </Notice>
             <OperationDetails operation={prepared} />
             {prepared.intent.origin && (
@@ -132,9 +130,7 @@ export function WalletProvider({
               <Button onClick={() => void approve()} disabled={busy}>
                 {busy
                   ? "Submitting…"
-                  : state.mode === "mock"
-                    ? "Approve sample operation"
-                    : "Approve operation"}
+                  : "Approve operation"}
               </Button>
             </div>
           </>

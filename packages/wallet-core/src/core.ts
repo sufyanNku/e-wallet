@@ -1513,7 +1513,7 @@ export class WalletCore {
     if (networkById(this.networkId).family !== "evm")
       throw new WalletError(
         "ADAPTER_UNAVAILABLE",
-        "This network adapter is not yet connected. No fixture fallback is used.",
+        "This network connection is unavailable.",
       );
     let adapter = this.adapters.get(this.networkId);
     if (!adapter) {

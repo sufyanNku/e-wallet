@@ -51,7 +51,7 @@ describe("mock workflow and operation boundaries", () => {
         "sample password",
         "sample password",
       ),
-    ).rejects.toThrow("designated");
+    ).rejects.toThrow("not supported");
     expect(g.getSnapshot().initialized).toBe(false);
   });
   it("signs no keys and applies exact balance/fee deltas once", async () => {

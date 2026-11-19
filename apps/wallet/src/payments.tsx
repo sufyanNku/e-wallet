@@ -1,3 +1,4 @@
+import { displayNetworkName } from "@ewallet/domain";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -99,7 +100,7 @@ export function Send() {
       <>
         <PageTitle title="Send" />
         <Empty title="No assets available">
-          Receive test assets before sending.
+          Receive assets before sending.
         </Empty>
       </>
     );
@@ -203,18 +204,18 @@ export function Send() {
                   const max = BigInt(b.available) - reserve;
                   if (max <= 0n)
                     throw new Error(
-                      "No spendable balance after the sample fee reserve.",
+                      "No spendable balance after the network fee reserve.",
                     );
                   setAmount(formatAmount(max, b.decimals));
                 })
               }
             >
               {s.mode === "mock"
-                ? "Use max (with sample fee reserve)"
+                ? "Use max (with network fee reserve)"
                 : "Use max with current fee reserve"}
             </Button>
             <Notice>
-              Network: {networkById(s.networkId).name}. A complete fee preview
+              Network: {displayNetworkName(networkById(s.networkId))}. A complete fee preview
               appears before approval.
             </Notice>
             {action.error && <Notice tone="error">{action.error}</Notice>}
@@ -297,10 +298,10 @@ export function Receive() {
     <>
       <PageTitle
         title="Receive assets"
-        description="Share your address together with its network. Only send test assets."
+        description="Share your address together with its network."
       />
       <Panel className="receive-panel">
-        <h2>{networkById(s.networkId).name}</h2>
+        <h2>{displayNetworkName(networkById(s.networkId))}</h2>
         {networkById(s.networkId).family === "bitcoin" && (
           <Select
             label="Bitcoin receive address type"
@@ -332,13 +333,11 @@ export function Receive() {
             src={qr}
             width={280}
             height={280}
-            alt={s.mode === "mock" ? "QR code of the reviewed sample receive request" : "QR code of the reviewed receive request"}
+            alt="QR code of the reviewed receive request"
           />
         )}
         <Notice tone="warning">
-          {s.mode === "mock"
-            ? "Sample address only. Never send real funds."
-            : "Only receive test assets on the exact selected network."}
+          Only receive supported assets on the selected network.
         </Notice>
         {received && (
           <>
@@ -348,7 +347,7 @@ export function Receive() {
                 onClick={() =>
                   void action.run(async () => {
                     await navigator.clipboard.writeText(received.address);
-                    notify(s.mode === "mock" ? "Sample address copied." : "Address copied.");
+                    notify("Address copied.");
                   })
                 }
               >
@@ -359,7 +358,7 @@ export function Receive() {
                 onClick={() =>
                   void action.run(async () => {
                     await navigator.clipboard.writeText(received.payload);
-                    notify(s.mode === "mock" ? "Sample payment request copied." : "Payment request copied.");
+                    notify("Payment request copied.");
                   })
                 }
               >
@@ -472,7 +471,7 @@ export function Contacts() {
               error={errors.address?.message}
               spellCheck={false}
             />
-            <p className="muted">Network: {networkById(s.networkId).name}</p>
+            <p className="muted">Network: {displayNetworkName(networkById(s.networkId))}</p>
             {action.error && <Notice tone="error">{action.error}</Notice>}
             <Button type="submit">Save contact</Button>
             {id && (

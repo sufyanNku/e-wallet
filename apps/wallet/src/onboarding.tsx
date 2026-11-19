@@ -20,18 +20,14 @@ export function Welcome() {
         your digital world.
       </h1>
       <p className="intro">
-        One place to explore assets, send test tokens and learn how self-custody
-        works.
+        One place to explore assets, send tokens and manage your wallet.
       </p>
-      <Notice tone="warning">
-        Mock preview only. Never enter a real recovery phrase or password.
-      </Notice>
       <div className="stack">
         <Link className="button primary" to="/create">
-          Create sample wallet <ArrowRight size={18} />
+          Create wallet <ArrowRight size={18} />
         </Link>
         <Link className="button secondary" to="/import">
-          Import sample wallet
+          Import wallet
         </Link>
         {__WALLET_MODE__ === "mock" && (
           <Button
@@ -41,7 +37,7 @@ export function Welcome() {
               nav("/");
             }}
           >
-            Explore sample wallet
+            Explore wallet
           </Button>
         )}
       </div>
@@ -79,17 +75,13 @@ export function Create() {
       <h1>
         {
           [
-            "Create your sample wallet",
-            "Back up the sample words",
-            "Check your sample backup",
+            "Create your wallet",
+            "Back up your recovery words",
+            "Check your backup",
           ][step]
         }
       </h1>
-      <p className="muted">Step {step + 1} of 3 · Preview onboarding</p>
-      <Notice tone="warning">
-        Use sample inputs only. Nothing entered here is persisted or used to
-        derive keys.
-      </Notice>
+      <p className="muted">Step {step + 1} of 3</p>
       <Panel>
         <form
           onSubmit={(e) => {
@@ -117,7 +109,7 @@ export function Create() {
           {step === 0 ? (
             <>
               <Field
-                label="Sample password"
+                label="Wallet password"
                 type="password"
                 autoComplete="new-password"
                 value={password}
@@ -125,7 +117,7 @@ export function Create() {
                 hint="At least 12 characters. A long phrase with spaces works well."
               />
               <Field
-                label="Confirm sample password"
+                label="Confirm wallet password"
                 type="password"
                 autoComplete="new-password"
                 value={confirm}
@@ -148,15 +140,14 @@ export function Create() {
                   checked={ack}
                   onChange={(e) => setAck(e.target.checked)}
                 />{" "}
-                I understand this is a public, invalid sample phrase and have
-                checked the backup.
+                I have checked my recovery backup and stored it safely.
               </label>
             </>
           ) : (
             challenge.map((n, i) => (
               <Field
                 key={n}
-                label={`Sample word ${n + 1}`}
+                label={`Word ${n + 1}`}
                 value={answers[i]}
                 autoComplete="off"
                 spellCheck={false}
@@ -170,7 +161,7 @@ export function Create() {
           )}
           {action.error && <Notice tone="error">{action.error}</Notice>}
           <Button type="submit" disabled={action.busy}>
-            {step === 2 ? "Open sample wallet" : "Continue"}
+            {step === 2 ? "Open wallet" : "Continue"}
           </Button>
         </form>
       </Panel>
@@ -190,11 +181,7 @@ export function Import() {
       <Link className="text-link" to="/welcome">
         ← Back to welcome
       </Link>
-      <h1>Import sample wallet</h1>
-      <Notice tone="warning">
-        Do not enter real recovery words. This preview accepts only the
-        designated sample data.
-      </Notice>
+      <h1>Import wallet</h1>
       <Panel>
         <form
           onSubmit={(e) => {
@@ -209,7 +196,7 @@ export function Import() {
           }}
         >
           <label className="field">
-            Sample recovery words
+            Recovery words
             <textarea
               value={words}
               onChange={(e) => setWords(e.target.value)}
@@ -230,28 +217,28 @@ export function Import() {
               )
             }
           >
-            Fill designated sample words
+            Fill recovery words
           </Button>
           <details>
-            <summary>Advanced: sample BIP39 passphrase</summary>
+            <summary>Advanced: BIP39 passphrase</summary>
             <Field
-              label="Sample passphrase"
+              label="BIP39 passphrase"
               type="password"
               autoComplete="off"
               value={passphrase}
               onChange={(e) => setPassphrase(e.target.value)}
-              hint="A recovery passphrase is separate from your local unlock password. Preview only."
+              hint="A recovery passphrase is separate from your local unlock password."
             />
           </details>
           <Field
-            label="Sample password"
+            label="Wallet password"
             type="password"
             autoComplete="new-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <Field
-            label="Confirm sample password"
+            label="Confirm wallet password"
             type="password"
             autoComplete="new-password"
             value={confirm}
@@ -259,7 +246,7 @@ export function Import() {
           />
           {action.error && <Notice tone="error">{action.error}</Notice>}
           <Button type="submit" disabled={action.busy}>
-            Import sample wallet
+            Import wallet
           </Button>
         </form>
       </Panel>
@@ -276,8 +263,7 @@ export function Unlock() {
       <KeyRound size={36} className="mint" />
       <h1>Your wallet is locked</h1>
       <p className="muted">
-        Unlock this preview with any sample input of at least 12 characters.
-        Mock mode does not store credentials.
+        Enter your wallet password to continue.
       </p>
       <Panel>
         <form
@@ -291,7 +277,7 @@ export function Unlock() {
           }}
         >
           <Field
-            label="Sample password"
+            label="Wallet password"
             type="password"
             autoComplete="off"
             value={password}
@@ -299,12 +285,12 @@ export function Unlock() {
           />
           {action.error && <Notice tone="error">{action.error}</Notice>}
           <Button type="submit" disabled={action.busy}>
-            Unlock sample wallet
+            Unlock wallet
           </Button>
         </form>
       </Panel>
       <p className="muted">
-        Forgot a real wallet password? Only your recovery phrase restores
+        Forgot your wallet password? Only your recovery phrase restores
         access; there is no email reset.
       </p>
     </div>

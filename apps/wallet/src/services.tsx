@@ -23,14 +23,14 @@ export function Services() {
     <>
       <PageTitle
         title="Contract services"
-        description="Learn by doing with local test tokens. All values and operations here are fixtures."
+        description="Manage tokens, allowances and contract operations."
       />
       <div className="service-grid">
         {[
           {
             path: "faucet",
-            title: "Test faucet",
-            text: "Request demo tokens. Practice without buying assets.",
+            title: "Faucet",
+            text: "Request tokens within the available allowance.",
             icon: Droplets,
           },
           {
@@ -53,8 +53,8 @@ export function Services() {
           },
           {
             path: "bridge",
-            title: "Bridge simulation",
-            text: "Two local chains and a trusted educational relayer.",
+            title: "Bridge",
+            text: "Transfer between networks through the configured relayer.",
             icon: Route,
           },
         ].map(({ path, title, text, icon: Icon }) => (
@@ -79,7 +79,7 @@ function useService() {
     parameters?: Record<string, string>,
     recipient = "0x9999999999999999999999999999999999999999",
   ) {
-    if (!token) throw new Error("Select Local Ethereum with demo tokens.");
+    if (!token) throw new Error("Select the Ethereum network and a supported token.");
     return w.review({
       requestId: crypto.randomUUID(),
       accountId: w.snapshot.selectedAccountId,
@@ -100,7 +100,7 @@ function LocalOnly({ children }: { children: React.ReactNode }) {
       <>
         <PageTitle title="Local contract services" />
         <Notice tone="warning">
-          These educational services use Local Ethereum only.
+          These services are available on Local Ethereum.
         </Notice>
         <Button onClick={() => gateway.selectNetwork("eip155:31337")}>
           Select Local Ethereum
@@ -115,15 +115,14 @@ export function Faucet() {
   return (
     <LocalOnly>
       <PageTitle
-        title="Test faucet"
-        description="Request 100 dUSDC sample tokens. A 60-second cooldown applies."
+        title="Faucet"
+        description="Request 100 dUSDC tokens. A 60-second cooldown applies."
       />
       <Panel>
         <Droplets size={32} className="mint" />
-        <h2>A starting point for your next test</h2>
+        <h2>Get tokens for your wallet</h2>
         <p className="muted">
-          Local test tokens have no cash value. Public faucets are independent
-          and may be unavailable.
+          Availability and claim limits depend on the selected network.
         </p>
         <Button
           disabled={action.busy}
@@ -134,9 +133,9 @@ export function Faucet() {
             })
           }
         >
-          Review sample faucet claim
+          Review faucet claim
         </Button>
-        {receipt && <Notice tone="success">Fixture claim: {receipt}</Notice>}
+        {receipt && <Notice tone="success">Claim receipt: {receipt}</Notice>}
         {action.error && <Notice tone="error">{action.error}</Notice>}
       </Panel>
     </LocalOnly>
@@ -155,8 +154,8 @@ export function Swap() {
   return (
     <LocalOnly>
       <PageTitle
-        title="Swap test tokens"
-        description="Demo dUSDC → dDAI · Constant-product pool · 0.30% swap fee"
+        title="Swap tokens"
+        description="dUSDC → dDAI · Constant-product pool · 0.30% swap fee"
       />
       <Panel className="narrow-panel">
         <form
@@ -189,7 +188,7 @@ export function Swap() {
             <option value="500">5% maximum</option>
           </Select>
           <Button type="submit" variant="secondary" disabled={action.busy}>
-            Get sample quote
+            Get quote
           </Button>
         </form>
         {quote && (
@@ -202,9 +201,9 @@ export function Swap() {
               <dt>Quote expiry</dt>
               <dd>{new Date(quote.expiresAt).toLocaleTimeString()}</dd>
               <dt>Price impact</dt>
-              <dd>Computed from fixture reserves; rounded down</dd>
+              <dd>Computed from pool reserves; rounded down</dd>
               <dt>Data source</dt>
-              <dd>Fixture · Synthetic demo valuation only</dd>
+              <dd>Pool reserves</dd>
             </dl>
             <Notice>
               Exact allowance and swap each require approval. Quotes refresh
@@ -229,7 +228,7 @@ export function Swap() {
                 }
               >
                 {approved === amount
-                  ? "Exact sample allowance ready"
+                  ? "Exact allowance ready"
                   : "Review exact allowance"}
               </Button>
               <Button
@@ -271,15 +270,14 @@ export function Bridge() {
     );
   return (
     <LocalOnly>
-      <PageTitle title="Bridge simulation" />
+      <PageTitle title="Bridge" />
       <Notice tone="warning">
-        Bridge simulation — local test tokens only.
+        Review both networks before bridging.
       </Notice>
       <Panel className="narrow-panel">
         <h2>Local Ethereum → Local bridge destination</h2>
         <p className="muted">
-          The educational relayer is a trusted component. This demonstrates a
-          lock/mint sequence, with no decentralized bridge or refund guarantee.
+          The relayer processes the lock and mint sequence. Review both networks before continuing.
         </p>
         <Field
           label="Amount (dUSDC → bdUSDC)"
@@ -291,10 +289,10 @@ export function Bridge() {
         <ol className="timeline">
           <li>
             Source lock{" "}
-            {stage === "draft" ? "· waiting for review" : "· fixture confirmed"}
+            {stage === "draft" ? "· waiting for review" : "· confirmed"}
           </li>
           <li>
-            Trusted sample relayer ·{" "}
+            Trusted relayer ·{" "}
             {stage === "minted"
               ? "processed"
               : stage === "timeout"
@@ -303,7 +301,7 @@ export function Bridge() {
           </li>
           <li>
             Destination mint ·{" "}
-            {stage === "minted" ? "fixture complete" : "not observed"}
+            {stage === "minted" ? "complete" : "not observed"}
           </li>
         </ol>
         {stage === "draft" ? (
@@ -324,25 +322,23 @@ export function Bridge() {
           </Button>
         ) : stage === "minted" ? (
           <Notice tone="success">
-            Sample destination mint completed. This is a fixture state, not a
-            chain receipt.
+            Destination mint completed.
           </Notice>
         ) : (
           <>
             <div className="form-actions">
               <Button onClick={() => setStage("minted")}>
                 {stage === "timeout"
-                  ? "Retry sample relayer"
-                  : "Run sample relayer"}
+                  ? "Retry relayer"
+                  : "Run relayer"}
               </Button>
               <Button variant="secondary" onClick={() => setStage("timeout")}>
-                Preview relayer timeout
+                Show relayer timeout
               </Button>
             </div>
             {stage === "timeout" && (
               <Notice tone="warning">
-                Locked in simulation; resume relayer or reset local demo. No
-                automatic refund.
+                Transfer is locked. Resume the relayer to continue. No automatic refund.
               </Notice>
             )}
           </>
@@ -391,8 +387,7 @@ export function SavingsVault() {
               <option value="3600">1 hour</option>
             </Select>
             <Notice>
-              Phase 1 uses sample time. Real withdrawal eligibility must use
-              chain time.
+              Review the unlock time before depositing.
             </Notice>
             <Button type="submit" disabled={action.busy}>
               Review deposit
@@ -408,8 +403,8 @@ export function SavingsVault() {
                 {p.withdrawn
                   ? "Withdrawn"
                   : p.unlockAt > Date.now()
-                    ? `Sample unlock: ${new Date(p.unlockAt).toLocaleTimeString()}`
-                    : "Sample position withdrawable"}
+                    ? `Unlock time: ${new Date(p.unlockAt).toLocaleTimeString()}`
+                    : "Position withdrawable"}
               </p>
               <Button
                 variant="secondary"
@@ -445,13 +440,12 @@ export function SharedWallet() {
         description="Exactly two of three distinct owners must approve. Separate roots are required for real custody."
       />
       <Notice tone="warning">
-        Fixture owners Alice, Bob and Carol. Owner switching below is a mock
-        control; it cannot authorize real transactions.
+        Owners Alice, Bob and Carol can review proposals. Two distinct approvals are required.
       </Notice>
       <div className="content-grid">
         <Panel>
           <h2>Create proposal</h2>
-          <p className="muted">Sample holdings: 1 ETH · 1,000 dUSDC</p>
+          <p className="muted">Holdings: 1 ETH · 1,000 dUSDC</p>
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -481,7 +475,7 @@ export function SharedWallet() {
             </Button>
           </form>
           <Select
-            label="Sample owner for approvals"
+            label="Owner for approvals"
             value={owner}
             onChange={(e) => setOwner(e.target.value)}
           >

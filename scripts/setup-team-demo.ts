@@ -39,8 +39,8 @@ try {
     [
       { username: "alice", displayName: "Alice", role: "member" },
       { username: "bob", displayName: "Bob", role: "member" },
-      { username: "admin", displayName: "Demo administrator", role: "admin" },
-      { username: "auditor", displayName: "Demo auditor", role: "auditor" },
+      { username: "admin", displayName: "Administrator", role: "admin" },
+      { username: "auditor", displayName: "Auditor", role: "auditor" },
     ].map((c) => ({
       ...c,
       id: randomUUID(),

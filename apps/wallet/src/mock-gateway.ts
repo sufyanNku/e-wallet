@@ -69,7 +69,7 @@ export class MockWalletGateway implements WalletGateway {
   }
   private requireUnlocked() {
     if (this.state.locked)
-      fail("LOCKED", "Unlock your sample wallet to continue.");
+      fail("LOCKED", "Unlock your wallet to continue.");
   }
   private checkPassword(password: string, confirmation?: string) {
     if (
@@ -120,7 +120,7 @@ export class MockWalletGateway implements WalletGateway {
       contacts: [
         {
           id: "bob",
-          name: "Bob · Sample contact",
+          name: "Bob",
           networkId: "eip155:31337",
           address: bob,
         },
@@ -190,7 +190,7 @@ export class MockWalletGateway implements WalletGateway {
     )
       fail(
         "BACKUP",
-        "Acknowledge your backup and enter the three requested sample words.",
+        "Acknowledge your backup and enter the three requested words.",
       );
     this.challenge = [];
     this.populate();
@@ -205,14 +205,14 @@ export class MockWalletGateway implements WalletGateway {
     if (words.trim().split(/\s+/).join(" ") !== sampleWords.join(" "))
       fail(
         "MNEMONIC",
-        "Mock mode accepts only the designated 24 sample words. Never enter a real recovery phrase.",
+        "These recovery words are not supported. Check the 24 words and try again.",
       );
     this.populate();
   }
   async unlock(password: string) {
     this.checkPassword(password);
     if (!this.state.initialized)
-      fail("NO_WALLET", "Create or import the sample wallet first.");
+      fail("NO_WALLET", "Create or import your wallet first.");
     this.emit({ locked: false });
   }
   lock() {
@@ -247,7 +247,7 @@ export class MockWalletGateway implements WalletGateway {
     if (!acknowledged)
       fail(
         "ACKNOWLEDGEMENT",
-        "Confirm that you have backed up the sample wallet.",
+        "Confirm that you have backed up your wallet.",
       );
     this.cache.clear();
     this.pending.clear();
@@ -345,7 +345,7 @@ export class MockWalletGateway implements WalletGateway {
         ...[
           {
             symbol: "dUSDC",
-            name: "Demo USD Coin",
+            name: "USD Coin",
             decimals: 6,
             raw: "10000000000",
             ref: "0x3333333333333333333333333333333333333333",
@@ -354,7 +354,7 @@ export class MockWalletGateway implements WalletGateway {
           },
           {
             symbol: "dDAI",
-            name: "Demo Dai",
+            name: "Dai",
             decimals: 18,
             raw: "10000000000000000000000",
             ref: "0xabababababababababababababababababababab",
@@ -363,7 +363,7 @@ export class MockWalletGateway implements WalletGateway {
           },
           {
             symbol: "EWLT",
-            name: "e-wallet Demo Token",
+            name: "e-wallet Token",
             decimals: 18,
             raw: "2500000000000000000000",
             ref: "0x4444444444444444444444444444444444444444",
@@ -372,7 +372,7 @@ export class MockWalletGateway implements WalletGateway {
           },
           {
             symbol: "USDC",
-            name: "Unverified sample token",
+            name: "Unverified token",
             decimals: 6,
             raw: "7000000",
             ref: "0x5555555555555555555555555555555555555555",
@@ -462,7 +462,7 @@ export class MockWalletGateway implements WalletGateway {
     if (this.state.scenario === "rpc-offline")
       fail(
         "RPC_UNAVAILABLE",
-        "The sample RPC is disconnected. Retry or choose another preview scenario.",
+        "The network is disconnected. Retry your connection.",
       );
     if (this.state.scenario === "loading") return;
     for (const [id, op] of this.submitted) {
@@ -538,7 +538,7 @@ export class MockWalletGateway implements WalletGateway {
         decimals,
         observation: obs,
         symbol,
-        name: symbol + " · custom sample",
+        name: symbol + " · custom token",
         hidden: false,
         verified: false,
         microUsdRate: null,
@@ -624,7 +624,7 @@ export class MockWalletGateway implements WalletGateway {
     if (intent.kind === "faucet" && Date.now() < this.cooldown)
       fail(
         "COOLDOWN",
-        `Sample faucet cooldown: ${Math.ceil((this.cooldown - Date.now()) / 1000)} seconds remaining.`,
+        `Faucet cooldown: ${Math.ceil((this.cooldown - Date.now()) / 1000)} seconds remaining.`,
       );
     if (intent.kind === "nft-transfer") {
       const c = s.collectibles.find(
@@ -638,7 +638,7 @@ export class MockWalletGateway implements WalletGateway {
       if (!p || p.withdrawn || p.unlockAt > Date.now())
         fail(
           "LOCKED_POSITION",
-          "This sample position is still locked or already withdrawn.",
+          "This position is still locked or already withdrawn.",
         );
     }
     if (intent.kind === "execute") {
@@ -646,7 +646,7 @@ export class MockWalletGateway implements WalletGateway {
       if (!p || p.executed || p.approvals.length < 2)
         fail(
           "THRESHOLD",
-          "Execution requires two distinct sample owner approvals.",
+          "Execution requires two distinct owner approvals.",
         );
     }
     if (
@@ -675,10 +675,10 @@ export class MockWalletGateway implements WalletGateway {
         recipient: intent.recipient,
         amount: intent.amount,
         warnings: [
-          "Sample operation. No signing keys or real funds are involved.",
+          "Review the recipient and amount before continuing.",
           ...(intent.recipient ===
           this.state.accounts.find((a) => a.id === s.selectedAccountId)?.address
-            ? ["You are sending to your own sample address."]
+            ? ["You are sending to your own address."]
             : []),
         ],
       },
@@ -739,7 +739,7 @@ export class MockWalletGateway implements WalletGateway {
     this.consumed.add(id);
     this.pending.delete(id);
     if (this.state.scenario === "rejected")
-      fail("USER_REJECTED", "The sample approval was rejected.");
+      fail("USER_REJECTED", "The approval was rejected.");
     const state =
       this.state.scenario === "pending"
         ? "submitted"

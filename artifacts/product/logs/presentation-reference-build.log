@@ -1,0 +1,22 @@
+> e-wallet@0.1.0 build:dapp /home/sufyan/Desktop/Dev/E-wallet
+> tsx node_modules/vite/bin/vite.js build --config apps/reference-dapp/vite.config.ts
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./reference-api" without a file extension (apps/reference-dapp/vite.config.ts:1:28). Add the file extension
+  - import "../../services/backend/src/node-rpc" without a file extension (apps/reference-dapp/reference-api.ts:4:26). Add the file extension
+  - import "../../services/backend/src/bitcoin-rpc" without a file extension (apps/reference-dapp/reference-api.ts:5:42). Add the file extension
+  - import "./rpc" without a file extension (services/backend/src/node-rpc.ts:2:42). Add the file extension
+  - import "./rpc" without a file extension (services/backend/src/bitcoin-rpc.ts:2:29). Add the file extension
+  - import "./bitcoin-rpc" without a file extension (services/backend/src/node-rpc.ts:3:28). Add the file extension
+  - import "./rpc-concurrency" without a file extension (services/backend/src/rpc.ts:1:29). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+vite v8.3.8 building client environment for production...
+transforming...
+✓ 164 modules transformed.
+rendering chunks...
+computing gzip size...
+apps/reference-dapp/dist/index.html                   0.41 kB │ gzip:   0.29 kB
+apps/reference-dapp/dist/assets/index-CbNZMk7K.css    2.47 kB │ gzip:   1.08 kB
+apps/reference-dapp/dist/assets/index-W630Y0B_.js   367.39 kB │ gzip: 111.92 kB
+
+✓ built in 359ms

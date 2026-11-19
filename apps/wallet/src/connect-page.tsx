@@ -1,3 +1,4 @@
+import { displayNetworkName } from "@ewallet/domain";
 import { useEffect, useRef, useState } from "react";
 import { networks, networkById } from "@ewallet/config";
 import {
@@ -277,7 +278,7 @@ export function ConnectPage() {
                 )
                 .map((n) => (
                   <option key={n.id} value={n.id}>
-                    {n.name}
+                    {displayNetworkName(n)}
                   </option>
                 ))}
             </select>
@@ -306,7 +307,7 @@ export function ConnectPage() {
           <p>Selected signing account</p>
           {account && <Address value={account.address} />}
           <p>
-            Grant: this origin, this account, {networkById(s.networkId).name},
+            Grant: this origin, this account, {displayNetworkName(networkById(s.networkId))},
             and the requested supported methods. Expires in 24 hours. Every
             signing request needs a separate review.
           </p>
@@ -365,7 +366,7 @@ export function ConnectPage() {
           </Notice>
           <dl className="details">
             <dt>Network</dt>
-            <dd>{networkById(prepared.review.networkId).name}</dd>
+            <dd>{displayNetworkName(networkById(prepared.review.networkId))}</dd>
             <dt>Signing account</dt>
             <dd>
               <Address value={prepared.review.accountAddress} />

@@ -50,7 +50,7 @@ test("Bitcoin project API connects with descriptor consent, reviews a PSBT and b
   await expect(dapp.getByTestId("accounts")).toContainText("bcrt1");
   await dapp
     .getByRole("button", {
-      name: "Prepare 0.0001 BTC fixture payment",
+      name: "Prepare 0.0001 BTC payment",
       exact: true,
     })
     .click();

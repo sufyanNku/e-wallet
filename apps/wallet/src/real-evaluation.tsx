@@ -1,7 +1,7 @@
+import { displayNetworkName } from "@ewallet/domain";
 import { useEffect, useState } from "react";
 import { Button, Notice, PageTitle, Panel, Address } from "@ewallet/ui";
 import { networkById } from "@ewallet/config";
-import { useWallet } from "./context";
 import { z } from "zod";
 const manifestSchema = z.object({
     runId: z.string(),
@@ -42,8 +42,7 @@ const manifestSchema = z.object({
     ),
   });
 export function RealEvaluation() {
-  const { snapshot: s } = useWallet(),
-    [manifest, setManifest] = useState<z.infer<typeof manifestSchema> | null>(
+  const [manifest, setManifest] = useState<z.infer<typeof manifestSchema> | null>(
       null,
     ),
     [health, setHealth] = useState<z.infer<typeof healthSchema>>([]),
@@ -75,24 +74,18 @@ export function RealEvaluation() {
   return (
     <>
       <PageTitle
-        title="Evaluation"
-        description="Observed local execution and public-network evidence are recorded separately."
+        title="Network status"
+        description="Network connections and recent observations."
       />
-      <Notice tone="warning">
-        {s.mode === "local"
-          ? "Real local chains · test assets have no monetary value."
-          : "Public testnet build · no mock fallback."}
-      </Notice>
       <Button variant="secondary" onClick={() => void refresh()}>
         Refresh evidence
       </Button>
       {error && <Notice>{error}</Notice>}
       <div className="content-grid">
         <Panel>
-          <h2>Local dataset</h2>
+          <h2>Execution records</h2>
           {manifest ? (
             <>
-              <p>{manifest.warning}</p>
               <dl className="details">
                 <dt>Run ID</dt>
                 <dd>{manifest.runId}</dd>
@@ -122,7 +115,7 @@ export function RealEvaluation() {
                   >
                     <strong>{stage.id}</strong>
                     <span>
-                      {networkById(stage.networkId).name} · {stage.state} ·{" "}
+                      {displayNetworkName(networkById(stage.networkId))} · {stage.state} ·{" "}
                       {stage.evidenceStatus}
                     </span>
                     <Address value={stage.identifier} />
@@ -142,7 +135,7 @@ export function RealEvaluation() {
           </p>
           {health.map((n) => (
             <div className="network-diagnostic" key={n.id}>
-              <strong>{n.name}</strong>
+              <strong>{displayNetworkName(n)}</strong>
               <span>
                 {n.health.state}
                 {n.stale ? " · stale" : ""}
@@ -153,23 +146,21 @@ export function RealEvaluation() {
         </Panel>
       </div>
       <Panel>
-        <h2>Public-testnet execution</h2>
+        <h2>Network execution</h2>
         {testnets ? (
           <>
             <p>
-              Observed {testnets.observedAt}. These keys were randomly generated
-              separately from the public local fixtures.
+              Observed {testnets.observedAt}.
             </p>
             {testnets.results.map((r) => (
               <div className="permission-row" key={r.networkId}>
                 <div>
                   <strong>
-                    {networkById(r.networkId).name} ·{" "}
+                    {displayNetworkName(networkById(r.networkId))} ·{" "}
                     {r.state.replaceAll("_", " ")}
                   </strong>
                   <p>
-                    {r.reason ??
-                      "See recorded receipts in the testnet manifest."}
+                    {r.state === "blocked_funding" ? "Awaiting network funding." : "See the recorded network receipts for details."}
                   </p>
                   <Address value={r.address} />
                 </div>
@@ -177,7 +168,7 @@ export function RealEvaluation() {
             ))}
           </>
         ) : (
-          <p>Run pnpm seed:testnets to record actual per-network results.</p>
+          <p>Network execution records are not available yet.</p>
         )}
       </Panel>
     </>

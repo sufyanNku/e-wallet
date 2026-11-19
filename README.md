@@ -4,11 +4,13 @@ A self-custody wallet with a redesigned React web client and a **React Native / 
 
 **Current release: early access, local chains and testnets only. Real funds are disabled.** The November 19 product expansion supersedes the original browser-only scope in specification 01. Implementation and verification evidence for this expansion lives under `artifacts/product/`; the original four specification gates remain historical evidence rather than a production-launch certification.
 
+**Current priority: testing and instructor presentations.** Real-funds client launch is deferred until the team chooses to resume it. The web and native interfaces use ordinary wallet wording; that presentation change does not enable real funds, change network identities, or certify production readiness.
+
 The product now includes wallet-first navigation, token search, a command palette, notifications, market discovery, native secure storage, QR receive/scanning, native transaction review, on-chain balances/history, local swaps and collectible transfer flows. Market watch uses Coinbase spot quotes; demo portfolio values remain clearly separate. Original e-wallet branding is retained.
 
 ## Classroom logins and RBAC
 
-For a two-account presentation, follow [RBAC_DEMO_GUIDE.md](RBAC_DEMO_GUIDE.md). Run `pnpm build:wallet`, `pnpm demo:setup`, then `pnpm demo:dev`, and open **http://127.0.0.1:5173/team-demo**. Alice and Bob are Members; separate Admin and Auditor accounts demonstrate server-enforced permissions. Passwords are generated locally under ignored `.local/`. This area transfers **SQLite demo credits**, not blockchain assets or real money. It is disabled by default and unavailable in production/testnet mode. No chain node is needed for the classroom ledger.
+For a two-account presentation, follow [RBAC_DEMO_GUIDE.md](RBAC_DEMO_GUIDE.md). Run `pnpm build:wallet`, `pnpm demo:setup`, then `pnpm demo:dev`, and open **http://127.0.0.1:5173/accounts**. Alice and Bob are Members; separate Admin and Auditor accounts demonstrate server-enforced permissions. Passwords are generated locally under ignored `.local/`. This area transfers **SQLite demo credits**, not blockchain assets or real money. It is disabled by default and unavailable in production/testnet mode. No chain node is needed for the classroom ledger.
 
 ## Android and iOS
 
@@ -34,6 +36,8 @@ Native wallet envelopes use PBKDF2-SHA256 (600,000 iterations) and AES-256-GCM, 
 The verified debug APK is also preserved at `.local/releases/e-wallet-0.2.0-debug.apk`. It is a development build and requires Metro. It is not a store distribution package. Store-targeted builds refuse the public debug signing key and require HTTPS configuration, client-owned signing credentials and physical-device acceptance. Native external dapp connection protocols and biometric unlock are not yet implemented; the web popup connector remains available. Do not treat a successful JavaScript bundle or Node-hosted signing proof as a device security audit.
 
 ## Deployment and real-fund activation
+
+The future launch track is deferred, not cancelled. On resumption, confirm target networks, obtain client-owned domain/RPC and Apple/Google developer accounts, complete mainnet adapters and vault isolation, run physical-device and recovery/incident drills, obtain an independent security audit, and complete privacy/legal and signing/distribution approvals. All requirements in `release-config.json` remain enforced; none is considered complete because the interface labels changed.
 
 `infra/deployment/` contains an HTTPS reverse-proxy deployment, persistent SQLite storage, an unprivileged API container and health checks. `.env.example` documents the domain/API settings. No deployment or app-store upload has been performed.
 

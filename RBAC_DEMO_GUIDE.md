@@ -1,6 +1,8 @@
 # Classroom demo: two logins, transfers and RBAC
 
-This guide covers the **web classroom demo** at `http://127.0.0.1:5173/team-demo`.
+The interface uses ordinary account and credit labels for the presentation. Its underlying ledger is still for testing; real-fund activation remains disabled.
+
+This guide covers the **web classroom demo** at `http://127.0.0.1:5173/accounts`.
 It uses **demo credits recorded in SQLite**, not real money or on-chain crypto.
 No recovery phrase, faucet, gas or Docker node is needed for this demonstration.
 The existing self-custody crypto wallet remains available separately. Native Android/iOS username login is not part of this feature.
@@ -43,9 +45,9 @@ Stop any previous `pnpm dev` with **Ctrl+C** in its terminal, then run:
 pnpm demo:dev
 ```
 
-Open **http://127.0.0.1:5173/team-demo**.
+Open **http://127.0.0.1:5173/accounts**.
 
-You can also select **Classroom demo · Account login and roles** on the wallet welcome page, or **Classroom demo** in the wallet sidebar.
+You can also select **Sign in to your account** on the wallet welcome page, or **Accounts** in the wallet sidebar.
 
 The command enables `EWALLET_TEAM_DEMO=1` for this process. Ordinary `pnpm dev` leaves the classroom API disabled. If the existing backend is still running without that flag, startup tells you to stop it first.
 
@@ -57,11 +59,11 @@ Use the exact `127.0.0.1` address above. Cookies, allowed origins and browser st
 
 Use **one normal browser window and one incognito/private window**, or two separate browser profiles. Two normal tabs share the same login. Multiple incognito windows may also share one incognito session.
 
-1. In the normal window, open `/team-demo` and sign in as `alice`, using Alice's generated password.
+1. In the normal window, open `/accounts` and sign in as `alice`, using Alice's generated password.
 2. In the private window, open the same URL and sign in as `bob`, using Bob's password.
 3. Show the **Member** role and each user's available demo credits.
 4. In Alice's window, choose **Bob (@bob)** under **Recipient**.
-5. Enter **25.15** under **Amount in demo credits**.
+5. Enter **25.15** under **Amount in credits**.
 6. Click **Review transfer**, check the recipient and amount, then click **Confirm transfer**.
 7. Show the success receipt and Alice's updated balance.
 8. In Bob's window, click **Refresh balances**. His balance and incoming transfer appear. The page also refreshes automatically about every five seconds while visible.
@@ -119,7 +121,7 @@ These are application permissions for a local demonstration, not a production cu
 
 ## 6. Troubleshooting and checks
 
-- **“Enable classroom accounts” appears:** Stop the old server, run `pnpm demo:setup`, then `pnpm demo:dev`.
+- **“Account service is unavailable” appears:** Stop the old server, run `pnpm demo:setup`, then `pnpm demo:dev`.
 - **Port 5173/8787 is occupied:** Stop the earlier project terminal before restarting. Do not run two dev launchers on the same ports.
 - **Login fails:** Check the matching username/password in the local credential file. Check whether Admin suspended the Member. Wait one minute after repeated failed attempts.
 - **Alice and Bob become the same user:** Their browser windows share cookies. Use a separate browser profile or one normal window plus one private window.

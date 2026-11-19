@@ -1,3 +1,4 @@
+import { displayAssetName, displayNetworkName } from "@ewallet/domain";
 import { useEffect, useState, useSyncExternalStore, useRef } from "react";
 import {
   ActivityIndicator,
@@ -303,10 +304,6 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
               <Button secondary onPress={() => go("restore")}>
                 I already have a wallet
               </Button>
-              <Note>
-                Early access · Test networks only. Real-fund transfers are
-                disabled.
-              </Note>
               <Text style={[ui.subtitle, { fontSize: 11, marginTop: 24 }]}>
                 Your recovery phrase is the only way to restore your wallet.
                 Keep it private and offline.
@@ -535,7 +532,7 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
         >
           <View style={styles.dot} />
           <Text numberOfLines={1} style={styles.networkText}>
-            {network.name}
+            {displayNetworkName(network)}
           </Text>
         </Pressable>
         <Pressable
@@ -573,7 +570,7 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
           {screen === "wallet" ? (
             <>
               <View style={styles.balanceHeader}>
-                <Text style={ui.subtitle}>Total demo value</Text>
+                <Text style={ui.subtitle}>Total value</Text>
                 <Pressable
                   accessibilityRole="button"
                   accessibilityLabel={
@@ -595,7 +592,7 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
               <Text style={styles.balanceCaption}>
                 {s.status === "loading"
                   ? "Syncing on-chain balances…"
-                  : "Test assets · Demo valuation"}
+                  : "Your portfolio"}
               </Text>
               <View style={styles.actions}>
                 {[
@@ -672,7 +669,7 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
                   >
                     <Coin symbol={b.symbol} />
                     <View style={{ flex: 1, gap: 5 }}>
-                      <Text style={styles.assetName}>{b.name}</Text>
+                      <Text style={styles.assetName}>{displayAssetName(b.name)}</Text>
                       <Text style={styles.small}>{b.symbol}</Text>
                     </View>
                     <View style={{ alignItems: "flex-end", gap: 5 }}>
@@ -698,7 +695,7 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
                       : "Your wallet starts here"}
                   </Text>
                   <Text style={ui.subtitle}>
-                    Choose your network and receive your first test assets.
+                    Choose your network and receive your first assets.
                   </Text>
                   <Button secondary onPress={() => go("receive")}>
                     Receive
@@ -709,7 +706,6 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
                 {s.updatedAt
                   ? "Updated " + new Date(s.updatedAt).toLocaleTimeString()
                   : "No balance observation yet"}{" "}
-                · Test networks only
               </Text>
             </>
           ) : (
@@ -719,7 +715,7 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
             <>
               <Note>
                 Receive only {network.feeAsset.symbol} and supported tokens on{" "}
-                {network.name}. This release does not support real funds.
+                {displayNetworkName(network)}. Check the selected network before sharing this address.
               </Note>
               <View style={styles.qr}>
                 <QRCode
@@ -794,7 +790,7 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
                 keyboardType="decimal-pad"
               />
               <Text style={ui.subtitle}>
-                Network: {network.name}. Network fees are shown before you
+                Network: {displayNetworkName(network)}. Network fees are shown before you
                 approve.
               </Text>
               <Button
@@ -879,12 +875,12 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
                     <View style={styles.nftArtwork}>
                       <Icon name="image" size={52} tint={color.accent} />
                     </View>
-                    <Text style={ui.sectionTitle}>{item.name}</Text>
+                    <Text style={ui.sectionTitle}>{displayAssetName(item.name)}</Text>
                     <Text selectable style={styles.small}>
                       {short(item.asset.reference)}
                     </Text>
                     <Text style={ui.subtitle}>
-                      Ownership verified on {network.name}. External media is
+                      Ownership verified on {displayNetworkName(network)}. External media is
                       not loaded automatically.
                     </Text>
                     <Button
@@ -1018,19 +1014,13 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
                 </Button>
               </View>
               <View style={ui.card}>
-                <Text style={ui.sectionTitle}>Network and release</Text>
+                <Text style={ui.sectionTitle}>Network and app</Text>
                 <Row
                   label="Network"
-                  value={network.name}
+                  value={displayNetworkName(network)}
                   onPress={() => setSheet("network")}
                 />
-                <Row label="Real funds" value="Disabled" />
-                <Row label="Version" value="0.2.0 · Early access" />
-                <Note>
-                  Mainnet activation is locked until release checks pass. Your
-                  test-network recovery phrase will never be silently reused for
-                  real funds.
-                </Note>
+                <Row label="Version" value="0.2.0" />
               </View>
               <View style={ui.card}>
                 <Text style={ui.sectionTitle}>Remove wallet</Text>
@@ -1161,13 +1151,11 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
                 ? networks.map((n) => (
                     <Row
                       key={n.id}
-                      label={n.name}
+                      label={displayNetworkName(n)}
                       value={
                         s.networkId === n.id
                           ? "Selected"
-                          : n.environment === "local"
-                            ? "Local"
-                            : "Testnet"
+                          : "Available"
                       }
                       onPress={() => {
                         wallet.selectNetwork(n.id);
@@ -1235,7 +1223,7 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
                 </Text>
                 <Row
                   label="Network"
-                  value={networkById(review.intent.networkId).name}
+                  value={displayNetworkName(networkById(review.intent.networkId))}
                 />
                 <Row
                   label="From"
@@ -1327,14 +1315,14 @@ function MarketWatch({ wallet }: { wallet: NativeWallet }) {
   return (
     <>
       <Text style={ui.subtitle}>
-        Live market references. Test assets have no monetary value.
+        Live market references.
       </Text>
       <Text style={ui.sectionTitle}>Market watch</Text>
       {quotes?.assets.map((item) => (
         <View style={styles.asset} key={item.symbol}>
           <Coin symbol={item.symbol} />
           <View style={{ flex: 1, gap: 5 }}>
-            <Text style={styles.assetName}>{item.name}</Text>
+            <Text style={styles.assetName}>{displayAssetName(item.name)}</Text>
             <Text style={styles.small}>{item.symbol}</Text>
           </View>
           <Text style={styles.assetName}>{formatUsd(item.microUsd)}</Text>
@@ -1378,8 +1366,7 @@ function Swap({
   return (
     <>
       <Text style={ui.subtitle}>
-        Swap test tokens through the verified local pool. Network and contract
-        checks run before every review.
+        Swap tokens through the selected pool. Network and contract checks run before every review.
       </Text>
       <Input
         label="You pay (dUSDC)"
@@ -1429,10 +1416,6 @@ function Swap({
           </Button>
         </>
       )}
-      <Note>
-        Swaps in this build use test assets only. No simulated price is
-        presented as a market quote.
-      </Note>
     </>
   );
 }

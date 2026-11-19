@@ -4,7 +4,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 const root = "artifacts/phase-01";
 async function sample(page: Page) {
   await page.goto("/");
-  await page.getByRole("button", { name: "Explore sample wallet" }).click();
+  await page.getByRole("button", { name: "Explore wallet" }).click();
   await expect(
     page.getByRole("heading", { name: "Your wallet", exact: true }),
   ).toBeVisible();
@@ -19,20 +19,20 @@ test("keyboard onboarding, approval rejection and payment receipt", async ({
   page,
 }) => {
   await page.goto("/create");
-  await page.getByLabel("Sample password", { exact: true }).focus();
+  await page.getByLabel("Wallet password", { exact: true }).focus();
   await page.keyboard.type("only sample password");
   await page.keyboard.press("Tab");
   await page.keyboard.type("only sample password");
   await page.keyboard.press("Tab");
   await page.keyboard.press("Enter");
   await expect(
-    page.getByRole("heading", { name: "Back up the sample words" }),
+    page.getByRole("heading", { name: "Back up your recovery words" }),
   ).toBeVisible();
   await page.getByRole("checkbox").focus();
   await page.keyboard.press("Space");
   await page.keyboard.press("Tab");
   await page.keyboard.press("Enter");
-  for (const field of await page.getByLabel(/^Sample word \d+$/).all()) {
+  for (const field of await page.getByLabel(/^Word \d+$/).all()) {
     const n =
       (await field.getAttribute("aria-label")) ??
       (await page
@@ -42,7 +42,7 @@ test("keyboard onboarding, approval rejection and payment receipt", async ({
     await field.focus();
     await page.keyboard.type(`sample${String(index).padStart(2, "0")}`);
   }
-  await page.getByRole("button", { name: "Open sample wallet" }).focus();
+  await page.getByRole("button", { name: "Open wallet" }).focus();
   await page.keyboard.press("Enter");
   await expect(
     page.getByRole("heading", { name: "Your wallet", exact: true }),
@@ -73,7 +73,7 @@ test("keyboard onboarding, approval rejection and payment receipt", async ({
   await expect(dialog).not.toBeVisible();
   await page.getByRole("button", { name: "Review payment" }).click();
   await dialog
-    .getByRole("button", { name: "Approve sample operation" })
+    .getByRole("button", { name: "Approve operation" })
     .focus();
   await page.keyboard.press("Enter");
   await expect(
@@ -118,6 +118,7 @@ test("all screens at 320, 360, tablet and desktop have no horizontal clipping", 
     for (const path of paths) {
       await route(page, path);
       await page.getByRole("heading", { level: 1 }).waitFor();
+      expect(await page.locator("body").innerText(), `Visible copy on ${path}`).not.toMatch(/\bdemo\b|\bmock\b|\btest(?:net| assets| data| networks)?\b|\bclassroom\b|\bfixture\b/i);
       expect(
         await page.evaluate(
           () => document.documentElement.scrollWidth <= innerWidth,
@@ -147,7 +148,7 @@ test("built nested route, approval window and accessibility", async ({
   await expect(
     page.getByRole("heading", { name: /A little closer/ }),
   ).toBeVisible();
-  await page.getByRole("button", { name: "Explore sample wallet" }).click();
+  await page.getByRole("button", { name: "Explore wallet" }).click();
   const results = [];
   for (const path of [
     "/",
@@ -188,9 +189,9 @@ test("receive QR payload roundtrip and exact custom token import", async ({
   await sample(page);
   await route(page, "/receive");
   await expect(
-    page.getByAltText("QR code of the reviewed sample receive request"),
+    page.getByAltText("QR code of the reviewed receive request"),
   ).toBeVisible();
-  await page.getByAltText('QR code of the reviewed sample receive request').screenshot({path:`${root}/sample-qr.png`});
+  await page.getByAltText('QR code of the reviewed receive request').screenshot({path:`${root}/sample-qr.png`});
   await route(page, "/send");
   await page.getByLabel('Upload QR image').setInputFiles(`${root}/sample-qr.png`);
   await expect(page.getByLabel('Recipient address',{exact:true})).toHaveValue('0x1111111111111111111111111111111111111111');
@@ -209,9 +210,9 @@ test("receive QR payload roundtrip and exact custom token import", async ({
   await page
     .getByLabel("Contract or mint address")
     .fill("0x1212121212121212121212121212121212121212");
-  await page.getByLabel("Sample symbol").fill("DEMO");
+  await page.getByLabel("Token symbol").fill("DEMO");
   await page.getByLabel("Decimals", { exact: true }).fill("6");
   await page.getByRole("checkbox").check();
-  await page.getByRole("button", { name: "Import sample token" }).click();
+  await page.getByRole("button", { name: "Import token" }).click();
   await expect(page.getByText("DEMO", { exact: true })).toBeVisible();
 });

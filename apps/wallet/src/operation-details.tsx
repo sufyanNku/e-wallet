@@ -1,3 +1,4 @@
+import { displayNetworkName } from "@ewallet/domain";
 import { formatAmount, type PreparedOperation } from "@ewallet/domain";
 import { networkById } from "@ewallet/config";
 import { Address } from "@ewallet/ui";
@@ -11,7 +12,7 @@ export function OperationDetails({
       <dt>Operation</dt>
       <dd>{p.intent.kind}</dd>
       <dt>Network</dt>
-      <dd>{networkById(p.intent.networkId).name}</dd>
+      <dd>{displayNetworkName(networkById(p.intent.networkId))}</dd>
       {p.preview.sender && (
         <>
           <dt>Signing account</dt>

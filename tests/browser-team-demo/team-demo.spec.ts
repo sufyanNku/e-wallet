@@ -14,7 +14,9 @@ test("two logins transfer credits; server roles, suspension and read-only audit 
     ),
   );
   const login = async (p: Page, username: string) => {
-    await p.goto("/team-demo");
+    await p.goto("/accounts");
+    await p.getByRole("heading", { name: "Sign in to your account", exact: true }).waitFor();
+    expect(await p.locator("body").innerText()).not.toMatch(/\bdemo\b|\bmock\b|\btest(?:net| assets| data| networks)?\b|\bclassroom\b|\bfixture\b/i);
     await p.getByLabel("Username", { exact: true }).fill(username);
     await p
       .getByLabel("Password", { exact: true })
@@ -23,6 +25,7 @@ test("two logins transfer credits; server roles, suspension and read-only audit 
     await expect(p.getByTestId("team-role")).toContainText(
       username === "alice" || username === "bob" ? "member" : username,
     );
+    expect(await p.locator("body").innerText()).not.toMatch(/\bdemo\b|\bmock\b|\btest(?:net| assets| data| networks)?\b|\bclassroom\b|\bfixture\b/i);
   };
   const bobContext = await browser.newContext({
     baseURL: "http://127.0.0.1:8877",
@@ -40,7 +43,7 @@ test("two logins transfer credits; server roles, suspension and read-only audit 
     await page
       .getByLabel("Recipient", { exact: true })
       .selectOption({ label: "Bob (@bob)" });
-    await page.getByLabel("Amount in demo credits").fill("25.15");
+    await page.getByLabel("Amount in credits").fill("25.15");
     await page
       .getByRole("button", { name: "Review transfer", exact: true })
       .click();
@@ -78,7 +81,7 @@ test("two logins transfer credits; server roles, suspension and read-only audit 
     ).toBeVisible();
     await page.getByRole("button", { name: "Refresh balances" }).click();
     await expect(
-      page.getByRole("heading", { name: "Sign in to the demo" }),
+      page.getByRole("heading", { name: "Sign in to your account" }),
     ).toBeVisible();
     await admin
       .getByRole("button", { name: "Enable Alice", exact: true })
