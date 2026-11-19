@@ -1,12 +1,12 @@
 {
-  "observedAt": "2026-11-14T14:02:09.992Z",
+  "observedAt": "2026-11-19T08:31:03.259Z",
   "node": "v24.22.3",
   "pnpm": "10.34.9",
   "docker": true,
   "compose": true,
-  "freeDiskBytes": "120563310592",
-  "ramBytes": "16348647424",
-  "freeRamBytes": "7298772992",
+  "freeDiskBytes": "106242936832",
+  "ramBytes": "16348655616",
+  "freeRamBytes": "2295701504",
   "recommended": {
     "ramGiB": 16,
     "diskGiB": 25
@@ -17,7 +17,7 @@
     "5174": "available",
     "8545": "occupied",
     "8546": "occupied",
-    "8787": "available",
+    "8787": "occupied",
     "8899": "occupied",
     "8900": "occupied",
     "18443": "occupied"

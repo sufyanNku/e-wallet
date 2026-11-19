@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "networkId": "bitcoin:regtest",
   "genesisHash": "0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206",
-  "fundingEpoch": "30c0f7fdee830a00d197f9c2bfe59bcae4e03963b443c2dfab134954d6aa39a2",
-  "observedAt": "2026-11-13T21:46:54.357Z",
+  "fundingEpoch": "090c8ca7c8087185797cb0385037d7c8abd7e53227640ec278fe3d15789de52a",
+  "observedAt": "2026-11-19T08:59:18.886Z",
   "height": "113",
   "watchWalletPrivateKeysEnabled": false,
   "identities": {
@@ -66,42 +66,42 @@
   },
   "stages": {
     "alice-wpkh-0": {
-      "txid": "a3e8b0fb8a2e7939a3bdae7cb647045d1328309b38e124c5f91f37e28c55659f",
+      "txid": "eaea5b6748315957a919398a839265f3a0d483e5f94b292b2759fa3b8f855914",
       "state": "confirmed",
       "fee": "282"
     },
     "alice-wpkh-1": {
-      "txid": "a73441b015995a42126255c9ff771b042ceb671644143d03f0ff83d3369499e0",
+      "txid": "be88f1d1a879cb14a67d5633f7396a0159976d50c680081c06c21a491096ca51",
       "state": "confirmed",
       "fee": "282"
     },
     "alice-tr-0": {
-      "txid": "a9081e988ed58a0e8d8a14310c4c5d0af92e0874db900a5133bafe836246e191",
+      "txid": "7269b6dc415568674ca36bfcc5d6a1ed7b6b1e09b60e35f9c82a0b7ccf16398d",
       "state": "confirmed",
       "fee": "330"
     },
     "alice-tr-1": {
-      "txid": "5f319b2572f4551e3efd283f17b1c896d4a98827e67bdffd62868d533ba51c18",
+      "txid": "901adad458602bfaee06846cc4aca4ac946853cb4c7cd5869e09bf7984cde804",
       "state": "confirmed",
       "fee": "310"
     },
     "bob-wpkh": {
-      "txid": "4c63c6fe7ac6e3cef722f9d4fce4bd7822085dc03afe238291f000a646bfe90b",
+      "txid": "7495fcd438b292c2130307fc3db4b0d1158a79861bfde4c554279fa0fa0b1f40",
       "state": "confirmed",
       "fee": "262"
     },
     "carol-wpkh": {
-      "txid": "0f745dd43da66332beedd24b71225e0f2d986c73e8ae644196ae7963d89db037",
+      "txid": "8a0e8d64d7758b3d80f50c7b1e240f3b704a68dfa2faf517f4c6a04f3d938bfe",
       "state": "confirmed",
       "fee": "282"
     },
     "SEED-13-84": {
-      "txid": "23530d21acc5fb931b53418c0dd94bedf9f0b61ebb8ffb76a15ffa0db85beee1",
+      "txid": "56ca333f1580eee31a414586f8038aae15f33c0c0bd300a7d907c918940a3821",
       "state": "confirmed",
       "fee": "284"
     },
     "SEED-13-86": {
-      "txid": "982800d2e9bcfeea576d0e2ba5378d8de7a02756b31350ff53905d28754aa0e0",
+      "txid": "f777f94d999b708fe23684953687abf7b82e356e7afcc185eed2e55a20501b23",
       "state": "confirmed",
       "fee": "286"
     }
@@ -115,7 +115,7 @@
       "total": "73999716",
       "utxos": [
         {
-          "txid": "23530d21acc5fb931b53418c0dd94bedf9f0b61ebb8ffb76a15ffa0db85beee1",
+          "txid": "56ca333f1580eee31a414586f8038aae15f33c0c0bd300a7d907c918940a3821",
           "vout": "1",
           "address": "bcrt1q8403uy3m7mc85a0s8nh7q3m726w8p3xzg6q205",
           "scriptPubKey": "00143d5f1e123bf6f07a75f03cefe0477e569c70c4c2",
@@ -131,8 +131,8 @@
           "value": "23999716"
         },
         {
-          "txid": "a3e8b0fb8a2e7939a3bdae7cb647045d1328309b38e124c5f91f37e28c55659f",
-          "vout": "0",
+          "txid": "eaea5b6748315957a919398a839265f3a0d483e5f94b292b2759fa3b8f855914",
+          "vout": "1",
           "address": "bcrt1qrnnndt33lw89uth54kqmujahgpylg8dcgdv7vj",
           "scriptPubKey": "00141ce736ae31fb8e5e2ef4ad81be4bb74049f41db8",
           "amount": "0.50000000",
@@ -156,7 +156,7 @@
       "total": "47999714",
       "utxos": [
         {
-          "txid": "982800d2e9bcfeea576d0e2ba5378d8de7a02756b31350ff53905d28754aa0e0",
+          "txid": "f777f94d999b708fe23684953687abf7b82e356e7afcc185eed2e55a20501b23",
           "vout": "1",
           "address": "bcrt1pmztqlm2vjxul8m9wylyak76z8ulaf2cy4vyrmhrcww9jtcjv5x9qnv70tw",
           "scriptPubKey": "5120d8960fed4c91b9f3ecae27c9db7b423f3fd4ab04ab083ddc78738b25e24ca18a",
@@ -172,7 +172,7 @@
           "value": "7999714"
         },
         {
-          "txid": "a9081e988ed58a0e8d8a14310c4c5d0af92e0874db900a5133bafe836246e191",
+          "txid": "7269b6dc415568674ca36bfcc5d6a1ed7b6b1e09b60e35f9c82a0b7ccf16398d",
           "vout": "0",
           "address": "bcrt1p5xck6ss7hguku0u3vwqtswn8w79kv5s022dyurjxavhmntruuwsqxtusrj",
           "scriptPubKey": "5120a1b16d421eba396e3f916380b83a67778b66520f529a4e0e46eb2fb9ac7ce3a0",
@@ -197,7 +197,7 @@
       "total": "11000000",
       "utxos": [
         {
-          "txid": "23530d21acc5fb931b53418c0dd94bedf9f0b61ebb8ffb76a15ffa0db85beee1",
+          "txid": "56ca333f1580eee31a414586f8038aae15f33c0c0bd300a7d907c918940a3821",
           "vout": "0",
           "address": "bcrt1qvu3hu3u5ywnq0ugxsenyxhwmc6d06hqcdlm84m",
           "scriptPubKey": "001467237e479423a607f1068666435ddbc69afd5c18",
@@ -213,8 +213,8 @@
           "value": "1000000"
         },
         {
-          "txid": "4c63c6fe7ac6e3cef722f9d4fce4bd7822085dc03afe238291f000a646bfe90b",
-          "vout": "1",
+          "txid": "7495fcd438b292c2130307fc3db4b0d1158a79861bfde4c554279fa0fa0b1f40",
+          "vout": "0",
           "address": "bcrt1qvu3hu3u5ywnq0ugxsenyxhwmc6d06hqcdlm84m",
           "scriptPubKey": "001467237e479423a607f1068666435ddbc69afd5c18",
           "amount": "0.10000000",
@@ -246,7 +246,7 @@
       "total": "12000000",
       "utxos": [
         {
-          "txid": "0f745dd43da66332beedd24b71225e0f2d986c73e8ae644196ae7963d89db037",
+          "txid": "8a0e8d64d7758b3d80f50c7b1e240f3b704a68dfa2faf517f4c6a04f3d938bfe",
           "vout": "0",
           "address": "bcrt1qgkq0nv9hmlee49d5pekts5fvwnvsaznlqcjyq7",
           "scriptPubKey": "00144580f9b0b7dff39a95b40e6cb8512c74d90e8a7f",
@@ -262,7 +262,7 @@
           "value": "10000000"
         },
         {
-          "txid": "982800d2e9bcfeea576d0e2ba5378d8de7a02756b31350ff53905d28754aa0e0",
+          "txid": "f777f94d999b708fe23684953687abf7b82e356e7afcc185eed2e55a20501b23",
           "vout": "0",
           "address": "bcrt1qgkq0nv9hmlee49d5pekts5fvwnvsaznlqcjyq7",
           "scriptPubKey": "00144580f9b0b7dff39a95b40e6cb8512c74d90e8a7f",

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-14T14:03:07.051710Z",
+  "updatedAt": "2026-11-19T09:34:16.357117Z",
   "phases": [
     {
       "phase": "01",
@@ -2766,7 +2766,28 @@
     "excluded": [
       "Absent optional file 05; outside the four-file scope requested by the user"
     ],
-    "gateInterpretation": "G3 permits pending public funding; G4 requires accurate per-network blockers. Passing local gates never changes blocked public transaction rows to passed."
+    "gateInterpretation": "G3 permits pending public funding; G4 requires accurate per-network blockers. Passing local gates never changes blocked public transaction rows to passed.",
+    "productExpansion": {
+      "requestedAt": "2026-11-19",
+      "authorization": "User requested a Phantom-style web wallet plus Android/iOS and clarified no real funds for now.",
+      "state": "early_access_verified",
+      "realFundsEnabled": false,
+      "supersedes": "Browser-only restriction in file 01",
+      "productionLaunchReady": false,
+      "evidenceDirectory": "artifacts/product/",
+      "remaining": [
+        "Independent wallet security audit not performed",
+        "Native external dapp protocols and biometric unlock not implemented",
+        "Mainnet adapters/indexing and isolated mainnet vaults are not implemented; real funds cannot be enabled by a single switch yet",
+        "Client-owned production RPC/domain, legal approval and store signing/distribution remain release work",
+        "Android emulator remained ADB-offline; app startup and physical-device security acceptance remain unverified."
+      ],
+      "verificationPath": "artifacts/product/verification.json",
+      "androidBuild": "passed_debug_apk",
+      "iosBundle": "passed",
+      "iosBinary": "blocked_macos_xcode",
+      "deviceAcceptance": "blocked_emulator_boot_and_missing_ios_toolchain"
+    }
   },
   "publicNetworkBlockers": [
     {
@@ -2849,5 +2870,150 @@
     "publicTransactionPassed": 0,
     "publicTransactionBlockedFunding": 8,
     "dependencyAudit": "No unresolved advisories after checksum/behavior verification of the documented Hardhat Zod-3 security backport; raw version-based registry report retained."
+  },
+  "productTasks": [
+    {
+      "taskId": "P01",
+      "state": "passed",
+      "name": "Wallet-first web redesign, navigation, search, notifications and market discovery",
+      "changedPaths": [
+        "apps/wallet/src/product.css",
+        "apps/wallet/src/App.tsx",
+        "apps/wallet/src/portfolio.tsx",
+        "apps/wallet/src/discover.tsx"
+      ],
+      "evidencePaths": [
+        "artifacts/product/web-desktop.png",
+        "artifacts/product/web-mobile.png",
+        "artifacts/product/logs/product-interactions.log"
+      ]
+    },
+    {
+      "taskId": "P02",
+      "state": "passed",
+      "name": "Android/iOS native wallet core, encrypted vault, signing and journal",
+      "changedPaths": [
+        "packages/native-wallet/src",
+        "apps/mobile/src",
+        "services/backend/src/sessions.ts"
+      ],
+      "evidencePaths": [
+        "artifacts/product/native-evm-proof.json",
+        "artifacts/product/native-solana-proof.json",
+        "artifacts/product/native-bitcoin-proof.json",
+        "artifacts/product/logs/unit.log"
+      ],
+      "verificationLimit": "Node-hosted core proofs do not certify native Keychain or physical-device behavior."
+    },
+    {
+      "taskId": "P03",
+      "state": "passed",
+      "name": "Android debug package and native platform generation",
+      "changedPaths": [
+        "apps/mobile/android",
+        "apps/mobile/app.config.ts",
+        "apps/mobile/plugins"
+      ],
+      "evidencePaths": [
+        "artifacts/product/logs/android-build.log",
+        "artifacts/product/logs/native-bundles.log"
+      ],
+      "verificationLimit": "Debug build only; device and store release acceptance remain."
+    },
+    {
+      "taskId": "P04",
+      "state": "blocked",
+      "name": "iOS native binary and device acceptance",
+      "changedPaths": [
+        "apps/mobile/ios",
+        ".github/workflows/mobile.yml"
+      ],
+      "evidencePaths": [
+        "artifacts/product/logs/native-bundles.log"
+      ],
+      "remainingBlockers": [
+        "Linux workspace lacks macOS/Xcode; the macOS CI workflow is provided but has not run."
+      ]
+    },
+    {
+      "taskId": "P05",
+      "state": "passed",
+      "name": "HTTPS deployment configuration, market proxy and public native API sessions",
+      "changedPaths": [
+        "infra/deployment",
+        "services/backend/src/runtime-config.ts",
+        "services/backend/src/markets.ts",
+        "services/backend/migrations/008_native_sessions.sql"
+      ],
+      "evidencePaths": [
+        "artifacts/product/market-live-proof.json",
+        "artifacts/product/logs/unit.log"
+      ],
+      "verificationLimit": "Configuration validated locally; no public deployment performed."
+    },
+    {
+      "taskId": "P06",
+      "state": "blocked",
+      "name": "Real-fund launch and Phantom feature parity",
+      "changedPaths": [
+        "release-config.json",
+        "scripts/release-check.ts"
+      ],
+      "evidencePaths": [
+        "artifacts/product/release-readiness.json"
+      ],
+      "remainingBlockers": [
+        "Independent wallet security audit not performed",
+        "Native external dapp protocols and biometric unlock not implemented",
+        "Mainnet adapters/indexing and isolated mainnet vaults are not implemented; real funds cannot be enabled by a single switch yet",
+        "Client-owned production RPC/domain, legal approval and store signing/distribution remain release work"
+      ]
+    }
+  ],
+  "developerDocumentation": {
+    "state": "passed",
+    "guidePath": "MOBILE_INSTALLATION_GUIDE.md",
+    "readmeLinked": true,
+    "reviewedAgainst": [
+      "apps/mobile/package.json",
+      "apps/mobile/app.config.ts",
+      "packages/native-wallet/src/api.ts",
+      "services/backend/src/runtime-config.ts"
+    ],
+    "deviceInstallationExecuted": false,
+    "scope": "Android USB/APK and iOS Xcode direct install; development versus standalone builds and actual completion limits."
+  },
+  "referenceAppClarity": {
+    "state": "passed",
+    "changedPaths": [
+      "apps/reference-dapp/src/main.tsx",
+      "apps/reference-dapp/src/style.css",
+      "scripts/dev.ts"
+    ],
+    "checks": [
+      {
+        "command": "pnpm typecheck",
+        "exitCode": 0
+      },
+      {
+        "command": "pnpm build:dapp",
+        "exitCode": 0
+      },
+      {
+        "command": "pnpm exec playwright test --config playwright.dapp.config.ts",
+        "exitCode": 0,
+        "tests": 2
+      }
+    ],
+    "evidencePath": "artifacts/product/reference-clarity.json",
+    "browserSmoke": {
+      "observedAt": "2026-11-19T09:34:38.359Z",
+      "source": "Actual local browser",
+      "walletHref": "http://127.0.0.1:5173/",
+      "referenceDarkBackground": "rgb(20, 19, 24)",
+      "mobileWidth": 390,
+      "horizontalClipping": false,
+      "guide": "MOBILE_INSTALLATION_GUIDE.md"
+    }
   }
 }

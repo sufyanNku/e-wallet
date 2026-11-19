@@ -1,0 +1,45 @@
+{
+  "observedAt": "2026-11-19T08:57:10.968Z",
+  "source": "Native wallet core through real backend handlers and local blockchain nodes",
+  "platformBoundary": "Node-hosted native core; device Keychain/Hermes tests recorded separately",
+  "fixtureOnly": true,
+  "isolated": false,
+  "snapshotRestored": true,
+  "proofs": [
+    {
+      "type": "native",
+      "networkId": "eip155:31337",
+      "address": "0x37566338ADFbf56aa41FE8FC38aA92dB1e12aD59",
+      "hash": "0xa5b6ae1f05844281de1e948b6640bc227c5dd9d2cb550acca14ec6b143ccc150",
+      "signedJournalBeforeBroadcast": true,
+      "state": "confirmed",
+      "balanceBefore": "99898167009867965091",
+      "balanceAfter": "99897146008157326091",
+      "immutableReview": true
+    },
+    {
+      "type": "token",
+      "networkId": "eip155:31337",
+      "hash": "0xf67051bc02ef719a739d0e27f7c2ad8c80508a39f2e133358770aaf8e92a938b",
+      "state": "confirmed"
+    },
+    {
+      "type": "collectible",
+      "networkId": "eip155:31337",
+      "hash": "0xcf05dd7e51cd4b5ddcc2275bf85b67825939eda0fa52fea3b71e18a9644d207c",
+      "state": "confirmed"
+    },
+    {
+      "type": "swap",
+      "networkId": "eip155:31337",
+      "hash": "0x0fa674b78b283c1a748c9e5ce97631e593970e9ae60ec225c17a23446775f921",
+      "outputSymbol": "dDAI",
+      "quotedOutput": "996799935206225751",
+      "actualOutput": "996799935206225751",
+      "state": "confirmed"
+    }
+  ],
+  "lockedSigningRejected": true,
+  "duplicateApprovalRejected": true,
+  "secretNotPersistedOutsideEnvelope": true
+}

@@ -3,7 +3,7 @@
   "networkId": "bitcoin:regtest",
   "genesisHash": "0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206",
   "fundingEpoch": "60338c10f8611d661b2906d2c396e078452cccda3b774f18d5a4a49ea191c50c",
-  "observedAt": "2026-11-14T14:02:22.839Z",
+  "observedAt": "2026-11-19T08:31:26.379Z",
   "height": "113",
   "watchWalletPrivateKeysEnabled": false,
   "identities": {
@@ -115,22 +115,6 @@
       "total": "73999716",
       "utxos": [
         {
-          "txid": "4d4af0d41d66eb88cac6e31035f4d6242b9e89dbb23f2e0bb1a15898d451b910",
-          "vout": "1",
-          "address": "bcrt1q8403uy3m7mc85a0s8nh7q3m726w8p3xzg6q205",
-          "scriptPubKey": "00143d5f1e123bf6f07a75f03cefe0477e569c70c4c2",
-          "amount": "0.23999716",
-          "confirmations": "6",
-          "spendable": true,
-          "solvable": true,
-          "desc": "wpkh([0f09f381/84h/1h/0h/1/0]02abe0aefa25f992b96fa5a955576c24cd3def2aa735b3a8999064fd934bb1ecab)#y3qwqq6z",
-          "parent_descs": [
-            "wpkh([0f09f381/84h/1h/0h]tpubDCAVQRxWnkXjyYbsHdUsHA7krYSRyVS8EuWeWE6K2V34goMaUCdCTjfSFS8ZkE5iESaWQsZoM9HL7ZANi5bW7Ly3EqDqthEyvdZHSrBTNHq/1/*)#2ht989hy"
-          ],
-          "safe": true,
-          "value": "23999716"
-        },
-        {
           "txid": "fd9f3c6f90e077c119c2cf22f655ad1570c40b9f071dc73d2953ec0a9788ec39",
           "vout": "1",
           "address": "bcrt1qrnnndt33lw89uth54kqmujahgpylg8dcgdv7vj",
@@ -145,6 +129,22 @@
           ],
           "safe": true,
           "value": "50000000"
+        },
+        {
+          "txid": "4d4af0d41d66eb88cac6e31035f4d6242b9e89dbb23f2e0bb1a15898d451b910",
+          "vout": "1",
+          "address": "bcrt1q8403uy3m7mc85a0s8nh7q3m726w8p3xzg6q205",
+          "scriptPubKey": "00143d5f1e123bf6f07a75f03cefe0477e569c70c4c2",
+          "amount": "0.23999716",
+          "confirmations": "6",
+          "spendable": true,
+          "solvable": true,
+          "desc": "wpkh([0f09f381/84h/1h/0h/1/0]02abe0aefa25f992b96fa5a955576c24cd3def2aa735b3a8999064fd934bb1ecab)#y3qwqq6z",
+          "parent_descs": [
+            "wpkh([0f09f381/84h/1h/0h]tpubDCAVQRxWnkXjyYbsHdUsHA7krYSRyVS8EuWeWE6K2V34goMaUCdCTjfSFS8ZkE5iESaWQsZoM9HL7ZANi5bW7Ly3EqDqthEyvdZHSrBTNHq/1/*)#2ht989hy"
+          ],
+          "safe": true,
+          "value": "23999716"
         }
       ]
     },
@@ -155,22 +155,6 @@
       "path": "m/86'/1'/0'/0/0",
       "total": "47999714",
       "utxos": [
-        {
-          "txid": "8165f9f5f291fc00d3316636a7f18780543b9dfa36a68346128a7b05eebb9612",
-          "vout": "1",
-          "address": "bcrt1pmztqlm2vjxul8m9wylyak76z8ulaf2cy4vyrmhrcww9jtcjv5x9qnv70tw",
-          "scriptPubKey": "5120d8960fed4c91b9f3ecae27c9db7b423f3fd4ab04ab083ddc78738b25e24ca18a",
-          "amount": "0.07999714",
-          "confirmations": "6",
-          "spendable": true,
-          "solvable": true,
-          "desc": "tr([0f09f381/86h/1h/0h/1/0]cf3c2ec58c2cded46ab1ba776768f4763bb3a0aeff76f77429c5cfe50833a9b6)#uzyasam5",
-          "parent_descs": [
-            "tr([0f09f381/86h/1h/0h]tpubDC6sFjEmUwAk55rsMZ7fVbQWuXiN3Pn6iCXcXjuqcgNJEDyhLgQkdXqJfZGpysX2Spx1Wm9KfJy8s55F4V8sbqaFZ9synSVo2jSuUjTZCYK/1/*)#980w85f9"
-          ],
-          "safe": true,
-          "value": "7999714"
-        },
         {
           "txid": "0a471ee18298e8b66b5976467ff0e3ed02d31c423533eecd6f8a1bef679fe2e6",
           "vout": "1",
@@ -186,6 +170,22 @@
           ],
           "safe": true,
           "value": "40000000"
+        },
+        {
+          "txid": "8165f9f5f291fc00d3316636a7f18780543b9dfa36a68346128a7b05eebb9612",
+          "vout": "1",
+          "address": "bcrt1pmztqlm2vjxul8m9wylyak76z8ulaf2cy4vyrmhrcww9jtcjv5x9qnv70tw",
+          "scriptPubKey": "5120d8960fed4c91b9f3ecae27c9db7b423f3fd4ab04ab083ddc78738b25e24ca18a",
+          "amount": "0.07999714",
+          "confirmations": "6",
+          "spendable": true,
+          "solvable": true,
+          "desc": "tr([0f09f381/86h/1h/0h/1/0]cf3c2ec58c2cded46ab1ba776768f4763bb3a0aeff76f77429c5cfe50833a9b6)#uzyasam5",
+          "parent_descs": [
+            "tr([0f09f381/86h/1h/0h]tpubDC6sFjEmUwAk55rsMZ7fVbQWuXiN3Pn6iCXcXjuqcgNJEDyhLgQkdXqJfZGpysX2Spx1Wm9KfJy8s55F4V8sbqaFZ9synSVo2jSuUjTZCYK/1/*)#980w85f9"
+          ],
+          "safe": true,
+          "value": "7999714"
         }
       ]
     },

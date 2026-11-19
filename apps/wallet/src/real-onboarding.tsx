@@ -11,17 +11,15 @@ export function RealWelcome() {
         <WalletCards size={42} />
       </div>
       <h1>
-        Your keys.
+        Your world.
         <br />
-        Your responsibility.
+        In your wallet.
       </h1>
       <p className="intro">
-        Create a browser wallet for local chains and public testnets. Your
-        recovery phrase is the only way to restore it.
+        Send, receive and explore across networks. You hold the keys; your recovery phrase keeps you in control.
       </p>
       <Notice tone="warning">
-        University test-network prototype. Never use a phrase that controls real
-        funds.
+        Early access · Local and test networks. Real-fund transfers are not enabled in this release.
       </Notice>
       <div className="stack">
         <Link className="button primary" to="/create">

@@ -103,5 +103,5 @@ if (process.argv[2] !== "wallet") {
   launch(["relayer", "--watch"]);
 }
 console.log(
-  "Wallet http://127.0.0.1:5173 · built approvals/backend http://127.0.0.1:8787 · reference dapp http://127.0.0.1:5174. Existing nodes are used without reset or reseeding.",
+  "Open your wallet: http://127.0.0.1:5173\nDeveloper reference dapp (connection tests): http://127.0.0.1:5174\nBackend and built approval windows: http://127.0.0.1:8787\nExisting nodes are used without reset or reseeding.",
 );

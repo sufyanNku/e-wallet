@@ -63,19 +63,27 @@ try {
   ]);
   process.env.EWALLET_ISOLATED_SOLANA_TEST = "1";
   await run("pnpm", ["exec", "tsx", "scripts/check-indexers.ts", "solana"]);
-  await run("pnpm", [
+  if (!process.argv.includes("--native-only")) {
+    await run("pnpm", [
+      "exec",
+      "playwright",
+      "test",
+      "--config",
+      "playwright.solana.config.ts",
+    ]);
+    await run("pnpm", [
+      "exec",
+      "playwright",
+      "test",
+      "--config",
+      "playwright.dapp-solana.config.ts",
+    ]);
+  }
+  if(process.argv.includes("--native-only")) await run("pnpm", [
     "exec",
-    "playwright",
-    "test",
-    "--config",
-    "playwright.solana.config.ts",
-  ]);
-  await run("pnpm", [
-    "exec",
-    "playwright",
-    "test",
-    "--config",
-    "playwright.dapp-solana.config.ts",
+    "tsx",
+    "scripts/check-native-wallet.ts",
+    "--family=solana",
   ]);
 } finally {
   await run("docker", [...compose, "down"]);

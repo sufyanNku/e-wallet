@@ -1,10 +1,10 @@
 {
-  "observedAt": "2026-11-13T21:46:40.892Z",
+  "observedAt": "2026-11-19T08:58:45.491Z",
   "actualPopup": true,
   "walletStandard": true,
   "signMessage": true,
   "signedExactTransaction": true,
-  "signature": "3MZqYD28fPrudwLanFobtmGdgdf59DHqSxwY1GqYtQzjg9Aq1DYtSxCVnnDopJSbeX286kutgbsMMntCpntcBCmh",
+  "signature": "2PbLoQiFr5iowxkLZgNJPTebTqGqftYNVRwYsdyngFgScfXc2ShTd8vjfCnea72fZVSBnoWnUaNygsnpuMS8u56e",
   "recipientDeltaLamports": "10000",
   "isolatedLedger": true
 }

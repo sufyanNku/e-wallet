@@ -1,10 +1,13 @@
+import { WalletErrorBoundary } from "./error-boundary";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import App from "./App";
 import { WalletProvider } from "./context";
 import type { WalletGateway } from "@ewallet/domain";
+import "@fontsource-variable/manrope";
 import "./styles.css";
+import "./product.css";
 async function start() {
   let gateway: WalletGateway;
   if (__WALLET_MODE__ === "mock") {
@@ -26,13 +29,28 @@ async function start() {
         }
       >
         <WalletProvider gateway={gateway}>
-          <App />
+          <WalletErrorBoundary lock={() => gateway.lock()}>
+            <App />
+          </WalletErrorBoundary>
         </WalletProvider>
       </QueryClientProvider>
     </StrictMode>,
   );
 }
 void start().catch(() => {
-  document.getElementById("root")!.textContent =
-    "Wallet unavailable. This build cannot connect to the required signing core. No mock fallback was used.";
+  const root = document.getElementById("root")!;
+  const main = document.createElement("main");
+  main.className = "onboarding";
+  const title = document.createElement("h1");
+  title.textContent = "Let’s reconnect.";
+  const body = document.createElement("p");
+  body.className = "intro";
+  body.textContent =
+    "The signing core could not start. Reload to try again. Your encrypted wallet has not been replaced.";
+  const button = document.createElement("button");
+  button.className = "button primary";
+  button.textContent = "Reload wallet";
+  button.addEventListener("click", () => window.location.reload());
+  main.append(title, body, button);
+  root.replaceChildren(main);
 });

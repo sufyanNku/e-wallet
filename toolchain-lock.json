@@ -142,5 +142,16 @@
       "name": "ewallet-native:4.4.1-32.1",
       "imageId": "sha256:448131ad00cbc6b4941be56239469440c7d8992d308bf7635fb4fb81f8834968"
     }
-  ]
+  ],
+  "mobile": {
+    "framework": "Expo SDK 58.0.26",
+    "reactNative": "0.88.1",
+    "react": "19.3.0",
+    "typescript": "6.0.3",
+    "vault": "Expo SecureStore Keychain/Keystore; PBKDF2-SHA256 600000 and AES-256-GCM",
+    "publicStorage": "expo-sqlite 58.0.18",
+    "crypto": "@noble/ciphers 2.4.0, @noble/hashes 2.4.0, @noble/curves 2.4.0, @scure/btc-signer 2.4.1",
+    "updatePolicy": "Bundled application updates only; OTA updates disabled",
+    "dependencyVersions": "Exact dependency resolutions are preserved in pnpm-lock.yaml"
+  }
 }

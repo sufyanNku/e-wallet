@@ -1,0 +1,24 @@
+{
+  "assets": [
+    {
+      "symbol": "BTC",
+      "name": "Bitcoin",
+      "microUsd": "63545835000"
+    },
+    {
+      "symbol": "ETH",
+      "name": "Ethereum",
+      "microUsd": "1798695000"
+    },
+    {
+      "symbol": "SOL",
+      "name": "Solana",
+      "microUsd": "74305000"
+    }
+  ],
+  "observedAt": "2026-11-19T08:45:54.294Z",
+  "source": "Coinbase spot",
+  "stale": false,
+  "purpose": "Market reference only; test assets have no monetary value",
+  "verification": "Actual external provider request; no fixture fallback"
+}

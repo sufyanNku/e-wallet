@@ -144,6 +144,36 @@
       "id": "D043",
       "choice": "Select the project Node runtime through pnpm useNodeVersion",
       "reason": "The user terminal defaults to Node 22.23.1, while the application requires Node 24. Pin 24.22.3 in pnpm-workspace.yaml to make project commands select the supported runtime automatically; retain .nvmrc for optional nvm use without changing the global Node default. Verified from the Node-22 terminal."
+    },
+    {
+      "id": "D044",
+      "choice": "Native app supersedes original browser-only scope",
+      "reason": "The user explicitly expanded scope to Android/iOS and requested Phantom-style flows. Keep original e-wallet branding; use React Native/Expo with the existing public domain/adapters and a native signing core rather than a browser wrapper."
+    },
+    {
+      "id": "D045",
+      "choice": "Client launch remains test-network early access",
+      "reason": "User explicitly requested no real funds now. Mainnet enablement remains disabled. Release evidence records missing prerequisites and cannot convert an unchecked flag into a production claim."
+    },
+    {
+      "id": "D046",
+      "choice": "Native keychain vault and SQLite signed journal",
+      "reason": "OS-backed SecureStore holds the AES-GCM/PBKDF2-600k envelope; public preferences, activity and exact signed bytes use device SQLite. Background locking and independent native signing avoid browser Worker assumptions."
+    },
+    {
+      "id": "D047",
+      "choice": "Separate native public-data sessions",
+      "reason": "Native apps use one-hour random bearer sessions bound to native client kind, CSRF and absence of browser origin metadata. Browser strict-origin cookie sessions retain their existing boundary. Neither session grants signing authority."
+    },
+    {
+      "id": "D048",
+      "choice": "Fixed-source cached market references",
+      "reason": "Coinbase BTC/ETH/SOL spot quotes are bounded, cached and labelled independently of demo portfolio valuations. Outages retain stale timestamps and never invent prices."
+    },
+    {
+      "id": "D049",
+      "choice": "Deployment configuration and honest native build evidence",
+      "reason": "HTTPS origins, cookies, safe request logging, SQLite health, unprivileged deployment and store signing guards are configured. Hermes bundling and Node-hosted chain proofs do not replace physical-device testing or an independent audit."
     }
   ]
 }

@@ -105,6 +105,7 @@ export class SolanaAdapter {
         symbol: string;
       }>;
     },
+    private fetcher: typeof fetch = (input, init) => fetch(input, init),
   ) {
     this.profile = networkById(networkId);
     if (this.profile.family !== "solana")
@@ -126,7 +127,7 @@ export class SolanaAdapter {
       return genesis;
     }
     if (this.networkId === "solana:local") {
-      const response = await fetch("/api/v1/solana/environment", {
+      const response = await this.fetcher("/api/v1/solana/environment", {
         cache: "no-store",
       });
       if (!response.ok)
@@ -343,7 +344,7 @@ export class SolanaAdapter {
       await this.identity();
       return this.localRegistry.mints;
     }
-    const response = await fetch("/api/v1/solana/registry", {
+    const response = await this.fetcher("/api/v1/solana/registry", {
       cache: "no-store",
     });
     if (!response.ok)

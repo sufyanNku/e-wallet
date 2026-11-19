@@ -1,0 +1,23 @@
+{
+  "name": "@ewallet/native-wallet",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "@ewallet/domain": "workspace:*",
+    "@ewallet/config": "workspace:*",
+    "@scure/bip39": "2.4.0",
+    "@scure/bip32": "2.4.0",
+    "@scure/btc-signer": "2.4.1",
+    "@scure/base": "2.4.0",
+    "@noble/ciphers": "2.4.0",
+    "@noble/hashes": "2.4.0",
+    "@noble/curves": "2.4.0",
+    "ethers": "6.17.0",
+    "zod": "4.6.7",
+    "@ewallet/chain-evm": "workspace:*",
+    "@ewallet/chain-solana": "workspace:*",
+    "@solana/kit": "8.6.0"
+  }
+}

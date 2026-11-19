@@ -47,7 +47,15 @@
     "scenario": "tsx scripts/scenario.ts",
     "seed:testnets": "tsx scripts/seed-testnets.ts",
     "relayer": "tsx scripts/relayer.ts",
-    "audit:verified": "tsx scripts/audit-verified.ts"
+    "audit:verified": "tsx scripts/audit-verified.ts",
+    "mobile": "pnpm --filter @ewallet/mobile start",
+    "mobile:android": "pnpm --filter @ewallet/mobile android",
+    "mobile:ios": "pnpm --filter @ewallet/mobile ios",
+    "mobile:typecheck": "pnpm --filter @ewallet/mobile typecheck",
+    "mobile:export": "pnpm --filter @ewallet/mobile export",
+    "release:check": "tsx scripts/release-check.ts",
+    "mobile:test:chains": "tsx scripts/test-native.ts",
+    "mobile:build:android": "tsx scripts/build-android.ts"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",

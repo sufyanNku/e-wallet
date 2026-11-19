@@ -127,6 +127,10 @@ function App() {
   }
   return (
     <main>
+      <aside className="wallet-entry" aria-label="Open the wallet application">
+        <div><strong>This is the developer test dapp.</strong><p>Looking for the dark wallet? Open the wallet application on port 5173.</p></div>
+        <a href="http://127.0.0.1:5173/" target="_blank" rel="noopener noreferrer">Open wallet ↗</a>
+      </aside>
       <p className="eyebrow">DEVELOPER REFERENCE · TEST ASSETS</p>
       <h1>
         A separate site.

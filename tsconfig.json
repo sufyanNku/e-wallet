@@ -74,6 +74,9 @@
   "exclude": [
     "**/dist",
     "node_modules",
-    ".local"
+    ".local",
+    "apps/mobile/android",
+    "apps/mobile/ios",
+    "apps/mobile"
   ]
 }

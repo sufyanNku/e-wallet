@@ -11,3 +11,22 @@ coverage/
 contracts/artifacts/
 contracts/cache/
 contracts/types/
+
+# Native build output and signing material
+apps/mobile/.expo/
+**/android/.gradle/
+**/android/build/
+**/android/app/build/
+**/android/local.properties
+**/ios/Pods/
+**/ios/build/
+*.keystore
+*.jks
+*.p12
+*.mobileprovision
+**/android/.kotlin/
+**/.cxx/
+**/.xcode.env.local
+.DS_Store
+# Public framework debug key only; store-release builds reject debug signing.
+!apps/mobile/android/app/debug.keystore

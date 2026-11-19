@@ -1,0 +1,173 @@
+{
+  "observedAt": "2026-11-19T09:09:17.143769Z",
+  "scope": "November 19 wallet product expansion",
+  "state": "early_access_verified",
+  "realFundsEnabled": false,
+  "checks": [
+    {
+      "command": "pnpm typecheck",
+      "state": "passed",
+      "exitCode": 0,
+      "evidencePath": "artifacts/product/logs/typecheck.log"
+    },
+    {
+      "command": "pnpm mobile:typecheck",
+      "state": "passed",
+      "exitCode": 0,
+      "evidencePath": "artifacts/product/logs/mobile-typecheck.log"
+    },
+    {
+      "command": "pnpm lint",
+      "state": "passed",
+      "exitCode": 0,
+      "evidencePath": "artifacts/product/logs/lint.log"
+    },
+    {
+      "command": "pnpm test:unit",
+      "state": "passed",
+      "exitCode": 0,
+      "evidencePath": "artifacts/product/logs/unit.log"
+    },
+    {
+      "command": "pnpm test:browser-core",
+      "state": "passed",
+      "exitCode": 0,
+      "evidencePath": "artifacts/product/logs/core-browser.log"
+    },
+    {
+      "command": "pnpm exec playwright test --config playwright.chains.config.ts",
+      "state": "passed",
+      "exitCode": 0,
+      "evidencePath": "artifacts/product/logs/evm-browser.log"
+    },
+    {
+      "command": "pnpm test:browser-solana",
+      "state": "passed",
+      "exitCode": 0,
+      "evidencePath": "artifacts/product/logs/solana-browser.log"
+    },
+    {
+      "command": "pnpm test:browser-bitcoin",
+      "state": "passed",
+      "exitCode": 0,
+      "evidencePath": "artifacts/product/logs/bitcoin-browser.log"
+    },
+    {
+      "command": "pnpm exec playwright test tests/browser/product.spec.ts",
+      "state": "passed",
+      "exitCode": 0,
+      "evidencePath": "artifacts/product/logs/product-interactions.log"
+    },
+    {
+      "command": "pnpm mobile:build:android",
+      "state": "passed",
+      "exitCode": 0,
+      "evidencePath": "artifacts/product/logs/android-build.log"
+    },
+    {
+      "command": "pnpm --filter @ewallet/mobile exec expo export --platform android --platform ios --max-workers 1",
+      "state": "passed",
+      "exitCode": 0,
+      "evidencePath": "artifacts/product/logs/native-bundles.log"
+    },
+    {
+      "command": "pnpm --filter @ewallet/mobile exec expo install --check",
+      "state": "passed",
+      "exitCode": 0,
+      "evidencePath": "artifacts/product/logs/expo-compatibility.log"
+    },
+    {
+      "command": "pnpm audit:verified",
+      "state": "passed",
+      "exitCode": 0,
+      "evidencePath": "artifacts/product/logs/audit.log"
+    },
+    {
+      "command": "Native evm signing through actual public HTTP handlers and local nodes",
+      "state": "passed",
+      "evidencePath": "artifacts/product/native-evm-proof.json",
+      "boundary": "Node-hosted native core; device Keychain/Hermes tests recorded separately"
+    },
+    {
+      "command": "Native solana signing through actual public HTTP handlers and local nodes",
+      "state": "passed",
+      "evidencePath": "artifacts/product/native-solana-proof.json",
+      "boundary": "Node-hosted native core; device Keychain/Hermes tests recorded separately"
+    },
+    {
+      "command": "Native bitcoin signing through actual public HTTP handlers and local nodes",
+      "state": "passed",
+      "evidencePath": "artifacts/product/native-bitcoin-proof.json",
+      "boundary": "Node-hosted native core; device Keychain/Hermes tests recorded separately"
+    },
+    {
+      "command": "CI=1 pnpm test:ui",
+      "state": "passed",
+      "exitCode": 0,
+      "tests": 5,
+      "evidencePath": "artifacts/product/logs/ui-final.log"
+    },
+    {
+      "command": "pnpm exec playwright test --config playwright.dapp.config.ts",
+      "state": "passed",
+      "exitCode": 0,
+      "tests": 2,
+      "evidencePath": "artifacts/product/logs/evm-popup.log"
+    },
+    {
+      "command": "EWALLET_DOMAIN=wallet.example.invalid docker compose --file infra/deployment/compose.yaml config --quiet",
+      "state": "passed",
+      "exitCode": 0,
+      "boundary": "Configuration validation only; deployment was not performed."
+    }
+  ],
+  "unitTests": 70,
+  "unitTestFiles": 26,
+  "android": {
+    "package": "app.ewallet.wallet",
+    "version": "0.2.0",
+    "build": "debug",
+    "abis": [
+      "arm64-v8a",
+      "x86_64"
+    ],
+    "apkPath": "apps/mobile/android/app/build/outputs/apk/debug/app-debug.apk",
+    "bytes": 114246207,
+    "sha256": "dd1a8812ef4e46d8c44175fbab40e55c9436cecddbd8b3a131e3647ab1c9e4e7",
+    "requiresMetro": true,
+    "physicalDeviceVerified": false,
+    "emulatorStartup": "blocked_adb_remained_offline",
+    "stableLocalApkPath": ".local/releases/e-wallet-0.2.0-debug.apk"
+  },
+  "ios": {
+    "sourceProject": "apps/mobile/ios/ewallet.xcodeproj",
+    "hermesBundle": "passed",
+    "nativeBinary": "not_verified_requires_macos_xcode",
+    "physicalDeviceVerified": false
+  },
+  "storeUploaded": false,
+  "deployed": false,
+  "limitations": [
+    "Independent wallet security audit not performed",
+    "Native external dapp protocols and biometric unlock not implemented",
+    "Mainnet adapters/indexing and isolated mainnet vaults are not implemented; real funds cannot be enabled by a single switch yet",
+    "Client-owned production RPC/domain, legal approval and store signing/distribution remain release work"
+  ],
+  "releaseReadinessPath": "artifacts/product/release-readiness.json",
+  "deviceAcceptanceEvidence": "artifacts/product/device-acceptance.json",
+  "nativeBundleMetadata": {
+    "version": 0,
+    "bundler": "metro",
+    "fileMetadata": {
+      "ios": {
+        "bundle": "_expo/static/js/ios/index-a1d03314f026d4bf613f4f84707314ff.hbc",
+        "assets": []
+      },
+      "android": {
+        "bundle": "_expo/static/js/android/index-a0078895e21b9d868996fbe38257c8a9.hbc",
+        "assets": []
+      }
+    }
+  },
+  "nativeBundleMetadataSha256": "66d7b4e860ec9e08c7c6fc453251c5f9c4256c26b1ebf36e1ec719b86b8aaed6"
+}

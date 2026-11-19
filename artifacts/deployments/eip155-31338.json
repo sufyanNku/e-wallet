@@ -3,9 +3,9 @@
   "networkId": "eip155:31338",
   "chainId": "31338",
   "genesisHash": "0x2af263e036216caae158d7c98de1a3bb15c24844962d79b55d59af8d65cd2ba7",
-  "bootEpoch": "39fe772995f5fa85decbddbf97436308a6fdc90d74f631d00f0f57065407bf47",
-  "runId": "3ffe359b-6c8d-4741-aebe-b08fd3ae0bbb",
-  "createdAt": "2026-11-14T14:02:16.299Z",
+  "bootEpoch": "a0ea07ee79c5b7aeed99f4f8242eda2002d6ef8dc028c87498f64360f8f18f6a",
+  "runId": "04ab4fca-9b37-4c91-b118-dc32dd986ecc",
+  "createdAt": "2026-11-19T08:31:14.053Z",
   "compiler": {
     "version": "0.8.38",
     "evmVersion": "paris"

@@ -11,6 +11,9 @@ import {
   ChevronRight,
   ShieldCheck,
   ImageOff,
+  Search,
+  ArrowRight,
+  Clock3,
 } from "lucide-react";
 import {
   assetKey,
@@ -86,16 +89,21 @@ function BalanceRows({ balances }: { balances: AssetBalance[] }) {
 }
 export function Home() {
   const [watchAcknowledged, setWatchAcknowledged] = useState(false);
+  const [assetSearch, setAssetSearch] = useState("");
   const { snapshot: s, gateway, notify } = useWallet(),
     action = useAction();
   const n = networkById(s.networkId),
     value = demoValue(s.balances);
-  const assets = s.balances.filter((b) => !b.hidden);
+  const assets = s.balances.filter(
+    (b) =>
+      !b.hidden &&
+      (b.name + b.symbol).toLowerCase().includes(assetSearch.toLowerCase()),
+  );
   return (
     <>
       <PageTitle
         title="Your wallet"
-        description="A clear view of your digital assets."
+        description="Your assets. Your next move."
         action={
           <Button
             variant="ghost"
@@ -181,7 +189,7 @@ export function Home() {
                 : formatUsd(value.microUsd)}
           </div>
           <p className="muted">
-            Synthetic prices · {n.name}
+            Demo valuation · {n.name}
             {value.missingPriceCount > 0 ? " · Partial valuation" : ""}
           </p>
           <div className="quick-actions">
@@ -211,21 +219,41 @@ export function Home() {
             </Link>
           </div>
         </Panel>
-        <Panel className="wallet-note">
-          <ShieldCheck size={28} />
-          <h2>
-            Small steps.
-            <br />
-            More confidence.
-          </h2>
-          <p className="muted">
-            Explore self-custody with sample assets before using a real
-            test-network wallet.
-          </p>
-          <Link className="text-link" to="/evaluation">
-            View evaluation status <ArrowUpRight size={17} />
+        <section className="wallet-insights" aria-label="Wallet overview">
+          <div className="section-heading">
+            <h2>At a glance</h2>
+            <Clock3 size={17} />
+          </div>
+          <div className="insight-row">
+            <span>Network</span>
+            <strong>{n.name}</strong>
+          </div>
+          <div className="insight-row">
+            <span>Assets</span>
+            <strong>{s.balances.filter((b) => !b.hidden).length}</strong>
+          </div>
+          <div className="insight-row">
+            <span>Recent activity</span>
+            <strong>{s.activity.length} transactions</strong>
+          </div>
+          <div className="insight-status">
+            <span
+              className={
+                s.balanceStatus === "unavailable"
+                  ? "connection-dot offline"
+                  : "connection-dot"
+              }
+            />
+            {s.balanceStatus === "unavailable"
+              ? "Waiting for network"
+              : s.balances.some((b) => b.stale)
+                ? "Refresh needed"
+                : "Wallet up to date"}
+          </div>
+          <Link className="text-link" to="/activity">
+            View activity <ArrowRight size={15} />
           </Link>
-        </Panel>
+        </section>
       </div>
       <div className="tabs">
         <Link className="active" to="/">
@@ -235,7 +263,7 @@ export function Home() {
         <Link to="/activity">Activity</Link>
         <Link to="/apps">Apps</Link>
       </div>
-      <Panel>
+      <Panel className="holdings-panel">
         <div className="section-heading">
           <h2>
             Your assets <span className="count">{assets.length}</span>
@@ -244,17 +272,48 @@ export function Home() {
             <Plus size={16} /> Manage tokens
           </Link>
         </div>
+        <div className="asset-search">
+          <Search size={17} />
+          <label className="sr-only" htmlFor="asset-search">
+            Search tokens
+          </label>
+          <input
+            id="asset-search"
+            value={assetSearch}
+            onChange={(event) => setAssetSearch(event.target.value)}
+            placeholder="Search your tokens"
+            autoComplete="off"
+          />
+        </div>
         {s.scenario === "loading" ? (
-          <div className="empty" role="status">
-            Loading sample balances…
+          <div
+            className="asset-skeleton"
+            role="status"
+            aria-label="Loading balances"
+          >
+            {[0, 1, 2].map((i) => (
+              <div key={i}>
+                <span />
+                <span />
+                <span />
+              </div>
+            ))}
           </div>
         ) : assets.length ? (
           <BalanceRows balances={assets} />
         ) : (
-          <Empty title="No observed assets yet">
-            {s.mode === "mock"
-              ? "Receive test assets or visit the sample faucet to get started."
-              : "Chain data is currently unavailable. This is not a confirmed zero balance."}
+          <Empty
+            title={
+              assetSearch ? "No matching tokens" : "Your wallet starts here"
+            }
+          >
+            {assetSearch
+              ? "Try a different token name or symbol."
+              : s.balanceStatus === "ready"
+                ? "Receive your first assets to see them here."
+                : s.mode === "mock"
+                  ? "Receive test assets or visit the sample faucet to get started."
+                  : "Balances are not available yet. Refresh to reconnect to the network."}
             <br />
             <Link className="text-link" to="/faucet">
               Open faucet
@@ -262,12 +321,16 @@ export function Home() {
           </Empty>
         )}
         <p className="footnote">
-          {s.source === "fixture" ? "Fixture data" : "Node data unavailable"} ·
-          Updated{" "}
+          {s.source === "fixture"
+            ? "Sample data"
+            : s.balanceStatus === "unavailable"
+              ? "Network unavailable"
+              : "On-chain balances"}{" "}
+          · Updated{" "}
           {s.balanceStatus === "unavailable"
             ? "No observation yet"
             : new Date(s.updatedAt).toLocaleTimeString()}{" "}
-          · Prices are educational examples.
+          · Demo prices, not market quotes.
         </p>
       </Panel>
       {action.error && <Notice tone="error">{action.error}</Notice>}
@@ -309,7 +372,10 @@ export function AssetDetails() {
             {b.available} / {b.reserved}
           </dd>
           <dt>Source</dt>
-          <dd>Fixture · observation {b.observation.observedHeight}</dd>
+          <dd>
+            {b.observation.source === "node" ? "On-chain" : "Sample data"} ·
+            block {b.observation.observedHeight}
+          </dd>
         </dl>
         <div className="form-actions">
           <Link

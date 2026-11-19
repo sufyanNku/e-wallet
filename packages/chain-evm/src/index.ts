@@ -51,6 +51,7 @@ export class EvmAdapter {
   constructor(
     readonly networkId: string,
     provider?: JsonRpcProvider,
+    private fetcher: typeof fetch = (input, init) => fetch(input, init),
   ) {
     this.profile = networkById(networkId);
     if (this.profile.family !== "evm")
@@ -71,7 +72,7 @@ export class EvmAdapter {
   async environment() {
     await this.identity();
     if (this.profile.environment !== "local") return { bootEpoch: null };
-    const response = await fetch(
+    const response = await this.fetcher(
       "/api/v1/environment/" + encodeURIComponent(this.networkId),
       { cache: "no-store", signal: AbortSignal.timeout(10000) },
     );
@@ -89,7 +90,7 @@ export class EvmAdapter {
     return body.data;
   }
   async manifest(): Promise<DeploymentManifest | null> {
-    const response = await fetch(
+    const response = await this.fetcher(
       "/api/v1/deployments/" + encodeURIComponent(this.networkId),
       { cache: "no-store", signal: AbortSignal.timeout(10000) },
     );

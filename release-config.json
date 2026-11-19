@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "realFundsRequested": false,
+  "checks": {
+    "independentSecurityAudit": false,
+    "mainnetAdapterAcceptance": false,
+    "mainnetVaultIsolation": false,
+    "productionRpcAndIndexer": false,
+    "restoreAndIncidentDrill": false,
+    "androidPhysicalDeviceAcceptance": false,
+    "iosPhysicalDeviceAcceptance": false,
+    "clientPrivacyAndTermsApproval": false,
+    "storeSigningAndDistribution": false
+  }
+}

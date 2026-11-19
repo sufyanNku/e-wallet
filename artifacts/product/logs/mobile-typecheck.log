@@ -1,0 +1,8 @@
+
+> e-wallet@0.1.0 mobile:typecheck /home/sufyan/Desktop/Dev/E-wallet
+> pnpm --filter @ewallet/mobile typecheck
+
+
+> @ewallet/mobile@0.2.0 typecheck /home/sufyan/Desktop/Dev/E-wallet/apps/mobile
+> tsc --noEmit
+

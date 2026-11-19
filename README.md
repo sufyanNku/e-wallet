@@ -1,6 +1,45 @@
 # e-wallet
 
-A browser wallet implemented from specifications **01–04**: a React UI, a dedicated signing Worker, real EVM/Solana/Bitcoin adapters, local contracts, reproducible fixtures, SQLite indexing, safe metadata and browser popup connectors. Test assets have no monetary value. The optional fifth specification is absent and outside this implementation scope.
+A self-custody wallet with a redesigned React web client and a **React Native / Expo Android and iOS app**. The existing EVM, Solana and Bitcoin integrations are retained. Native and web signing run on the user's device; the backend handles public data.
+
+**Current release: early access, local chains and testnets only. Real funds are disabled.** The November 19 product expansion supersedes the original browser-only scope in specification 01. Implementation and verification evidence for this expansion lives under `artifacts/product/`; the original four specification gates remain historical evidence rather than a production-launch certification.
+
+The product now includes wallet-first navigation, token search, a command palette, notifications, market discovery, native secure storage, QR receive/scanning, native transaction review, on-chain balances/history, local swaps and collectible transfer flows. Market watch uses Coinbase spot quotes; demo portfolio values remain clearly separate. Original e-wallet branding is retained.
+
+## Android and iOS
+
+For direct phone installation without publishing, follow [MOBILE_INSTALLATION_GUIDE.md](MOBILE_INSTALLATION_GUIDE.md).
+
+```sh
+pnpm install --frozen-lockfile
+pnpm dev                         # backend + web + reference dapp
+# In another terminal:
+pnpm mobile                      # Metro for a development build
+pnpm mobile:android              # build and run on Android
+pnpm mobile:ios                  # build and run on macOS with Xcode
+pnpm mobile:typecheck
+pnpm mobile:export               # bundle both native targets; not signed store binaries
+pnpm mobile:build:android        # memory-conscious debug APK build
+pnpm mobile:test:chains          # actual chain proofs; disposable Solana/Bitcoin nodes
+```
+
+The default development API is `http://127.0.0.1:8787`. For Android devices/emulators, run `adb reverse tcp:8787 tcp:8787` and `adb reverse tcp:8081 tcp:8081`. A physical iPhone needs a reachable HTTPS API configured through `EXPO_PUBLIC_API_URL`; native API sessions intentionally differ from browser cookie sessions. Changing public environment variables requires rebuilding the app. `pnpm mobile:ios` requires macOS, Xcode and signing setup; Linux cannot verify the iOS executable.
+
+Native wallet envelopes use PBKDF2-SHA256 (600,000 iterations) and AES-256-GCM, stored using Expo SecureStore backed by the device Keychain/Keystore. Public preferences, history and signed transaction journals use on-device SQLite. Signing derives the same EVM, SLIP-0010 Solana and BIP84/BIP86 regtest addresses as the browser vectors. The app locks on backgrounding and after five minutes of inactivity. Sensitive screens request capture protection; native task-switcher privacy covers are included. No recovery phrase or private key is sent to the API.
+
+The verified debug APK is also preserved at `.local/releases/e-wallet-0.2.0-debug.apk`. It is a development build and requires Metro. It is not a store distribution package. Store-targeted builds refuse the public debug signing key and require HTTPS configuration, client-owned signing credentials and physical-device acceptance. Native external dapp connection protocols and biometric unlock are not yet implemented; the web popup connector remains available. Do not treat a successful JavaScript bundle or Node-hosted signing proof as a device security audit.
+
+## Deployment and real-fund activation
+
+`infra/deployment/` contains an HTTPS reverse-proxy deployment, persistent SQLite storage, an unprivileged API container and health checks. `.env.example` documents the domain/API settings. No deployment or app-store upload has been performed.
+
+```sh
+pnpm release:check
+# On the deployment host, after setting EWALLET_DOMAIN:
+docker compose --env-file .env --file infra/deployment/compose.yaml up --build -d
+```
+
+`release-config.json` records real-fund release prerequisites. **There is no safe one-click mainnet activation in this build yet.** Mainnet adapters/indexing, isolated mainnet vaults, independent audit, production RPC provisioning, physical-device tests and store credentials remain release work. The checker keeps these explicit and cannot enable real funds by flipping an unchecked flag. No real recovery phrase should be imported into this early-access build.
 
 ## Start the real local demo
 
@@ -104,3 +143,7 @@ Primary references for the updated configuration: [Polygon RPCs](https://docs.po
 
 Hardhat still depends on Zod 3.25.76. A source-controlled security backport rejects oversized constrained arrays/sets before walking elements, following the upstream fix for CVE-2023-54404. `security-patches.json` records the patch checksum and tests. `pnpm audit:verified` checks that checksum and the live parser behavior before exempting this exact version-only registry finding; other advisories fail normally. An unfiltered `pnpm audit` still reports the original package version. The wallet/backend use patched Zod 4.6.7.
 # e-wallet
+
+Android compilation and both native bundles passed. The local emulator remained ADB-offline in a fresh boot attempt, so device acceptance is explicitly unverified in `artifacts/product/device-acceptance.json`.
+
+Native integration references: [Expo monorepos](https://docs.expo.dev/guides/monorepos/), [SecureStore](https://docs.expo.dev/versions/latest/sdk/securestore/), [screen capture](https://docs.expo.dev/versions/latest/sdk/screen-capture/), and [Coinbase spot-price API](https://docs.cdp.coinbase.com/coinbase-app/track-apis/prices).

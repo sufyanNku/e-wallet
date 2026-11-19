@@ -5,6 +5,7 @@ export default ts.config(
   {
     ignores: [
       "**/dist/**",
+      "apps/mobile/android/**", "apps/mobile/ios/**", "apps/mobile/.expo/**",
       "contracts/artifacts/**", "contracts/cache/**", "contracts/types/**",
       "node_modules/**",
       ".local/**",

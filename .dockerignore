@@ -10,3 +10,11 @@ contracts/cache
 contracts/types
 .git
 .env*
+**/android/.gradle
+**/android/build
+**/android/app/build
+**/ios/Pods
+**/ios/build
+**/.expo
+**/.cxx
+**/android/.kotlin

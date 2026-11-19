@@ -1,0 +1,19 @@
+[WebServer] (node:120204) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:120290) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:120306) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:120493) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser-chains/evm.spec.ts:69:1 › real browser approves and broadcasts an EVM native payment, token payment and NFT transfer through its Worker (16.6s)
+  ✓  2 tests/browser-chains/evm.spec.ts:234:1 › real contract UI executes an AMM swap, a vault withdrawal and a faucet claim (37.6s)
+  ✓  3 tests/browser-chains/evm.spec.ts:335:1 › a second independent owner approves and executes a two-of-three shared proposal (19.4s)
+  ✓  4 tests/browser-chains/evm.spec.ts:372:1 › native maximum preserves a complete reviewed fee reserve (7.1s)
+  ✓  5 tests/browser-chains/evm.spec.ts:419:1 › bridge UI locks source tokens and the local relayer mints exactly one canonical destination (18.5s)
+  ✓  6 tests/browser-chains/evm.spec.ts:509:1 › node-backed discovery recovers a funded higher derivation index after phrase restoration (7.0s)
+
+  6 passed (1.9m)

@@ -97,11 +97,53 @@
     "webServer": {
       "command": "pnpm serve:web",
       "url": "http://127.0.0.1:8787/api/v1/health",
-      "reuseExistingServer": true,
+      "reuseExistingServer": false,
       "timeout": 30000
     }
   },
   "suites": [
+    {
+      "title": "product.spec.ts",
+      "file": "product.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "wallet search, token filtering, notifications and market discovery remain usable on mobile",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2232,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T09:03:56.190Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2fa8ab87beca8e7f39ce-bd98e8428ee5506b79dc",
+          "file": "product.spec.ts",
+          "line": 4,
+          "column": 1
+        }
+      ]
+    },
     {
       "title": "wallet.spec.ts",
       "file": "wallet.spec.ts",
@@ -124,12 +166,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1191,
+                  "duration": 1115,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-13T21:59:00.642Z",
+                  "startTime": "2026-11-19T09:03:58.753Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -158,12 +200,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 6995,
+                  "duration": 7535,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-13T21:59:02.073Z",
+                  "startTime": "2026-11-19T09:03:59.886Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -192,12 +234,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 4475,
+                  "duration": 4826,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-13T21:59:09.099Z",
+                  "startTime": "2026-11-19T09:04:07.439Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -226,12 +268,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 986,
+                  "duration": 889,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-13T21:59:13.591Z",
+                  "startTime": "2026-11-19T09:04:12.285Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -249,9 +291,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-13T21:58:58.096Z",
-    "duration": 16613.208000000002,
-    "expected": 4,
+    "startTime": "2026-11-19T09:03:53.723Z",
+    "duration": 19574.961,
+    "expected": 5,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

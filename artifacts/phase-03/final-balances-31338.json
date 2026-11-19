@@ -2,7 +2,7 @@
   "source": "node",
   "networkId": "eip155:31338",
   "observedHeight": "5",
-  "observedAt": "2026-11-14T14:02:25.439Z",
+  "observedAt": "2026-11-19T09:09:18.264Z",
   "balances": {
     "alice": {
       "native": "100000000000000000000",

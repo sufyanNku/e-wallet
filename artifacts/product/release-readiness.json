@@ -1,0 +1,19 @@
+{
+  "observedAt": "2026-11-19T08:56:03.535Z",
+  "target": "Real-fund public launch",
+  "requested": false,
+  "enabled": false,
+  "ready": false,
+  "blockers": [
+    "independentSecurityAudit",
+    "mainnetAdapterAcceptance",
+    "mainnetVaultIsolation",
+    "productionRpcAndIndexer",
+    "restoreAndIncidentDrill",
+    "androidPhysicalDeviceAcceptance",
+    "iosPhysicalDeviceAcceptance",
+    "clientPrivacyAndTermsApproval",
+    "storeSigningAndDistribution"
+  ],
+  "activation": "Mainnet remains disabled in the current adapters and vaults. Configuration booleans record release review and never bypass implementation."
+}

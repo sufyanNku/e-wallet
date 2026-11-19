@@ -1,4 +1,5 @@
-import {RealEvaluation} from './real-evaluation';
+import { Discover } from "./discover";
+import { RealEvaluation } from "./real-evaluation";
 import { ConnectPage } from "./connect-page";
 import { RealService, RealServices } from "./real-services";
 import {
@@ -19,13 +20,16 @@ import {
   Image,
   History,
   PanelsTopLeft,
-  ContactRound,
   Settings2,
   FlaskConical,
   LockKeyhole,
   Plus,
   ArrowLeftRight,
   ShieldCheck,
+  Search,
+  Bell,
+  ChevronRight,
+  Command,
 } from "lucide-react";
 import { networks, networkById } from "@ewallet/config";
 import { Address, Button, Field, Modal, Notice } from "@ewallet/ui";
@@ -69,17 +73,19 @@ import {
 } from "./services";
 import { Settings, Evaluation } from "./settings";
 const navigation = [
-  { to: "/", label: "Overview", icon: LayoutDashboard },
+  { to: "/", label: "Wallet", icon: LayoutDashboard },
+  { to: "/swap", label: "Swap", icon: ArrowLeftRight },
   { to: "/collectibles", label: "Collectibles", icon: Image },
   { to: "/activity", label: "Activity", icon: History },
   { to: "/apps", label: "Connected apps", icon: PanelsTopLeft },
-  { to: "/contacts", label: "Contacts", icon: ContactRound },
-  { to: "/services", label: "Contract services", icon: ShieldCheck },
+
+  { to: "/discover", label: "Discover", icon: Search },
 ];
 function RouteFocus() {
   const { pathname } = useLocation();
   useEffect(() => {
-    document.getElementById("main-content")?.focus();
+    document.getElementById("main-content")?.focus({ preventScroll: true });
+    window.scrollTo({ top: 0 });
   }, [pathname]);
   return null;
 }
@@ -99,6 +105,19 @@ function Shell() {
   const accountOpen = useUiState((v) => v.accountsOpen),
     setAccountOpen = useUiState((v) => v.setAccountsOpen);
   const [name, setName] = useState("");
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === "k") {
+        event.preventDefault();
+        setSearchOpen((open) => !open);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
   useQuery({
     queryKey: ["portfolio", s.mode, s.selectedAccountId, s.networkId],
     queryFn: async () => {
@@ -119,12 +138,12 @@ function Shell() {
       </a>
       <aside className="sidebar">
         <Link className="brand" to="/">
-          <span className="brand-mark">
-            <WalletCards size={25} />
+          <span className="brand-mark product-mark" aria-hidden="true">
+            e
           </span>
           e-wallet<span className="brand-dot">.</span>
         </Link>
-        <div className="workspace-label">YOUR WORKSPACE</div>
+        <div className="workspace-label">YOUR WALLET, EVERYWHERE</div>
         <nav aria-label="Main navigation">
           {navigation.map(({ to, label, icon: Icon }) => (
             <NavLink key={to} to={to} end={to === "/"}>
@@ -134,22 +153,21 @@ function Shell() {
           ))}
         </nav>
         <div className="sidebar-bottom">
-          <div className="test-note">
-            <FlaskConical size={20} />
-            <strong>Room to experiment.</strong>
-            <p>
-              Test assets. Real learning.
-              <br />
-              No monetary value.
-            </p>
+          <div className="custody-note">
+            <span className="connection-dot" /> Keys held by you
+            <p>Encrypted on this device.</p>
           </div>
+          <NavLink to="/contacts">
+            <WalletCards size={19} /> Address book
+          </NavLink>
+          <NavLink to="/services"><ShieldCheck size={19} /> Network tools</NavLink>
           <NavLink to="/settings">
             <Settings2 size={19} />
             Settings
           </NavLink>
           <NavLink to="/evaluation">
             <FlaskConical size={19} />
-            Evaluation
+            Network status
           </NavLink>
         </div>
       </aside>
@@ -169,6 +187,21 @@ function Shell() {
             <span className="mode-extra"> · Test assets only</span>
           </div>
           <div className="selectors">
+            <Button
+              variant="ghost"
+              aria-label="Search wallet"
+              onClick={() => setSearchOpen(true)}
+            >
+              <Search size={19} />
+              <kbd className="desktop-label">⌘ K</kbd>
+            </Button>
+            <Button
+              variant="ghost"
+              aria-label="Notifications"
+              onClick={() => setNotificationsOpen(true)}
+            >
+              <Bell size={19} />
+            </Button>
             <label className="sr-only" htmlFor="network">
               Selected network
             </label>
@@ -227,7 +260,7 @@ function Shell() {
           { to: "/", label: "Wallet", icon: WalletCards },
           { to: "/activity", label: "Activity", icon: History },
           { to: "/swap", label: "Swap", icon: ArrowLeftRight },
-          { to: "/apps", label: "Apps", icon: PanelsTopLeft },
+          { to: "/discover", label: "Discover", icon: Search },
           { to: "/settings", label: "Settings", icon: Settings2 },
         ].map(({ to, label, icon: Icon }) => (
           <NavLink to={to} end={to === "/"} key={to}>
@@ -236,6 +269,112 @@ function Shell() {
           </NavLink>
         ))}
       </nav>
+      <Modal
+        open={searchOpen}
+        onClose={() => {
+          setSearchOpen(false);
+          setSearch("");
+        }}
+        title="Search your wallet"
+        description="Find an asset or jump to a wallet action."
+      >
+        <Field
+          label="Search assets and actions"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          autoFocus
+          placeholder="Token, network, or action…"
+        />
+        <div className="command-results">
+          {navigation
+            .concat([
+              { to: "/send", label: "Send a payment", icon: ArrowLeftRight },
+              { to: "/receive", label: "Receive crypto", icon: WalletCards },
+              {
+                to: "/settings",
+                label: "Settings and recovery",
+                icon: Settings2,
+              },
+            ])
+            .filter((item) =>
+              item.label.toLowerCase().includes(search.toLowerCase()),
+            )
+            .map(({ to, label, icon: Icon }) => (
+              <Link key={to} to={to} onClick={() => setSearchOpen(false)}>
+                <Icon size={19} />
+                <span>{label}</span>
+                <ChevronRight size={15} />
+              </Link>
+            ))}
+          {s.balances
+            .filter(
+              (asset) =>
+                !asset.hidden &&
+                (asset.name + asset.symbol)
+                  .toLowerCase()
+                  .includes(search.toLowerCase()),
+            )
+            .map((asset) => (
+              <Link
+                key={asset.asset.reference}
+                to={
+                  "/asset?key=" +
+                  encodeURIComponent(
+                    [
+                      asset.asset.networkId,
+                      asset.asset.standard,
+                      asset.asset.reference,
+                      asset.asset.tokenId ?? "",
+                    ].join("/"),
+                  )
+                }
+                onClick={() => setSearchOpen(false)}
+              >
+                <Search size={19} />
+                <span>
+                  {asset.name} <small>{asset.symbol}</small>
+                </span>
+                <ChevronRight size={15} />
+              </Link>
+            ))}
+        </div>
+        <p className="muted small">
+          <Command size={12} /> K opens search from anywhere.
+        </p>
+      </Modal>
+      <Modal
+        open={notificationsOpen}
+        onClose={() => setNotificationsOpen(false)}
+        title="Notifications"
+        description="Recent transaction updates for this account."
+      >
+        {s.activity.length ? (
+          s.activity.slice(0, 8).map((item) => (
+            <Link
+              className="notification-row"
+              key={item.id}
+              to="/activity"
+              onClick={() => setNotificationsOpen(false)}
+            >
+              <span className="notification-dot" />
+              <span>
+                <strong>{item.intent.kind.replaceAll("-", " ")}</strong>
+                <small>
+                  {item.state.replaceAll("_", " ")} ·{" "}
+                  {new Date(item.createdAt).toLocaleString()}
+                </small>
+              </span>
+              <ChevronRight size={16} />
+            </Link>
+          ))
+        ) : (
+          <div className="empty">
+            <Bell size={28} />
+            <h3>You're all caught up</h3>
+            <p>Transaction updates will appear here.</p>
+          </div>
+        )}
+      </Modal>
       <Modal
         open={accountOpen}
         onClose={() => setAccountOpen(false)}
@@ -322,7 +461,11 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {__WALLET_MODE__ !== "mock" && <Route element={<OnboardingShell />}><Route path="/connect" element={<ConnectPage />}/></Route>}
+        {__WALLET_MODE__ !== "mock" && (
+          <Route element={<OnboardingShell />}>
+            <Route path="/connect" element={<ConnectPage />} />
+          </Route>
+        )}
         <Route element={<OnboardingShell />}>
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/create" element={<Create />} />
@@ -332,12 +475,15 @@ export default function App() {
         <Route element={<Guard />}>
           <Route element={<Shell />}>
             <Route index element={<Home />} />
-            {__WALLET_MODE__ === "mock" && <Route path="/connect" element={<ConnectionApproval />}/>}
+            {__WALLET_MODE__ === "mock" && (
+              <Route path="/connect" element={<ConnectionApproval />} />
+            )}
             <Route path="/asset" element={<AssetDetails />} />
             <Route path="/tokens" element={<TokenManagement />} />
             <Route path="/send" element={<Send />} />
             <Route path="/receive" element={<Receive />} />
             <Route path="/contacts" element={<Contacts />} />
+            <Route path="/discover" element={<Discover />} />
             <Route path="/activity" element={<Activity />} />
             <Route path="/collectibles" element={<Collectibles />} />
             <Route
@@ -408,7 +554,12 @@ export default function App() {
                 __WALLET_MODE__ === "mock" ? <Settings /> : <RealSettings />
               }
             />
-            <Route path="/evaluation" element={__WALLET_MODE__ === "mock" ? <Evaluation /> : <RealEvaluation />} />
+            <Route
+              path="/evaluation"
+              element={
+                __WALLET_MODE__ === "mock" ? <Evaluation /> : <RealEvaluation />
+              }
+            />
             <Route
               path="*"
               element={

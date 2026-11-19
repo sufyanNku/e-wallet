@@ -1,3 +1,5 @@
+import { registerMarkets } from "./markets";
+import { runtimeConfig } from "./runtime-config";
 import { observeBridge } from "./bridge-observer";
 import { localManifestSchema } from "../../../packages/domain/src/local-manifest";
 import { registerReadApi } from "./read-api";
@@ -13,6 +15,7 @@ import { registerRpc } from "./rpc";
 import { registerEnvironment } from "./environment";
 
 export async function buildServer(options: { databasePath?: string } = {}) {
+  const runtime = runtimeConfig();
   const frontendConfig = fileURLToPath(
     new URL("../../../apps/wallet/dist/wallet-config.json", import.meta.url),
   );
@@ -21,7 +24,23 @@ export async function buildServer(options: { databasePath?: string } = {}) {
         .mode
     : "unbuilt";
   const app = Fastify({
-    logger: false,
+    logger: runtime.deployed
+      ? {
+          level: "info",
+          serializers: {
+            req: (req) => ({ method: req.method }),
+            res: (res) => ({ statusCode: res.statusCode }),
+          },
+          redact: [
+            "req.headers",
+            "req.body",
+            "req.query",
+            "req.params",
+            "err.stack",
+            "err.message",
+          ],
+        }
+      : false,
     bodyLimit: 262144,
     ajv: { customOptions: { removeAdditional: false, coerceTypes: false } },
   });
@@ -46,7 +65,7 @@ export async function buildServer(options: { databasePath?: string } = {}) {
     });
   });
   app.addHook("onRequest", async (req, reply) => {
-    if (!["127.0.0.1:8787", "127.0.0.1:5173"].includes(req.headers.host ?? ""))
+    if (!runtime.hosts.includes(req.headers.host ?? ""))
       return reply.code(403).send({
         error: {
           code: "HOST",
@@ -58,6 +77,8 @@ export async function buildServer(options: { databasePath?: string } = {}) {
       "Content-Security-Policy",
       "default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
     );
+    if (runtime.deployed)
+      reply.header("Strict-Transport-Security", "max-age=31536000");
     reply.header("Referrer-Policy", "no-referrer");
     reply.header("X-Content-Type-Options", "nosniff");
     reply.header(
@@ -82,8 +103,10 @@ export async function buildServer(options: { databasePath?: string } = {}) {
         ? ".local/browser-solana/backend.sqlite"
         : process.env.EWALLET_ISOLATED_BITCOIN_TEST === "1"
           ? ".local/browser-bitcoin/backend.sqlite"
-          : `.local/${process.env.EWALLET_MODE ?? "local"}/backend.sqlite`),
+          : runtime.databasePath),
+    runtime,
   );
+  registerMarkets(app);
   await registerBitcoinWatch(app, sessions.db, sessions.session);
   const indexer = await registerWatchApi(app, sessions.db, sessions.session);
   registerReadApi(app, sessions.db, sessions.session, indexer);
@@ -93,15 +116,13 @@ export async function buildServer(options: { databasePath?: string } = {}) {
   for (const path of ["manifest", "testnets"])
     app.get("/api/v1/demo/" + path, async (req, reply) => {
       if (frontendMode !== "local" || process.env.EWALLET_MODE === "testnet")
-        return reply
-          .code(404)
-          .send({
-            error: {
-              code: "DEMO_DISABLED",
-              message: "Local evaluation data is disabled.",
-              correlationId: req.id,
-            },
-          });
+        return reply.code(404).send({
+          error: {
+            code: "DEMO_DISABLED",
+            message: "Local evaluation data is disabled.",
+            correlationId: req.id,
+          },
+        });
       try {
         const file =
             path === "manifest"
@@ -112,40 +133,44 @@ export async function buildServer(options: { databasePath?: string } = {}) {
         reply.header("Cache-Control", "no-store");
         return { data, meta: { source: "recorded-node-evidence" } };
       } catch {
-        return reply
-          .code(503)
-          .send({
-            error: {
-              code: "NEEDS_SEED",
-              message: "Run the documented local seed/evidence command.",
-              correlationId: req.id,
-            },
-          });
+        return reply.code(503).send({
+          error: {
+            code: "NEEDS_SEED",
+            message: "Run the documented local seed/evidence command.",
+            correlationId: req.id,
+          },
+        });
       }
     });
   app.get("/api/v1/bridge/status", async (req, reply) => {
     if (frontendMode !== "local")
-      return reply
-        .code(404)
-        .send({
-          error: {
-            code: "LOCAL_ONLY",
-            message: "Bridge simulation is local only.",
-            correlationId: req.id,
-          },
-        });
+      return reply.code(404).send({
+        error: {
+          code: "LOCAL_ONLY",
+          message: "Bridge simulation is local only.",
+          correlationId: req.id,
+        },
+      });
     try {
       return { data: await observeBridge(), meta: { source: "node" } };
     } catch {
-      return reply
-        .code(503)
-        .send({
-          error: {
-            code: "BRIDGE_UNAVAILABLE",
-            message: "The local bridge pair is unavailable or needs reseeding.",
-            correlationId: req.id,
-          },
-        });
+      return reply.code(503).send({
+        error: {
+          code: "BRIDGE_UNAVAILABLE",
+          message: "The local bridge pair is unavailable or needs reseeding.",
+          correlationId: req.id,
+        },
+      });
+    }
+  });
+  app.get("/api/v1/ready", async (_req, reply) => {
+    try {
+      sessions.db.prepare("SELECT 1").get();
+      return {
+        data: { ready: true, mode: frontendMode, realFundsEnabled: false },
+      };
+    } catch {
+      return reply.code(503).send({ data: { ready: false } });
     }
   });
   app.get("/api/v1/health", async () => ({
@@ -177,8 +202,9 @@ export async function buildServer(options: { databasePath?: string } = {}) {
 }
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const app = await buildServer();
-  await app.listen({ host: "127.0.0.1", port: 8787 });
-  console.log("e-wallet evaluation host: http://127.0.0.1:8787");
+  const runtime = runtimeConfig();
+  await app.listen({ host: runtime.host, port: runtime.port });
+  console.log(`e-wallet service listening on ${runtime.host}:${runtime.port}`);
   for (const signal of ["SIGTERM", "SIGINT"] as const)
     process.once(signal, () => {
       void app.close().then(() => process.exit(0));
