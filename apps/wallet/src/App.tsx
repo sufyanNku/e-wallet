@@ -1,6 +1,6 @@
 import { displayNetworkName, displayAssetName } from "@ewallet/domain";
 import { Discover } from "./discover";
-import { TeamDemo } from "./team-demo";
+import { AccountsPage } from "./accounts";
 import { RealEvaluation } from "./real-evaluation";
 import { ConnectPage } from "./connect-page";
 import { RealService, RealServices } from "./real-services";
@@ -38,42 +38,21 @@ import { Address, Button, Field, Modal, Notice } from "@ewallet/ui";
 import { useWallet, useAction } from "./context";
 import { useUiState } from "./ui-state";
 import {
-  Welcome as MockWelcome,
-  Create as MockCreate,
-  Import as MockImport,
-  Unlock as MockUnlock,
-} from "./onboarding";
-import {
-  RealWelcome,
-  RealCreate,
-  RealImport,
-  RealUnlock,
+  RealWelcome as Welcome,
+  RealCreate as Create,
+  RealImport as Import,
+  RealUnlock as Unlock,
 } from "./real-onboarding";
 import { RealSettings } from "./real-settings";
 import { RealApps } from "./real-apps";
-const [Welcome, Create, Import, Unlock] =
-  __WALLET_MODE__ === "mock"
-    ? [MockWelcome, MockCreate, MockImport, MockUnlock]
-    : [RealWelcome, RealCreate, RealImport, RealUnlock];
 import {
   Home,
   AssetDetails,
   TokenManagement,
   Activity,
   Collectibles,
-  ConnectedApps,
-  ConnectionApproval,
 } from "./portfolio";
 import { Send, Receive, Contacts } from "./payments";
-import {
-  Services,
-  Faucet,
-  Swap,
-  Bridge,
-  SavingsVault,
-  SharedWallet,
-} from "./services";
-import { Settings, Evaluation } from "./settings";
 const navigation = [
   { to: "/", label: "Wallet", icon: LayoutDashboard },
   { to: "/swap", label: "Swap", icon: ArrowLeftRight },
@@ -126,7 +105,7 @@ function Shell() {
       await gateway.refresh();
       return true;
     },
-    enabled: s.mode !== "mock" && !s.locked && Boolean(s.selectedAccountId),
+    enabled: !s.locked && Boolean(s.selectedAccountId),
     refetchInterval: 5000,
     refetchIntervalInBackground: false,
     retry: 1,
@@ -162,7 +141,9 @@ function Shell() {
           <NavLink to="/contacts">
             <WalletCards size={19} /> Address book
           </NavLink>
-          <NavLink to="/services"><ShieldCheck size={19} /> Network tools</NavLink>
+          <NavLink to="/services">
+            <ShieldCheck size={19} /> Network tools
+          </NavLink>
           <NavLink to="/settings">
             <Settings2 size={19} />
             Settings
@@ -171,7 +152,11 @@ function Shell() {
             <FlaskConical size={19} />
             Network status
           </NavLink>
-          {__WALLET_MODE__ === "local" && <NavLink to="/accounts"><ShieldCheck size={19} /> Accounts</NavLink>}
+          {__WALLET_MODE__ === "local" && (
+            <NavLink to="/accounts">
+              <ShieldCheck size={19} /> Accounts
+            </NavLink>
+          )}
         </div>
       </aside>
       <div className="app-body">
@@ -211,7 +196,6 @@ function Shell() {
               {networks
                 .filter(
                   (n) =>
-                    s.mode === "mock" ||
                     n.environment === s.mode ||
                     (s.mode === "testnet" && n.family === "bitcoin"),
                 )
@@ -438,9 +422,7 @@ function OnboardingShell() {
           <WalletCards size={26} />
           e-wallet.
         </Link>
-        <span className="mode-badge">
-          Your wallet, everywhere
-        </span>
+        <span className="mode-badge">Your wallet, everywhere</span>
       </header>
       <main id="main-content" tabIndex={-1}>
         <RouteFocus />
@@ -453,14 +435,11 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {__WALLET_MODE__ === "local" && <Route path="/accounts" element={<TeamDemo />} />}
-        {__WALLET_MODE__ === "local" && <Route path="/team-demo" element={<Navigate to="/accounts" replace />} />}
-        {__WALLET_MODE__ !== "mock" && (
-          <Route element={<OnboardingShell />}>
-            <Route path="/connect" element={<ConnectPage />} />
-          </Route>
+        {__WALLET_MODE__ === "local" && (
+          <Route path="/accounts" element={<AccountsPage />} />
         )}
         <Route element={<OnboardingShell />}>
+          <Route path="/connect" element={<ConnectPage />} />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/create" element={<Create />} />
           <Route path="/import" element={<Import />} />
@@ -469,9 +448,6 @@ export default function App() {
         <Route element={<Guard />}>
           <Route element={<Shell />}>
             <Route index element={<Home />} />
-            {__WALLET_MODE__ === "mock" && (
-              <Route path="/connect" element={<ConnectionApproval />} />
-            )}
             <Route path="/asset" element={<AssetDetails />} />
             <Route path="/tokens" element={<TokenManagement />} />
             <Route path="/send" element={<Send />} />
@@ -480,80 +456,19 @@ export default function App() {
             <Route path="/discover" element={<Discover />} />
             <Route path="/activity" element={<Activity />} />
             <Route path="/collectibles" element={<Collectibles />} />
-            <Route
-              path="/apps"
-              element={
-                __WALLET_MODE__ === "mock" ? <ConnectedApps /> : <RealApps />
-              }
-            />
-            <Route
-              path="/services"
-              element={
-                __WALLET_MODE__ === "mock" ? <Services /> : <RealServices />
-              }
-            />
-            <Route
-              path="/swap"
-              element={
-                __WALLET_MODE__ === "mock" ? (
-                  <Swap />
-                ) : (
-                  <RealService service="swap" />
-                )
-              }
-            />
-            <Route
-              path="/bridge"
-              element={
-                __WALLET_MODE__ === "mock" ? (
-                  <Bridge />
-                ) : (
-                  <RealService service="bridge" />
-                )
-              }
-            />
-            <Route
-              path="/faucet"
-              element={
-                __WALLET_MODE__ === "mock" ? (
-                  <Faucet />
-                ) : (
-                  <RealService service="faucet" />
-                )
-              }
-            />
-            <Route
-              path="/vault"
-              element={
-                __WALLET_MODE__ === "mock" ? (
-                  <SavingsVault />
-                ) : (
-                  <RealService service="vault" />
-                )
-              }
-            />
-            <Route
-              path="/shared"
-              element={
-                __WALLET_MODE__ === "mock" ? (
-                  <SharedWallet />
-                ) : (
-                  <RealService service="shared" />
-                )
-              }
-            />
-            <Route
-              path="/settings"
-              element={
-                __WALLET_MODE__ === "mock" ? <Settings /> : <RealSettings />
-              }
-            />
-            <Route
-              path="/evaluation"
-              element={
-                __WALLET_MODE__ === "mock" ? <Evaluation /> : <RealEvaluation />
-              }
-            />
+            <Route path="/apps" element={<RealApps />} />
+            <Route path="/services" element={<RealServices />} />
+            {(["swap", "bridge", "faucet", "vault", "shared"] as const).map(
+              (service) => (
+                <Route
+                  key={service}
+                  path={"/" + service}
+                  element={<RealService service={service} />}
+                />
+              ),
+            )}
+            <Route path="/settings" element={<RealSettings />} />
+            <Route path="/evaluation" element={<RealEvaluation />} />
             <Route
               path="*"
               element={

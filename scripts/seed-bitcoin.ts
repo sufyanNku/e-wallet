@@ -1,3 +1,4 @@
+import "./report-paths.ts";
 import { signReviewedBitcoin } from "../packages/wallet-core/src/bitcoin-signer";
 import { mkdir, readFile, writeFile, unlink, rename } from "node:fs/promises";
 import { z } from "zod";
@@ -48,7 +49,7 @@ const encode = (v: unknown) =>
 export async function seedBitcoin() {
   await bitcoinIdentity();
   await mkdir(".local/secrets", { recursive: true, mode: 0o700 });
-  await mkdir("artifacts/seed", { recursive: true });
+  await mkdir(".local/state/seed", { recursive: true });
   const wallets = (await bitcoinRpc("listwallets")) as string[],
     directories = (await bitcoinRpc("listwalletdir")) as {
       wallets: Array<{ name: string }>;
@@ -447,8 +448,8 @@ export async function seedBitcoin() {
   };
   await writeFile(
     isolated
-      ? "artifacts/phase-03/isolated-bitcoin-manifest.json"
-      : "artifacts/seed/bitcoin-manifest.json",
+      ? ".local/reports/chains/isolated-bitcoin-manifest.json"
+      : ".local/state/seed/bitcoin-manifest.json",
     encode(manifest),
   );
   console.log(

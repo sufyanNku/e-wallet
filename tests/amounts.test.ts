@@ -3,12 +3,11 @@ import fc from "fast-check";
 import {
   parseAmount,
   formatAmount,
-  demoValue,
+  portfolioValue,
   formatUsd,
   transactionIntentSchema,
   assetBalanceSchema,
 } from "@ewallet/domain";
-import { MockWalletGateway } from "../apps/wallet/src/mock-gateway";
 describe("exact quantities", () => {
   it("retains one wei and integers beyond Number.MAX_SAFE_INTEGER", () => {
     expect(parseAmount("0.000000000000000001", 18)).toBe(1n);
@@ -48,13 +47,35 @@ describe("exact quantities", () => {
     );
   });
   it("distinguishes unpriced and unavailable data", () => {
-    const g = new MockWalletGateway();
-    g.loadSample();
-    const b = g.getSnapshot().balances;
-    expect(demoValue(b).priceSource).toBe("demo");
-    expect(demoValue([{ ...b[0], microUsdRate: null }]).missingPriceCount).toBe(
-      1,
-    );
+    const b = [
+      assetBalanceSchema.parse({
+        asset: {
+          networkId: "eip155:31337",
+          standard: "native",
+          reference: "native",
+        },
+        name: "Ethereum",
+        symbol: "ETH",
+        decimals: 18,
+        raw: "1000000000000000000",
+        available: "1000000000000000000",
+        reserved: "0",
+        microUsdRate: "2000000000",
+        verified: true,
+        hidden: false,
+        stale: false,
+        observation: {
+          source: "node",
+          networkId: "eip155:31337",
+          observedHeight: "1",
+          observedAt: new Date().toISOString(),
+        },
+      }),
+    ];
+    expect(portfolioValue(b).priceSource).toBe("demo");
+    expect(
+      portfolioValue([{ ...b[0], microUsdRate: null }]).missingPriceCount,
+    ).toBe(1);
     expect(() =>
       assetBalanceSchema.parse({
         ...b[0],

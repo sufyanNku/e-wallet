@@ -1,3 +1,4 @@
+import "./scripts/report-paths.ts";
 import { defineConfig } from "@playwright/test";
 // Prevent Playwright's automatic AI error-page snapshot from recording a
 // recovery screen. This switch is verified in the pinned runner source.
@@ -7,7 +8,7 @@ export default defineConfig({
   workers: 1,
   reporter: [
     ["list"],
-    ["json", { outputFile: "artifacts/phase-02/browser-results.json" }],
+    ["json", { outputFile: ".local/reports/core/browser-results.json" }],
   ],
   use: {
     baseURL: "http://127.0.0.1:8787",

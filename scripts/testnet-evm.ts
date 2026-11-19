@@ -228,7 +228,7 @@ export async function executeTestnetEvm(
       nft = await deploy("DemoNFT721", [signer.address]),
       multi = await deploy("DemoNFT1155", [
         signer.address,
-        "https://example.invalid/educational/{id}.json",
+        "https://example.invalid/configured/{id}.json",
       ]);
     await transact("mint:erc20", {
       to: await token.getAddress(),
@@ -242,7 +242,7 @@ export async function executeTestnetEvm(
       data: nft.interface.encodeFunctionData("mint", [
         signer.address,
         1n,
-        "https://example.invalid/educational/campus.json",
+        "https://example.invalid/configured/access-pass.json",
       ]),
     });
     await transact("mint:erc1155", {

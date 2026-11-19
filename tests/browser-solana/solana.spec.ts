@@ -4,7 +4,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { parse } from "lossless-json";
 process.env.PLAYWRIGHT_NO_COPY_PROMPT = "1";
 const manifest = JSON.parse(
-    await readFile("artifacts/phase-03/isolated-solana-manifest.json", "utf8"),
+    await readFile(".local/reports/chains/isolated-solana-manifest.json", "utf8"),
   ),
   alice = manifest.identities.alice.address,
   bob = manifest.identities.bob.address,
@@ -138,7 +138,7 @@ test("browser Worker signs SOL, SPL with missing ATA, Token-2022 and a standard 
     .poll(() => tokens(dana, manifest.mints.token2022.address))
     .toBe(t22Before + 1n);
   await page.locator('a[href="/collectibles"]').first().click();
-  await page.getByRole("button", { name: /Campus Pass #1/ }).click();
+  await page.getByRole("button", { name: /Access Pass #1/ }).click();
   await page.getByLabel("Full recipient address").fill(bob);
   await page
     .getByRole("button", { name: "Review collectible transfer" })
@@ -218,7 +218,7 @@ test("browser Worker signs SOL, SPL with missing ATA, Token-2022 and a standard 
   }
   expect(receipts.length).toBeGreaterThanOrEqual(5);
   await writeFile(
-    "artifacts/phase-03/solana-browser-proof.json",
+    ".local/reports/chains/solana-browser-proof.json",
     JSON.stringify(
       {
         source: "node",

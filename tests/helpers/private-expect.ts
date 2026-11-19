@@ -20,6 +20,12 @@ function assertions(locator: Locator, negated = false) {
       check(() => locator.isVisible(), options),
     toBeDisabled: (options?: { timeout?: number }) =>
       check(() => locator.isDisabled(), options),
+    toHaveText: (text: string, options?: { timeout?: number }) =>
+      check(async () => (await locator.textContent())?.trim() === text, options),
+    toHaveValue: (text: string, options?: { timeout?: number }) =>
+      check(async () => (await locator.inputValue()) === text, options),
+    toHaveCount: (count: number, options?: { timeout?: number }) =>
+      check(async () => (await locator.count()) === count, options),
     toContainText: (text: string | RegExp, options?: { timeout?: number }) =>
       check(async () => {
         const value = (await locator.textContent()) ?? "";

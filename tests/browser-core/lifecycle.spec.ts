@@ -187,9 +187,9 @@ test("published-vector recovery, encrypted export/restore, password changes, sto
   } finally {
     await fresh.close();
   }
-  await mkdir("artifacts/phase-02", { recursive: true });
+  await mkdir(".local/reports/core", { recursive: true });
   await writeFile(
-    "artifacts/phase-02/browser-security.json",
+    ".local/reports/core/browser-security.json",
     JSON.stringify(
       {
         secretNetworkLeaks: 0,

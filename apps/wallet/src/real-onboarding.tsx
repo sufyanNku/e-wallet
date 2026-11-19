@@ -220,7 +220,7 @@ export function RealImport() {
             e.preventDefault();
             void action.run(async () => {
               if (kind === "phrase")
-                await gateway.importSample(
+                await gateway.restorePhrase(
                   mnemonic,
                   password,
                   confirm,

@@ -1,3 +1,4 @@
+import "./report-paths.ts";
 import Database from "better-sqlite3";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { randomUUID, createHash } from "node:crypto";
@@ -39,7 +40,7 @@ let address: string,
   descriptor: string | null = null;
 if (family === "evm") {
   const manifest = JSON.parse(
-    await readFile("artifacts/seed/evm-manifest.json", "utf8"),
+    await readFile(".local/state/seed/evm-manifest.json", "utf8"),
   );
   address = manifest.identities.alice.evm.address.toLowerCase();
   network = "eip155:31337";
@@ -48,8 +49,8 @@ if (family === "evm") {
   const manifest = JSON.parse(
     await readFile(
       process.env.EWALLET_ISOLATED_SOLANA_TEST === "1"
-        ? "artifacts/phase-03/isolated-solana-manifest.json"
-        : "artifacts/seed/solana-manifest.json",
+        ? ".local/reports/chains/isolated-solana-manifest.json"
+        : ".local/state/seed/solana-manifest.json",
       "utf8",
     ),
   );
@@ -59,8 +60,8 @@ if (family === "evm") {
   const manifest = JSON.parse(
       await readFile(
         process.env.EWALLET_ISOLATED_BITCOIN_TEST === "1"
-          ? "artifacts/phase-03/isolated-bitcoin-manifest.json"
-          : "artifacts/seed/bitcoin-manifest.json",
+          ? ".local/reports/chains/isolated-bitcoin-manifest.json"
+          : ".local/state/seed/bitcoin-manifest.json",
         "utf8",
       ),
     ),
@@ -156,9 +157,9 @@ if (
   links.n === 0
 )
   throw new Error("No real chain history was indexed");
-await mkdir("artifacts/phase-04", { recursive: true });
+await mkdir(".local/reports/integration", { recursive: true });
 await writeFile(
-  "artifacts/phase-04/index-" + family + ".json",
+  ".local/reports/integration/index-" + family + ".json",
   JSON.stringify(
     {
       source: "node",

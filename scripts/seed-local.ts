@@ -1,3 +1,4 @@
+import "./report-paths.ts";
 import { execFile, spawn } from "node:child_process";
 import { promisify } from "node:util";
 import { readFile, writeFile, mkdir, rename } from "node:fs/promises";
@@ -32,9 +33,9 @@ if (
   process.env.EWALLET_ISOLATED_BITCOIN_TEST
 )
   throw new Error("seed:local accepts only the main local namespace.");
-await mkdir("artifacts/phase-04", { recursive: true });
+await mkdir(".local/reports/integration", { recursive: true });
 await writeFile(
-  "artifacts/phase-04/preflight.json",
+  ".local/reports/integration/preflight.json",
   JSON.stringify(await preflight(), null, 2),
 );
 let healthy = true;
@@ -60,7 +61,7 @@ for (const id of ["eip155:31337", "eip155:31338"]) {
   try {
     const old = JSON.parse(
       await readFile(
-        "artifacts/deployments/" + id.replace(":", "-") + ".json",
+        ".local/state/deployments/" + id.replace(":", "-") + ".json",
         "utf8",
       ),
     );
@@ -148,13 +149,13 @@ for (const [id, args] of stages) {
   await rename(".local/seed-journal.json.tmp", ".local/seed-journal.json");
 }
 const evm = JSON.parse(
-    await readFile("artifacts/seed/evm-manifest.json", "utf8"),
+    await readFile(".local/state/seed/evm-manifest.json", "utf8"),
   ),
   sol = JSON.parse(
-    await readFile("artifacts/seed/solana-manifest.json", "utf8"),
+    await readFile(".local/state/seed/solana-manifest.json", "utf8"),
   ),
   btc = JSON.parse(
-    await readFile("artifacts/seed/bitcoin-manifest.json", "utf8"),
+    await readFile(".local/state/seed/bitcoin-manifest.json", "utf8"),
   ),
   scenarios: Array<{
     id: string;
@@ -270,7 +271,7 @@ const manifest = localManifestSchema.parse({
       [31337, 31338].map(async (id) =>
         JSON.parse(
           await readFile(
-            "artifacts/phase-03/final-balances-" + id + ".json",
+            ".local/reports/chains/final-balances-" + id + ".json",
             "utf8",
           ),
         ),
@@ -294,11 +295,11 @@ const manifest = localManifestSchema.parse({
   assertions: {
     state: "passed",
     evidence: [
-      "artifacts/phase-04/seed-assertions.json",
-      "artifacts/phase-03/evm-assertions.json",
-      "artifacts/phase-04/index-evm.json",
-      "artifacts/phase-04/index-solana.json",
-      "artifacts/phase-04/index-bitcoin.json",
+      ".local/reports/integration/seed-assertions.json",
+      ".local/reports/chains/evm-assertions.json",
+      ".local/reports/integration/index-evm.json",
+      ".local/reports/integration/index-solana.json",
+      ".local/reports/integration/index-bitcoin.json",
     ],
   },
 });
@@ -321,9 +322,9 @@ await writeFile(
     2,
   ),
 );
-await mkdir("artifacts/seed", { recursive: true });
+await mkdir(".local/state/seed", { recursive: true });
 await writeFile(
-  "artifacts/seed/local-manifest.json",
+  ".local/state/seed/local-manifest.json",
   JSON.stringify(manifest, null, 2) + "\n",
 );
 console.log(

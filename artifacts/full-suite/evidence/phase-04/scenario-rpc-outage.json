@@ -1,9 +1,0 @@
-{
-  "name": "rpc-outage",
-  "observedAt": "2026-11-19T10:52:00.395Z",
-  "networkId": "eip155:31337",
-  "isolatedBySnapshot": true,
-  "source": "controlled transport fault injection",
-  "unavailable": true,
-  "syntheticReceipt": false
-}

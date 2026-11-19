@@ -1,3 +1,4 @@
+import "./report-paths.ts";
 import {
   readFile,
   writeFile,
@@ -166,7 +167,7 @@ await copyFile(
   ".local/image-context/programs/build.json",
 );
 await writeFile(
-  "artifacts/phase-03/metadata-program.json",
+  ".local/reports/chains/metadata-program.json",
   JSON.stringify(
     { ...build, state: "passed", verifiedAt: new Date().toISOString() },
     null,

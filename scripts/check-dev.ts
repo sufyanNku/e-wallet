@@ -1,3 +1,4 @@
+import "./report-paths.ts";
 import { spawn } from "node:child_process";
 import { open, writeFile } from "node:fs/promises";
 const log = await open(".local/dev-smoke.log", "w"),
@@ -31,7 +32,7 @@ try {
           health.data.service !== "e-wallet" ||
           health.data.frontendMode !== "local"
         )
-          throw new Error("Unexpected evaluation host");
+          throw new Error("Unexpected application host");
         ready = true;
         break;
       }
@@ -52,7 +53,7 @@ try {
   )
     throw new Error("Approval security headers differ");
   await writeFile(
-    "artifacts/phase-04/dev-supervisor-proof.json",
+    ".local/reports/integration/dev-supervisor-proof.json",
     JSON.stringify(
       {
         observedAt: new Date().toISOString(),

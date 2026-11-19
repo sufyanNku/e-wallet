@@ -26,7 +26,7 @@ export const integer = z
   .regex(/^(0|[1-9]\d*)$/)
   .max(100);
 export const family = z.enum(["evm", "solana", "bitcoin"]);
-export const environment = z.enum(["mock", "local", "testnet"]);
+export const environment = z.enum(["local", "testnet"]);
 export const networkProfileSchema = z.object({
   id: z.string().max(80),
   name: z.string().max(80),
@@ -311,7 +311,7 @@ export function formatAmount(raw: string | bigint, decimals: number): string {
   const f = padded.slice(-decimals).replace(/0+$/, "");
   return padded.slice(0, -decimals) + (f ? "." + f : "");
 }
-export function demoValue(balances: AssetBalance[]): PortfolioValue {
+export function portfolioValue(balances: AssetBalance[]): PortfolioValue {
   let microUsd = 0n,
     missingPriceCount = 0;
   for (const b of balances.filter((b) => !b.hidden)) {
@@ -345,18 +345,6 @@ export const contactSchema = z.object({
   address: z.string().min(1).max(200),
 });
 export type Contact = z.infer<typeof contactSchema>;
-export type Scenario =
-  | "populated"
-  | "empty"
-  | "loading"
-  | "rpc-offline"
-  | "stale"
-  | "low-fee"
-  | "wrong-network"
-  | "rejected"
-  | "pending"
-  | "reverted"
-  | "expired-quote";
 export type VaultPosition = {
   id: string;
   amount: string;
@@ -371,7 +359,7 @@ export type SharedProposal = {
   executed: boolean;
 };
 export type WalletSnapshot = {
-  mode: "mock" | "local" | "testnet";
+  mode: "local" | "testnet";
   source: "fixture" | "node";
   initialized: boolean;
   locked: boolean;
@@ -385,7 +373,6 @@ export type WalletSnapshot = {
   contacts: Contact[];
   positions: VaultPosition[];
   proposals: SharedProposal[];
-  scenario: Scenario;
   updatedAt: string;
   hiddenAmounts: boolean;
   autoLockMinutes: 1 | 5 | 15;
@@ -419,7 +406,7 @@ export interface WalletGateway {
     password: string,
     confirmation: string,
   ): Promise<{ words: string[]; challenge: number[] }>;
-  importSample(
+  restorePhrase(
     words: string,
     password: string,
     confirmation: string,
@@ -470,6 +457,5 @@ export interface WalletGateway {
   loadCollectibleMetadata?(id: string): Promise<void>;
   connectBitcoinWatch?(): Promise<void>;
   newBitcoinReceive?(): Promise<void>;
-  setScenario(scenario: Scenario): void;
 }
 export { displayAccountName, displayAssetName, displayNetworkName } from "./presentation";

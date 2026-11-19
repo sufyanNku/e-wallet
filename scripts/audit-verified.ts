@@ -1,3 +1,4 @@
+import "./report-paths.ts";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { readFile, writeFile, realpath } from "node:fs/promises";
@@ -61,7 +62,7 @@ if (!audit.metadata || !audit.advisories)
     "Registry audit did not return a complete vulnerability report.",
   );
 await writeFile(
-  "artifacts/dependency-audit-raw.json",
+  ".local/reports/dependency-audit-raw.json",
   JSON.stringify(audit, null, 2),
 );
 const unresolved = Object.values(audit.advisories).filter((entry) => {
@@ -100,7 +101,7 @@ const result = {
   ],
 };
 await writeFile(
-  "artifacts/dependency-audit.json",
+  ".local/reports/dependency-audit.json",
   JSON.stringify(result, null, 2),
 );
 if (unresolved.length)

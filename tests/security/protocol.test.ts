@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from "vitest";
 import { WalletCore } from "../../packages/wallet-core/src/core";
 import { VaultStore } from "../../packages/wallet-core/src/storage";
 import { ApprovalLedger } from "../../packages/wallet-core/src/approvals";
-import { MockWalletGateway, bob } from "../../apps/wallet/src/mock-gateway";
+import { operationFixture } from "../helpers/operation";
 import { redact } from "../../packages/domain/src/redaction";
 import vectors from "../../fixtures/derivation-vectors.json";
 describe("bounded messages and single-use approval", () => {
@@ -40,31 +40,20 @@ describe("bounded messages and single-use approval", () => {
     await store.close();
   });
   it("binds approval to digest, network, account, expiry, immutable payload and session", async () => {
-    const g = new MockWalletGateway();
-    g.loadSample();
-    const s = g.getSnapshot();
-    const op = await g.prepare({
-      requestId: crypto.randomUUID(),
-      accountId: s.selectedAccountId,
-      networkId: s.networkId,
-      kind: "send",
-      recipient: bob,
-      asset: s.balances[0].asset,
-      amount: "1",
-    });
+    const op = operationFixture();
     let now = Date.now();
     const ledger = new ApprovalLedger(undefined, () => now);
     ledger.register(op);
     op.intent.amount = "999";
     expect(ledger.review(op.id).intent.amount).toBe("1");
     expect(() =>
-      ledger.approve(op.id, "0".repeat(64), s.selectedAccountId, s.networkId),
+      ledger.approve(op.id, "0".repeat(64), op.intent.accountId, op.intent.networkId),
     ).toThrow("changed");
     expect(() =>
-      ledger.approve(op.id, op.digest, s.selectedAccountId, "eip155:1"),
+      ledger.approve(op.id, op.digest, op.intent.accountId, "eip155:1"),
     ).toThrow();
     expect(() => ledger.consume(op.id)).toThrow("Explicit");
-    ledger.approve(op.id, op.digest, s.selectedAccountId, s.networkId);
+    ledger.approve(op.id, op.digest, op.intent.accountId, op.intent.networkId);
     ledger.consume(op.id);
     expect(() => ledger.consume(op.id)).toThrow();
     ledger.clear();
@@ -73,7 +62,7 @@ describe("bounded messages and single-use approval", () => {
     ledger.register(op);
     now = op.expiresAt + 1;
     expect(() =>
-      ledger.approve(op.id, op.digest, s.selectedAccountId, s.networkId),
+      ledger.approve(op.id, op.digest, op.intent.accountId, op.intent.networkId),
     ).toThrow("expired");
   });
   it("sends no secrets to console or fetch during core import/reveal/change/export", async () => {

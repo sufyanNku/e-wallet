@@ -1,1 +1,1 @@
-declare const __WALLET_MODE__: "mock" | "local" | "testnet";
+declare const __WALLET_MODE__: "local" | "testnet";

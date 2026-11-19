@@ -178,45 +178,27 @@ export function Send() {
               disabled={action.busy}
               onClick={() =>
                 void action.run(async () => {
-                  if (s.mode !== "mock") {
-                    validateRecipient(recipient, s.networkId);
-                    if (!gateway.estimateMaximum)
-                      throw new Error("Maximum quoting is unavailable.");
-                    const maximum = await gateway.estimateMaximum({
-                      requestId: crypto.randomUUID(),
-                      accountId: s.selectedAccountId,
-                      networkId: s.networkId,
-                      kind: "send",
-                      recipient,
-                      asset: b.asset,
-                      amount: "1",
-                    });
-                    setAmount(formatAmount(maximum, b.decimals));
-                    return;
-                  }
-                  const n = networkById(s.networkId);
-                  const reserve =
-                    b.asset.standard === "native"
-                      ? (10n ** BigInt(Math.max(0, n.feeAsset.decimals - 4)) *
-                          12n) /
-                        10n
-                      : 0n;
-                  const max = BigInt(b.available) - reserve;
-                  if (max <= 0n)
-                    throw new Error(
-                      "No spendable balance after the network fee reserve.",
-                    );
-                  setAmount(formatAmount(max, b.decimals));
+                  if (!gateway.estimateMaximum)
+                    throw new Error("Maximum quoting is unavailable.");
+                  const maximum = await gateway.estimateMaximum({
+                    requestId: crypto.randomUUID(),
+                    accountId: s.selectedAccountId,
+                    networkId: s.networkId,
+                    kind: "send",
+                    recipient,
+                    asset: b.asset,
+                    amount: "1",
+                  });
+                  setAmount(formatAmount(maximum, b.decimals));
+                  return;
                 })
               }
             >
-              {s.mode === "mock"
-                ? "Use max (with network fee reserve)"
-                : "Use max with current fee reserve"}
+              Use max with current fee reserve
             </Button>
             <Notice>
-              Network: {displayNetworkName(networkById(s.networkId))}. A complete fee preview
-              appears before approval.
+              Network: {displayNetworkName(networkById(s.networkId))}. A
+              complete fee preview appears before approval.
             </Notice>
             {action.error && <Notice tone="error">{action.error}</Notice>}
             <Button type="submit" disabled={action.busy}>
@@ -309,7 +291,7 @@ export function Receive() {
             onChange={(e) => {
               const type = e.target.value as "p2wpkh" | "p2tr";
               setType(type);
-              if (s.mode !== "mock") {
+              {
                 const current = s.accounts.find(
                     (a) => a.id === s.selectedAccountId,
                   ),
@@ -367,7 +349,7 @@ export function Receive() {
             </div>
           </>
         )}
-        {s.mode !== "mock" && s.networkId === "bitcoin:regtest" && (
+        {s.networkId === "bitcoin:regtest" && (
           <Button
             variant="secondary"
             disabled={action.busy}
@@ -471,7 +453,9 @@ export function Contacts() {
               error={errors.address?.message}
               spellCheck={false}
             />
-            <p className="muted">Network: {displayNetworkName(networkById(s.networkId))}</p>
+            <p className="muted">
+              Network: {displayNetworkName(networkById(s.networkId))}
+            </p>
             {action.error && <Notice tone="error">{action.error}</Notice>}
             <Button type="submit">Save contact</Button>
             {id && (

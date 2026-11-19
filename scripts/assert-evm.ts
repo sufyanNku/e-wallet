@@ -1,3 +1,4 @@
+import "./report-paths.ts";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import {
   JsonRpcProvider,
@@ -11,7 +12,7 @@ import { deploymentSchema } from "@ewallet/domain/deployments";
 import { abis } from "@ewallet/config/abis";
 import { currentEpoch } from "../services/backend/src/environment";
 const seed = JSON.parse(
-  await readFile("artifacts/seed/evm-manifest.json", "utf8"),
+  await readFile(".local/state/seed/evm-manifest.json", "utf8"),
 );
 const checks: Array<{
   networkId: string;
@@ -24,7 +25,7 @@ for (const chain of [31337, 31338]) {
   const id = `eip155:${chain}`,
     manifest = deploymentSchema.parse(
       JSON.parse(
-        await readFile(`artifacts/deployments/eip155-${chain}.json`, "utf8"),
+        await readFile(`.local/state/deployments/eip155-${chain}.json`, "utf8"),
       ),
     ),
     provider = new JsonRpcProvider(
@@ -229,9 +230,9 @@ for (const chain of [31337, 31338]) {
         actual: finalBalances[name].native,
       });
   }
-  await mkdir("artifacts/phase-03", { recursive: true });
+  await mkdir(".local/reports/chains", { recursive: true });
   await writeFile(
-    `artifacts/phase-03/final-balances-${chain}.json`,
+    `.local/reports/chains/final-balances-${chain}.json`,
     JSON.stringify(
       {
         source: "node",
@@ -247,7 +248,7 @@ for (const chain of [31337, 31338]) {
   provider.destroy();
 }
 await writeFile(
-  "artifacts/phase-03/evm-assertions.json",
+  ".local/reports/chains/evm-assertions.json",
   JSON.stringify({ source: "node", checks }, null, 2) + "\n",
 );
 console.log(

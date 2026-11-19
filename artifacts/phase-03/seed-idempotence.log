@@ -1,5 +1,0 @@
-eip155:31337: deployments and 69 real transaction stages reconciled.
-eip155:31338: deployments and 5 real transaction stages reconciled.
-Solana: 34 real stages reconciled; metadata and supply assertions passed.
-Bitcoin: public descriptors, six funding transactions, script-type allocations and watch-only policy verified.
-All three chain families: seed rerun preserved balances, holdings and spendable outputs.

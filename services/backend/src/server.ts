@@ -1,5 +1,5 @@
 import { registerMarkets } from "./markets";
-import { registerTeamDemo, teamDemoEnabled } from "./team-demo";
+import { registerAccounts, accountsEnabled } from "./accounts";
 import { runtimeConfig } from "./runtime-config";
 import { observeBridge } from "./bridge-observer";
 import { localManifestSchema } from "../../../packages/domain/src/local-manifest";
@@ -108,7 +108,12 @@ export async function buildServer(options: { databasePath?: string } = {}) {
     runtime,
   );
   registerMarkets(app);
-  registerTeamDemo(app, sessions.db, sessions.session, teamDemoEnabled() && frontendMode === "local");
+  registerAccounts(
+    app,
+    sessions.db,
+    sessions.session,
+    accountsEnabled() && frontendMode === "local",
+  );
   await registerBitcoinWatch(app, sessions.db, sessions.session);
   const indexer = await registerWatchApi(app, sessions.db, sessions.session);
   registerReadApi(app, sessions.db, sessions.session, indexer);
@@ -116,20 +121,20 @@ export async function buildServer(options: { databasePath?: string } = {}) {
   await registerRpc(app);
   await registerEnvironment(app);
   for (const path of ["manifest", "testnets"])
-    app.get("/api/v1/demo/" + path, async (req, reply) => {
+    app.get("/api/v1/environment/" + path, async (req, reply) => {
       if (frontendMode !== "local" || process.env.EWALLET_MODE === "testnet")
         return reply.code(404).send({
           error: {
-            code: "DEMO_DISABLED",
-            message: "Local evaluation data is disabled.",
+            code: "LOCAL_ONLY",
+            message: "Local environment details are unavailable.",
             correlationId: req.id,
           },
         });
       try {
         const file =
             path === "manifest"
-              ? "artifacts/seed/local-manifest.json"
-              : "artifacts/seed/testnet-manifest.json",
+              ? ".local/state/seed/local-manifest.json"
+              : ".local/state/seed/testnet-manifest.json",
           raw = JSON.parse(readFileSync(file, "utf8")),
           data = path === "manifest" ? localManifestSchema.parse(raw) : raw;
         reply.header("Cache-Control", "no-store");
@@ -138,7 +143,7 @@ export async function buildServer(options: { databasePath?: string } = {}) {
         return reply.code(503).send({
           error: {
             code: "NEEDS_SEED",
-            message: "Run the documented local seed/evidence command.",
+            message: "Network setup is incomplete. Contact your administrator.",
             correlationId: req.id,
           },
         });
@@ -149,7 +154,7 @@ export async function buildServer(options: { databasePath?: string } = {}) {
       return reply.code(404).send({
         error: {
           code: "LOCAL_ONLY",
-          message: "Bridge simulation is local only.",
+          message: "Bridge service is available on the local network.",
           correlationId: req.id,
         },
       });

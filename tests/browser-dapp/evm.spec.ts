@@ -10,7 +10,7 @@ import {
 process.env.PLAYWRIGHT_NO_COPY_PROMPT = "1";
 const password = "Public local test-only password";
 const manifest = JSON.parse(
-  await readFile("artifacts/seed/evm-manifest.json", "utf8"),
+  await readFile(".local/state/seed/evm-manifest.json", "utf8"),
 );
 async function unlock(popup: Page) {
   await popup.getByLabel("Wallet password", { exact: true }).fill(password);
@@ -173,7 +173,7 @@ test("built cross-origin popup connects, signs messages, sends a payment and rev
     await page.getByRole("button", { name: "Disconnect", exact: true }).click();
     await expect(dapp.getByTestId("accounts")).toContainText("None shared");
     await writeFile(
-      "artifacts/phase-04/dapp-evm-proof.json",
+      ".local/reports/integration/dapp-evm-proof.json",
       JSON.stringify(
         {
           observedAt: new Date().toISOString(),

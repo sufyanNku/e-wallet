@@ -38,11 +38,14 @@ const text = z.string().max(3000),
       .optional(),
   });
 const fixtures = new Map([
-  ["/fixtures/campus.json", "fixtures/media/campus.json"],
-  ["/fixtures/study.json", "fixtures/media/study.json"],
+  ["/fixtures/access-pass.json", "fixtures/media/access-pass.json"],
+  ["/fixtures/membership.json", "fixtures/media/membership.json"],
+  ["/fixtures/access-pass.png", "fixtures/media/access-pass.png"],
+  ["/fixtures/campus.json", "fixtures/media/access-pass.json"],
+  ["/fixtures/study.json", "fixtures/media/membership.json"],
   ["/fixtures/broken.json", "fixtures/media/broken.json"],
   ["/fixtures/malformed.json", "fixtures/media/malformed.json"],
-  ["/fixtures/campus.png", "fixtures/media/campus.png"],
+  ["/fixtures/campus.png", "fixtures/media/access-pass.png"],
 ]);
 export function parseAssetKey(value: string): AssetId {
   const [networkId, standard, reference, tokenId, ...rest] = value.split("/");
@@ -73,7 +76,7 @@ function localFixture(uri: string) {
   )
     return null;
   const path = /^\/fixtures\/[0-9a-f]{64}\.json$/.test(url.pathname)
-    ? "fixtures/media/study.json"
+    ? "fixtures/media/membership.json"
     : fixtures.get(url.pathname);
   return path ?? null;
 }
@@ -175,8 +178,8 @@ async function metadataUri(asset: AssetId) {
         JSON.parse(
           await readFile(
             process.env.EWALLET_ISOLATED_SOLANA_TEST === "1"
-              ? "artifacts/phase-03/isolated-solana-manifest.json"
-              : "artifacts/seed/solana-manifest.json",
+              ? ".local/reports/chains/isolated-solana-manifest.json"
+              : ".local/state/seed/solana-manifest.json",
             "utf8",
           ),
         ),

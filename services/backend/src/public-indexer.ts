@@ -95,7 +95,7 @@ export class PublicIndexer {
     let text: string;
     try {
       text = await readFile(
-        `artifacts/deployments/${networkId.replace(":", "-")}.json`,
+        `.local/state/deployments/${networkId.replace(":", "-")}.json`,
         "utf8",
       );
     } catch (error) {

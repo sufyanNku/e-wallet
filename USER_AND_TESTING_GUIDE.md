@@ -16,7 +16,7 @@ The project has two separate areas:
 - **Crypto wallet:** Uses a recovery phrase and a wallet password. It interacts with Ethereum-compatible, Solana and Bitcoin development networks. Signing happens on the user's device.
 - **Accounts:** Uses a username and password. Alice and Bob can transfer credits. Admin and Auditor accounts demonstrate role-based permissions. These credits are stored in SQLite and are separate from crypto balances.
 
-The current project is for testing and presentations. Real-fund launch is deferred. The interfaces use ordinary wallet wording, but changing the wording does not enable real money. Use only the project's testing identities and assets.
+The current project is configured for local chains and public testnets. Real-fund launch is deferred. The interfaces use ordinary wallet wording, but changing the wording does not enable real money. Use only the project's testing identities and assets.
 
 ### Useful words to know
 
@@ -31,7 +31,7 @@ The current project is for testing and presentations. Real-fund launch is deferr
 
 ## 2. Start the application
 
-### Option A: easiest two-person presentation
+### Option A: Accounts and credit transfers
 
 Use this option for username login, credit transfers and roles. Blockchain nodes are not required.
 
@@ -42,15 +42,15 @@ Use this option for username login, credit transfers and roles. Blockchain nodes
    pnpm install --frozen-lockfile
    pnpm node --version
    pnpm build:wallet
-   pnpm demo:setup
-   pnpm demo:dev
+   pnpm accounts:setup
+   pnpm dev:accounts
    ```
 
 3. `pnpm node --version` should show **v24.22.3**. The workspace selects this runtime even if your terminal normally uses Node 22.
 4. Open **http://127.0.0.1:5173/accounts**.
-5. Read the generated usernames and passwords from `.local/local/team-demo-credentials.json`.
+5. Read the generated usernames and passwords from `.local/local/accounts-credentials.json`.
 6. Sign in as Alice in a normal browser window and Bob in an incognito window.
-7. Follow features 26–28 below. For a presentation script, see [RBAC_DEMO_GUIDE.md](RBAC_DEMO_GUIDE.md).
+7. Follow features 26–28 below. For detailed login and role checks, see [ACCOUNTS_GUIDE.md](ACCOUNTS_GUIDE.md).
 
 Stop an existing development server with **Ctrl+C** before starting another one. Re-running setup preserves existing account balances, passwords and history.
 
@@ -63,13 +63,13 @@ pnpm install --frozen-lockfile
 pnpm preflight
 pnpm infra:up
 pnpm seed:local
-pnpm demo:setup
-EWALLET_TEAM_DEMO=1 pnpm dev
+pnpm accounts:setup
+EWALLET_ACCOUNTS=1 pnpm dev
 ```
 
 This starts the web wallet, Accounts API, reference connection application and local bridge relayer. Docker hosts the local chain nodes. Allow the seed command to finish before opening the wallet.
 
-On Windows PowerShell, replace the last command with `$env:EWALLET_TEAM_DEMO="1"; pnpm dev`.
+On Windows PowerShell, replace the last command with `$env:EWALLET_ACCOUNTS="1"; pnpm dev`.
 
 Open these addresses:
 
@@ -300,7 +300,7 @@ First prepare the dependencies and local dataset using Option B. Then **stop dev
 pnpm test:all:local
 ```
 
-The runner performs the checks sequentially, writes a log for every check, and stops at a failure. Read **`artifacts/full-suite/report.json`** for the current result and the relevant log under **`artifacts/full-suite/logs/`**. Fix the reported problem and run again. It does not reset your main ledgers or send public-network funds.
+The runner performs the checks sequentially, writes a log for every check, and stops at a failure. Read **`.local/reports/full-suite/report.json`** for the current result and the relevant log under **`.local/reports/full-suite/logs/`**. Fix the reported problem and run again. It does not reset your main ledgers or send public-network funds.
 
 For a fix confined to the failed check or its environment, `pnpm test:all:local --resume` can continue in the same Git checkout. It retains earlier passing results only when the application/dependency fingerprint matches, and archives the failed attempt. If application code or any earlier passed test changed, run the full command without `--resume`.
 
@@ -319,13 +319,13 @@ Chrome defaults to `/opt/google/chrome/chrome`. Set `PLAYWRIGHT_CHROMIUM_EXECUTA
 ### Run one area when fixing a problem
 
 - **Unit/security:** `pnpm test:unit` — amounts, derivation, encrypted vaults, sessions, CSRF, permissions, requests, metadata, journals and adapters.
-- **Wallet UI:** `pnpm build:web`, then `pnpm test:ui` — navigation, payment review/rejection, QR parsing, token import, contacts/accounts management, presentation labels, accessibility and responsive layouts. This is the isolated preview build, not on-chain execution.
+- **Wallet UI:** `pnpm build:web`, then `pnpm test:ui` — navigation, payment review/rejection, QR parsing, token import, contacts/accounts management, product wording, accessibility and responsive layouts. These tests use the real built wallet and node-backed balances.
 - **Core browser:** `pnpm build:wallet`, then `pnpm test:browser-core` — actual signing Worker, onboarding, backup restore, password changes and cross-window locking.
 - **EVM browser:** `pnpm exec playwright test --config playwright.chains.config.ts` — actual local EVM payments, collectibles, services, shared ownership, maximum fees, bridge and discovery.
 - **EVM popup:** `pnpm exec playwright test --config playwright.dapp.config.ts` — built-wallet connections and explicit approvals.
 - **Solana browser/popup:** `pnpm test:browser-solana` — creates its own temporary validator and checks SOL, SPL, Token-2022, collectibles and connections.
 - **Bitcoin browser/popup:** `pnpm test:browser-bitcoin` — creates its own temporary regtest node and checks SegWit/Taproot payments, change, confirmations and connections.
-- **Accounts:** `pnpm test:demo` — two users, credits, roles, suspension, reports and responsive/accessibility checks in a disposable database.
+- **Accounts:** `pnpm test:accounts` — two users, credits, roles, suspension, reports and responsive/accessibility checks in a disposable database.
 - **Contracts:** `pnpm contracts:test` — contract access control, cooldowns, lock times, shared approvals and bridge replay protection.
 - **Backend/indexing:** `pnpm test:integration` — public API isolation, indexed activity, state reconciliation and reorg recovery.
 - **Native core:** `pnpm mobile:test:chains` — native signing logic against real local nodes. These are Node-hosted core tests, not native UI/device tests.
@@ -333,7 +333,7 @@ Chrome defaults to `/opt/google/chrome/chrome`. Set `PLAYWRIGHT_CHROMIUM_EXECUTA
 - **Dependency audit:** `pnpm audit:verified` — retains the raw advisory report and verifies the documented security backport before applying its mitigation.
 - **Dataset:** `pnpm seed:assert` — compares prepared balances/holdings with actual nodes without sending payments.
 
-Build commands share `apps/wallet/dist`. Run the wallet UI tests before building the real wallet; rebuild with `pnpm build:wallet` afterwards. Solana/Bitcoin browser commands manage their own temporary nodes. They must run sequentially, with port 8787 available.
+Build commands share `apps/wallet/dist`. Build the local wallet before running browser tests; after testing a testnet build, restore it with `pnpm build:wallet`. Solana/Bitcoin browser commands manage their own temporary nodes. They must run sequentially, with port 8787 available.
 
 ### Failure and recovery scenarios
 
@@ -384,14 +384,14 @@ Record phone model, OS version, app version, result and any error. Native biomet
 - **Sending a token fails despite a token balance:** The sender may lack the native asset required for the network fee.
 - **A second login replaces the first:** Use independent browser profiles rather than two tabs sharing cookies.
 - **You forgot the crypto-wallet password:** Restore from your recovery phrase in a fresh browser profile/device and choose a new password. There is no email reset for a self-custody wallet. An encrypted backup file still needs its own password.
-- **Accounts are unavailable:** Stop the existing server and start `pnpm demo:dev`, or use `EWALLET_TEAM_DEMO=1 pnpm dev` for the complete environment.
+- **Accounts are unavailable:** Stop the existing server and start `pnpm dev:accounts`, or use `EWALLET_ACCOUNTS=1 pnpm dev` for the complete environment.
 - **The app cannot reach the backend:** Android needs ADB port reversal for the documented USB setup. A physical iPhone needs a reachable HTTPS API.
 - **A test says a port is occupied:** Stop the existing development/Metro/test process. Do not reset Docker volumes to solve a port conflict.
-- **After tests, screens look different:** Run `pnpm build:wallet` and restart the intended development command. Preview and real builds share an output directory.
+- **After tests, screens look different:** Run `pnpm build:wallet` and restart the intended development command. Local and testnet builds share an output directory.
 
 ## 8. What a successful test run means
 
-The recorded run on **November 19, 2026** passed **all 40 automated check groups**, including 76 unit/security tests, 9 contract tests, 21 distinct browser scenarios, three native chain families, both mobile bundles and the Android debug build. A native-test confirmation timing issue was fixed, and bridge-test cleanup was checked again separately. Read the [full report](artifacts/full-suite/report.json) for logs and exact boundaries; the initial failed test attempt is retained there for transparency.
+Read the current [full-suite report](.local/reports/full-suite/report.json) for the exact check counts, results and limitations. The report is generated by `pnpm test:all:local`; it is not shipped as source evidence.
 
 A passing report means the listed checks passed on that revision and environment. It does not prove that every possible bug is absent. Keep a failing log, steps to reproduce and the affected platform when reporting a problem.
 
@@ -400,7 +400,7 @@ The full-suite report distinguishes automated passes, external-service limitatio
 After testing, restart the project:
 
 ```sh
-EWALLET_TEAM_DEMO=1 pnpm dev
+EWALLET_ACCOUNTS=1 pnpm dev
 ```
 
-For a short classroom presentation, follow features **26 → 27 → 28**. For the crypto wallet, follow **02 → 10 → 12 → 14 → 15**.
+For a short account walkthrough, follow features **26 → 27 → 28**. For the crypto wallet, follow **02 → 10 → 12 → 14 → 15**.

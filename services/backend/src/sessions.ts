@@ -79,16 +79,14 @@ export async function registerSessions(
         req.headers["x-wallet-client"] !== "native-v1" ||
         !req.headers["content-type"]?.startsWith("application/json")
       )
-        return reply
-          .code(403)
-          .send({
-            error: {
-              code: "ORIGIN",
-              message:
-                "Native session requests must come from the native client.",
-              correlationId: req.id,
-            },
-          });
+        return reply.code(403).send({
+          error: {
+            code: "ORIGIN",
+            message:
+              "Native session requests must come from the native client.",
+            correlationId: req.id,
+          },
+        });
       return;
     }
     if (
@@ -133,6 +131,8 @@ export async function registerSessions(
           max: 10,
           timeWindow: "1 minute",
           groupId: "session-create",
+          // Reusing an authenticated public session allocates no new record.
+          allowList: (request: FastifyRequest) => Boolean(session(request)),
         },
       },
     },

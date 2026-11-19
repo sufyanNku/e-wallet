@@ -5,18 +5,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import App from "./App";
 import { WalletProvider } from "./context";
 import type { WalletGateway } from "@ewallet/domain";
+import { RealWalletGateway } from "./real-gateway";
 import "@fontsource-variable/manrope";
 import "./styles.css";
 import "./product.css";
 async function start() {
-  let gateway: WalletGateway;
-  if (__WALLET_MODE__ === "mock") {
-    const { MockWalletGateway } = await import("./mock-gateway");
-    gateway = new MockWalletGateway();
-  } else {
-    const { RealWalletGateway } = await import("./real-gateway");
-    gateway = await RealWalletGateway.open();
-  }
+  const gateway: WalletGateway = await RealWalletGateway.open();
   createRoot(document.getElementById("root")!).render(
     <StrictMode>
       <QueryClientProvider

@@ -1,3 +1,4 @@
+import "./report-paths.ts";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { z } from "zod";
 const config = z
@@ -33,9 +34,9 @@ const result = {
   activation:
     "Mainnet remains disabled in the current adapters and vaults. Configuration booleans record release review and never bypass implementation.",
 };
-await mkdir("artifacts/product", { recursive: true });
+await mkdir(".local/reports/product", { recursive: true });
 await writeFile(
-  "artifacts/product/release-readiness.json",
+  ".local/reports/product/release-readiness.json",
   JSON.stringify(result, null, 2) + "\n",
 );
 console.log(

@@ -12,7 +12,7 @@ import {
 import { networkById } from "@ewallet/config";
 import { useWallet, useAction } from "./context";
 import type { RealWalletGateway } from "./real-gateway";
-import { download } from "./settings";
+import { download } from "./download";
 export function RealSettings() {
   const { gateway, snapshot: s, notify } = useWallet(),
     action = useAction();

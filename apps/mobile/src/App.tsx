@@ -33,7 +33,7 @@ import {
   assetKey,
   formatAmount,
   formatUsd,
-  demoValue,
+  portfolioValue,
   parseAmount,
   type PreparedOperation,
   type TransactionIntent,
@@ -587,7 +587,7 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
                   ? "••••••"
                   : s.status === "unavailable"
                     ? "Unavailable"
-                    : formatUsd(demoValue(s.balances).microUsd)}
+                    : formatUsd(portfolioValue(s.balances).microUsd)}
               </Text>
               <Text style={styles.balanceCaption}>
                 {s.status === "loading"
@@ -681,7 +681,7 @@ function WalletApp({ wallet }: { wallet: NativeWallet }) {
                           ? "Unpriced"
                           : hidden
                             ? "••••"
-                            : formatUsd(demoValue([b]).microUsd)}
+                            : formatUsd(portfolioValue([b]).microUsd)}
                       </Text>
                     </View>
                   </Pressable>

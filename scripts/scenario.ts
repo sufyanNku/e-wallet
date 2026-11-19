@@ -1,3 +1,4 @@
+import "./report-paths.ts";
 import { observeBridge } from "../services/backend/src/bridge-observer";
 import { JsonRpcProvider, Wallet, Interface, Transaction } from "ethers";
 import { readFile, writeFile, open, unlink } from "node:fs/promises";
@@ -44,7 +45,7 @@ if (name === "reorg-evm") {
         await readFile(".local/secrets/alice.json", "utf8"),
       ),
       manifest = JSON.parse(
-        await readFile("artifacts/seed/evm-manifest.json", "utf8"),
+        await readFile(".local/state/seed/evm-manifest.json", "utf8"),
       ),
       wallet = Wallet.fromPhrase(fixture.mnemonic, provider),
       nonce = await provider.getTransactionCount(wallet.address, "pending");
@@ -196,7 +197,7 @@ if (name === "reorg-evm") {
         "Tokens remain locked until relayer resumes or the isolated snapshot is restored; no refund was advertised.";
     }
     await writeFile(
-      "artifacts/phase-04/scenario-" + name + ".json",
+      ".local/reports/integration/scenario-" + name + ".json",
       JSON.stringify(proof, null, 2),
     );
     console.log(name + ": bounded scenario verified; node restored.");

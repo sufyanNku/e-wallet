@@ -1,8 +1,0 @@
-{
-  "observedAt": "2026-11-19T11:09:36.653116+00:00",
-  "host": "Linux",
-  "adbDevices": "List of devices attached",
-  "xcodebuildAvailable": false,
-  "physicalAcceptancePerformed": false,
-  "note": "No connected Android device and no macOS/Xcode toolchain. Build and Node-hosted core checks are recorded separately."
-}

@@ -63,8 +63,8 @@ export async function indexSolana(
       JSON.parse(
         await readFile(
           process.env.EWALLET_ISOLATED_SOLANA_TEST === "1"
-            ? "artifacts/phase-03/isolated-solana-manifest.json"
-            : "artifacts/seed/solana-manifest.json",
+            ? ".local/reports/chains/isolated-solana-manifest.json"
+            : ".local/state/seed/solana-manifest.json",
           "utf8",
         ),
       ),

@@ -1,5 +1,5 @@
 import { displayNetworkName, displayAssetName } from "@ewallet/domain";
-import { Link, useNavigate, useSearchParams } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import { useState } from "react";
 import {
   ArrowUpRight,
@@ -20,7 +20,7 @@ import {
   assetKey,
   formatAmount,
   formatUsd,
-  demoValue,
+  portfolioValue,
   parseAmount,
   type AssetBalance,
 } from "@ewallet/domain";
@@ -79,7 +79,7 @@ function BalanceRows({ balances }: { balances: AssetBalance[] }) {
                 ? "Unpriced"
                 : s.hiddenAmounts
                   ? "••••"
-                  : formatUsd(demoValue([b]).microUsd)}
+                  : formatUsd(portfolioValue([b]).microUsd)}
             </small>
           </div>
           <ChevronRight size={17} />
@@ -94,7 +94,7 @@ export function Home() {
   const { snapshot: s, gateway, notify } = useWallet(),
     action = useAction();
   const n = networkById(s.networkId),
-    value = demoValue(s.balances);
+    value = portfolioValue(s.balances);
   const assets = s.balances.filter(
     (b) =>
       !b.hidden &&
@@ -112,11 +112,7 @@ export function Home() {
             onClick={() =>
               void action.run(async () => {
                 await gateway.refresh();
-                notify(
-                  s.mode === "mock"
-                    ? "Balances refreshed."
-                    : "Node balances refreshed.",
-                );
+                notify("Node balances refreshed.");
               })
             }
           >
@@ -125,45 +121,37 @@ export function Home() {
           </Button>
         }
       />
-      {s.mode !== "mock" &&
-        n.family === "bitcoin" &&
-        s.bitcoinWatchConsentRequired && (
-          <Panel>
-            <h2>Enable watch-only discovery</h2>
-            <p>
-              The configured local backend receives this account’s public ranged
-              descriptors. They reveal current and future receive/change
-              addresses and their activity. The backend uses a watch-only
-              Bitcoin Core wallet; private keys stay in this browser’s Worker.
-            </p>
-            <label className="checkbox-label">
-              <input
-                type="checkbox"
-                checked={watchAcknowledged}
-                onChange={(e) => setWatchAcknowledged(e.target.checked)}
-              />
-              I understand that public descriptors reveal this account’s address
-              activity.
-            </label>
-            <Button
-              disabled={!watchAcknowledged || action.busy}
-              onClick={() =>
-                void action.run(async () => {
-                  await gateway.connectBitcoinWatch?.();
-                  setWatchAcknowledged(false);
-                })
-              }
-            >
-              Enable public descriptor watch
-            </Button>
-            {action.error && <Notice tone="error">{action.error}</Notice>}
-          </Panel>
-        )}
-      {s.scenario === "rpc-offline" && (
-        <Notice tone="error">
-          Network disconnected. Last-known balances are shown; sending is
-          unavailable.
-        </Notice>
+      {n.family === "bitcoin" && s.bitcoinWatchConsentRequired && (
+        <Panel>
+          <h2>Enable watch-only discovery</h2>
+          <p>
+            The configured local backend receives this account’s public ranged
+            descriptors. They reveal current and future receive/change addresses
+            and their activity. The backend uses a watch-only Bitcoin Core
+            wallet; private keys stay in this browser’s Worker.
+          </p>
+          <label className="checkbox-label">
+            <input
+              type="checkbox"
+              checked={watchAcknowledged}
+              onChange={(e) => setWatchAcknowledged(e.target.checked)}
+            />
+            I understand that public descriptors reveal this account’s address
+            activity.
+          </label>
+          <Button
+            disabled={!watchAcknowledged || action.busy}
+            onClick={() =>
+              void action.run(async () => {
+                await gateway.connectBitcoinWatch?.();
+                setWatchAcknowledged(false);
+              })
+            }
+          >
+            Enable public descriptor watch
+          </Button>
+          {action.error && <Notice tone="error">{action.error}</Notice>}
+        </Panel>
       )}
       {s.balances.some((b) => b.stale) && (
         <Notice tone="warning">
@@ -286,7 +274,7 @@ export function Home() {
             autoComplete="off"
           />
         </div>
-        {s.scenario === "loading" ? (
+        {s.balanceStatus === "loading" ? (
           <div
             className="asset-skeleton"
             role="status"
@@ -312,9 +300,7 @@ export function Home() {
               ? "Try a different token name or symbol."
               : s.balanceStatus === "ready"
                 ? "Receive your first assets to see them here."
-                : s.mode === "mock"
-                  ? "Receive assets or open the faucet to get started."
-                  : "Balances are not available yet. Refresh to reconnect to the network."}
+                : "Balances are not available yet. Refresh to reconnect to the network."}
             <br />
             <Link className="text-link" to="/faucet">
               Open faucet
@@ -322,11 +308,9 @@ export function Home() {
           </Empty>
         )}
         <p className="footnote">
-          {s.source === "fixture"
-            ? "Wallet balances"
-            : s.balanceStatus === "unavailable"
-              ? "Network unavailable"
-              : "On-chain balances"}{" "}
+          {s.balanceStatus === "unavailable"
+            ? "Network unavailable"
+            : "On-chain balances"}{" "}
           · Updated{" "}
           {s.balanceStatus === "unavailable"
             ? "No observation yet"
@@ -372,10 +356,7 @@ export function AssetDetails() {
             {b.available} / {b.reserved}
           </dd>
           <dt>Source</dt>
-          <dd>
-            {b.observation.source === "node" ? "On-chain" : "Wallet balances"} ·
-            block {b.observation.observedHeight}
-          </dd>
+          <dd>On-chain · block {b.observation.observedHeight}</dd>
         </dl>
         <div className="form-actions">
           <Link
@@ -433,9 +414,7 @@ export function TokenManagement() {
               <div>
                 <strong>{b.symbol}</strong>
                 <small className="muted block">
-                  {b.verified
-                    ? "Registry entry"
-                    : "Unverified / possible spam"}
+                  {b.verified ? "Registry entry" : "Unverified / possible spam"}
                 </small>
               </div>
               <Button
@@ -450,7 +429,8 @@ export function TokenManagement() {
       <Panel>
         <h2>Import custom token</h2>
         <Notice tone="warning">
-          Review token metadata carefully. A readable symbol is not proof of trust.
+          Review token metadata carefully. A readable symbol is not proof of
+          trust.
         </Notice>
         <form
           onSubmit={(e) => {
@@ -520,7 +500,7 @@ export function ActivityList({ asset }: { asset?: string }) {
   const record = s.activity.find((t) => t.id === selected);
   return (
     <>
-      {s.mode !== "mock" && s.history && (
+      {s.history && (
         <Notice>
           {s.history.status === "syncing"
             ? "Activity indexing is in progress."
@@ -649,11 +629,7 @@ export function ActivityList({ asset }: { asset?: string }) {
             <dt>Observation</dt>
             <dd>{record.height ?? "Not included"}</dd>
             <dt>Data source</dt>
-            <dd>
-              {record.source === "fixture"
-                ? "Explorer transaction unavailable"
-                : "Node · inclusion thresholds are application policy"}
-            </dd>
+            <dd>Node · inclusion thresholds are application policy</dd>
           </dl>
         </Panel>
       )}
@@ -693,7 +669,7 @@ export function Collectibles() {
           >
             <div className="collectible-art">
               {c.image ? (
-                <img src={c.image} alt="Original Campus Pass artwork" />
+                <img src={c.image} alt="Original Access Pass artwork" />
               ) : (
                 <>
                   <ImageOff size={40} />
@@ -726,7 +702,7 @@ export function Collectibles() {
           <p>
             Owned quantity: {c.quantity} · ID {c.asset.tokenId ?? "mint"}
           </p>
-          {s.mode !== "mock" && (
+          {
             <Button
               variant="secondary"
               disabled={action.busy}
@@ -736,7 +712,7 @@ export function Collectibles() {
             >
               Load safe NFT details
             </Button>
-          )}
+          }
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -784,153 +760,5 @@ export function Collectibles() {
         </Panel>
       )}
     </>
-  );
-}
-export function ConnectedApps() {
-  const { snapshot: s, gateway, review } = useWallet(),
-    action = useAction();
-  const [revoked, setRevoked] = useState(false);
-  const token = s.balances.find((b) => b.symbol === "dUSDC");
-  return (
-    <>
-      <PageTitle
-        title="Connected apps"
-        description="A connection grant and an on-chain token allowance are different permissions."
-      />
-      <Panel>
-        <h2>Connection grants</h2>
-        {s.permissions
-          .filter((p) => !p.revoked)
-          .map((p) => (
-            <div className="permission-row" key={p.id}>
-              <div>
-                <strong className="break">{p.origin}</strong>
-                <p className="muted">{p.methods.join(", ")}</p>
-                <p className="small muted">
-                  {p.networks.join(", ")} · Expires{" "}
-                  {new Date(p.expiresAt).toLocaleDateString()}
-                </p>
-              </div>
-              <Button
-                variant="secondary"
-                onClick={() => gateway.disconnect(p.id)}
-              >
-                Disconnect
-              </Button>
-            </div>
-          ))}
-        {s.permissions.every((p) => p.revoked) && (
-          <Empty title="No connected apps">
-            Only apps using the e-wallet connector can request access.
-          </Empty>
-        )}
-        <Link className="text-link" to="/connect">
-          Preview connection approval
-        </Link>
-      </Panel>
-      <Panel>
-        <h2>Token authorizations</h2>
-        <p className="muted">
-          Coverage is limited to the tracked range. Disconnecting does
-          not revoke allowances.
-        </p>
-        {networkById(s.networkId).family === "bitcoin" ? (
-          <Notice>Bitcoin requires approval for every signing request.</Notice>
-        ) : token && !revoked ? (
-          <div className="permission-row">
-            <div>
-              <strong>dUSDC · Spender</strong>
-              <p>Exact allowance: 25 dUSDC</p>
-              <Address value="0x8888888888888888888888888888888888888888" />
-            </div>
-            <Button
-              variant="secondary"
-              disabled={action.busy}
-              onClick={() =>
-                void action.run(async () => {
-                  const tx = await review({
-                    requestId: crypto.randomUUID(),
-                    accountId: s.selectedAccountId,
-                    networkId: s.networkId,
-                    kind: "revoke",
-                    recipient: "0x8888888888888888888888888888888888888888",
-                    asset: token.asset,
-                    amount: "1",
-                  });
-                  if (tx?.state === "confirmed") setRevoked(true);
-                })
-              }
-            >
-              Review revoke
-            </Button>
-          </div>
-        ) : (
-          <Notice>No tracked authorizations.</Notice>
-        )}
-        {action.error && <Notice tone="error">{action.error}</Notice>}
-      </Panel>
-    </>
-  );
-}
-export function ConnectionApproval() {
-  const { snapshot: s, gateway } = useWallet(),
-    nav = useNavigate();
-  const [result, setResult] = useState("");
-  return (
-    <div className="approval-page">
-      <PageTitle
-        title="Connection request"
-        description="An app is asking to view your selected public account."
-      />
-      <Panel>
-        <Notice tone="warning">Review connection permissions</Notice>
-        <h2>http://127.0.0.1:5174</h2>
-        <p className="muted">
-          This exact origin can request public addresses. Every signing
-          request needs a separate review.
-        </p>
-        <dl className="details">
-          <dt>Account</dt>
-          <dd>{s.accounts.find((a) => a.id === s.selectedAccountId)?.name}</dd>
-          <dt>Network</dt>
-          <dd>{displayNetworkName(networkById(s.networkId))}</dd>
-          <dt>Methods</dt>
-          <dd>View public account · Request transfer approval</dd>
-          <dt>Grant duration</dt>
-          <dd>24 hours</dd>
-        </dl>
-        {result ? (
-          <Notice tone="success">{result}</Notice>
-        ) : (
-          <div className="form-actions">
-            <Button
-              variant="secondary"
-              onClick={() => {
-                setResult("Connection rejected. No account was shared.");
-              }}
-            >
-              Reject connection
-            </Button>
-            <Button
-              onClick={() => {
-                setResult(
-                  "Connection approved. Public account access only.",
-                );
-              }}
-            >
-              Allow connection
-            </Button>
-          </div>
-        )}
-        <div className="form-actions">
-          <Button variant="ghost" onClick={() => nav("/apps")}>
-            Back to apps
-          </Button>
-          <Button variant="ghost" onClick={() => gateway.lock()}>
-            Lock wallet
-          </Button>
-        </div>
-      </Panel>
-    </div>
   );
 }

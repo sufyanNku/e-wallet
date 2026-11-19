@@ -151,7 +151,7 @@ async function relay() {
     const result = await observeBridge();
     await writeFile(
       // Development polling is runtime state, not a new evidence snapshot.
-      watch ? ".local/bridge-status.json" : "artifacts/seed/bridge-status.json",
+      watch ? ".local/bridge-status.json" : ".local/state/seed/bridge-status.json",
       JSON.stringify(result, null, 2),
     );
     return result;

@@ -1,3 +1,4 @@
+import "./report-paths.ts";
 import { spawn, execFile } from "node:child_process";
 import { mkdir, chmod, writeFile } from "node:fs/promises";
 import { promisify } from "node:util";
@@ -73,7 +74,7 @@ try {
     "--family=bitcoin",
   ]);
   await writeFile(
-    "artifacts/phase-03/bitcoin-browser-cleanup.json",
+    ".local/reports/chains/bitcoin-browser-cleanup.json",
     JSON.stringify({
       project: "ewallet-bitcoin-browser-test",
       mainLedgerTouched: false,

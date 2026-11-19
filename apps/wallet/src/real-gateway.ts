@@ -23,7 +23,6 @@ import {
   type TransactionIntent,
   type PreparedOperation,
   type TransactionRecord,
-  type Scenario,
   type Contact,
 } from "@ewallet/domain";
 import { coreStatusSchema, type CoreStatus } from "@ewallet/domain/protocol";
@@ -62,7 +61,6 @@ export class RealWalletGateway implements WalletGateway {
     contacts: [],
     positions: [],
     proposals: [],
-    scenario: "populated",
     updatedAt: "1970-01-01T00:00:00.000Z",
     hiddenAmounts: false,
     autoLockMinutes: 5,
@@ -188,7 +186,7 @@ export class RealWalletGateway implements WalletGateway {
     this.revised();
     void navigator.storage?.persist?.();
   }
-  async importSample(
+  async restorePhrase(
     mnemonic: string,
     password: string,
     confirmation: string,
@@ -783,12 +781,6 @@ export class RealWalletGateway implements WalletGateway {
         amount: parseAmount(amount, 6).toString(),
         slippageBps,
       }),
-    );
-  }
-  setScenario(_scenario: Scenario) {
-    throw new WalletError(
-      "MODE_BOUNDARY",
-      "Fixture scenarios are not available in a real wallet build.",
     );
   }
   async discover(family: CoreStatus["accounts"][number]["family"], start = 0) {

@@ -61,7 +61,7 @@ it("uses an explicit local fixture map and never makes arbitrary private-host ex
     false,
     256 * 1024,
   );
-  expect(JSON.parse(response.bytes.toString()).name).toContain("Campus");
+  expect(JSON.parse(response.bytes.toString()).name).toContain("Access");
   await expect(
     fetchMetadataBytes("http://127.0.0.1:8787/not-a-fixture", false, 1024),
   ).rejects.toThrow("blocked");
@@ -75,7 +75,7 @@ it("uses an explicit local fixture map and never makes arbitrary private-host ex
 });
 it("re-encodes the original fixture as metadata-free WebP and refuses SVG/HTML and excessive dimensions", async () => {
   const output = await reencodeRaster(
-      await readFile("fixtures/media/campus.png"),
+      await readFile("fixtures/media/access-pass.png"),
     ),
     metadata = await sharp(output).metadata();
   expect(metadata.format).toBe("webp");

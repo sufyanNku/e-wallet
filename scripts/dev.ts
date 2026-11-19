@@ -47,7 +47,7 @@ for (const id of ["eip155:31337", "eip155:31338"]) {
     const epoch = await currentEpoch(id),
       manifest = JSON.parse(
         await readFile(
-          "artifacts/deployments/" + id.replace(":", "-") + ".json",
+          ".local/state/deployments/" + id.replace(":", "-") + ".json",
           "utf8",
         ),
       );
@@ -76,10 +76,14 @@ else {
     body = (await response.json()) as { data: { service: string } };
   if (!response.ok || body.data.service !== "e-wallet")
     throw new Error("Port 8787 belongs to another service.");
-  if (process.env.EWALLET_TEAM_DEMO === "1") {
-    const status = await fetch("http://127.0.0.1:8787/api/v1/team-demo/status", { signal: AbortSignal.timeout(2000) });
+  if (process.env.EWALLET_ACCOUNTS === "1") {
+    const status = await fetch("http://127.0.0.1:8787/api/v1/accounts/status", {
+      signal: AbortSignal.timeout(2000),
+    });
     if (!status.ok || !(await status.json()).data?.enabled)
-      throw new Error("Stop the existing pnpm dev process, then run pnpm demo:dev to enable classroom accounts.");
+      throw new Error(
+        "Stop the existing pnpm dev process, then run pnpm dev:accounts to enable Accounts.",
+      );
   }
   console.log("Using the existing e-wallet backend.");
 }
@@ -110,5 +114,7 @@ if (process.argv[2] !== "wallet") {
 console.log(
   "Open your wallet: http://127.0.0.1:5173\nDeveloper reference dapp (connection tests): http://127.0.0.1:5174\nBackend and built approval windows: http://127.0.0.1:8787\nExisting nodes are used without reset or reseeding.",
 );
-if (process.env.EWALLET_TEAM_DEMO === "1")
-  console.log("Account logins and RBAC: http://127.0.0.1:5173/accounts (SQLite demo credits; no blockchain funds).");
+if (process.env.EWALLET_ACCOUNTS === "1")
+  console.log(
+    "Account logins and RBAC: http://127.0.0.1:5173/accounts (SQLite demo credits; no blockchain funds).",
+  );

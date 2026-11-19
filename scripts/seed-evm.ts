@@ -343,7 +343,7 @@ export async function seedEvm() {
         {
           standard: "erc721",
           reference: await nft.getAddress(),
-          name: "Demo Campus Pass",
+          name: "Demo Access Pass",
           symbol: "dCAMP",
           decimals: 0,
           tokenIds: ["101", "102", "103"],
@@ -352,7 +352,7 @@ export async function seedEvm() {
         {
           standard: "erc1155",
           reference: await multi.getAddress(),
-          name: "Demo Study Club",
+          name: "Demo Membership",
           symbol: "dSTUDY",
           decimals: 0,
           tokenIds: ["1", "2"],
@@ -371,7 +371,7 @@ export async function seedEvm() {
         await tx(`opening:nft:${id}`, nft, "mint", [
           accounts[name].address,
           id,
-          "http://127.0.0.1:8787/fixtures/campus.json",
+          "http://127.0.0.1:8787/fixtures/access-pass.json",
         ]);
       for (const [name, id, qty] of [
         ["alice", 1n, 5n],
@@ -651,8 +651,8 @@ export async function seedEvm() {
       contracts,
       assets,
     });
-    await mkdir("artifacts/deployments", { recursive: true });
-    const file = `artifacts/deployments/eip155-${chainId}.json`;
+    await mkdir(".local/state/deployments", { recursive: true });
+    const file = `.local/state/deployments/eip155-${chainId}.json`;
     let previous: DeploymentManifest | null = null;
     try {
       previous = deploymentSchema.parse(
@@ -702,9 +702,9 @@ export async function seedEvm() {
         },
       ]),
   );
-  await mkdir("artifacts/seed", { recursive: true });
+  await mkdir(".local/state/seed", { recursive: true });
   await writeFile(
-    "artifacts/seed/evm-manifest.json",
+    ".local/state/seed/evm-manifest.json",
     encode({
       schemaVersion: 1,
       seedVersion: 1,

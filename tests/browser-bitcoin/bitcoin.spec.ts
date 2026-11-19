@@ -9,7 +9,7 @@ import { satoshis, bitcoin } from "@ewallet/chain-bitcoin";
 process.env.EWALLET_ISOLATED_BITCOIN_TEST = "1";
 process.env.PLAYWRIGHT_NO_COPY_PROMPT = "1";
 const manifest = JSON.parse(
-  await readFile("artifacts/phase-03/isolated-bitcoin-manifest.json", "utf8"),
+  await readFile(".local/reports/chains/isolated-bitcoin-manifest.json", "utf8"),
 );
 async function enableWatch(page: Page) {
   await expect
@@ -174,7 +174,7 @@ test("browser Worker sends P2WPKH and key-path P2TR PSBTs, recognizes internal c
   };
   expect(info.private_keys_enabled).toBe(false);
   await writeFile(
-    "artifacts/phase-03/bitcoin-browser-proof.json",
+    ".local/reports/chains/bitcoin-browser-proof.json",
     JSON.stringify(
       {
         source: "node",

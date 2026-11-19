@@ -31,7 +31,7 @@ try {
   });
   if (response.ok)
     throw new Error(
-      "Stop pnpm dev and the evaluation server before resetting local state.",
+      "Stop pnpm dev and the application server before resetting local state.",
     );
 } catch (e) {
   if (e instanceof Error && e.message.startsWith("Stop pnpm")) throw e;
@@ -128,15 +128,15 @@ for (const name of [
   }
 }
 for (const path of [
-  "artifacts/seed/local-manifest.json",
-  "artifacts/seed/evm-manifest.json",
-  "artifacts/seed/solana-manifest.json",
-  "artifacts/seed/bitcoin-manifest.json",
-  "artifacts/deployments/eip155-31337.json",
-  "artifacts/deployments/eip155-31338.json",
+  ".local/state/seed/local-manifest.json",
+  ".local/state/seed/evm-manifest.json",
+  ".local/state/seed/solana-manifest.json",
+  ".local/state/seed/bitcoin-manifest.json",
+  ".local/state/deployments/eip155-31337.json",
+  ".local/state/deployments/eip155-31338.json",
 ]) {
   const absolute = resolve(root, path);
-  if (!absolute.startsWith(root + "/artifacts/"))
+  if (!absolute.startsWith(root + "/.local/state/"))
     throw new Error("Reset artifact path escaped");
   await rm(absolute, { force: true });
 }

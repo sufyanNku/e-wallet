@@ -82,7 +82,7 @@ export function RealService({ service }: { service: Service }) {
       <>
         <PageTitle title="Local contract services" />
         <Notice>
-          These educational contracts are deployed on Local Ethereum A.
+          These configured contracts are deployed on Local Ethereum A.
         </Notice>
         <Button onClick={() => gateway.selectNetwork("eip155:31337")}>
           Select Local Ethereum

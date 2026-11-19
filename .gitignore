@@ -30,3 +30,11 @@ apps/mobile/.expo/
 .DS_Store
 # Public framework debug key only; store-release builds reject debug signing.
 !apps/mobile/android/app/debug.keystore
+
+# Generated diagnostics and machine-specific chain metadata
+artifacts/phase-*/
+artifacts/product/
+artifacts/full-suite/
+artifacts/seed/
+artifacts/deployments/
+artifacts/*.json

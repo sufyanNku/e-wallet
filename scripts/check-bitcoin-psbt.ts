@@ -1,3 +1,4 @@
+import "./report-paths.ts";
 import { readFile, writeFile } from "node:fs/promises";
 import { roots } from "./seed-evm";
 import {
@@ -19,7 +20,7 @@ import {
 import { signReviewedBitcoin } from "../packages/wallet-core/src/bitcoin-signer";
 await bitcoinIdentity();
 const manifest = JSON.parse(
-    await readFile("artifacts/seed/bitcoin-manifest.json", "utf8"),
+    await readFile(".local/state/seed/bitcoin-manifest.json", "utf8"),
   ),
   proofs = [];
 for (const type of ["p2wpkh", "p2tr"] as const) {
@@ -101,7 +102,7 @@ for (const type of ["p2wpkh", "p2tr"] as const) {
   });
 }
 await writeFile(
-  "artifacts/phase-03/bitcoin-psbt-proof.json",
+  ".local/reports/chains/bitcoin-psbt-proof.json",
   JSON.stringify(
     { networkId: "bitcoin:regtest", source: "node", proofs },
     null,

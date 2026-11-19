@@ -12,7 +12,7 @@ import { z } from "zod";
 const directory = ".local/testnet/secrets";
 await mkdir(directory, { recursive: true, mode: 0o700 });
 await chmod(directory, 0o700);
-await mkdir("artifacts/seed", { recursive: true });
+await mkdir(".local/state/seed", { recursive: true });
 type Result = {
   networkId: string;
   state: "passed" | "failed" | "blocked_funding" | "blocked_rpc" | "not_run";
@@ -200,7 +200,7 @@ for (const profile of networks.filter((n) => n.environment === "testnet")) {
   results.push(row);
   console.log(profile.id + ": " + row.state);
   await writeFile(
-    "artifacts/seed/testnet-manifest.json.tmp",
+    ".local/state/seed/testnet-manifest.json.tmp",
     JSON.stringify(
       {
         schemaVersion: 1,
@@ -220,8 +220,8 @@ for (const profile of networks.filter((n) => n.environment === "testnet")) {
     ),
   );
   await rename(
-    "artifacts/seed/testnet-manifest.json.tmp",
-    "artifacts/seed/testnet-manifest.json",
+    ".local/state/seed/testnet-manifest.json.tmp",
+    ".local/state/seed/testnet-manifest.json",
   );
 }
 if (results.some((r) => r.state === "failed")) process.exitCode = 1;

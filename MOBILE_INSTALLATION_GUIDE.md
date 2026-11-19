@@ -2,7 +2,7 @@
 
 This guide covers installing your own development build directly on a phone. No Play Store or App Store listing is required. Run commands from the repository root unless a step says otherwise. Shell examples use Bash.
 
-**Current status:** this is a local-chain/testnet early-access build. Real funds are disabled. Android APK compilation and both native JavaScript bundles passed; physical-device acceptance and the iOS executable have not been verified. The Android emulator remained ADB-offline during our check. See [verification](artifacts/product/verification.json) and [device acceptance](artifacts/product/device-acceptance.json).
+The application currently supports local chains and public testnets; real funds remain disabled. The [full-suite report](.local/reports/full-suite/report.json) records build and automated results. Physical-device acceptance and iOS native compilation require separate checks on the intended hardware.
 
 ## 1. Know which application you are opening
 
@@ -11,7 +11,7 @@ This guide covers installing your own development build directly on a phone. No 
 - **Backend and built wallet approval windows:** <http://127.0.0.1:8787>.
 - **Metro:** port **8081** — serves JavaScript to native debug builds.
 
-The screenshot showing a populated wallet uses mock/sample balances. The actual wallet has the same styling, but starts with create/restore and displays observed chain balances. To preview sample data, run `pnpm dev:ui` instead of the regular wallet dev server; both use port 5173, so stop one before starting the other.
+A newly created wallet starts empty. Restore the prepared local identity after seeding to view actual node-backed holdings. There is no frontend-only sample-balance mode.
 
 ## 2. Prepare the repository and backend
 
@@ -33,7 +33,7 @@ pnpm dev
 
 Keep that terminal running. The phone needs the backend for network reads and transaction broadcasts. Installing an APK/IPA does not install the backend or blockchain nodes onto the phone.
 
-For a populated local demonstration, fixture recovery information is generated under ignored `.local/secrets/`. These are deliberately public, insecure test identities. Use only test wallets; never import a recovery phrase that controls real funds.
+For populated local holdings, fixture recovery information is generated under ignored `.local/secrets/`. These are deliberately public, insecure test identities. Use only test wallets; never import a recovery phrase that controls real funds.
 
 ## 3. Android: install over USB
 
@@ -195,12 +195,8 @@ For private testing on additional registered devices, a team enrolled in the App
 - **API address or native configuration changed:** restart Metro and rebuild/reinstall the native app so its configuration is refreshed.
 - **Need an Expo Go shortcut:** use this project's own native build for acceptance testing; Expo Go does not validate this app's generated native security configuration.
 
-## 7. Is all the work complete?
+## 7. Verify the installed application
 
-**No. The implemented early-access build is not the completed production/Phantom-parity scope.**
+Follow the device checklist in [USER_AND_TESTING_GUIDE.md](USER_AND_TESTING_GUIDE.md#6-complete-the-phone-checklist). Record the phone model, OS, build and results. JavaScript exports, an Android APK build and Node-hosted chain tests do not prove that camera permissions, secure storage or privacy controls work on a physical phone.
 
-Completed evidence includes the redesigned web UI, native Android/iOS source, Android debug APK, both native bundles, 70 passing unit tests, web multichain browser flows and native signing-core chain proofs.
-
-Still outstanding: physical-device acceptance, iOS executable verification/signing, native external dapp protocols, biometric unlock, independent security review, mainnet adapters/indexing and isolated mainnet vaults, and client deployment/distribution setup. One-click mainnet activation is not implemented. Public-testnet funding blockers remain separate from successful local-chain tests.
-
-Use [the current verification report](artifacts/product/verification.json), [release checks](artifacts/product/release-readiness.json) and `pnpm release:check` for the exact limitations. Installing privately does not make those checks complete.
+Physical-device acceptance, iOS native compilation/signing, native external dapp protocols and biometric unlock remain outstanding. Future real-funds requirements remain in `release-config.json`; run `pnpm release:check` to inspect them. Private installation does not enable real funds.

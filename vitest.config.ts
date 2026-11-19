@@ -1,3 +1,4 @@
+import "./scripts/report-paths.ts";
 import { defineConfig } from "vitest/config";
 import { fileURLToPath } from "node:url";
 export default defineConfig({
@@ -30,6 +31,6 @@ export default defineConfig({
     include: ["tests/**/*.test.ts", "tests/**/*.test.tsx"],
     environment: "node",
     reporters: ["default", "json"],
-    outputFile: { json: "artifacts/unit-results.json" },
+    outputFile: { json: ".local/reports/unit-results.json" },
   },
 });

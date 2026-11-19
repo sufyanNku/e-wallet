@@ -11,7 +11,7 @@ export async function observeBridge() {
         deploymentSchema.parse(
           JSON.parse(
             await readFile(
-              "artifacts/deployments/eip155-" + id + ".json",
+              ".local/state/deployments/eip155-" + id + ".json",
               "utf8",
             ),
           ),

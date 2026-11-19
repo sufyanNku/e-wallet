@@ -314,8 +314,8 @@ export class EvmAdapter {
           },
           name:
             asset.standard === "erc721"
-              ? `Campus Pass #${id}`
-              : `Study Club #${id}`,
+              ? `Access Pass #${id}`
+              : `Membership #${id}`,
           quantity: quantity.toString(),
           metadataStatus: "missing",
           image: null,

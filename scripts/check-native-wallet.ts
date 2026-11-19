@@ -1,3 +1,4 @@
+import "./report-paths.ts";
 import { bitcoinRpc } from "../services/backend/src/bitcoin-rpc";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { NativeWallet } from "../packages/native-wallet/src/wallet";
@@ -105,10 +106,10 @@ try {
   const manifest = JSON.parse(
     await readFile(
       family === "solana"
-        ? "artifacts/phase-03/isolated-solana-manifest.json"
+        ? ".local/reports/chains/isolated-solana-manifest.json"
         : family === "bitcoin"
-          ? "artifacts/phase-03/isolated-bitcoin-manifest.json"
-          : "artifacts/seed/evm-manifest.json",
+          ? ".local/reports/chains/isolated-bitcoin-manifest.json"
+          : ".local/state/seed/evm-manifest.json",
       "utf8",
     ),
   );
@@ -291,9 +292,9 @@ try {
   const raw = [...data.values()].join("");
   if (raw.includes(phrase))
     throw new Error("Phrase found outside encrypted storage");
-  await mkdir("artifacts/product", { recursive: true });
+  await mkdir(".local/reports/product", { recursive: true });
   await writeFile(
-    "artifacts/product/native-" + family + "-proof.json",
+    ".local/reports/product/native-" + family + "-proof.json",
     JSON.stringify(
       {
         observedAt: new Date().toISOString(),

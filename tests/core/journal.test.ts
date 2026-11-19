@@ -2,20 +2,9 @@ import "fake-indexeddb/auto";
 import { it, expect } from "vitest";
 import { OperationJournal } from "../../packages/wallet-core/src/journal";
 import { VaultStore } from "../../packages/wallet-core/src/storage";
-import { MockWalletGateway, bob } from "../../apps/wallet/src/mock-gateway";
+import { operationFixture } from "../helpers/operation";
 it("journals the expected identifier before broadcast and resumes uncertainty without a second signing transition", async () => {
-  const g = new MockWalletGateway();
-  g.loadSample();
-  const s = g.getSnapshot(),
-    op = await g.prepare({
-      requestId: crypto.randomUUID(),
-      accountId: s.selectedAccountId,
-      networkId: s.networkId,
-      kind: "send",
-      recipient: bob,
-      asset: s.balances[0].asset,
-      amount: "1",
-    });
+  const op = operationFixture();
   const store = new VaultStore("local", `journal-${crypto.randomUUID()}`);
   const journal = new OperationJournal(store);
   await journal.create(op);

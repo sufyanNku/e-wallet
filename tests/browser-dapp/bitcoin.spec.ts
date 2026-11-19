@@ -100,7 +100,7 @@ test("Bitcoin project API connects with descriptor consent, reviews a PSBT and b
   await expect(dapp.getByTestId("result")).toContainText(signed.txid);
   expect(await bitcoinRpc("getrawmempool")).toContain(signed.txid);
   await writeFile(
-    "artifacts/phase-04/dapp-bitcoin-proof.json",
+    ".local/reports/integration/dapp-bitcoin-proof.json",
     JSON.stringify(
       {
         observedAt: new Date().toISOString(),

@@ -360,9 +360,9 @@ export async function executeTestnetSolana(
     )[0],
     metaData = getCreateMetadataAccountV3InstructionDataEncoder().encode({
       data: {
-        name: "Educational Campus Pass",
+        name: "Access Pass",
         symbol: "dCAMP",
-        uri: "https://example.invalid/educational/campus.json",
+        uri: "https://example.invalid/configured/access-pass.json",
         sellerFeeBasisPoints: 0,
         creators: null,
         collection: null,

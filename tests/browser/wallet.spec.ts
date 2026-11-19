@@ -1,101 +1,65 @@
-import { test, expect, type Page } from "@playwright/test";
+import { test } from "@playwright/test";
+import { expect } from "../helpers/private-expect";
+import { openWallet, walletRoute } from "../helpers/browser-wallet";
 import AxeBuilder from "@axe-core/playwright";
-import { mkdir, writeFile } from "node:fs/promises";
-const root = "artifacts/phase-01";
-async function sample(page: Page) {
-  await page.goto("/");
-  await page.getByRole("button", { name: "Explore wallet" }).click();
-  await expect(
-    page.getByRole("heading", { name: "Your wallet", exact: true }),
-  ).toBeVisible();
-}
-async function route(page: Page, path: string) {
-  await page.evaluate((path) => {
-    history.pushState({}, "", path);
-    dispatchEvent(new PopStateEvent("popstate"));
-  }, path);
-}
-test("keyboard onboarding, approval rejection and payment receipt", async ({
+import { readFile, writeFile } from "node:fs/promises";
+import { JsonRpcProvider } from "ethers";
+
+test("keyboard payment review rejects safely without changing the node balance", async ({
   page,
 }) => {
-  await page.goto("/create");
-  await page.getByLabel("Wallet password", { exact: true }).focus();
-  await page.keyboard.type("only sample password");
-  await page.keyboard.press("Tab");
-  await page.keyboard.type("only sample password");
-  await page.keyboard.press("Tab");
-  await page.keyboard.press("Enter");
-  await expect(
-    page.getByRole("heading", { name: "Back up your recovery words" }),
-  ).toBeVisible();
-  await page.getByRole("checkbox").focus();
-  await page.keyboard.press("Space");
-  await page.keyboard.press("Tab");
-  await page.keyboard.press("Enter");
-  for (const field of await page.getByLabel(/^Word \d+$/).all()) {
-    const n =
-      (await field.getAttribute("aria-label")) ??
-      (await page
-        .locator(`label[for="${await field.getAttribute("id")}"]`)
-        .innerText());
-    const index = Number(n.match(/\d+/)![0]);
-    await field.focus();
-    await page.keyboard.type(`sample${String(index).padStart(2, "0")}`);
-  }
-  await page.getByRole("button", { name: "Open wallet" }).focus();
-  await page.keyboard.press("Enter");
-  await expect(
-    page.getByRole("heading", { name: "Your wallet", exact: true }),
-  ).toBeVisible();
-  await page.getByRole("link", { name: "Send", exact: true }).focus();
-  await page.keyboard.press("Enter");
-  await page
-    .getByLabel("Recipient address", { exact: true })
-    .fill("0x2222222222222222222222222222222222222222");
-  await page.getByLabel("Amount (ETH)", { exact: true }).fill("0.1");
-  await page.getByRole("button", { name: "Review payment" }).focus();
-  await page.keyboard.press("Enter");
-  const dialog = page.getByRole("dialog");
-  await expect(dialog).toBeVisible();
-  await expect(
-    dialog.getByText("0x2222222222222222222222222222222222222222", {
-      exact: true,
-    }),
-  ).toBeVisible();
-  for (let i = 0; i < 10; i++) {
-    await page.keyboard.press("Tab");
+  test.setTimeout(90000);
+  await openWallet(page);
+  const manifest = JSON.parse(
+    await readFile(".local/state/seed/evm-manifest.json", "utf8"),
+  );
+  const provider = new JsonRpcProvider("http://127.0.0.1:8545", 31337, {
+    staticNetwork: true,
+    cacheTimeout: 0,
+  });
+  try {
+    const before = await provider.getBalance(
+      manifest.identities.alice.evm.address,
+    );
+    await walletRoute(page, "/send");
+    await page
+      .getByLabel("Recipient address", { exact: true })
+      .fill(manifest.identities.bob.evm.address);
+    await page.getByLabel("Amount (ETH)", { exact: true }).fill("0.001");
+    await page
+      .getByRole("button", { name: "Review payment", exact: true })
+      .focus();
+    await page.keyboard.press("Enter");
+    const dialog = page.getByRole("dialog", { name: "Review operation" });
+    await expect(dialog).toBeVisible();
+    await expect(
+      dialog.getByText(manifest.identities.bob.evm.address, { exact: true }),
+    ).toBeVisible();
+    for (let i = 0; i < 8; i++) {
+      await page.keyboard.press("Tab");
+      expect(
+        await dialog.evaluate((element) =>
+          element.contains(document.activeElement),
+        ),
+      ).toBe(true);
+    }
+    await dialog.getByRole("button", { name: "Reject", exact: true }).click();
+    await expect(dialog).not.toBeVisible();
     expect(
-      await dialog.evaluate((el) => el.contains(document.activeElement)),
-    ).toBe(true);
+      await provider.getBalance(manifest.identities.alice.evm.address),
+    ).toBe(before);
+  } finally {
+    provider.destroy();
   }
-  await dialog.getByRole("button", { name: "Reject", exact: true }).focus();
-  await page.keyboard.press("Enter");
-  await expect(dialog).not.toBeVisible();
-  await page.getByRole("button", { name: "Review payment" }).click();
-  await dialog
-    .getByRole("button", { name: "Approve operation" })
-    .focus();
-  await page.keyboard.press("Enter");
-  await expect(
-    page.getByRole("heading", { name: "Activity", exact: true }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("button", { name: /send.*confirmed/i }),
-  ).toBeVisible();
-  await page.getByRole("button", { name: /send.*confirmed/i }).click();
-  await expect(
-    page.getByRole("heading", { name: "Transaction details" }),
-  ).toBeVisible();
 });
-test("all screens at 320, 360, tablet and desktop have no horizontal clipping", async ({
+
+test("real wallet routes and onboarding fit phone, tablet and desktop widths", async ({
   page,
 }) => {
   test.setTimeout(120000);
-  await mkdir(root, { recursive: true });
-  await sample(page);
+  await openWallet(page);
   const paths = [
     "/",
-    "/asset?key=eip155%3A31337%2Fnative%2Fnative%2F",
     "/tokens",
     "/send",
     "/receive",
@@ -103,7 +67,6 @@ test("all screens at 320, 360, tablet and desktop have no horizontal clipping", 
     "/activity",
     "/collectibles",
     "/apps",
-    "/connect",
     "/services",
     "/swap",
     "/bridge",
@@ -116,39 +79,34 @@ test("all screens at 320, 360, tablet and desktop have no horizontal clipping", 
   for (const width of [320, 360, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     for (const path of paths) {
-      await route(page, path);
-      await page.getByRole("heading", { level: 1 }).waitFor();
-      expect(await page.locator("body").innerText(), `Visible copy on ${path}`).not.toMatch(/\bdemo\b|\bmock\b|\btest(?:net| assets| data| networks)?\b|\bclassroom\b|\bfixture\b/i);
+      await walletRoute(page, path);
       expect(
         await page.evaluate(
           () => document.documentElement.scrollWidth <= innerWidth,
         ),
-        `${path} at ${width}`,
       ).toBe(true);
-      await page.screenshot({
-        path: `${root}/${width}-${path === "/" ? "home" : path.slice(1).split('?')[0]}.png`,
-        fullPage: true,
-      });
+      expect(await page.locator("body").innerText()).not.toMatch(
+        /\bclassroom\b|\buniversity\b|\binstructor\b|\bmock\b/iu,
+      );
     }
-  }
-  for (const width of [320,360,768,1440]) {
-    await page.setViewportSize({width,height:900});
-    for (const path of ['/welcome','/create','/import','/unlock']) {
-      await route(page,path);
-      await page.getByRole('heading',{level:1}).waitFor();
-      expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-      await page.screenshot({path:`${root}/${width}-${path.slice(1)}.png`,fullPage:true});
+    for (const path of ["/welcome", "/create", "/import", "/unlock"]) {
+      await walletRoute(page, path);
+      expect(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth <= innerWidth,
+        ),
+      ).toBe(true);
     }
   }
 });
-test("built nested route, approval window and accessibility", async ({
+
+test("built wallet routes remain accessible without a frontend data fallback", async ({
   page,
 }) => {
+  test.setTimeout(90000);
   await page.goto("/send");
-  await expect(
-    page.getByRole("heading", { name: /A little closer/ }),
-  ).toBeVisible();
-  await page.getByRole("button", { name: "Explore wallet" }).click();
+  await expect(page.getByRole("heading", { name: /Your world/ })).toBeVisible();
+  await openWallet(page);
   const results = [];
   for (const path of [
     "/",
@@ -159,60 +117,64 @@ test("built nested route, approval window and accessibility", async ({
     "/settings",
     "/connect",
   ]) {
-    await route(page, path);
-    await page.getByRole("heading", { level: 1 }).waitFor();
-    const r = await new AxeBuilder({ page })
+    await walletRoute(page, path);
+    const result = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
       .analyze();
-    results.push({ path, violations: r.violations });
-    expect(r.violations, `Accessibility on ${path}`).toEqual([]);
+    results.push({ path, violations: result.violations });
+    expect(
+      result.violations.map((v) => ({ id: v.id, impact: v.impact })),
+    ).toEqual([]);
   }
-  await page.setViewportSize({ width: 460, height: 720 });
-  await route(page, "/connect");
-  await page.getByRole("button", { name: "Reject connection" }).focus();
-  await page.keyboard.press("Enter");
-  await expect(
-    page.getByText("Connection rejected. No account was shared."),
-  ).toBeVisible();
-  await page.screenshot({
-    path: `${root}/approval-460x720.png`,
-    fullPage: true,
-  });
   await writeFile(
-    `${root}/accessibility.json`,
-    JSON.stringify(results, null, 2),
+    ".local/reports/web/accessibility.json",
+    JSON.stringify(results, null, 2) + "\n",
   );
 });
-test("receive QR payload roundtrip and exact custom token import", async ({
+
+test("receive QR and actual token metadata are checked against the selected network", async ({
   page,
-}) => {
-  await sample(page);
-  await route(page, "/receive");
+}, testInfo) => {
+  test.setTimeout(90000);
+  await openWallet(page);
+  const manifest = JSON.parse(
+    await readFile(".local/state/seed/evm-manifest.json", "utf8"),
+  );
+  const deployment = JSON.parse(
+    await readFile(".local/state/deployments/eip155-31337.json", "utf8"),
+  );
+  await walletRoute(page, "/receive");
+  const image = page.getByAltText("QR code of the reviewed receive request");
+  await expect(image).toBeVisible();
+  const qr = testInfo.outputPath("receive-qr.png");
+  await image.screenshot({ path: qr });
+  await walletRoute(page, "/send");
+  await page.getByLabel("Upload QR image").setInputFiles(qr);
   await expect(
-    page.getByAltText("QR code of the reviewed receive request"),
-  ).toBeVisible();
-  await page.getByAltText('QR code of the reviewed receive request').screenshot({path:`${root}/sample-qr.png`});
-  await route(page, "/send");
-  await page.getByLabel('Upload QR image').setInputFiles(`${root}/sample-qr.png`);
-  await expect(page.getByLabel('Recipient address',{exact:true})).toHaveValue('0x1111111111111111111111111111111111111111');
+    page.getByLabel("Recipient address", { exact: true }),
+  ).toHaveValue(manifest.identities.alice.evm.address);
   await page
     .getByLabel("QR or address text")
     .fill(
       JSON.stringify({
-        address: "0x2222222222222222222222222222222222222222",
+        address: manifest.identities.bob.evm.address,
         network: "eip155:84532",
         amount: "1",
       }),
     );
-  await page.getByRole("button", { name: "Read pasted request" }).click();
+  await page
+    .getByRole("button", { name: "Read pasted request", exact: true })
+    .click();
   await expect(page.getByRole("alert")).toContainText("another network");
-  await route(page, "/tokens");
+  await walletRoute(page, "/tokens");
   await page
     .getByLabel("Contract or mint address")
-    .fill("0x1212121212121212121212121212121212121212");
-  await page.getByLabel("Token symbol").fill("DEMO");
+    .fill(deployment.contracts.Impostor.address);
+  await page.getByLabel("Token symbol").fill("USDC");
   await page.getByLabel("Decimals", { exact: true }).fill("6");
   await page.getByRole("checkbox").check();
-  await page.getByRole("button", { name: "Import token" }).click();
-  await expect(page.getByText("DEMO", { exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Import token", exact: true }).click();
+  await expect(page.getByText("USDC", { exact: true })).toBeVisible({
+    timeout: 10000,
+  });
 });

@@ -59,9 +59,9 @@ export function RealEvaluation() {
       return (await response.json()).data;
     };
     const results = await Promise.allSettled([
-      read("demo/manifest").then((v) => setManifest(manifestSchema.parse(v))),
+      read("environment/manifest").then((v) => setManifest(manifestSchema.parse(v))),
       read("networks").then((v) => setHealth(healthSchema.parse(v))),
-      read("demo/testnets").then((v) => setTestnets(testnetsSchema.parse(v))),
+      read("environment/testnets").then((v) => setTestnets(testnetsSchema.parse(v))),
     ]);
     if (results.some((r) => r.status === "rejected"))
       setError(

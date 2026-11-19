@@ -1,3 +1,4 @@
+import "./report-paths.ts";
 import { spawn, execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { createServer } from "node:net";
@@ -30,7 +31,7 @@ type Result = {
   completedAt: string;
   evidencePath: string;
 };
-const directory = "artifacts/full-suite";
+const directory = ".local/reports/full-suite";
 const exec = promisify(execFile);
 async function applicationFingerprint() {
   const { stdout } = await exec("git", [
@@ -51,6 +52,7 @@ async function applicationFingerprint() {
   ]);
   const digest = createHash("sha256");
   for (const path of stdout.split("\0").filter(Boolean).sort()) {
+    if (!existsSync(path)) continue;
     digest.update(path + "\0").update(await readFile(path));
   }
   return digest.digest("hex");
@@ -67,9 +69,8 @@ const checks: Check[] = [
   { name: "unit-and-security", args: ["test:unit"] },
   { name: "contracts", args: ["contracts:test"] },
   { name: "dataset-before", args: ["seed:assert"] },
-  { name: "preview-build", args: ["build:web"] },
+  { name: "web-build", args: ["build:wallet"] },
   { name: "web-ui-accessibility-responsive", args: ["test:ui"] },
-  { name: "local-wallet-build", args: ["build:wallet"] },
   {
     name: "release-boundary",
     args: ["exec", "node", "scripts/check-release.mjs"],
@@ -96,7 +97,7 @@ const checks: Check[] = [
       "playwright.dapp.config.ts",
     ],
   },
-  { name: "accounts-and-rbac", args: ["test:demo"] },
+  { name: "accounts-and-rbac", args: ["test:accounts"] },
   { name: "backend-indexing-and-reorg", args: ["test:integration"] },
   ...[
     "pending-evm",
@@ -189,7 +190,7 @@ async function report() {
     results.some((r) => r.name === "network-identities" && r.state === "passed")
   ) {
     observations.networks = JSON.parse(
-      await readFile("artifacts/phase-03/network-health.json", "utf8"),
+      await readFile(".local/reports/chains/network-health.json", "utf8"),
     ).results;
   }
   if (
@@ -198,7 +199,7 @@ async function report() {
     )
   ) {
     const markets = JSON.parse(
-      await readFile("artifacts/product/market-live-proof.json", "utf8"),
+      await readFile(".local/reports/product/market-live-proof.json", "utf8"),
     );
     observations.market = {
       assets: markets.assets.length,
@@ -323,7 +324,7 @@ try {
             ...process.env,
             NODE_ENV: "test",
             EWALLET_MODE: "local",
-            EWALLET_TEAM_DEMO: "0",
+            EWALLET_ACCOUNTS: "0",
             CI: "1",
             PLAYWRIGHT_NO_COPY_PROMPT: "1",
             ...check.env,
@@ -352,7 +353,7 @@ try {
   }
   state = "passed";
   console.log(
-    "All automated local checks passed. See artifacts/full-suite/report.json for exact scope and device limits.",
+    "All automated local checks passed. See .local/reports/full-suite/report.json for exact scope and device limits.",
   );
 } catch (error) {
   state = "failed";

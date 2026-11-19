@@ -1,3 +1,4 @@
+import "./report-paths.ts";
 import { readFile, writeFile } from "node:fs/promises";
 import { spawn } from "node:child_process";
 import { networkRpc } from "../services/backend/src/node-rpc";
@@ -26,7 +27,7 @@ await new Promise<void>((resolve, reject) => {
   );
 });
 const sol = solanaManifestSchema.parse(
-  JSON.parse(await readFile("artifacts/seed/solana-manifest.json", "utf8")),
+  JSON.parse(await readFile(".local/state/seed/solana-manifest.json", "utf8")),
 );
 check(
   "Solana genesis",
@@ -75,7 +76,7 @@ for (const account of sol.finalBalances) {
     );
 }
 const btc = JSON.parse(
-    await readFile("artifacts/seed/bitcoin-manifest.json", "utf8"),
+    await readFile(".local/state/seed/bitcoin-manifest.json", "utf8"),
   ),
   identity = await bitcoinIdentity();
 check("Bitcoin funding epoch", identity.ledgerFingerprint === btc.fundingEpoch);
@@ -126,7 +127,7 @@ for (const [id, stage] of Object.entries(btc.stages) as Array<
   );
 }
 await writeFile(
-  "artifacts/phase-04/seed-assertions.json",
+  ".local/reports/integration/seed-assertions.json",
   JSON.stringify(
     {
       observedAt: new Date().toISOString(),

@@ -1,3 +1,4 @@
+import "./report-paths.ts";
 import {
   readFile,
   writeFile,
@@ -178,7 +179,7 @@ export async function seedSolana() {
     );
   await mkdir(".local/secrets", { recursive: true, mode: 0o700 });
   await chmod(".local/secrets", 0o700);
-  await mkdir("artifacts/seed", { recursive: true });
+  await mkdir(".local/state/seed", { recursive: true });
   const journalPath = isolated
     ? ".local/seed-solana-browser.json"
     : ".local/seed-solana.json";
@@ -484,8 +485,8 @@ export async function seedSolana() {
     true,
   );
   await mint("frozen", 14, 6, "Demo Frozen Token", "dICE");
-  await mint("nft1", 15, 0, "Campus Pass #1", "dCAMP");
-  await mint("nft2", 16, 0, "Campus Pass #2", "dCAMP");
+  await mint("nft1", 15, 0, "Access Pass #1", "dCAMP");
+  await mint("nft2", 16, 0, "Access Pass #2", "dCAMP");
   async function ata(key: string, owner: string) {
     return (
       await findAssociatedTokenPda({
@@ -539,7 +540,7 @@ export async function seedSolana() {
         data: {
           name: m.name,
           symbol: m.symbol,
-          uri: "http://127.0.0.1:8787/fixtures/campus.json",
+          uri: "http://127.0.0.1:8787/fixtures/access-pass.json",
           sellerFeeBasisPoints: 0,
           creators: null,
           collection: null,
@@ -902,8 +903,8 @@ export async function seedSolana() {
   solanaManifestSchema.parse(manifest);
   await writeFile(
     isolated
-      ? "artifacts/phase-03/isolated-solana-manifest.json"
-      : "artifacts/seed/solana-manifest.json",
+      ? ".local/reports/chains/isolated-solana-manifest.json"
+      : ".local/state/seed/solana-manifest.json",
     encode(manifest),
   );
   console.log(

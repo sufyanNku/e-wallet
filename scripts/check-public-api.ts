@@ -1,10 +1,11 @@
+import "./report-paths.ts";
 import { readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { buildServer } from "../services/backend/src/server";
 import { networkRpc } from "../services/backend/src/node-rpc";
 const persistent = process.argv.includes("--persistent");
 const manifest = JSON.parse(
-    await readFile("artifacts/seed/evm-manifest.json", "utf8"),
+    await readFile(".local/state/seed/evm-manifest.json", "utf8"),
   ),
   alice = manifest.identities.alice.evm.address,
   deployment = manifest.deployments.find(
@@ -121,7 +122,7 @@ try {
   )
     throw new Error("Notifications were absent or repeated");
   await writeFile(
-    "artifacts/phase-04/public-api-proof.json",
+    ".local/reports/integration/public-api-proof.json",
     JSON.stringify(
       {
         observedAt: new Date().toISOString(),

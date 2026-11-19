@@ -34,7 +34,7 @@ test("Wallet Standard connects through a real popup, signs exact bytes and sends
     ),
     manifest = JSON.parse(
       await readFile(
-        "artifacts/phase-03/isolated-solana-manifest.json",
+        ".local/reports/chains/isolated-solana-manifest.json",
         "utf8",
       ),
     );
@@ -139,7 +139,7 @@ test("Wallet Standard connects through a real popup, signs exact bytes and sends
     )
     .toBe(before + 10000);
   await writeFile(
-    "artifacts/phase-04/dapp-solana-proof.json",
+    ".local/reports/integration/dapp-solana-proof.json",
     JSON.stringify(
       {
         observedAt: new Date().toISOString(),

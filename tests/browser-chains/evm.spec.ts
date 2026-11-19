@@ -5,11 +5,34 @@ process.env.PLAYWRIGHT_NO_COPY_PROMPT = "1";
 import { test, type Page } from "@playwright/test";
 import { readFile, writeFile, unlink } from "node:fs/promises";
 import { JsonRpcProvider, Contract, parseEther, HDNodeWallet } from "ethers";
+import { setTimeout as wait } from "node:timers/promises";
 const manifest = JSON.parse(
-  await readFile("artifacts/seed/evm-manifest.json", "utf8"),
+  await readFile(".local/state/seed/evm-manifest.json", "utf8"),
 );
 let snapshot = "";
-test.beforeEach(async () => {
+let rpcBudget = { remaining: 2400, resetsAt: 0 };
+test.beforeEach(async ({ page }) => {
+  test.setTimeout(120000);
+  // The scenarios share one server/IP. Respect its real request window rather
+  // than disabling rate limits or letting earlier scenarios exhaust the next.
+  if (rpcBudget.remaining < 1200 && rpcBudget.resetsAt > Date.now()) {
+    console.log("Waiting for the shared RPC rate-limit window to renew.");
+    await wait(rpcBudget.resetsAt - Date.now() + 100);
+  }
+  page.on("response", async (response) => {
+    if (!response.url().includes("/api/v1/rpc/")) return;
+    const headers = response.headers();
+    if (headers["x-ratelimit-remaining"] !== undefined)
+      rpcBudget = {
+        remaining: Number(headers["x-ratelimit-remaining"]),
+        resetsAt: Date.now() + Number(headers["x-ratelimit-reset"]) * 1000,
+      };
+    if (response.status() >= 400)
+      console.log("RPC request rejected", {
+        status: response.status(),
+        remaining: rpcBudget.remaining,
+      });
+  });
   const p = new JsonRpcProvider("http://127.0.0.1:8545");
   if (BigInt(await p.send("eth_chainId", [])) !== 31337n)
     throw new Error("Refusing snapshot on wrong network");
@@ -58,7 +81,15 @@ async function navigate(page: Page, path: string) {
 }
 async function approve(page: Page) {
   const dialog = page.getByRole("dialog", { name: "Review operation" });
-  await expect(dialog).toBeVisible();
+  // Preparing a real contract review can include several bounded node reads.
+  await expect(dialog)
+    .toBeVisible({ timeout: 15000 })
+    .catch(async () => {
+      const alerts = await page.getByRole("alert").allTextContents();
+      throw new Error(
+        "Review unavailable. Public error: " + alerts.join(" | "),
+      );
+    });
   await dialog
     .getByRole("button", { name: "Approve operation", exact: true })
     .click();
@@ -132,7 +163,7 @@ test("real browser approves and broadcasts an EVM native payment, token payment 
     .poll(async () => BigInt(await usdc.balanceOf(bob)))
     .toBe(beforeToken + 1n);
   await page.locator('a[href="/collectibles"]').first().click();
-  await page.getByRole("button", { name: /Campus Pass #101/ }).click();
+  await page.getByRole("button", { name: /Access Pass #101/ }).click();
   await page.getByLabel("Full recipient address").fill(bob);
   await page
     .getByRole("button", { name: "Review collectible transfer" })
@@ -163,7 +194,7 @@ test("real browser approves and broadcasts an EVM native payment, token payment 
     provider,
   );
   const before1155 = BigInt(await multi.balanceOf(bob, 1));
-  await page.getByRole("button", { name: /Study Club #1/ }).click();
+  await page.getByRole("button", { name: /Membership #1/ }).click();
   await page.getByLabel("Full recipient address").fill(bob);
   await page.getByLabel("Quantity", { exact: true }).fill("1");
   await page
@@ -207,7 +238,7 @@ test("real browser approves and broadcasts an EVM native payment, token payment 
     }
   }
   await writeFile(
-    "artifacts/phase-03/evm-browser-proof.json",
+    ".local/reports/chains/evm-browser-proof.json",
     JSON.stringify(
       {
         source: "node",
@@ -327,7 +358,7 @@ test("real contract UI executes an AMM swap, a vault withdrawal and a faucet cla
     cleanup: "Isolated EVM snapshot reverted after assertions",
   };
   await writeFile(
-    "artifacts/phase-03/services-browser-proof.json",
+    ".local/reports/chains/services-browser-proof.json",
     JSON.stringify(report, null, 2),
   );
   provider.destroy();
@@ -420,6 +451,23 @@ test("bridge UI locks source tokens and the local relayer mints exactly one cano
   page,
 }) => {
   test.setTimeout(120000);
+  page.on("response", async (response) => {
+    if (!response.url().includes("/api/v1/rpc/")) return;
+    const method = JSON.parse(response.request().postData() ?? "{}").method;
+    if (response.status() >= 400)
+      console.log("Bridge RPC transport failure", {
+        method,
+        status: response.status(),
+      });
+    else {
+      const body = await response.json().catch(() => null);
+      if (body?.data?.error)
+        console.log("Bridge RPC execution failure", {
+          method,
+          error: body.data.error,
+        });
+    }
+  });
   const destination = new JsonRpcProvider("http://127.0.0.1:8546", 31338, {
       staticNetwork: true,
       cacheTimeout: 0,
@@ -433,7 +481,7 @@ test("bridge UI locks source tokens and the local relayer mints exactly one cano
     if ((e as NodeJS.ErrnoException).code !== "ENOENT") throw e;
   }
   try {
-    previousStatus = await readFile("artifacts/seed/bridge-status.json");
+    previousStatus = await readFile(".local/state/seed/bridge-status.json");
   } catch (e) {
     if ((e as NodeJS.ErrnoException).code !== "ENOENT") throw e;
   }
@@ -447,7 +495,41 @@ test("bridge UI locks source tokens and the local relayer mints exactly one cano
         exact: true,
       })
       .click();
+    await expect(page.locator(".decoded-operation")).toContainText(
+      "exact amount 1000000",
+    );
     await approve(page);
+    const deployment = JSON.parse(
+      await readFile(".local/state/deployments/eip155-31337.json", "utf8"),
+    );
+    const source = new JsonRpcProvider("http://127.0.0.1:8545", 31337, {
+      staticNetwork: true,
+      cacheTimeout: 0,
+    });
+    try {
+      const token = new Contract(
+        deployment.contracts.dUSDC.address,
+        ["function allowance(address,address) view returns(uint256)"],
+        source,
+      );
+      await expect
+        .poll(
+          async () =>
+            String(
+              await token.allowance(
+                alice,
+                deployment.contracts.DemoBridgeLock.address,
+              ),
+            ),
+          { timeout: 10000 },
+        )
+        .toBe("1000000");
+    } finally {
+      source.destroy();
+    }
+    await expect(
+      page.getByLabel("Source amount (dUSDC)", { exact: true }),
+    ).toHaveValue("1");
     await page
       .getByRole("button", { name: "Review source lock", exact: true })
       .click();
@@ -486,7 +568,7 @@ test("bridge UI locks source tokens and the local relayer mints exactly one cano
       ),
     ).toHaveLength(1);
     await writeFile(
-      "artifacts/phase-04/bridge-browser-proof.json",
+      ".local/reports/integration/bridge-browser-proof.json",
       JSON.stringify(
         {
           observedAt: new Date().toISOString(),
@@ -494,7 +576,8 @@ test("bridge UI locks source tokens and the local relayer mints exactly one cano
           realDestinationMint: true,
           message: minted[0],
           repeatRelayDeduplicated: true,
-          cleanup: "Both EVM snapshots restored; relayer journal and status artifact restored",
+          cleanup:
+            "Both EVM snapshots restored; relayer journal and status artifact restored",
         },
         null,
         2,
@@ -510,9 +593,9 @@ test("bridge UI locks source tokens and the local relayer mints exactly one cano
         if (e.code !== "ENOENT") throw e;
       });
     if (previousStatus !== null)
-      await writeFile("artifacts/seed/bridge-status.json", previousStatus);
+      await writeFile(".local/state/seed/bridge-status.json", previousStatus);
     else
-      await unlink("artifacts/seed/bridge-status.json").catch((e) => {
+      await unlink(".local/state/seed/bridge-status.json").catch((e) => {
         if (e.code !== "ENOENT") throw e;
       });
   }
@@ -564,7 +647,7 @@ test("node-backed discovery recovers a funded higher derivation index after phra
       accounts.getByText(higher.address, { exact: true }),
     ).toBeVisible();
     await writeFile(
-      "artifacts/phase-02/discovery-browser-proof.json",
+      ".local/reports/core/discovery-browser-proof.json",
       JSON.stringify(
         {
           observedAt: new Date().toISOString(),
